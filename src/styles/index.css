@@ -1,6 +1,6 @@
 .homepage_bg {
 	background-size: cover !important;
-	min-height: 100vh;
+	min-height: 80vh;
 	position: relative;
 }
 
@@ -41,7 +41,7 @@
 	margin-top: 10px;
 }
 
-.homepage_bg .slick-dots {
+.home_carousel .slick-dots {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -67,21 +67,14 @@
 	letter-spacing: 0.5px;
 }
 
-.search_component_div {
-	position: relative;
-	background-color: rgba(208, 223, 252, 0.1);
-	border-radius: 8px;
-	padding: 0.2rem;
+.explore_apartments {
+	margin-top: 6rem;
 }
 
-.search_component_div input {
-	font-size: 14px;
-	padding-left: 2.2rem;
-}
-
-.search_component_div span {
-	position: absolute;
-	top: 10px;
-	color: #3c79f2;
-	left: 16px;
+.explore_apartments .slick-arrow::before {
+	background-color: rgba(45, 45, 45, 0.8);
+	color: white;
+	border-radius: 50%;
+	padding: -0px;
+	font-size: 28px;
 }

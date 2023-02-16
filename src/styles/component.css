@@ -1,0 +1,96 @@
+/* ---------------- search apartment bar component styles -------------------- */
+.search_component_div {
+	position: relative;
+	background-color: rgba(208, 223, 252, 0.1);
+	border-radius: 8px;
+	padding: 0.2rem;
+}
+
+.search_component_div input,
+.search_component_div select {
+	font-size: 14px;
+	padding-left: 2.2rem;
+}
+
+.search_component_div span {
+	position: absolute;
+	top: 10px;
+	color: #3c79f2;
+	left: 16px;
+}
+
+/* ---------------- Page section header component styles -------------------- */
+.page_header_component h3 {
+	font-size: 26px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: #2d2d2d;
+}
+
+.blue_line {
+	height: 2px;
+	width: 50px;
+	margin-right: 8px;
+}
+
+.page_header_component h6,
+.page_header_component a {
+	margin-bottom: 0;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+/* ---------------- Slider images component styles -------------------- */
+.images_slider .slick-dots {
+	position: absolute;
+	bottom: 0;
+}
+
+.images_slider .slick-dots li.slick-active button::before {
+	color: #6394f4;
+	transform: scale(1.5);
+}
+
+.images_slider .slick-dots li button::before {
+	color: #fff;
+}
+
+.images_slider .slick-dots li {
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+}
+
+.images_slider .slick-dots li button {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+
+.images_slider .slick-prev {
+	left: 12px;
+	z-index: 99;
+}
+
+.images_slider .slick-next {
+	right: 16px;
+	z-index: 99;
+}
+
+/* -------------------- ApartmentCard component styles --------------- */
+.apartment_card_div {
+	padding-top: 1rem;
+}
+.apartment_card h6 {
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 30px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.15px;
+	color: rgba(6, 6, 6, 0.9);
+}
+
+.apartment_card img {
+	border-radius: 0px 0px 8px 8px;
+}

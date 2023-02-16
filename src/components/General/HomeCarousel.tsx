@@ -18,13 +18,13 @@ const HomeCarousel = () => {
 		slidesToShow: 1,
 		arrows: false,
 		slidesToScroll: 1,
-		autoplay: false,
+		autoplay: true,
 		autoplaySpeed: 9000,
 		pauseOnHover: false,
 	}
 
 	return (
-		<div style={{ position: 'relative' }}>
+		<div className='home_carousel' style={{ position: 'relative' }}>
 			<Slider {...settings}>
 				<div>
 					<div

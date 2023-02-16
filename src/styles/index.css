@@ -1,0 +1,87 @@
+.homepage_bg {
+	background-size: cover !important;
+	min-height: 100vh;
+	position: relative;
+}
+
+.homepage_bg::before {
+	content: '';
+	background-color: rgba(45, 45, 45, 0.7);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+.homepage_div {
+	flex-direction: column;
+	display: flex;
+	height: 90vh;
+	justify-content: center;
+	position: relative;
+	color: #fff;
+}
+
+.homepage_div h1 {
+	font-style: normal;
+	font-weight: 700;
+	font-size: 36px;
+	line-height: 40px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: rgba(248, 248, 248, 0.8);
+}
+
+.homepage_div p {
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.homepage_bg .slick-dots {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: #fff;
+}
+
+.homepage_bg .slick-dots li.slick-active button:before {
+	opacity: 0.75;
+	color: #fff;
+}
+
+.search_apartment_div {
+	margin-top: -8.1rem;
+	position: relative;
+}
+
+.search_apartment_div h3 {
+	color: #fff;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 30px;
+	text-align: center;
+	letter-spacing: 0.5px;
+}
+
+.search_component_div {
+	position: relative;
+	background-color: rgba(208, 223, 252, 0.1);
+	border-radius: 8px;
+	padding: 0.2rem;
+}
+
+.search_component_div input {
+	font-size: 14px;
+	padding-left: 2.2rem;
+}
+
+.search_component_div span {
+	position: absolute;
+	top: 10px;
+	color: #3c79f2;
+	left: 16px;
+}

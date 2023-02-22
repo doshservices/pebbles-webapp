@@ -39,6 +39,7 @@
 	margin-bottom: 0;
 	font-weight: 600;
 	font-size: 16px;
+	text-transform: uppercase;
 }
 
 /* ---------------- Slider images component styles -------------------- */
@@ -84,7 +85,6 @@
 	font-style: normal;
 	font-weight: 700;
 	font-size: 16px;
-	line-height: 30px;
 	display: flex;
 	align-items: center;
 	letter-spacing: 0.15px;
@@ -93,4 +93,135 @@
 
 .apartment_card img {
 	border-radius: 0px 0px 8px 8px;
+}
+
+.apartment_card p {
+	margin-bottom: 6px;
+	font-weight: 500;
+}
+
+.apartment_card .amount {
+	color: #06060699;
+	font-size: 12px;
+}
+
+.apartment_card .amount span {
+	font-weight: 700;
+	font-size: 18px;
+	letter-spacing: 0.15px;
+	color: #060606;
+}
+
+/* ----------------------------------- footer section styles ---------------------------- */
+.footer1 {
+	background: #071f50;
+	color: #f8f8f8cc;
+	padding-top: 1.5rem;
+	padding-bottom: 0.7rem;
+}
+
+.footer1 h6 {
+	font-weight: 600;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.footer1 p {
+	font-weight: 500;
+	font-size: 12px;
+}
+
+.footer1 .social_links {
+	display: flex;
+}
+
+.footer1 .social_links a {
+	color: #155eef;
+	background-color: #fff;
+	height: 30px;
+	width: 30px;
+	display: flex;
+	border-radius: 50%;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	transition: all 0.4s ease-in-out;
+}
+
+.footer1 .social_links a:hover {
+	color: #f8f8f8;
+	background-color: #155eef;
+	box-shadow: 1px 1px 1px #ccc;
+}
+
+.footer1 .social_links a i {
+	font-size: 1.2rem;
+}
+
+.footer_align_right {
+	text-align: right;
+}
+
+.footer1 input,
+.footer1 button {
+	border-radius: 0;
+	font-size: 14px;
+}
+
+.footer1 input {
+	width: 3rem !important;
+}
+
+.footer1 button {
+	background-color: #155eef;
+	color: #f8f8f8;
+	width: 6rem;
+	font-weight: 600;
+}
+
+.footer1 input:focus,
+.footer1 button:focus {
+	border: none;
+}
+
+.footer2 {
+	background: #041330;
+	padding-top: 2rem;
+	padding-bottom: 0.6rem;
+}
+
+.foot_links a {
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 16px;
+	text-transform: uppercase;
+	color: rgba(248, 248, 248, 0.8);
+	display: inline-block;
+	margin-right: 2rem;
+}
+
+.foot_para {
+	padding-top: 3.5rem;
+}
+
+.foot_para p,
+.foot_para a {
+	font-weight: 600;
+	font-size: 12px;
+	color: rgba(248, 248, 248, 0.8);
+	text-decoration: none;
+}
+
+.foot_para .align_right {
+	text-align: right;
+}
+
+.bg_white {
+	background-color: white !important;
+}
+
+/* Navbar component styles ---------------------- */
+.nav_dark {
+	background-color: rgba(0, 0, 0, 0.8);
+	/* filter: blur(1rem); */
 }

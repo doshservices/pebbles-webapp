@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from 'react-slick'
 import ApartmentCard from '../ApartmentCard'
 
-const ApartmentSlider = ({ data }: { data: any[] }) => {
+const ReviewSlider = ({ data }: { data: any[] }) => {
 	const settings = {
 		dots: false,
 		infinite: true,
@@ -45,8 +45,20 @@ const ApartmentSlider = ({ data }: { data: any[] }) => {
 		<div className='container px-5 '>
 			<Slider {...settings}>
 				{data.map((item, index) => (
-					<div key={index} className='p-4'>
-						<ApartmentCard apartmentInfo={item} />
+					<div key={index} className='p-2 mt-3'>
+						<div
+							className={
+								index === 0
+									? 'review_box review_0'
+									: index % 2 !== 0
+									? 'review_box review_1'
+									: 'review_box review_2'
+							}
+						>
+							<p className='message'>"{item.message}"</p>
+							<p className='name'> {item.name} </p>
+							<p className='location'> {item.location} </p>
+						</div>
 					</div>
 				))}
 			</Slider>
@@ -54,4 +66,4 @@ const ApartmentSlider = ({ data }: { data: any[] }) => {
 	)
 }
 
-export default ApartmentSlider
+export default ReviewSlider

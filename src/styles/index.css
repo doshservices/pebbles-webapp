@@ -68,7 +68,8 @@
 }
 
 .explore_apartments {
-	margin-top: 6rem;
+	padding-top: 6rem;
+	padding-bottom: 2rem;
 }
 
 .explore_apartments .slick-arrow::before {
@@ -77,4 +78,156 @@
 	border-radius: 50%;
 	padding: -0px;
 	font-size: 28px;
+}
+
+.new_apartments {
+	position: relative;
+	padding-top: 4rem;
+	padding-bottom: 3rem;
+}
+
+.new_apartments::before {
+	content: '';
+	background-color: rgba(6, 6, 6, 0.65);
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	height: 100%;
+}
+
+.new_apartments img {
+	width: 100%;
+	height: 188px;
+	object-fit: cover;
+}
+
+.new_apartments a {
+	text-decoration: none;
+}
+
+.new_apartments a img {
+	border-radius: 8px;
+}
+
+.new_apartments h1 {
+	text-align: center;
+	font-weight: 700;
+	font-size: 40px;
+	letter-spacing: 0.15px;
+	color: #f8f8f8;
+	position: relative;
+	margin-bottom: 3rem;
+}
+
+.new_apartments .bg-white {
+	margin-top: -0.2rem;
+	height: 2.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 0.5rem;
+}
+
+.new_apartments p {
+	margin-bottom: 0;
+	font-weight: 500;
+	letter-spacing: 0.15px;
+}
+
+.text_black {
+	color: #060606;
+}
+
+.new_apartments .explore {
+	color: #f8f8f8;
+	position: relative;
+	border: 1px solid #f8f8f8;
+	padding: 0.4rem 1rem;
+	font-weight: 500;
+	transition: all 0.3s ease-in-out;
+}
+
+.new_apartments .explore:hover {
+	background-color: #f8f8f8;
+	box-shadow: 1px 2px 3px #ccc;
+	color: #060606;
+}
+
+@media (max-width: 1200px) {
+	.new_apartments img {
+		height: 130px;
+	}
+}
+
+@media (max-width: 992px) {
+	.new_apartments .row-mobile {
+		display: flex;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		overflow-y: hidden;
+		/* margin-right: 5px; */
+	}
+	.new_apartments img {
+		width: 150px;
+		height: 130px;
+	}
+}
+
+.trendy_apartments {
+	padding-top: 3.5rem;
+}
+
+.unlock_your {
+	padding-bottom: 5rem;
+	padding-top: 6rem;
+}
+
+.unlock_your h1 {
+	text-align: left;
+	margin-bottom: 2rem;
+}
+
+.unlock_your p {
+	color: #f8f8f8;
+}
+
+.review_0 {
+	background: #dfafb9;
+	border-radius: 100px 0px;
+}
+
+.review_1 {
+	background: #ffddee;
+	border-radius: 0px 100px;
+}
+
+.review_2 {
+	background: #d1b3cb;
+	border-radius: 100px 0px;
+}
+
+.review_box {
+	padding: 2rem;
+	padding-top: 3rem;
+	min-height: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.review_box .message {
+	font-family: 'Halant', serif;
+	font-weight: 500;
+	line-height: 28px;
+	text-align: justify;
+	letter-spacing: 0.15px;
+	color: #2d2d2d;
+	min-height: 11rem;
+	padding-bottom: 0.1rem;
+}
+
+.review_box .name {
+	font-weight: 500;
 }

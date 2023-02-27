@@ -2,17 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import { HiMenuAlt1 } from 'react-icons/hi'
-import {
-	FaMapMarker,
-	FaMapPin,
-	FaRegUserCircle,
-	FaTshirt,
-} from 'react-icons/fa'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Nav, Navbar, Dropdown, Container, Image } from 'react-bootstrap'
 // import { user_logout } from '../../redux/actions/userAuthActions'
 import '../../styles/component.css'
+import logo_blue from '../../assets/Logo_blue.png'
 import logo from '../../assets/Logo.png'
+import logo_small from '../../assets/Logo_small.png'
+import apartment_black from '../../assets/apartment_black.png'
+import apartment from '../../assets/apartment.png'
+import events from '../../assets/events.png'
+import food_black from '../../assets/food_black.png'
+import food from '../../assets/food.png'
+import laundry_black from '../../assets/laundry_black.png'
+import laundry from '../../assets/laundry.png'
+import ride_black from '../../assets/ride_black.png'
+import ride from '../../assets/ride.png'
+import profileCircle from '../../assets/profile-circle.png'
+import profileCircleBlack from '../../assets/profile-circle-black.png'
+import '../../styles/component.css'
 
 const Header = () => {
 	const dispatch = useAppDispatch()
@@ -42,44 +50,54 @@ const Header = () => {
 	return (
 		<header className='fixed-top'>
 			<Navbar
-				className={colorChange ? 'nav_dark' : ''}
-				expand='md'
+				className={colorChange ? 'nav_light def_navbar1' : 'def_navbar1'}
+				expand='lg'
 				collapseOnSelect
 			>
-				<Container>
-					<div>
-						<a href='/' className='mr-3 text-white'>
+				<Container style={{ zIndex: 99999999, position: 'relative' }}>
+					<div className='social_links'>
+						<a href='/' className='me-3 '>
 							<i className='icofont-facebook'></i>
 						</a>
-						<a href='/' className='mr-3 text-white'>
+						<a href='/' className='me-3 '>
 							<i className='icofont-twitter'></i>
 						</a>
-						<a href='/' className='mr-3 text-white'>
+						<a href='/' className='me-3 '>
 							<i className='icofont-linkedin'></i>
 						</a>
-						<a href='/' className='text-white'>
+						<a href='/' className=''>
 							<i className='icofont-instagram'></i>
 						</a>
 					</div>
+
+					<div>
+						<img src={logo_small} alt='' className='logo' />
+					</div>
+
 					<Navbar.Toggle aria-controls='basic-navbar-nav'>
 						<HiMenuAlt1 />
 					</Navbar.Toggle>
 					<Navbar.Collapse id='basic-navbar-nav'>
-						<Nav className='ml-auto'>
-							<LinkContainer to='/professionals'>
-								<Nav.Link className='js-scroll'> Professionals </Nav.Link>
+						<Nav className='ms-auto nav_box'>
+							<LinkContainer to='/professionals' className='host_btn'>
+								<Nav.Link> Become a Host </Nav.Link>
 							</LinkContainer>
 
-							<Dropdown className='js-scroll'>
-								<Dropdown.Toggle
-									variant=''
-									className='js-scroll2 pt-2 camp_btn'
-									id='dropdown-basic'
-								>
-									<FaRegUserCircle color='#fff' />
+							<Dropdown className=''>
+								<Dropdown.Toggle variant='' className='' id='dropdown-basic'>
+									<img
+										src={profileCircle}
+										alt=''
+										className='prof_circle profile_light'
+									/>
+									<img
+										src={profileCircleBlack}
+										alt=''
+										className='prof_circle profile_dark'
+									/>
 								</Dropdown.Toggle>
 
-								<Dropdown.Menu>
+								<Dropdown.Menu style={{ padding: '.5rem 1rem' }}>
 									<LinkContainer to={`/login`}>
 										<Nav.Link className=''> Login </Nav.Link>
 									</LinkContainer>
@@ -90,58 +108,89 @@ const Header = () => {
 				</Container>
 			</Navbar>
 
-			<div className={colorChange ? 'bg_white' : ''}>
+			<div className={colorChange ? 'nav_light def_navbar2' : 'def_navbar2'}>
 				<div className='container'>
 					<div className='row'>
-						<div className='col-md-4'>
+						<div className='col-lg-4 col-md-6 col-6'>
 							<div className='row'>
-								<div className='col-md-4'>
-									<Link to=''>
-										<i className='icofont-google-map'></i>
+								<div className='col-md-4 col b_r_w navLink_div'>
+									<Link to='' className='js_scroll'>
+										<div className='text-center'>
+											<img className='sub_img_light' src={apartment} alt='' />
+											<img
+												className='sub_img_dark'
+												src={apartment_black}
+												alt=''
+											/>
+										</div>
 										<span> APARTMENT </span>
 									</Link>
 								</div>
 
-								<div className='col-md-4'>
-									<Link to=''>
-										<i className='icofont-car'></i>
+								<div className='col-md-4 col b_r_w navLink_div'>
+									<Link to='' className='js_scroll'>
+										<div className='text-center'>
+											<img className='sub_img_light' src={ride} alt='' />
+											<img className='sub_img_dark' src={ride_black} alt='' />
+										</div>
 										<span> RIDE </span>
 									</Link>
 								</div>
 
-								<div className='col-md-4'>
-									<Link to=''>
-										<FaTshirt />
+								<div className='col-md-4 col navLink_div'>
+									<Link to='' className='js_scroll'>
+										<div className='text-center'>
+											<img className='sub_img_light' src={laundry} alt='' />
+											<img
+												className='sub_img_dark'
+												src={laundry_black}
+												alt=''
+											/>
+										</div>
 										<span> LAUNDRY </span>
 									</Link>
 								</div>
 							</div>
 						</div>
 
-						<div className='col-md-4'>
-							<img src={logo} alt='' />
+						<div className='col-lg-4 text-center center_logo'>
+							<img src={logo} alt='' className='center_logo1' />
+							<img src={logo_blue} alt='' className='center_logo2' />
 						</div>
 
-						<div className='col-md-4'>
+						<div className='col-lg-4 col-md-6 col-6'>
 							<div className='row'>
-								<div className='col-md-4'>
-									<Link to=''>
-										<i className='icofont-google-map'></i>
-										<span> APARTMENT </span>
+								<div className='col-md-4 col b_r_w navLink_div'>
+									<Link to='' className='js_scroll'>
+										<div className='text-center'>
+											<img className='sub_img_light' src={food} alt='' />
+											<img className='sub_img_dark' src={food_black} alt='' />
+										</div>
+										<span> Food </span>
 									</Link>
 								</div>
 
-								<div className='col-md-4'>
-									<Link to=''>
-										<i className='icofont-car'></i>
-										<span> RIDE </span>
+								<div className='col-md-4 col b_r_w navLink_div'>
+									<Link to='' className='js_scroll'>
+										<div className='text-center'>
+											<img className='sub_img_light' src={apartment} alt='' />
+											<img
+												className='sub_img_dark'
+												src={apartment_black}
+												alt=''
+											/>
+										</div>
+										<span> VOUCHER </span>
 									</Link>
 								</div>
 
-								<div className='col-md-4'>
-									<Link to=''>
-										<FaTshirt />
-										<span> LAUNDRY </span>
+								<div className='col-md-4 col navLink_div'>
+									<Link to='' className='js_scroll'>
+										<div className='text-center'>
+											<img className='sub_img_light' src={events} alt='' />
+											<i className='fa fa-calendar sub_img_dark' />
+										</div>
+										<span> EVENTS </span>
 									</Link>
 								</div>
 							</div>

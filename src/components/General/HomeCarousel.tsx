@@ -1,8 +1,10 @@
 import React from 'react'
 // import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+// import { Link, useNavigate } from 'react-router-dom'
 import Slider from 'react-slick'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
+import carouselBackground2 from '../../assets/Registration1.jpg'
+// import carouselBackground3 from '../../assets/Registration2.png'
 import SearchApartmentComponent from './SearchApartmentComponent'
 
 const HomeCarousel = () => {
@@ -43,15 +45,15 @@ const HomeCarousel = () => {
 				</div>
 				<div>
 					<div
-						style={{ backgroundImage: `url(${carouselBackground1})` }}
+						style={{ backgroundImage: `url(${carouselBackground2})` }}
 						className='homepage_bg'
 					>
 						<div className='homepage_div container'>
-							<h1>DO YOU HAVE A SCRIPT?</h1>
+							<h1>FIND AFFORDABLE </h1>
+							<h1>LOCATIONS AROUND YOU</h1>
 							<p>
-								Submit your script to <strong>Alofund</strong>, a movie fund for
-								micro-budget social impact African films aimed at dealing with
-								societal issues.
+								Stay in comfort and style with our highly rated service
+								apartments.
 							</p>
 						</div>
 					</div>

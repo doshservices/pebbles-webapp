@@ -1,3 +1,6 @@
+a {
+	text-decoration: none;
+}
 .homepage_bg {
 	background-size: cover !important;
 	min-height: 100vh;
@@ -73,6 +76,10 @@
 	padding-bottom: 2rem;
 }
 
+.explore_apartments .p_4 {
+	padding: 20px;
+}
+
 .explore_apartments .slick-arrow::before {
 	background-color: rgba(45, 45, 45, 0.8);
 	color: white;
@@ -96,6 +103,10 @@
 	left: 0;
 	bottom: 0;
 	height: 100%;
+}
+
+.gxc {
+	position: relative;
 }
 
 .new_apartments img {
@@ -242,5 +253,13 @@
 	.homepage_div h1 {
 		font-size: 24px;
 		line-height: 26px;
+	}
+
+	.new_apartments h1 {
+		font-size: 30px;
+	}
+
+	.unlock_your h1 {
+		font-size: 24px;
 	}
 }

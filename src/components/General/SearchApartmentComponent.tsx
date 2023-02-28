@@ -24,6 +24,7 @@ const SearchApartmentComponent = () => {
 									console.log(place)
 								}}
 								className='form-control'
+								placeholder='Enter a location'
 							/>
 						</div>
 						<div className='col-lg-8 col-md-12'>

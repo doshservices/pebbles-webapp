@@ -11,7 +11,7 @@ const ReviewSlider = ({ data }: { data: any[] }) => {
 		arrows: true,
 		slidesToScroll: 3,
 		autoplay: false,
-		autoplaySpeed: 9000,
+		autoplaySpeed: 3000,
 		pauseOnHover: false,
 		responsive: [
 			{
@@ -24,7 +24,7 @@ const ReviewSlider = ({ data }: { data: any[] }) => {
 				},
 			},
 			{
-				breakpoint: 600,
+				breakpoint: 992,
 				settings: {
 					slidesToShow: 2,
 					slidesToScroll: 2,
@@ -32,10 +32,12 @@ const ReviewSlider = ({ data }: { data: any[] }) => {
 				},
 			},
 			{
-				breakpoint: 480,
+				breakpoint: 767,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
+					autoplay: true,
+					arrows: false,
 				},
 			},
 		],

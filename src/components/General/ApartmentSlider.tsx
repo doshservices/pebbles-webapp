@@ -12,7 +12,7 @@ const ApartmentSlider = ({ data }: { data: any[] }) => {
 		slidesToScroll: 3,
 		autoplay: false,
 		autoplaySpeed: 9000,
-		pauseOnHover: false,
+		pauseOnHover: true,
 		responsive: [
 			{
 				breakpoint: 1024,
@@ -24,7 +24,7 @@ const ApartmentSlider = ({ data }: { data: any[] }) => {
 				},
 			},
 			{
-				breakpoint: 600,
+				breakpoint: 767,
 				settings: {
 					slidesToShow: 2,
 					slidesToScroll: 2,
@@ -32,10 +32,12 @@ const ApartmentSlider = ({ data }: { data: any[] }) => {
 				},
 			},
 			{
-				breakpoint: 480,
+				breakpoint: 576,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
+					autoplay: true,
+					arrows: false,
 				},
 			},
 		],
@@ -45,7 +47,7 @@ const ApartmentSlider = ({ data }: { data: any[] }) => {
 		<div className='container px-5 '>
 			<Slider {...settings}>
 				{data.map((item, index) => (
-					<div key={index} className='p-4'>
+					<div key={index} className='p_4'>
 						<ApartmentCard apartmentInfo={item} />
 					</div>
 				))}

@@ -9,17 +9,17 @@ const Footer = () => {
 			<div className='footer1'>
 				<div className='container'>
 					<div className='row'>
-						<div className='col-md-4'>
+						<div className='col-md-4 foot_socials'>
 							<h6> SOCIAL MEDIA </h6>
 							<p> FOLLOW PEBBLES SIGNATURE </p>
 							<div className='social_links'>
-								<a href='/' className='mr-3'>
+								<a href='/' className='me-3'>
 									<i className='icofont-facebook'></i>
 								</a>
-								<a href='/' className='mr-3'>
+								<a href='/' className='me-3'>
 									<i className='icofont-twitter'></i>
 								</a>
-								<a href='/' className='mr-3'>
+								<a href='/' className='me-3'>
 									<i className='icofont-linkedin'></i>
 								</a>
 								<a href='/'>
@@ -61,21 +61,53 @@ const Footer = () => {
 							<img src={Logo} alt='' />
 						</div>
 						<div className='foot_links'>
-							<Link to='/' className=''>
-								APARTMENT
-							</Link>
-							<Link to='/' className=''>
-								ABOUT
-							</Link>
-							<Link to='/' className=''>
-								CONTACT
-							</Link>
-							<Link to='/' className=''>
-								BECOME A HOST
-							</Link>
-							<Link to='/' className=''>
-								PRIVACY POLICY
-							</Link>
+							<div className='row justify-content-center'>
+								<div className='col-md-6 col-8'>
+									<div className='row sv'>
+										<div className='col'>
+											<Link to='/' className=''>
+												APARTMENT
+											</Link>
+										</div>
+										<div className='col'>
+											<Link to='/' className=''>
+												ABOUT
+											</Link>
+										</div>
+										<div className='col'>
+											<Link to='/' className=''>
+												CONTACT
+											</Link>
+										</div>
+										<div className='col'>
+											<Link to='/' className=''>
+												BECOME A HOST
+											</Link>
+										</div>
+										<div className='col'>
+											<Link to='/' className=''>
+												PRIVACY POLICY
+											</Link>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className=' foot_socials2'>
+						<div className='social_links'>
+							<a href='/' className='me-3'>
+								<i className='icofont-facebook'></i>
+							</a>
+							<a href='/' className='me-3'>
+								<i className='icofont-twitter'></i>
+							</a>
+							<a href='/' className='me-3'>
+								<i className='icofont-linkedin'></i>
+							</a>
+							<a href='/'>
+								<i className='icofont-instagram'></i>
+							</a>
 						</div>
 					</div>
 					<div className='foot_para'>

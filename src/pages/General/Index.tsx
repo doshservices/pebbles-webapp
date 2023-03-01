@@ -3,7 +3,7 @@ import '../../styles/index.css'
 import HomeCarousel from '../../components/General/HomeCarousel'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import apartmentImg from '../../assets/picture.png'
-import { getNearbyApartments } from '../../features/apartment/apartmentSlice'
+// import { getNearbyApartments } from '../../features/apartment/apartmentSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import bgImage from '../../assets/carouselBackground1.png'
@@ -93,7 +93,7 @@ const Index = () => {
 	const { nearbyApartments } = useAppSelector((state) => state.apartment)
 
 	useEffect(() => {
-		dispatch(getNearbyApartments())
+		// dispatch(getNearbyApartments())
 
 		console.log('nearbyApartments', nearbyApartments)
 	}, [dispatch])

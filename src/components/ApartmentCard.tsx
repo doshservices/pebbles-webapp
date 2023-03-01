@@ -6,7 +6,7 @@ import SliderImages from './SliderImages'
 const ApartmentCard = ({ apartmentInfo }: { apartmentInfo: any }) => {
 	return (
 		<div className='apartment_card'>
-			<Link to='/'>
+			<Link to='/apartments/1'>
 				<SliderImages images={apartmentInfo.images} />
 				<div className='apartment_card_div'>
 					<h6> {apartmentInfo.address} </h6>

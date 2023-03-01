@@ -1,0 +1,261 @@
+/* -------------------------------------- Navbar component styles ---------------------- */
+.nav_light {
+	background-color: rgba(255, 255, 255, 0.95);
+	/* filter: blur(0.2rem); */
+}
+
+header a {
+	text-decoration: none;
+}
+
+.host_btn {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 32px;
+	letter-spacing: 0.15px;
+	color: #f8f8f8 !important;
+	border: 1px solid #f8f8f8;
+	padding: 1px 22px !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 6px;
+	transition: all 0.4s ease-in-out;
+	margin-right: 1.7rem;
+	height: 2.5rem;
+	margin-top: 0.2rem;
+}
+
+.nav_light .host_btn {
+	color: #000 !important;
+	border: 1px solid #2d2d2d;
+}
+
+.host_btn:hover {
+	background-color: #f8f8f8;
+	color: #222 !important;
+}
+
+.nav_light .host_btn:hover {
+	color: #fff !important;
+	background-color: #000;
+	border: 1px solid #2d2d2d;
+}
+
+header .prof_circle {
+	height: 2rem;
+}
+
+.def_navbar1 .social_links a {
+	color: #fff;
+}
+
+.nav_light.def_navbar1 .social_links a {
+	color: #2d2d2d;
+}
+
+.def_navbar2,
+.def_navbar1 {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.def_navbar1 .dropdown-toggle::after {
+	display: none;
+}
+
+.def_navbar1 button:focus:not(:focus-visible),
+.def_navbar3 button:focus:not(:focus-visible),
+.def_navbar3 button,
+.def_navbar1 button {
+	border: none;
+	box-shadow: none;
+}
+
+.def_navbar1 .navbar-toggler {
+	border-color: none !important;
+	color: #071f50;
+}
+
+.navLink_div {
+	justify-content: center;
+	align-items: center;
+	margin-top: 0.8rem;
+}
+
+.js_scroll {
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 15px;
+	color: rgba(248, 248, 248, 0.8);
+	display: block;
+	text-align: center;
+}
+
+.js_scroll img {
+	height: 1rem;
+	margin-bottom: 0.3rem;
+}
+
+.js_scroll i {
+	height: 1.1rem;
+	margin-bottom: 0rem;
+}
+
+.center_logo img {
+	width: 80%;
+}
+
+.nav_light .js_scroll {
+	color: #2d2d2d;
+}
+
+.def_navbar2 .sub_img_dark {
+	display: none;
+}
+
+.nav_light.def_navbar2 .sub_img_light {
+	display: none;
+}
+
+.nav_light.def_navbar2 .sub_img_dark {
+	display: inline-block;
+}
+
+.b_r_w {
+	border-right: 1px solid #fff;
+}
+
+.nav_light .b_r_w {
+	border-right: 1px solid #2d2d2d;
+}
+
+.def_navbar2 .center_logo2,
+.nav_light.def_navbar2 .center_logo1 {
+	display: none;
+}
+
+.nav_light.def_navbar2 .center_logo2 {
+	display: inline-block;
+}
+
+.def_navbar3 .host_btn {
+	color: #155eef !important;
+	border: 1px solid #155eef;
+	background-color: #fff;
+}
+
+.def_navbar3 .logo {
+	width: 18rem;
+	object-fit: cover;
+}
+
+.def_navbar4 .sub_img_dark {
+	display: inline-block;
+}
+
+.def_navbar3,
+.def_navbar4 {
+	background-color: #fff;
+}
+
+/* .navbar_search .search_component_main_div {
+	padding: 0 15%;
+	margin-top: 0;
+} */
+
+@media (min-width: 992px) {
+	.def_navbar1 .profile_dark {
+		display: none;
+	}
+
+	.nav_light.def_navbar1 .profile_dark {
+		display: inline-block;
+	}
+
+	.nav_light.def_navbar1 .profile_light {
+		display: none;
+	}
+
+	.def_navbar1 .logo {
+		display: none;
+	}
+
+	.def_navbar4 {
+		display: none;
+	}
+}
+
+@media (max-width: 992px) {
+	.def_navbar2 {
+		background-color: #fff;
+	}
+
+	.def_navbar1 {
+		background-color: #f7f9fd;
+	}
+
+	.def_navbar1 .profile_light {
+		display: none;
+	}
+
+	.def_navbar1 .social_links {
+		display: none;
+	}
+
+	.def_navbar1 .logo {
+		width: 10rem;
+	}
+
+	.def_navbar1 .dropdown-toggle::after {
+		display: inline-block;
+	}
+
+	.nav_box {
+		background-color: #f1f1f1;
+		margin-top: 0.3rem;
+	}
+
+	.host_btn {
+		color: black !important;
+		justify-content: flex-start;
+		font-size: 14px;
+		border: none;
+		padding: 0px 6px !important;
+		margin-right: 0;
+		height: 1.5rem;
+	}
+
+	.center_logo {
+		display: none;
+	}
+
+	.b_r_w,
+	.nav_light .b_r_w {
+		border-right: 1px solid transparent;
+	}
+
+	.js_scroll {
+		color: #2d2d2d;
+	}
+
+	.nav_light.def_navbar2 .sub_img_light,
+	.def_navbar2 .sub_img_light {
+		display: none;
+	}
+
+	.nav_light.def_navbar2 .sub_img_dark,
+	.def_navbar2 .sub_img_dark {
+		display: inline-block;
+	}
+
+	.def_navbar4 {
+		display: block;
+	}
+}
+
+@media (max-width: 576px) {
+	.js_scroll {
+		font-size: 8px;
+	}
+}

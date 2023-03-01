@@ -1,10 +1,32 @@
 import React, { useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../../app/hooks'
+import { get_search_apartments } from '../../features/apartment/apartmentSlice'
 
 const SearchApartmentComponent = () => {
-	const [value, onChange] = useState(new Date())
+	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
-	console.log('key', process.env.REACT_APP_GOOGLE_MAPS_API)
+	const [loc, setLoc] = useState<any>({})
+	const [checkIn, setCheckIn] = useState('')
+	const [checkOut, setCheckOut] = useState('')
+	const [apartmentType, setApartmentType] = useState('')
+
+	console.log('loc', loc)
+
+	const submitHandler = () => {
+		dispatch(
+			get_search_apartments({
+				loc: loc?.formatted_address,
+				checkIn,
+				checkOut,
+				apartmentType,
+			})
+		)
+
+		navigate('/search-apartments')
+	}
 
 	return (
 		<div className='search_component_main_div'>
@@ -21,7 +43,7 @@ const SearchApartmentComponent = () => {
 							<Autocomplete
 								apiKey={process.env.REACT_APP_GOOGLE_MAPS_API}
 								onPlaceSelected={(place) => {
-									console.log(place)
+									setLoc(place)
 								}}
 								className='form-control'
 								placeholder='Enter a location'
@@ -42,6 +64,7 @@ const SearchApartmentComponent = () => {
 										className='form-control'
 										onFocus={(e) => (e.target.type = 'date')}
 										onBlur={(e) => (e.target.type = 'text')}
+										onChange={(e) => setCheckIn(e.target.value)}
 									/>
 								</div>
 								<div
@@ -57,6 +80,7 @@ const SearchApartmentComponent = () => {
 										className='form-control'
 										onFocus={(e) => (e.target.type = 'date')}
 										onBlur={(e) => (e.target.type = 'text')}
+										onChange={(e) => setCheckOut(e.target.value)}
 									/>
 								</div>
 								<div
@@ -67,9 +91,9 @@ const SearchApartmentComponent = () => {
 										<i className='fa fa-home-alt' aria-hidden='true'></i>
 									</span>
 									<select
-										// onChange={(e) => {
-										// 	setApartmentType(e.target.value)
-										// }}
+										onChange={(e) => {
+											setApartmentType(e.target.value)
+										}}
 										className='form-control form-select form-input'
 									>
 										<option value=''> Apartment Type </option>
@@ -102,6 +126,7 @@ const SearchApartmentComponent = () => {
 									<button
 										type='submit'
 										className='btn btn-primary form-control'
+										onClick={() => submitHandler()}
 									>
 										Search
 									</button>

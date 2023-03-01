@@ -5,6 +5,8 @@ import Preloader from './components/Preloader'
 
 import GeneralPath from './GeneralPath'
 import Index from './pages/General/Index'
+import SearchApartments from './pages/General/SearchApartments'
+import ApartmentDetails from './pages/General/ApartmentDetails'
 
 function App() {
 	return (
@@ -16,6 +18,8 @@ function App() {
 						<Route path='/' element={<Navigate replace to='/home' />} />
 						<Route path='/' element={<GeneralPath />}>
 							<Route path='home' element={<Index />} />
+							<Route path='search-apartments' element={<SearchApartments />} />
+							<Route path='apartments/:id' element={<ApartmentDetails />} />
 						</Route>
 					</Routes>
 				</Suspense>

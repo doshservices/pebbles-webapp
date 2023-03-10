@@ -560,4 +560,7 @@ a {
 	.intro_image.intro_half {
 		display: none;
 	}
+	.lightbox_btn {
+		bottom: 2rem;
+	}
 }

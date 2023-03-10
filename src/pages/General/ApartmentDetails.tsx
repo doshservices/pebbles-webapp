@@ -20,12 +20,18 @@ import abuja from '../../assets/abuja.png'
 import two_users from '../../assets/two_users.png'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import apartmentImg from '../../assets/picture.png'
+import Lightbox from 'react-18-image-lightbox'
+import 'react-18-image-lightbox/style.css'
 
 const ApartmentDetails = () => {
 	const pressHandler = () => {}
 
 	const [limitValue, setLimitValue] = useState<number>(3)
 	const [limit, setLimit] = useState<boolean>(false)
+	const [photoIndex, setPhotoIndex] = useState<number>(0)
+	const [isOpen, setIsOpen] = useState<boolean>(false)
+
+	const images = [bgImage, bgImage2]
 
 	const amenities: string[] = [
 		'24hrs Power Supply',
@@ -110,7 +116,7 @@ const ApartmentDetails = () => {
 			</div>
 
 			<div className='container'>
-				<div>
+				<div style={{ position: 'relative' }}>
 					<div className='row mb-4'>
 						<div className='col-md-7'>
 							<img src={bgImage} alt='' className='intro_image intro_full' />
@@ -124,6 +130,25 @@ const ApartmentDetails = () => {
 							</div>
 						</div>
 					</div>
+
+					<button className='lightbox_btn' onClick={() => setIsOpen(true)}>
+						VIEW 10 PHOTOS
+					</button>
+					{isOpen && (
+						<Lightbox
+							mainSrc={images[photoIndex]}
+							nextSrc={images[(photoIndex + 1) % images.length]}
+							prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+							onCloseRequest={() => setIsOpen(false)}
+							onMovePrevRequest={() =>
+								setPhotoIndex((photoIndex + images.length - 1) % images.length)
+							}
+							onMoveNextRequest={() =>
+								setPhotoIndex((photoIndex + 1) % images.length)
+							}
+							imagePadding={100}
+						/>
+					)}
 				</div>
 
 				<div>

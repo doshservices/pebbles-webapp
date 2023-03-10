@@ -393,12 +393,6 @@ a {
 	box-shadow: none;
 }
 
-@media (max-width: 992px) {
-	.apartment_formform_div .bor_right {
-		border-right: 1px solid #333333;
-	}
-}
-
 .apartment_formform .btn_save {
 	background: #155eef;
 	border-radius: 4px;
@@ -493,6 +487,18 @@ a {
 	width: 100%;
 	border-radius: 0;
 	margin-bottom: 1rem;
+}
+
+.lightbox_btn {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+	font-size: 14px;
+	background: #f8f8f8;
+	border-width: 1px 1px 0px 0px;
+	border-style: solid;
+	border-color: #2d2d2d;
+	border-radius: 4px;
 }
 
 @media (max-width: 1200px) {

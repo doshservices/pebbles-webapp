@@ -8,7 +8,13 @@ const GeneralPath = () => {
 
 	return (
 		<>
-			<Header type={location?.pathname === '/home' ? 1 : 2} />
+			<Header
+				type={
+					location?.pathname === '/home' || location?.pathname === '/about-us'
+						? 1
+						: 2
+				}
+			/>
 			<div>
 				<Outlet />
 			</div>

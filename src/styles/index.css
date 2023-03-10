@@ -1,14 +1,16 @@
 a {
 	text-decoration: none;
 }
-.homepage_bg {
+.homepage_bg,
+.about_page_bg {
 	background-size: cover !important;
 	min-height: 100vh;
 	position: relative;
 	object-fit: contain;
 }
 
-.homepage_bg::before {
+.homepage_bg::before,
+.about_page_bg::before {
 	content: '';
 	background-color: rgba(45, 45, 45, 0.7);
 	position: absolute;
@@ -563,4 +565,12 @@ a {
 	.lightbox_btn {
 		bottom: 2rem;
 	}
+}
+
+/* -------------------------------------- About page styles --------------------------------------- */
+.about_page_bg {
+	min-height: 80vh;
+}
+
+.about_page_section {
 }

@@ -7,6 +7,7 @@ import GeneralPath from './GeneralPath'
 import Index from './pages/General/Index'
 import SearchApartments from './pages/General/SearchApartments'
 import ApartmentDetails from './pages/General/ApartmentDetails'
+import About from './pages/General/About'
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 							<Route path='home' element={<Index />} />
 							<Route path='search-apartments' element={<SearchApartments />} />
 							<Route path='apartments/:id' element={<ApartmentDetails />} />
+							<Route path='about-us' element={<About />} />
 						</Route>
 					</Routes>
 				</Suspense>

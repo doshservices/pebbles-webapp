@@ -70,7 +70,7 @@ const Footer = () => {
 											</Link>
 										</div>
 										<div className='col'>
-											<Link to='/' className=''>
+											<Link to='/about-us' className=''>
 												ABOUT
 											</Link>
 										</div>

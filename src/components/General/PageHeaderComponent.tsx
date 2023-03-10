@@ -11,9 +11,9 @@ const PageHeaderComponent = ({
 }: {
 	topHeader: string
 	header: string
-	link: string
+	link?: string
 	topHeaderColor: string
-	linkText: string
+	linkText?: string
 }) => {
 	return (
 		<div className='container page_header_component'>
@@ -28,9 +28,11 @@ const PageHeaderComponent = ({
 			<div className='d-flex justify-content-between pt-0 mt-1'>
 				<h3> {header} </h3>
 
-				<Link to={link} style={{ color: topHeaderColor }}>
-					{linkText}
-				</Link>
+				{link && linkText && (
+					<Link to={link} style={{ color: topHeaderColor }}>
+						{linkText}
+					</Link>
+				)}
 			</div>
 		</div>
 	)

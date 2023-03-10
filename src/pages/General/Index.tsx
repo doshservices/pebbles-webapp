@@ -122,7 +122,7 @@ const Index = () => {
 						<h1> New Apartments Added Weekly </h1>
 
 						<div
-							className='row align-middle no-gutters row-mobile gxc'
+							className='row align-middle g-0 row-mobile gxc'
 							style={{ padding: 0 }}
 						>
 							<div

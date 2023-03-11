@@ -541,11 +541,13 @@ a {
 		font-size: 16px;
 	}
 
-	.apartment_details_page .landmarks img {
+	.apartment_details_page .landmarks img,
+	.about_team img {
 		width: 150px;
 		height: 130px;
 	}
-	.apartment_details_page .row-mobile {
+	.apartment_details_page .row-mobile,
+	.about_team .row-mobile {
 		display: flex;
 		flex-wrap: nowrap;
 		overflow-x: auto;
@@ -565,6 +567,10 @@ a {
 	.lightbox_btn {
 		bottom: 2rem;
 	}
+
+	.about_pad {
+		padding: 0 1rem;
+	}
 }
 
 /* -------------------------------------- About page styles --------------------------------------- */
@@ -573,4 +579,59 @@ a {
 }
 
 .about_page_section {
+	padding: 4rem 0;
+}
+
+.about_pad {
+	padding: 0 3.5rem;
+}
+
+.about_text {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.about_text p {
+	font-size: 14px;
+	line-height: 28px;
+	text-align: justify;
+}
+
+.about_team h4 {
+	padding: 1rem 0 0rem 0;
+}
+
+.about_team p {
+	font-size: 14px;
+	color: rgba(45, 45, 45, 0.7);
+}
+
+.about_team {
+	padding-bottom: 5rem;
+}
+
+.about_page_section img {
+	width: 100%;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+.about_team img {
+	width: 100%;
+	object-fit: cover;
+}
+
+@media (max-width: 992px) {
+	.about_team img {
+		width: 150px;
+		height: 130px;
+	}
+}
+
+@media (max-width: 767px) {
+	.about_team h4 {
+		font-size: 16px;
+	}
 }

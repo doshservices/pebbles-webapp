@@ -47,14 +47,14 @@ const About = () => {
 				<div className='container'>
 					<div className='about_pad'>
 						<div className='row'>
-							<div className='col-md-6 col-sm-12'>
+							<div className='col-md-6 col-sm-12 mb-5'>
 								<div className=''>
 									<img src={who} alt='' />
 								</div>
 							</div>
-							<div className='col-md-6 col-sm-12'>
-								<div>
-									<h2>WHO WE ARE</h2>
+							<div className='col-md-6 col-sm-12 mb-5'>
+								<div className='about_text'>
+									<h3>WHO WE ARE</h3>
 									<p>
 										Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 										Proin nec auctor ligula, sed luctus magna. Sed placerat
@@ -73,52 +73,56 @@ const About = () => {
 									</p>
 								</div>
 							</div>
-							<div className='col-md-6 col-sm-12'>
-								<div>
-									<h2>WHO WE ARE</h2>
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Proin nec auctor ligula, sed luctus magna. Sed placerat
-										lacus auctor congue molestie. Sed facilisis felis ac commodo
-										convallis. Nunc ullamcorper vehicula magna sit amet
-										tincidunt. Fusce in iaculis arcu, sed posuere nisi. Etiam
-										porttitor elit eget arcu malesuada dictum. Fusce sit amet
-										elit viverra, laoreet risus ac, varius enim. Quisque ut
-										pellentesque mi. Nullam lacus quam, imperdiet ac metus non,
-										eleifend ornare massa.Morbi vestibulum erat eget massa
-										sollicitudin, vel pellentesque diam posuere. Suspendisse
-										scelerisque consectetur nisi, sed vulputate lacus aliquet
-										sed. Orci varius natoque penatibus et magnis dis parturient
-										montes, nascetur ridiculus mus. In aliquam vel nisl sit amet
-										lobortis.
-									</p>
+							<div className='row'>
+								<div className='col-md-6 col-sm-12 mb-5 order-first order-md-last '>
+									<img src={what} alt='' />
+								</div>
+								<div className='col-md-6 col-sm-12 mb-5 order-last order-md-first'>
+									<div className='about_text'>
+										<h3>WHAT WE DO</h3>
+										<p>
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+											Proin nec auctor ligula, sed luctus magna. Sed placerat
+											lacus auctor congue molestie. Sed facilisis felis ac
+											commodo convallis. Nunc ullamcorper vehicula magna sit
+											amet tincidunt. Fusce in iaculis arcu, sed posuere nisi.
+											Etiam porttitor elit eget arcu malesuada dictum. Fusce sit
+											amet elit viverra, laoreet risus ac, varius enim. Quisque
+											ut pellentesque mi. Nullam lacus quam, imperdiet ac metus
+											non, eleifend ornare massa.Morbi vestibulum erat eget
+											massa sollicitudin, vel pellentesque diam posuere.
+											Suspendisse scelerisque consectetur nisi, sed vulputate
+											lacus aliquet sed. Orci varius natoque penatibus et magnis
+											dis parturient montes, nascetur ridiculus mus. In aliquam
+											vel nisl sit amet lobortis.
+										</p>
+									</div>
 								</div>
 							</div>
-							<div className='col-md-6 col-sm-12'>
-								<img src={what} alt='' />
-							</div>
-							<div className='col-md-6 col-sm-12'>
-								<img src={where} alt='' />
-							</div>
-							<div className='col-md-6 col-sm-12'>
-								<div>
-									<h2>WHO WE ARE</h2>
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Proin nec auctor ligula, sed luctus magna. Sed placerat
-										lacus auctor congue molestie. Sed facilisis felis ac commodo
-										convallis. Nunc ullamcorper vehicula magna sit amet
-										tincidunt. Fusce in iaculis arcu, sed posuere nisi. Etiam
-										porttitor elit eget arcu malesuada dictum. Fusce sit amet
-										elit viverra, laoreet risus ac, varius enim. Quisque ut
-										pellentesque mi. Nullam lacus quam, imperdiet ac metus non,
-										eleifend ornare massa.Morbi vestibulum erat eget massa
-										sollicitudin, vel pellentesque diam posuere. Suspendisse
-										scelerisque consectetur nisi, sed vulputate lacus aliquet
-										sed. Orci varius natoque penatibus et magnis dis parturient
-										montes, nascetur ridiculus mus. In aliquam vel nisl sit amet
-										lobortis.
-									</p>
+							<div className='row'>
+								<div className='col-md-6 col-sm-12 mb-5'>
+									<img src={where} alt='' />
+								</div>
+								<div className='col-md-6 col-sm-12 mb-5'>
+									<div className='about_text'>
+										<h3>WHERE WE WANT TO BE </h3>
+										<p>
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+											Proin nec auctor ligula, sed luctus magna. Sed placerat
+											lacus auctor congue molestie. Sed facilisis felis ac
+											commodo convallis. Nunc ullamcorper vehicula magna sit
+											amet tincidunt. Fusce in iaculis arcu, sed posuere nisi.
+											Etiam porttitor elit eget arcu malesuada dictum. Fusce sit
+											amet elit viverra, laoreet risus ac, varius enim. Quisque
+											ut pellentesque mi. Nullam lacus quam, imperdiet ac metus
+											non, eleifend ornare massa.Morbi vestibulum erat eget
+											massa sollicitudin, vel pellentesque diam posuere.
+											Suspendisse scelerisque consectetur nisi, sed vulputate
+											lacus aliquet sed. Orci varius natoque penatibus et magnis
+											dis parturient montes, nascetur ridiculus mus. In aliquam
+											vel nisl sit amet lobortis.
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -126,10 +130,12 @@ const About = () => {
 				</div>
 			</section>
 
-			<section>
-				<h2> MEET THE TEAM </h2>
+			<section className='about_team'>
 				<div className='container'>
-					<div className='row'>
+					<h2 className='text-center mb-4 pb-2' style={{ fontWeight: '600' }}>
+						MEET THE TEAM
+					</h2>
+					<div className='row row-mobile'>
 						{team.map((item, index) => (
 							<div className='col'>
 								<img src={item.image} alt='' />

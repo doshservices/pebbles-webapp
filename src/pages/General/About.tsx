@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
 import who from '../../assets/who.png'
 import what from '../../assets/what.png'
@@ -29,6 +29,16 @@ const About = () => {
 			role: 'Head of Accounts',
 		},
 	]
+	const RouteToTop = () => {
+		window.scrollTo(0, 0)
+	}
+
+	useLayoutEffect(() => {
+		RouteToTop()
+	}, [])
+
+	console.log(window.history)
+
 	return (
 		<main className='about_page'>
 			<section
@@ -137,7 +147,7 @@ const About = () => {
 					</h2>
 					<div className='row row-mobile'>
 						{team.map((item, index) => (
-							<div className='col'>
+							<div className='col' key={index}>
 								<img src={item.image} alt='' />
 								<h4> {item.name} </h4>
 								<p> {item.role} </p>

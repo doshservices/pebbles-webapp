@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Footer from './components/General/Footer'
 import Header from './components/General/Header'
+import RouteToTop from './utils/RouteToTop'
 
 const GeneralPath = () => {
 	const location = useLocation()
@@ -10,14 +11,16 @@ const GeneralPath = () => {
 		<>
 			<Header
 				type={
-					location?.pathname === '/home' || location?.pathname === '/about-us'
+					location?.pathname === '/home' ||
+					location?.pathname === '/about-us' ||
+					location?.pathname === '/contact'
 						? 1
 						: 2
 				}
 			/>
-			<div>
+			<RouteToTop prevLoc={location}>
 				<Outlet />
-			</div>
+			</RouteToTop>
 			<Footer />
 		</>
 	)

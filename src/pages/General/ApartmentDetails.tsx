@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import bgImage from '../../assets/carouselBackground1.png'
 import bgImage2 from '../../assets/Registration1.jpg'
@@ -24,7 +24,26 @@ import Lightbox from 'react-18-image-lightbox'
 import 'react-18-image-lightbox/style.css'
 
 const ApartmentDetails = () => {
-	const pressHandler = () => {}
+	const pressHandler = async (e: any, id: number) => {
+		// e.preventDefault()
+		// setIsLoading(true)
+		// await axios({
+		// 	url: `${url}/apartments/is-available`,
+		// 	method: "POST",
+		// 	headers: authHeader(userDetail.token),
+		// 	data: { apartmentId: id },
+		// })
+		// 	.then((res) => {
+		// 		setAvailability(res?.data?.data?.message)
+		// 		toast.success(res?.data?.data?.message, { position: "top-right" })
+		// 		setIsLoading(false)
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log("error with fetching apartment availability", err)
+		// 		setIsLoading(false)
+		// 	})
+		// setIsLoading(false)
+	}
 
 	const [limitValue, setLimitValue] = useState<number>(3)
 	const [limit, setLimit] = useState<boolean>(false)
@@ -106,6 +125,14 @@ const ApartmentDetails = () => {
 			images: [apartmentImg, apartmentImg, apartmentImg],
 		},
 	]
+
+	const RouteToTop = () => {
+		window.scrollTo(0, 0)
+	}
+
+	useLayoutEffect(() => {
+		RouteToTop()
+	}, [])
 
 	useEffect(() => {}, [limitValue, limit])
 

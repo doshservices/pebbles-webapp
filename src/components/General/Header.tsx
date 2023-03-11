@@ -25,8 +25,6 @@ import '../../styles/header.css'
 const Header = ({ type }: { type: number }) => {
 	const dispatch = useAppDispatch()
 
-	console.log('type', type)
-
 	const [colorChange, setColorchange] = useState(false)
 	const changeNavbarColor = () => {
 		if (window.scrollY >= 80) {
@@ -44,10 +42,6 @@ const Header = ({ type }: { type: number }) => {
 		e.preventDefault()
 		// dispatch(user_logout())
 	}
-
-	useEffect(() => {
-		console.log('scroll value', window.scrollY)
-	}, [])
 
 	return (
 		<header className='fixed-top'>
@@ -174,8 +168,10 @@ const Header = ({ type }: { type: number }) => {
 								</div>
 
 								<div className='col-lg-4 text-center center_logo'>
-									<img src={logo} alt='' className='center_logo1' />
-									<img src={logo_blue} alt='' className='center_logo2' />
+									<Link to='/'>
+										<img src={logo} alt='' className='center_logo1' />
+										<img src={logo_blue} alt='' className='center_logo2' />
+									</Link>
 								</div>
 
 								<div className='col-lg-4 col-md-6 col-6'>

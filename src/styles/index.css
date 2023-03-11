@@ -635,3 +635,155 @@ a {
 		font-size: 16px;
 	}
 }
+
+/* ----------------------------------------- Contact page ------------------------------------ */
+.contact_box {
+	background: #f0f3fb;
+	border-radius: 12px;
+	padding: 1.5rem 0 3rem 0;
+	width: 30%;
+	color: #2d2d2d;
+}
+
+.contact_box1 {
+	padding: 0.3rem 1.1rem;
+	border-bottom: 1px solid rgba(45, 45, 45, 0.3);
+}
+
+.contact_box1 svg {
+	color: #3c79f2;
+	margin-right: 0.5rem;
+}
+
+.contact_box1 p {
+	display: flex;
+	align-items: center;
+}
+
+.contact_box1 span {
+	font-weight: 500;
+	margin-right: 0.5rem;
+}
+
+.contact_links {
+	padding: 1.6rem 1.1rem 0 1.1rem;
+}
+
+.contact_links a {
+	color: white;
+	background: #155eef;
+	border: 1px solid #155eef;
+	height: 1.8rem;
+	width: 1.8rem;
+	display: inline-block;
+	border-radius: 50%;
+	text-align: center;
+	padding-top: 0.1rem;
+	transition: all 0.4s ease-in-out;
+}
+
+.contact_links a:hover {
+	color: #155eef;
+	background: #fff;
+	border: 1px solid #155eef;
+}
+
+.contact_left {
+	border: 1px solid #155eef;
+	border-radius: 12px;
+	padding: 1.2rem;
+}
+
+.contact_left img {
+	width: 100%;
+	border-radius: 1rem;
+	margin: 1rem 0 1.5rem 0;
+}
+
+.contact_div2 {
+	padding: 4rem 0;
+}
+
+.contact_left p {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 28px;
+}
+
+.contact_right {
+	border: 1px solid #155eef;
+	border-radius: 12px;
+	padding: 1.2rem 2rem;
+}
+
+.contact_pad {
+	padding-left: 3rem;
+}
+
+.contact_right form {
+	padding: 1rem 0 1rem 0;
+}
+
+.pebbles_form input {
+	border: none;
+	border-bottom: 1px solid #2d2d2d;
+	border-radius: 0;
+	color: rgba(45, 45, 45, 0.5);
+	padding: 0;
+	font-size: 14px;
+}
+
+.pebbles_form input:focus,
+.pebbles_form textarea:focus {
+	box-shadow: none;
+	color: rgba(45, 45, 45, 0.5);
+}
+
+.pebbles_form input::placeholder,
+.pebbles_form textarea::placeholder {
+	color: rgba(45, 45, 45, 0.5);
+}
+
+.pebbles_form label {
+	margin: 2rem 0 1.5rem 0;
+}
+
+.pebbles_form textarea {
+	border: 1px solid #2d2d2d;
+	color: rgba(45, 45, 45, 0.5);
+	padding: 1rem;
+	font-size: 14px;
+	height: 20rem;
+}
+
+@media (max-width: 1200px) {
+	.contact_box {
+		width: 40%;
+	}
+}
+
+@media (max-width: 992px) {
+	.contact_pad {
+		padding-left: 1rem;
+	}
+
+	.contact_box {
+		width: 50%;
+	}
+}
+
+@media (max-width: 767px) {
+	.contact_pad {
+		padding-left: 0;
+	}
+
+	.contact_left {
+		margin-bottom: 2rem;
+		margin-top: 4rem;
+	}
+
+	.contact_box {
+		width: 100%;
+		margin-top: 40rem;
+	}
+}

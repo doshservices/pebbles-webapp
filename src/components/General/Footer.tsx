@@ -65,7 +65,7 @@ const Footer = () => {
 								<div className='col-md-6 col-8'>
 									<div className='row sv'>
 										<div className='col'>
-											<Link to='/' className=''>
+											<Link to='/apartments' className=''>
 												APARTMENT
 											</Link>
 										</div>
@@ -75,17 +75,17 @@ const Footer = () => {
 											</Link>
 										</div>
 										<div className='col'>
-											<Link to='/' className=''>
+											<Link to='/contact' className=''>
 												CONTACT
 											</Link>
 										</div>
 										<div className='col'>
-											<Link to='/' className=''>
+											<Link to='/become-a-host' className=''>
 												BECOME A HOST
 											</Link>
 										</div>
 										<div className='col'>
-											<Link to='/' className=''>
+											<Link to='/privacy-policy' className=''>
 												PRIVACY POLICY
 											</Link>
 										</div>

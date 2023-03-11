@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { useAppSelector } from '../../app/hooks'
 import ApartmentCard from '../../components/ApartmentCard'
 import apartmentImg from '../../assets/picture.png'
@@ -58,6 +58,14 @@ const SearchApartments = () => {
 	// const { searchApartments, isFetchingSearchApartments } = useAppSelector(
 	// 	(state) => state.apartment
 	// )
+
+	const RouteToTop = () => {
+		window.scrollTo(0, 0)
+	}
+
+	useLayoutEffect(() => {
+		RouteToTop()
+	}, [])
 
 	const [sortParams, setSortParams] = useState('')
 

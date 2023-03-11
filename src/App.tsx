@@ -1,5 +1,11 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
+import {
+	BrowserRouter,
+	Navigate,
+	Routes,
+	Route,
+	useLocation,
+} from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Preloader from './components/Preloader'
 
@@ -8,6 +14,7 @@ import Index from './pages/General/Index'
 import SearchApartments from './pages/General/SearchApartments'
 import ApartmentDetails from './pages/General/ApartmentDetails'
 import About from './pages/General/About'
+import Contact from './pages/General/Contact'
 
 function App() {
 	return (
@@ -22,6 +29,7 @@ function App() {
 							<Route path='search-apartments' element={<SearchApartments />} />
 							<Route path='apartments/:id' element={<ApartmentDetails />} />
 							<Route path='about-us' element={<About />} />
+							<Route path='contact' element={<Contact />} />
 						</Route>
 					</Routes>
 				</Suspense>

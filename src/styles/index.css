@@ -787,3 +787,80 @@ a {
 		margin-top: 40rem;
 	}
 }
+
+/* ------------------------------------- lOGIN PAGE STYLES -------------------------------------- */
+.auth_page .auth_page_bg {
+	min-height: 100vh;
+}
+
+.pebbles_form_div,
+.pebbles_form1_div {
+	position: relative;
+	padding-top: 3rem;
+}
+
+.pebbles_form_div .pebbles_form {
+	background: #fff;
+	border-radius: 6px;
+	padding: 7rem 2rem 3rem 2rem;
+}
+
+.pebbles_form_div .pebbles_form h4,
+.pebbles_form1_div .pebbles_form h4 {
+	font-weight: 600;
+	margin-bottom: 3rem;
+}
+
+.password_div,
+.confirm_password_div {
+	position: relative;
+}
+
+.password_div i,
+.confirm_password_div i {
+	position: absolute;
+	right: 0.1rem;
+	bottom: 0.4rem;
+}
+
+.pebbles_form1_div .pebbles_form {
+	background: #fff;
+	border-radius: 6px;
+	padding: 2rem 2rem 3rem 2rem;
+}
+
+.pebbles_form1_div .pebbles_form h4 {
+	margin-bottom: 1.5rem;
+}
+
+.resend button {
+	border: none;
+	background-color: #fff;
+	font-weight: 400;
+	font-size: 14px;
+	color: #155eef;
+}
+
+@media (max-width: 767px) {
+	.auth_page .logo_div {
+		text-align: center;
+	}
+}
+
+@media (max-width: 576px) {
+	.auth_page .auth_page_bg {
+		background-image: none !important;
+	}
+
+	.auth_page .about_page_bg::before {
+		background-color: transparent !important;
+	}
+
+	.pebbles_form_div .pebbles_form {
+		padding: 2rem 1rem 3rem 1rem;
+	}
+
+	.auth_page .logo_div {
+		display: none;
+	}
+}

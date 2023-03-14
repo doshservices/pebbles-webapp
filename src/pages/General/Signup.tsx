@@ -1,14 +1,32 @@
-import React, { useState, useLayoutEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useLayoutEffect, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import {
+	user_signup,
+	get_otp,
+} from '../../features/authentication/authenticationSlice'
 import OTPInput, { ResendOTP } from 'otp-input-react'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
 import Registration4 from '../../assets/Registration4.jpg'
 import logo from '../../assets/Logo_white.png'
 
 const Signup = () => {
+	const dispatch = useAppDispatch()
+	let navigate = useNavigate()
+
+	const { user_register } = useAppSelector((state) => state.auth)
+
 	const [verify, setVerify] = useState(false)
 	const [showIndividual, setShowIndividual] = useState(true)
+	const [message, setMessage] = useState<string | null>(null)
 	const [OTP, setOTP] = useState('')
+	const [firstName, setFirstName] = useState('')
+	const [lastName, setLastName] = useState('')
+	const [email, setEmail] = useState('')
+	const [phoneNumber, setPhoneNumber] = useState('')
+	const [password, setPassword] = useState('')
+	const [confirmPassword, setConfirmPassword] = useState('')
+	const [role, setRole] = useState('')
 
 	const viewHandler = () => {
 		let pass = document.getElementById('password')
@@ -38,8 +56,39 @@ const Signup = () => {
 
 	const submitHandler = (e: any) => {
 		e.preventDefault()
-		setVerify(true)
+		dispatch(
+			user_signup({
+				firstName,
+				lastName,
+				email,
+				googleSigned: true,
+				password,
+				phoneNumber,
+				role,
+				otp: OTP,
+			})
+		)
 	}
+
+	const submitSignupHandler = (e: any, role: string) => {
+		e.preventDefault()
+		setRole(role)
+		if (password === confirmPassword) {
+			// if (otp?.status === 200) {
+			dispatch(get_otp({ email }))
+			setVerify(true)
+			// }
+		} else {
+			setMessage('Passwords do not match.')
+		}
+	}
+
+	useEffect(() => {
+		if (user_register) {
+			navigate('/login')
+		}
+	}, [user_register])
+
 	return (
 		<main className='about_page auth_page'>
 			{verify ? (
@@ -80,20 +129,25 @@ const Signup = () => {
 											</div>
 
 											<div className='mt-5'>
-												<button className='btn btn-primary form-control'>
+												<button
+													className='btn btn-primary form-control'
+													onClick={(e) => submitHandler(e)}
+												>
 													Verify
 												</button>
 											</div>
 										</form>
 										<div className='mt-3 text-center resend'>
-											<p>
-												Didn’t receive a One-Time password?{' '}
+											<div>
+												<p>Didn’t receive a One-Time password? </p>
 												<ResendOTP
 													maxTime={120}
 													style={{}}
-													onResendClick={() => console.log('Resend clicked')}
+													onResendClick={(e: any) =>
+														submitSignupHandler(e, role)
+													}
 												/>
-											</p>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -159,6 +213,7 @@ const Signup = () => {
 															type='text'
 															placeholder='First name here'
 															className='form-control'
+															onChange={(e) => setFirstName(e.target.value)}
 														/>
 													</div>
 													<div className='col-md-6'>
@@ -167,6 +222,7 @@ const Signup = () => {
 															type='text'
 															placeholder='Last name here'
 															className='form-control'
+															onChange={(e) => setLastName(e.target.value)}
 														/>
 													</div>
 													<div className='col-md-6'>
@@ -175,6 +231,7 @@ const Signup = () => {
 															type='email'
 															placeholder='Email address here'
 															className='form-control'
+															onChange={(e) => setEmail(e.target.value)}
 														/>
 													</div>
 													<div className='col-md-6'>
@@ -183,6 +240,7 @@ const Signup = () => {
 															type='telephone'
 															placeholder='Phone Number here'
 															className='form-control'
+															onChange={(e) => setPhoneNumber(e.target.value)}
 														/>
 													</div>
 													<div className='col-md-6'>
@@ -193,6 +251,7 @@ const Signup = () => {
 																className='form-control'
 																id='password'
 																type='password'
+																onChange={(e) => setPassword(e.target.value)}
 															/>
 															<i
 																className='fa fa-eye view'
@@ -209,6 +268,9 @@ const Signup = () => {
 																className='form-control'
 																id='confirm_password'
 																type='password'
+																onChange={(e) =>
+																	setConfirmPassword(e.target.value)
+																}
 															/>
 															<i
 																className='fa fa-eye view'
@@ -221,37 +283,38 @@ const Signup = () => {
 												<div className='mt-3'>
 													<button
 														className='btn btn-primary form-control'
-														onClick={(e) => submitHandler(e)}
+														onClick={(e) => submitSignupHandler(e, 'USER')}
 													>
 														Create Account
 													</button>
 												</div>
+												<p
+													className='text-center mt-2'
+													style={{ fontSize: '12px' }}
+												>
+													{message}
+												</p>
 											</form>
 										) : (
 											<form>
 												<div className='row'>
-													<div className='col-md-6'>
+													<div className='col-md-12'>
 														<label htmlFor='fullName'>Company Name</label>
 														<input
 															type='text'
 															placeholder='Company name here'
 															className='form-control'
+															onChange={(e) => setFirstName(e.target.value)}
 														/>
 													</div>
-													<div className='col-md-6'>
-														<label htmlFor='fullName'>Company Address</label>
-														<input
-															type='text'
-															placeholder='Company address here'
-															className='form-control'
-														/>
-													</div>
+
 													<div className='col-md-6'>
 														<label htmlFor='fullName'>Email Address</label>
 														<input
 															type='email'
 															placeholder='Email address here'
 															className='form-control'
+															onChange={(e) => setEmail(e.target.value)}
 														/>
 													</div>
 													<div className='col-md-6'>
@@ -260,6 +323,7 @@ const Signup = () => {
 															type='telephone'
 															placeholder='Phone Number here'
 															className='form-control'
+															onChange={(e) => setPhoneNumber(e.target.value)}
 														/>
 													</div>
 													<div className='col-md-6'>
@@ -270,6 +334,7 @@ const Signup = () => {
 																className='form-control'
 																id='password'
 																type='password'
+																onChange={(e) => setPassword(e.target.value)}
 															/>
 															<i
 																className='fa fa-eye view'
@@ -286,6 +351,9 @@ const Signup = () => {
 																className='form-control'
 																id='confirm_password'
 																type='password'
+																onChange={(e) =>
+																	setConfirmPassword(e.target.value)
+																}
 															/>
 															<i
 																className='fa fa-eye view'
@@ -298,11 +366,17 @@ const Signup = () => {
 												<div className='mt-3'>
 													<button
 														className='btn btn-primary form-control '
-														onClick={(e) => submitHandler(e)}
+														onClick={(e) => submitSignupHandler(e, 'BUSINESS')}
 													>
 														Create Account
 													</button>
 												</div>
+												<p
+													className='text-center mt-2'
+													style={{ fontSize: '12px' }}
+												>
+													{message}
+												</p>
 											</form>
 										)}
 

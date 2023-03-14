@@ -1,0 +1,260 @@
+.pcoded-inner-navbar .active {
+	border-bottom: 0;
+}
+
+.dashboard_avatar {
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	margin-right: 0.5rem;
+}
+
+.user_dashboard {
+	padding: 2rem 0;
+	// background-color: #f4f6f9;
+	margin-top: 0;
+
+	&_dashboard_box {
+		box-shadow: 0px 3px 30px #74747429;
+		border-radius: 5px;
+		text-align: center;
+		padding: 2rem 2rem 1rem 2rem;
+		min-height: 18rem;
+		margin-bottom: 2rem;
+
+		img {
+			width: 7rem;
+			margin-bottom: 1rem;
+		}
+
+		p {
+			color: #858585;
+		}
+
+		h1 {
+			color: #fc1a29;
+			font-size: 5rem;
+		}
+	}
+
+	.circle_dot {
+		height: 1rem;
+		width: 1rem;
+		border-radius: 50%;
+		background-color: #fff;
+		margin-right: 0.5rem;
+		margin-top: 0.25rem;
+		border: 4.5px solid #fc1a29;
+	}
+
+	&_profile_form {
+		box-shadow: 0px 9px 20px #00000029;
+		border-radius: 15px;
+		padding: 4rem 3rem;
+
+		.sc-fOKMvo svg {
+			margin-bottom: 1.5rem;
+		}
+
+		.radio {
+			height: 1rem;
+		}
+
+		.male,
+		.female {
+			font-size: 13px;
+		}
+
+		label {
+			font-size: 14px;
+			font-weight: 500;
+		}
+
+		input,
+		select {
+			height: 3rem;
+			margin-bottom: 1.5rem;
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
+
+		textarea {
+			margin-bottom: 1.5rem;
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
+
+		.nav-tabs .nav-item {
+			width: 25%;
+			text-align: center;
+			cursor: pointer;
+
+			@media (max-width: 424px) {
+				width: 50%;
+			}
+		}
+
+		p {
+			font-size: 11px;
+			color: #aaa;
+			margin-top: -1.2rem;
+		}
+
+		.tab-content > .active {
+			border-bottom: 0;
+		}
+
+		.currency {
+			border: 1px solid #ced4da;
+			height: 3rem;
+			width: 10%;
+			border-radius: 0.25rem 0 0 0.25rem;
+			text-align: center;
+			padding-top: 0.7rem;
+		}
+
+		.curr_amt {
+			border-radius: 0 0.25rem 0.25rem 0;
+		}
+	}
+
+	.dot_dot {
+		height: 0.4rem;
+		width: 0.4rem;
+		border-radius: 50%;
+		display: inline-block;
+	}
+
+	.yellow_dot {
+		background-color: #eea920;
+	}
+
+	.red_dot {
+		background-color: #fc1a29;
+	}
+
+	.green_dot {
+		background-color: #34a206;
+	}
+
+	.black_dot {
+		background-color: #333;
+	}
+
+	&_submissions {
+		&_box {
+			box-shadow: 0px 3px 30px #7474741a;
+			margin-bottom: 4rem;
+			border-radius: 15px;
+
+			.img_box {
+				height: 11rem;
+				overflow: hidden;
+				border-radius: 15px 0 0 15px;
+
+				@media (max-width: 767px) {
+					border-radius: 15px 15px 0 0;
+				}
+
+				img {
+					height: 100%;
+					width: 100%;
+					object-fit: cover;
+				}
+			}
+
+			.box {
+				padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+
+				h3 {
+					font-weight: 600;
+					font-size: 1.5rem;
+				}
+
+				svg {
+					color: #fc1a29;
+				}
+
+				h6 {
+					color: #fc1a29;
+					font-size: 0.9rem;
+					font-weight: 500;
+				}
+
+				p {
+					font-size: 14px;
+				}
+			}
+		}
+	}
+
+	.justify-end {
+		justify-content: end;
+
+		@media (max-width: 767px) {
+			justify-content: center;
+		}
+	}
+
+	.home_image_box {
+		border-radius: 50%;
+		height: 7rem;
+		width: 7rem;
+		text-align: center;
+		overflow: hidden;
+		display: flex;
+		margin: auto auto 1rem auto;
+		justify-content: center;
+
+		img {
+			text-align: center;
+			margin: auto;
+		}
+	}
+
+	.page_header {
+		@media (max-width: 767px) {
+			text-align: center;
+			font-size: 28px;
+		}
+	}
+
+	table {
+		font-size: 13px;
+	}
+}
+
+.text-rightt {
+	text-align: right !important;
+}
+
+.paginate {
+	margin-top: 3rem;
+	display: flex;
+	justify-content: center;
+}
+.paginate a {
+	background-color: #fff;
+	border: 1px solid #999;
+	color: #111;
+	padding: 0.5rem 1rem;
+	margin: 0.15rem;
+	font-weight: 600;
+	box-shadow: 4px 3px 9px #999;
+	transition: all 0.4s ease-in-out;
+	text-decoration: none;
+	font-size: 0.9rem;
+}
+.paginate a:hover {
+	text-decoration: none;
+	box-shadow: 2px 7px 9px #999;
+}
+.paginate .active {
+	background: #fc1a29;
+	border: 1px solid #fc1a29;
+	color: #fff;
+}

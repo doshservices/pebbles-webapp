@@ -13,6 +13,8 @@ import Signup from './pages/General/Signup'
 import Login from './pages/General/Login'
 import AuthPath from './AuthPath'
 import ForgotPassword from './pages/General/ForgotPassword'
+import UserPath from './UserPath'
+import UserDashboardHome from './pages/Dashboard/UserDashboardHome'
 
 function App() {
 	return (
@@ -33,6 +35,14 @@ function App() {
 							<Route path='signup' element={<Signup />} />
 							<Route path='login' element={<Login />} />
 							<Route path='forgot-password' element={<ForgotPassword />} />
+						</Route>
+
+						<Route
+							path='user/dashboard'
+							element={<Navigate replace to='/user/dashboard/home' />}
+						/>
+						<Route path='/user/dashboard' element={<UserPath />}>
+							<Route path='home' element={<UserDashboardHome />} />
 						</Route>
 					</Routes>
 				</Suspense>

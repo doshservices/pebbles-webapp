@@ -1,9 +1,19 @@
-import React, { useLayoutEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useLayoutEffect, useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { user_login } from '../../features/authentication/authenticationSlice'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
 import logo from '../../assets/Logo_white.png'
 
 const Login = () => {
+	const dispatch = useAppDispatch()
+	let navigate = useNavigate()
+
+	const { user_detail, token } = useAppSelector((state) => state.auth)
+
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+
 	const viewHandler = () => {
 		let pass = document.getElementById('password')
 		let view = document.getElementById('view')
@@ -20,6 +30,24 @@ const Login = () => {
 	useLayoutEffect(() => {
 		RouteToTop()
 	}, [])
+
+	const submitHandler = (e: any) => {
+		e.preventDefault()
+		dispatch(
+			user_login({
+				loginId: email,
+				password,
+			})
+		)
+	}
+
+	useEffect(() => {
+		if (user_detail) {
+			navigate('/user/dashboard')
+		}
+
+		console.log(user_detail, 'token', token)
+	}, [user_detail])
 
 	return (
 		<main className='about_page auth_page'>
@@ -49,6 +77,7 @@ const Login = () => {
 											type='text'
 											placeholder='Email address here'
 											className='form-control'
+											onChange={(e) => setEmail(e.target.value)}
 										/>
 										<div className='password_div'>
 											<label htmlFor='fullName'>Password</label>
@@ -57,6 +86,7 @@ const Login = () => {
 												className='form-control'
 												id='password'
 												type='password'
+												onChange={(e) => setPassword(e.target.value)}
 											/>
 											<i
 												className='fa fa-eye view'
@@ -90,7 +120,10 @@ const Login = () => {
 											</label>
 										</div>
 										<div className='mt-1'>
-											<button className='btn btn-primary form-control'>
+											<button
+												className='btn btn-primary form-control'
+												onClick={(e) => submitHandler(e)}
+											>
 												Log In
 											</button>
 										</div>

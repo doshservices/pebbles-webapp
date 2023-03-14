@@ -73,13 +73,24 @@ const Signup = () => {
 	const submitSignupHandler = (e: any, role: string) => {
 		e.preventDefault()
 		setRole(role)
-		if (password === confirmPassword) {
-			// if (otp?.status === 200) {
-			dispatch(get_otp({ email }))
-			setVerify(true)
-			// }
+		if (
+			firstName &&
+			lastName &&
+			email &&
+			phoneNumber &&
+			password &&
+			confirmPassword
+		) {
+			if (password === confirmPassword) {
+				// if (otp?.status === 200) {
+				dispatch(get_otp({ email }))
+				setVerify(true)
+				// }
+			} else {
+				setMessage('Passwords do not match.')
+			}
 		} else {
-			setMessage('Passwords do not match.')
+			setMessage('All fields are required.')
 		}
 	}
 

@@ -73,14 +73,7 @@ const Signup = () => {
 	const submitSignupHandler = (e: any, role: string) => {
 		e.preventDefault()
 		setRole(role)
-		if (
-			firstName &&
-			lastName &&
-			email &&
-			phoneNumber &&
-			password &&
-			confirmPassword
-		) {
+		if (firstName && email && phoneNumber && password && confirmPassword) {
 			if (password === confirmPassword) {
 				// if (otp?.status === 200) {
 				dispatch(get_otp({ email }))

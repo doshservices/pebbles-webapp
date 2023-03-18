@@ -1,6 +1,6 @@
 export interface AuthInitialInterface {
-	user_detail: AuthInterface[] | null
-	user_register: AuthInterface[] | null
+	user_detail: AuthInterface | null
+	user_register: AuthInterface | null
 	token: string | null
 	otp: OTPInterface | null
 	isLoading: boolean
@@ -23,6 +23,7 @@ export interface AuthInterface {
 	role: string
 	status: string
 	_id: string
+	profilePicture?: string
 }
 
 export interface OTPInterface {

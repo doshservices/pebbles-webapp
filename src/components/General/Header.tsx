@@ -79,7 +79,7 @@ const Header = ({ type }: { type: number }) => {
 							</Navbar.Toggle>
 							<Navbar.Collapse id='basic-navbar-nav'>
 								<Nav className='ms-auto nav_box'>
-									<LinkContainer to='/signup' className='host_btn'>
+									<LinkContainer to='/auth/signup' className='host_btn'>
 										<Nav.Link> Become a Host </Nav.Link>
 									</LinkContainer>
 
@@ -102,7 +102,7 @@ const Header = ({ type }: { type: number }) => {
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu style={{ padding: '.5rem 1rem' }}>
-											<LinkContainer to={`/login`}>
+											<LinkContainer to={`/auth/login`}>
 												<Nav.Link className=''> Login </Nav.Link>
 											</LinkContainer>
 										</Dropdown.Menu>
@@ -242,7 +242,7 @@ const Header = ({ type }: { type: number }) => {
 							</Navbar.Toggle>
 							<Navbar.Collapse id='basic-navbar-nav'>
 								<Nav className='ms-auto nav_box'>
-									<LinkContainer to='/signup' className='host_btn'>
+									<LinkContainer to='/auth/signup' className='host_btn'>
 										<Nav.Link> Become a Host </Nav.Link>
 									</LinkContainer>
 
@@ -260,7 +260,7 @@ const Header = ({ type }: { type: number }) => {
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu style={{ padding: '.5rem 1rem' }}>
-											<LinkContainer to={`/login`}>
+											<LinkContainer to={`/auth/login`}>
 												<Nav.Link className=''> Login </Nav.Link>
 											</LinkContainer>
 										</Dropdown.Menu>

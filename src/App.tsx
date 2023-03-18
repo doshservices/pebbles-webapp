@@ -15,6 +15,14 @@ import AuthPath from './AuthPath'
 import ForgotPassword from './pages/General/ForgotPassword'
 import UserPath from './UserPath'
 import UserDashboardHome from './pages/Dashboard/UserDashboardHome'
+import UserProfile from './pages/Dashboard/UserProfile'
+import UserBookings from './pages/Dashboard/UserBookings'
+import UserBusinessBookings from './pages/Dashboard/UserBusinessBookings'
+import UserWishlist from './pages/Dashboard/UserWishlist'
+import UserListings from './pages/Dashboard/UserListings'
+import UserNotifications from './pages/Dashboard/UserNotifications'
+import UserUpgrade from './pages/Dashboard/UserUpgrade'
+import UserGuests from './pages/Dashboard/UserGuests'
 
 function App() {
 	return (
@@ -31,18 +39,26 @@ function App() {
 							<Route path='about-us' element={<About />} />
 							<Route path='contact' element={<Contact />} />
 						</Route>
-						<Route path='/' element={<AuthPath />}>
+						<Route path='/auth/' element={<AuthPath />}>
 							<Route path='signup' element={<Signup />} />
 							<Route path='login' element={<Login />} />
 							<Route path='forgot-password' element={<ForgotPassword />} />
 						</Route>
 
 						<Route
-							path='user/dashboard'
+							path='/user/dashboard'
 							element={<Navigate replace to='/user/dashboard/home' />}
 						/>
-						<Route path='/user/dashboard' element={<UserPath />}>
+						<Route path='/user/dashboard/' element={<UserPath />}>
 							<Route path='home' element={<UserDashboardHome />} />
+							<Route path='profile' element={<UserProfile />} />
+							<Route path='my-bookings' element={<UserBookings />} />
+							<Route path='bookings' element={<UserBusinessBookings />} />
+							<Route path='wishlist' element={<UserWishlist />} />
+							<Route path='listings' element={<UserListings />} />
+							<Route path='notifications' element={<UserNotifications />} />
+							<Route path='upgrade-account' element={<UserUpgrade />} />
+							<Route path='guests' element={<UserGuests />} />
 						</Route>
 					</Routes>
 				</Suspense>

@@ -1,24 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
-// import Avatar1 from '../../../assets/avatar-4.png'
+// import { TbFileX } from 'react-icons/tb'
+import { useAppSelector } from '../../../app/hooks'
+import Avatar1 from '../../../assets/profile-circle-black.png'
+import { reset } from '../../../features/authentication/authenticationSlice'
+import { useAppDispatch } from '../../../app/hooks'
 
 const NavRight = () => {
-	// const userAuth = useSelector((state) => state.userAuth)
-	// const { userDetail } = userAuth
+	const dispatch = useAppDispatch()
+	const { user_detail } = useAppSelector((state) => state.auth)
 
 	const logoutHandler = (e) => {
 		e.preventDefault()
-		// dispatch(user_logout())
+		dispatch(reset())
 	}
 
 	return (
-		<ul className='navbar-nav ml-auto'>
+		<ul
+			className='navbar-nav ml-auto'
+			style={{ display: 'flex', alignItems: 'center' }}
+		>
 			<li>
-				<div className='pro-head'>
-					{/* {userDetail && userDetail.profileImage ? (
+				<div
+					className='pro-head'
+					style={{ alignItems: 'center', display: 'flex' }}
+				>
+					{user_detail && user_detail.profilePicture ? (
 						<img
-							src={userDetail.profileImage}
+							src={user_detail.profilePicture}
 							className='dashboard_avatar'
 							alt='User Profile'
 						/>
@@ -29,9 +39,29 @@ const NavRight = () => {
 							alt='User Profile'
 						/>
 					)}
-					<span>
-						{userDetail && userDetail.firstName + ' ' + userDetail.lastName}
-					</span> */}
+					<span className='d-inline'>
+						<span
+							className='mb-0 pb-0 mt-0 pt-0'
+							style={{ fontSize: '12px', fontWeight: '700' }}
+						>
+							{user_detail &&
+								user_detail.firstName + ' ' + user_detail.lastName}
+						</span>
+						<p
+							className='mb-0 pb-0 mt-0 pt-0'
+							style={{
+								lineHeight: '16px',
+								paddingLeft: '.1rem',
+								fontSize: '11px',
+							}}
+						>
+							{user_detail
+								? user_detail.role === 'USER'
+									? 'Personal'
+									: 'Business'
+								: null}
+						</p>
+					</span>
 				</div>
 			</li>
 			<li>
@@ -39,7 +69,7 @@ const NavRight = () => {
 					<Dropdown.Toggle variant={'link'} id='dropdown-basic'>
 						<i className='icon feather icon-settings' />
 					</Dropdown.Toggle>
-					<Dropdown.Menu alignRight className='profile-notification'>
+					<Dropdown.Menu className='profile-notification'>
 						<ul className='pro-body'>
 							<li>
 								<Link to='/' className='dropdown-item'>

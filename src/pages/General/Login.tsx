@@ -41,12 +41,15 @@ const Login = () => {
 		)
 	}
 
+	console.log('user', user_detail)
+
 	useEffect(() => {
 		if (user_detail) {
-			navigate('/user/dashboard')
+			navigate('/user/dashboard/home')
 		}
-
-		console.log(user_detail, 'token', token)
+		console.log('====================================')
+		console.log('user', user_detail)
+		console.log('====================================')
 	}, [user_detail])
 
 	return (
@@ -96,7 +99,7 @@ const Login = () => {
 										</div>
 
 										<div className='text-end mt-3'>
-											<Link to='/forgot-password'>Forgot password?</Link>
+											<Link to='/auth/forgot-password'>Forgot password?</Link>
 										</div>
 										<div
 											className='form-input-group checkbox'
@@ -131,7 +134,7 @@ const Login = () => {
 									<div className='mt-3 text-center'>
 										<p>
 											Don’t have an account?{' '}
-											<Link to='/signup' style={{ fontWeight: '500' }}>
+											<Link to='/auth/signup' style={{ fontWeight: '500' }}>
 												Create account
 											</Link>
 										</p>

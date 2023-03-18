@@ -2,9 +2,10 @@ import { combineReducers } from 'redux'
 import { ApartmentReducer } from './features/apartment/apartmentSlice'
 import { AuthReducer } from './features/authentication/authenticationSlice'
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
 	apartment: ApartmentReducer,
 	auth: AuthReducer,
 })
 
-export default rootReducer
+// export default rootReducer
+export type RootState = ReturnType<typeof rootReducer>

@@ -1,12 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { AuthInitialState } from './authenticationState'
+import { AuthInitialState, AuthInitialInterface } from './authenticationState'
+import { REHYDRATE } from 'redux-persist'
 import { authHeader, header } from '../../utils/headers'
 // import toast from 'react-hot-toast'
 import config from '../../utils/config'
+import { RehydrateAppAction } from '../../types/types'
+import { newState } from '../../utils/newState'
 
 let url = config.liveUrl
-let token: string = '123'
+
+function rehydrate(
+	state: AuthInitialInterface,
+	rehydrateParams: RehydrateAppAction
+) {
+	return newState(rehydrateParams.payload?.auth || state, {
+		user_detail: rehydrateParams.payload?.auth?.user_detail ?? null,
+		token: rehydrateParams.payload?.auth?.token ?? null,
+	})
+}
 
 export const user_signup = createAsyncThunk(
 	'auth/user_signup',
@@ -129,8 +141,17 @@ export const user_login = createAsyncThunk(
 export const { reducer: AuthReducer, actions } = createSlice({
 	name: 'auth',
 	initialState: AuthInitialState,
-	reducers: {},
+	reducers: {
+		reset: (state) => {
+			state.isLoading = false
+			state.otp = null
+			state.token = null
+			state.user_detail = null
+			state.user_register = null
+		},
+	},
 	extraReducers: (builder) => {
+		builder.addCase(REHYDRATE, rehydrate)
 		builder.addCase(user_signup.fulfilled, (state, action) => {
 			state.user_register = action.payload.data.newUser
 			state.isLoading = false
@@ -165,4 +186,4 @@ export const { reducer: AuthReducer, actions } = createSlice({
 	},
 })
 
-export const {} = actions
+export const { reset } = actions

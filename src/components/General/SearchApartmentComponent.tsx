@@ -13,8 +13,6 @@ const SearchApartmentComponent = () => {
 	const [checkOut, setCheckOut] = useState('')
 	const [apartmentType, setApartmentType] = useState('')
 
-	console.log('loc', loc)
-
 	const submitHandler = () => {
 		dispatch(
 			get_search_apartments({

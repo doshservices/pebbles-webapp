@@ -1,18 +1,23 @@
 import NavContent from './NavContent/index'
 import NavHead from './NavHead'
-import navigation from './menu'
+import items from './menu'
 import { useState } from 'react'
 import OutsideClick from '../../OutsideClick'
+import { useAppSelector } from '../../../app/hooks'
 
-const Navigation = (props) => {
+const Navigation = ({ openMenu, toggleMenu }) => {
 	const [collapse, setCollapse] = useState(false)
+
+	const { user_detail } = useAppSelector((state) => state.auth)
+
+	const windowWidth = window.window
 
 	let toggleClass = [
 		'pcoded-navbar menu-light navbar-default brand-default drp-icon-style1 menu-item-icon-style1 active-default title-default',
 	]
 	if (collapse) {
 		toggleClass = [...toggleClass, 'navbar-collapsed']
-	} else if (props.openMenu) {
+	} else if (openMenu) {
 		toggleClass = [...toggleClass, 'mob-open']
 	}
 
@@ -23,14 +28,17 @@ const Navigation = (props) => {
 
 	return (
 		<nav className={toggleClass.join(' ')}>
-			<OutsideClick handleToggle={props.toggleMenu}>
+			<OutsideClick handleToggle={toggleMenu}>
 				<div className='navbar-wrapper'>
 					<NavHead
 						collapseMenu={collapse}
-						windowWidth={props.windowWidth}
+						windowWidth={windowWidth}
 						onToggleNavigation={toggleNavigation}
 					/>
-					<NavContent navigation={navigation.items} />
+					<NavContent
+						permission={user_detail && user_detail.role}
+						navigation={items}
+					/>
 				</div>
 			</OutsideClick>
 		</nav>

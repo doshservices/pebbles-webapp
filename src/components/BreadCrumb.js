@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import nav from './userDashboard/Navigation/menu'
+import items from './userDashboard/Navigation/menu'
 
 const BreadCrumb = ({ loc }) => {
 	// const adminAuth = useSelector((state) => state.adminAuth)
@@ -16,7 +16,7 @@ const BreadCrumb = ({ loc }) => {
 
 	useEffect(() => {
 		if (userDetail) {
-			nav.items.map((item, index) => {
+			items.map((item, index) => {
 				if (item.type && item.type === 'group') {
 					getCollapse(item, index)
 				}
@@ -56,7 +56,7 @@ const BreadCrumb = ({ loc }) => {
 								<Link to='/user/dashboard/home'>
 									<i
 										className='feather icon-home'
-										style={{ color: '#fc1a29' }}
+										style={{ color: '#155EEF' }}
 									/>
 								</Link>
 							</li>

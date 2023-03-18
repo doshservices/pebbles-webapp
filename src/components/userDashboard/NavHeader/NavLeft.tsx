@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Dropdown } from 'react-bootstrap'
 
-const NavLeft = (props) => {
+const NavLeft = ({ handle }) => {
 	const [openSearch, setOpenSearch] = useState(false)
 
 	const searchHandler = (e) => {
@@ -12,11 +12,15 @@ const NavLeft = (props) => {
 	return (
 		<ul className='navbar-nav mr-auto'>
 			<li>
-				<a href='#/' className='full-screen' onClick={props.handle}>
+				<button
+					className='full-screen'
+					onClick={handle}
+					style={{ border: 'none', backgroundColor: '#fff' }}
+				>
 					<i className='feather icon-maximize' />
-				</a>
+				</button>
 			</li>
-			{/* <li className='nav-item'>
+			<li className='nav-item'>
 				<div id='main-search' className={`main-search ${openSearch && 'open'}`}>
 					<div className='input-group'>
 						<input
@@ -41,7 +45,7 @@ const NavLeft = (props) => {
 						</span>
 					</div>
 				</div>
-			</li> */}
+			</li>
 		</ul>
 	)
 }

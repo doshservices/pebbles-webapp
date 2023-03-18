@@ -89,7 +89,7 @@ const Signup = () => {
 
 	useEffect(() => {
 		if (user_register) {
-			navigate('/login')
+			navigate('/auth/login')
 		}
 	}, [user_register])
 
@@ -171,7 +171,9 @@ const Signup = () => {
 									className='logo_div'
 									style={{ position: 'relative', marginTop: '1.5rem' }}
 								>
-									<img src={logo} alt='' className='img-fluid' />
+									<Link to='/'>
+										<img src={logo} alt='' className='img-fluid' />
+									</Link>
 								</div>
 							</div>
 							<div className='col-lg-6 col-md-8'>
@@ -387,7 +389,7 @@ const Signup = () => {
 										<div className='mt-3 text-center'>
 											<p>
 												Already have an account?{' '}
-												<Link to='/login' style={{ fontWeight: '500' }}>
+												<Link to='/auth/login' style={{ fontWeight: '500' }}>
 													Log In
 												</Link>
 											</p>

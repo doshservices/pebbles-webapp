@@ -21,7 +21,7 @@ const NavRight = () => {
 			className='navbar-nav ml-auto'
 			style={{ display: 'flex', alignItems: 'center' }}
 		>
-			<li>
+			<li style={{ lineHeight: '14px' }}>
 				<div
 					className='pro-head'
 					style={{ alignItems: 'center', display: 'flex' }}

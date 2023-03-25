@@ -56,6 +56,61 @@
 	box-shadow: 1px 2px 3px #ccc;
 }
 
-/* .dashboard_pad {
-	padding: 1rem 5rem;
-} */
+.dashboard {
+	padding: 1rem 0;
+}
+
+.dashboard h6 {
+	margin-bottom: 1rem;
+}
+
+.dashboard .pebbles_form select {
+	border: none;
+	border-bottom: 1px solid #2d2d2d;
+	border-radius: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+.dashboard .pebbles_form select:focus {
+	box-shadow: none;
+}
+
+.dashboard_bookings .images_slider {
+	width: 9rem;
+}
+
+.dashboard_bookings .images_slider img {
+	width: 90%;
+	height: 5rem;
+	object-fit: cover;
+	border-radius: 8px;
+	margin-right: 1rem;
+}
+
+.dashboard_bookings .apart_name {
+	margin-top: 1rem;
+}
+
+.dashboard table {
+	margin-top: 0.5rem;
+	font-size: 14px;
+}
+
+.dashboard thead {
+	border-bottom: 0px solid transparent;
+}
+
+.dashboard thead tr th {
+	color: #2d2d2d80;
+	font-weight: 600;
+}
+
+.dashboard_bookings tbody tr td {
+	padding-top: 1.5rem;
+	vertical-align: text-bottomß;
+}
+
+.dashboard_bookings .td_pad_top {
+	padding-top: 3.5rem;
+}

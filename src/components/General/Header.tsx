@@ -283,7 +283,10 @@ const Header = ({ type }: { type: number }) => {
 											/>
 										</Dropdown.Toggle>
 
-										<Dropdown.Menu style={{ padding: '.5rem 1rem' }}>
+										<Dropdown.Menu
+											align={'end'}
+											style={{ padding: '.5rem 1rem' }}
+										>
 											{!user_detail ? (
 												<LinkContainer to={`/auth/login`}>
 													<Nav.Link className=''> Login </Nav.Link>

@@ -6,8 +6,8 @@ const UserDashboardHome = () => {
 	const dataData2 = [12, 19, 3, 5, 2, 3, 6]
 
 	return (
-		<main>
-			<h6 className='mb-4'> All Time </h6>
+		<main className='dashboard'>
+			<h6 className=''> All Time </h6>
 			<div className='row mb-4'>
 				<div className='col-md-3 col-sm-6'>
 					<div className='stat_box stat_box1'>

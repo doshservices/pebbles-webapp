@@ -18,7 +18,7 @@ const SliderImages = ({ images }: { images: any[] }) => {
 		<div className='images_slider'>
 			<Slider {...settings2}>
 				{images.map((item: string, index: number) => (
-					<img src={item} alt='' key={index} />
+					<img src={item} alt='' key={index} className='img-fluid' />
 				))}
 			</Slider>
 		</div>

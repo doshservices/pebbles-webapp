@@ -1,0 +1,61 @@
+.stat_box {
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+	justify-content: center;
+	padding: 0.4rem 1.5rem;
+	color: #fff;
+	margin-bottom: 1rem;
+}
+
+.stat_box1 {
+	background: linear-gradient(102.03deg, #046ba6 0%, #0096eb 100%);
+}
+
+.stat_box2 {
+	background: linear-gradient(101.5deg, #0a9a50 0%, #00c861 101.34%);
+}
+
+.stat_box3 {
+	background: linear-gradient(101.74deg, #c69014 0%, #dbb252 102.07%);
+}
+
+.stat_box4 {
+	background: linear-gradient(
+		78.39deg,
+		#ff5b3d 2.71%,
+		rgba(233, 78, 50, 0.79) 98.86%
+	);
+}
+
+.stat_box p {
+	margin-bottom: 0;
+	font-size: 13px;
+}
+
+.stat_box h5 {
+	padding-top: 0.7rem;
+}
+
+.dashboard .pebbles_form button {
+	margin-top: 3rem;
+	width: 10rem;
+	font-weight: 500;
+	font-size: 14px;
+	color: #155eef;
+	background-color: #fff;
+	border: 1px solid #155eef;
+	border-radius: 6px;
+	transition: all 0.3s ease-in-out;
+}
+
+.dashboard .pebbles_form button:hover {
+	background-color: #155eef;
+	color: #fff;
+	box-shadow: 1px 2px 3px #ccc;
+}
+
+/* .dashboard_pad {
+	padding: 1rem 5rem;
+} */

@@ -24,6 +24,9 @@ export interface AuthInterface {
 	status: string
 	_id: string
 	profilePicture?: string
+	country?: string
+	state?: string
+	address?: string
 }
 
 export interface OTPInterface {

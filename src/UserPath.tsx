@@ -6,6 +6,7 @@ import Navigation from './components/userDashboard/Navigation'
 import BreadCrumb from './components/BreadCrumb'
 import { useAppSelector } from './app/hooks'
 import items from './components/userDashboard/Navigation/menu'
+import './styles/dashboard.css'
 
 const UserPath = () => {
 	const navigate = useNavigate()

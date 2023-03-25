@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { HiMenuAlt1 } from 'react-icons/hi'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Nav, Navbar, Dropdown, Container, Image } from 'react-bootstrap'
-// import { user_logout } from '../../redux/actions/userAuthActions'
+import { Nav, Navbar, Dropdown, Container } from 'react-bootstrap'
 import '../../styles/component.css'
 import logo_blue from '../../assets/Logo_blue.png'
 import logo from '../../assets/Logo.png'
@@ -21,6 +20,7 @@ import ride from '../../assets/ride.png'
 import profileCircle from '../../assets/profile-circle.png'
 import profileCircleBlack from '../../assets/profile-circle-black.png'
 import '../../styles/header.css'
+import { reset } from '../../features/authentication/authenticationSlice'
 
 const Header = ({ type }: { type: number }) => {
 	const dispatch = useAppDispatch()
@@ -35,12 +35,11 @@ const Header = ({ type }: { type: number }) => {
 	}
 	window.addEventListener('scroll', changeNavbarColor)
 
-	// const userAuth = useSelector((state) => state.userAuth)
-	// const { userDetail } = userAuth
+	const { user_detail } = useAppSelector((state) => state.auth)
 
 	const logoutHandler = (e: any) => {
 		e.preventDefault()
-		// dispatch(user_logout())
+		dispatch(reset())
 	}
 
 	return (
@@ -101,10 +100,35 @@ const Header = ({ type }: { type: number }) => {
 											/>
 										</Dropdown.Toggle>
 
-										<Dropdown.Menu style={{ padding: '.5rem 1rem' }}>
-											<LinkContainer to={`/auth/login`}>
-												<Nav.Link className=''> Login </Nav.Link>
-											</LinkContainer>
+										<Dropdown.Menu
+											align={'end'}
+											style={{ padding: '.5rem .4rem' }}
+										>
+											{!user_detail ? (
+												<LinkContainer to={`/auth/login`}>
+													<Nav.Link className=''> Login </Nav.Link>
+												</LinkContainer>
+											) : (
+												<div className='text-center'>
+													<LinkContainer to={`/user/dashboard`}>
+														<Nav.Link className=''> My Dashboard </Nav.Link>
+													</LinkContainer>
+													<div className='text-center'>
+														<button
+															className='btn btn-primary'
+															style={{
+																backgroundColor: 'white',
+																border: '1px solid red',
+																color: 'red',
+																fontSize: '12px',
+															}}
+															onClick={logoutHandler}
+														>
+															Sign Out
+														</button>
+													</div>
+												</div>
+											)}
 										</Dropdown.Menu>
 									</Dropdown>
 								</Nav>
@@ -260,9 +284,31 @@ const Header = ({ type }: { type: number }) => {
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu style={{ padding: '.5rem 1rem' }}>
-											<LinkContainer to={`/auth/login`}>
-												<Nav.Link className=''> Login </Nav.Link>
-											</LinkContainer>
+											{!user_detail ? (
+												<LinkContainer to={`/auth/login`}>
+													<Nav.Link className=''> Login </Nav.Link>
+												</LinkContainer>
+											) : (
+												<div className='text-center'>
+													<LinkContainer to={`/user/dashboard`}>
+														<Nav.Link className=''> My Dashboard </Nav.Link>
+													</LinkContainer>
+													<div className='text-center'>
+														<button
+															className='btn btn-primary'
+															style={{
+																backgroundColor: 'white',
+																border: '1px solid red',
+																color: 'red',
+																fontSize: '12px',
+															}}
+															onClick={logoutHandler}
+														>
+															Sign Out
+														</button>
+													</div>
+												</div>
+											)}
 										</Dropdown.Menu>
 									</Dropdown>
 								</Nav>

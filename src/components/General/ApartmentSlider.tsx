@@ -1,8 +1,9 @@
 import React from 'react'
 import Slider from 'react-slick'
+import { ApartmentInterface } from '../../features/apartment/apartmentState'
 import ApartmentCard from '../ApartmentCard'
 
-const ApartmentSlider = ({ data }: { data: any[] }) => {
+const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
 	const settings = {
 		dots: false,
 		infinite: true,
@@ -46,11 +47,13 @@ const ApartmentSlider = ({ data }: { data: any[] }) => {
 	return (
 		<div className='container px-5 '>
 			<Slider {...settings}>
-				{data.map((item, index) => (
-					<div key={index} className='p_4'>
-						<ApartmentCard apartmentInfo={item} />
-					</div>
-				))}
+				{data.map((item, index) => {
+					return index <= 5 ? (
+						<div key={index} className='p_4'>
+							<ApartmentCard apartmentInfo={item} />
+						</div>
+					) : null
+				})}
 			</Slider>
 		</div>
 	)

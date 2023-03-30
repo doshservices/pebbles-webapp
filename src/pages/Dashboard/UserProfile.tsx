@@ -1,33 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import picture from '../../assets/fav.jpg'
 import { Country, State, City } from 'country-state-city'
+import { user_update } from '../../features/authentication/authenticationSlice'
 
 const UserProfile = () => {
 	const dispatch = useAppDispatch()
-	const { user_detail } = useAppSelector((state) => state.auth)
+	const { user_detail, isLoading } = useAppSelector((state) => state.auth)
 
-	const [firstName, setFirstName] = useState(
-		user_detail ? user_detail.firstName : ''
+	const [fullName, setFullName] = useState(
+		user_detail ? user_detail.fullName : ''
 	)
 	const [email, setEmail] = useState(user_detail ? user_detail.email : '')
-	const [lastName, setLastName] = useState(
-		user_detail ? user_detail.lastName : ''
+	const [businessName, setBusinessName] = useState(
+		user_detail ? user_detail.businessName : ''
 	)
 	const [phoneNumber, setPhoneNumber] = useState(
 		user_detail ? user_detail.phoneNumber : ''
 	)
 	const [address, setAddress] = useState(user_detail ? user_detail.address : '')
+	const [businessaddress, setBusinessAddress] = useState(
+		user_detail ? user_detail.businessAddress : ''
+	)
 	const [state, setState] = useState(user_detail ? user_detail.state : '')
+	const [city, setCity] = useState(user_detail ? user_detail.city : '')
 	const [country, setCountry] = useState(
 		user_detail ? user_detail.country : 'NG'
 	)
 	const [password, setPassword] = useState('')
 	const [newPassword, setNewPassword] = useState('')
 	const [confirmPassword, setConfirmPassword] = useState('')
-
-	console.log(Country.getAllCountries())
-	console.log(State.getAllStates())
 
 	const viewHandler = () => {
 		let pass = document.getElementById('password')
@@ -56,13 +58,130 @@ const UserProfile = () => {
 		view?.classList.toggle('fa-eye-slash')
 	}
 
-	const updateHandler = (e) => {
-		e.preventDefault()
+	const [imageFile, setImageFile] = useState('')
+	const [idFile, setIdFile] = useState('')
+	const [imageFormat, setImageFormat] = useState('')
+	const [idFormat, setIdFormat] = useState('')
+	const [mainImage, setMainImage] = useState<string | Blob>('')
+	const [mainId, setMainId] = useState<string | Blob>('')
+	const [uploadedImage, setUploadedImage] = useState('')
+	const [uploadedId, setUploadedId] = useState('')
+	const [uploading, setUploading] = useState(false)
+	const [uploadedValidID, setUploadedValidID] = useState('')
+	const [mainValidID, setMainValidID] = useState(null)
+
+	const getBase64 = (file: any) => {
+		return new Promise((resolve) => {
+			let baseURL: string | ArrayBuffer | null = ''
+			let reader = new FileReader()
+			reader.readAsDataURL(file)
+			reader.onload = () => {
+				// Make a fileInfo Object
+				baseURL = reader?.result
+				resolve(baseURL)
+			}
+		})
 	}
 
-	console.log('====================================')
-	console.log('user_detail', user_detail)
-	console.log('====================================')
+	const handleFileInputChange = (e: any, text: string) => {
+		let file = e.target.files[0]
+
+		if (text === 'image') setMainImage(file)
+		else setMainId(file)
+
+		getBase64(file)
+			.then((result) => {
+				file['base64'] = result
+				console.log('File Is', file)
+				let split = file.base64.split(',')
+
+				if (text === 'image') {
+					setImageFile(split[1])
+					let type = file.type.split('/')
+					setImageFormat(type[1])
+				} else {
+					setIdFile(split[1])
+					let type = file.type.split('/')
+					setIdFormat(type[1])
+				}
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
+
+	const uploadFileHandler = () => {
+		const formData = new FormData()
+		formData.append('file', mainImage)
+		formData.append('image', mainImage)
+		formData.append('upload_preset', 'pebbles')
+		formData.append('cloud_name', 'pebbles-signature')
+
+		setUploading(true)
+
+		fetch('https://api.cloudinary.com/v1_1/pebbles-signature/image/upload', {
+			method: 'POST',
+			body: formData,
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setUploading(false)
+				setMainImage('')
+				setUploadedImage(data.url)
+				setImageFile('')
+			})
+			.catch((err) => {
+				console.log(err)
+				setUploading(false)
+				setMainImage('')
+				setImageFile('')
+			})
+	}
+
+	const uploadIdHandler = () => {
+		const formData = new FormData()
+		formData.append('file', mainId)
+		formData.append('image', mainId)
+		formData.append('upload_preset', 'pebbles')
+		formData.append('cloud_name', 'pebbles-signature')
+
+		setUploading(true)
+
+		fetch('https://api.cloudinary.com/v1_1/pebbles-signature/image/upload', {
+			method: 'POST',
+			body: formData,
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setUploading(false)
+				setMainId('')
+				setUploadedId(data.url)
+				setIdFile('')
+			})
+			.catch((err) => {
+				console.log(err)
+				setUploading(false)
+				setMainId('')
+				setIdFile('')
+			})
+	}
+
+	const updateHandler = (e: any) => {
+		e.preventDefault()
+		let data = {
+			fullName,
+			businessName,
+			businessaddress,
+			phoneNumber,
+			state,
+			country,
+			city,
+			profilePicture: uploadedImage,
+			validId: uploadedId,
+		}
+		dispatch(user_update(data))
+	}
+	// useEffect(() => {}, [uploadedImage])
 
 	return (
 		<main className='dashboard'>
@@ -82,34 +201,53 @@ const UserProfile = () => {
 						>
 							<form autoComplete='off'>
 								<div className='row'>
+									<>
+										<div className='col-md-12'>
+											<label htmlFor='firstName'>
+												{user_detail?.role === 'USER'
+													? 'Full Name'
+													: 'Business Name'}
+											</label>
+											<input
+												type='text'
+												value={fullName}
+												placeholder='Enter First name here'
+												className='form-control'
+												onChange={(e) =>
+													user_detail?.role === 'USER'
+														? setFullName(e.target.value)
+														: setBusinessName(e.target.value)
+												}
+											/>
+										</div>
+									</>
+
 									<div className='col-md-6'>
-										<label htmlFor='firstName'> First Name </label>
-										<input
-											type='text'
-											value={firstName}
-											placeholder='Enter First name here'
-											className='form-control'
-											onChange={(e) => setFirstName(e.target.value)}
-										/>
-									</div>
-									<div className='col-md-6'>
-										<label htmlFor='lastName'> Last Name </label>
-										<input
-											type='text'
-											placeholder='Enter Last name here'
-											value={lastName}
-											className='form-control'
-											onChange={(e) => setLastName(e.target.value)}
-										/>
-									</div>
-									<div className='col-md-12'>
-										<label htmlFor='address'> Address </label>
+										<label htmlFor='address'>
+											{user_detail?.role === 'USER'
+												? 'Address'
+												: 'Business Address'}
+										</label>
 										<input
 											type='text'
 											placeholder='Enter Address here'
 											value={address}
 											className='form-control'
-											onChange={(e) => setAddress(e.target.value)}
+											onChange={(e) =>
+												user_detail?.role === 'USER'
+													? setAddress(e.target.value)
+													: setBusinessAddress(e.target.value)
+											}
+										/>
+									</div>
+									<div className='col-md-6'>
+										<label htmlFor='city'> City </label>
+										<input
+											type='text'
+											placeholder='Enter City here'
+											value={city}
+											className='form-control'
+											onChange={(e) => setCity(e.target.value)}
 										/>
 									</div>
 									<div className='col-md-6'>
@@ -143,12 +281,88 @@ const UserProfile = () => {
 										</select>
 									</div>
 
+									<div className='col-md-6 col-sm-6'>
+										<div className='facilities__images'>
+											<label className='facilities__images-text'>
+												Profile Picture
+											</label>
+
+											<input
+												type='file'
+												className='form-control'
+												// onChange={(e) => setImage(e.target.files[0])}
+												onChange={(e) => handleFileInputChange(e, 'image')}
+												style={{ borderBottom: 'none' }}
+											/>
+											{imageFile && (
+												<div className='col-md-12'>
+													<div className='mt-2'>
+														<button
+															className='btn btn-primary'
+															onClick={uploadFileHandler}
+															disabled={uploading ? true : false}
+														>
+															Upload Image{' '}
+															{uploading && (
+																<i className='fas fa-spinner fa-spin'></i>
+															)}
+														</button>
+													</div>
+												</div>
+											)}
+											<input
+												type='text'
+												value={uploadedImage}
+												onChange={(e) => setUploadedImage(e.target.value)}
+												className='site-form mb-3 d-none'
+											/>
+										</div>
+									</div>
+									<div className='col-md-6 col-sm-6'>
+										<div className='facilities__images'>
+											<label className='facilities__images-text'>
+												Valid ID
+											</label>
+
+											<input
+												type='file'
+												className='form-control'
+												onChange={(e) => handleFileInputChange(e, 'id')}
+												style={{ borderBottom: 'none' }}
+											/>
+											{idFile && (
+												<div className='col-md-12'>
+													<div className='mt-2'>
+														<button
+															className='btn btn-primary'
+															onClick={uploadIdHandler}
+															disabled={uploading ? true : false}
+														>
+															Save{' '}
+															{uploading && (
+																<i className='fas fa-spinner fa-spin'></i>
+															)}
+														</button>
+													</div>
+												</div>
+											)}
+											<input
+												type='text'
+												value={uploadedId}
+												onChange={(e) => setUploadedId(e.target.value)}
+												className='site-form mb-3 d-none'
+											/>
+										</div>
+									</div>
+
 									<div className='col-12 d-flex justify-content-end'>
 										<button
 											className='btn btn-primary form-control'
 											onClick={(e) => updateHandler(e)}
+											disabled={isLoading ? true : false}
 										>
-											Edit
+											Update
+											{isLoading && <i className='fas fa-spinner fa-spin'></i>}
 										</button>
 									</div>
 								</div>

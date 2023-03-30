@@ -94,6 +94,7 @@ a {
 	position: relative;
 	padding-top: 4rem;
 	padding-bottom: 3rem;
+	background-attachment: fixed;
 }
 
 .new_apartments::before {

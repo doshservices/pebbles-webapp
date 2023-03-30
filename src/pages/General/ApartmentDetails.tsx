@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import bgImage from '../../assets/carouselBackground1.png'
 import bgImage2 from '../../assets/Registration1.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { comma } from '../../utils/helper'
 import { FaSnowflake } from 'react-icons/fa'
 import {
@@ -22,8 +22,16 @@ import ApartmentSlider from '../../components/General/ApartmentSlider'
 import apartmentImg from '../../assets/picture.png'
 import Lightbox from 'react-18-image-lightbox'
 import 'react-18-image-lightbox/style.css'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { get_apartment_by_id } from '../../features/apartment/apartmentSlice'
 
 const ApartmentDetails = () => {
+	const dispatch = useAppDispatch()
+	const params = useParams()
+
+	const { allApartments, apartment, isFetchingApartment } = useAppSelector(
+		(state) => state.apartment
+	)
 	const pressHandler = async (e: any, id: number) => {
 		// e.preventDefault()
 		// setIsLoading(true)
@@ -134,7 +142,9 @@ const ApartmentDetails = () => {
 		RouteToTop()
 	}, [])
 
-	useEffect(() => {}, [limitValue, limit])
+	useEffect(() => {
+		dispatch(get_apartment_by_id({ id: params?.id }))
+	}, [limitValue, limit, params.id])
 
 	return (
 		<main className='apartment_details_page page_padding'>
@@ -497,7 +507,7 @@ const ApartmentDetails = () => {
 				<div className='container landmarks'>
 					<div className='row row-mobile px-4'>
 						{landmarks.map((item, index) => (
-							<div className='col'>
+							<div className='col' key={index}>
 								<img src={item.image} alt='' />
 								<h5> {item.name} </h5>
 								<p> {item.distance}mins Drive </p>
@@ -515,7 +525,9 @@ const ApartmentDetails = () => {
 					link='/apartments-near-you'
 					linkText='View all'
 				/>
-				<ApartmentSlider data={data} />
+				<ApartmentSlider
+					data={allApartments ? allApartments?.apartments : []}
+				/>
 			</section>
 		</main>
 	)

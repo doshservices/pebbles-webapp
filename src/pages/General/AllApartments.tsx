@@ -22,14 +22,10 @@ const AnyReactComponent = ({
 	</>
 )
 
-const SearchApartments = () => {
-	const { searchApartments, isFetchingSearchApartments } = useAppSelector(
+const AllApartments = () => {
+	const { allApartments, isFetchingAllApartments } = useAppSelector(
 		(state) => state.apartment
 	)
-
-	console.log('====================================')
-	console.log('searchApartments', searchApartments)
-	console.log('====================================')
 
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
@@ -62,7 +58,7 @@ const SearchApartments = () => {
 						marginBottom: '2rem',
 					}}
 				>
-					APARTMENTS SEARCH
+					ALL APARTMENTS
 				</h5>
 				<div className='row'>
 					<div className='col-lg-8'>
@@ -94,11 +90,10 @@ const SearchApartments = () => {
 							</div>
 						</div>
 						<div className='row'>
-							{isFetchingSearchApartments ? (
+							{isFetchingAllApartments ? (
 								<Loader />
-							) : searchApartments &&
-							  searchApartments.apartments?.length > 0 ? (
-								searchApartments.apartments.map((item, index) => (
+							) : allApartments && allApartments?.apartments.length > 0 ? (
+								allApartments?.apartments.map((item, index) => (
 									<div className='col-md-4 col-sm-6' key={index}>
 										<div key={index} className='p_4 mb-5'>
 											<ApartmentCard apartmentInfo={item} />
@@ -137,4 +132,4 @@ const SearchApartments = () => {
 	)
 }
 
-export default SearchApartments
+export default AllApartments

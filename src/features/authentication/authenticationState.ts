@@ -16,17 +16,19 @@ export const AuthInitialState: AuthInitialInterface = {
 
 export interface AuthInterface {
 	email: string
-	firstName: string
+	fullName?: string
 	isVerified: boolean
-	lastName: string
+	businessName?: string
 	phoneNumber: string
 	role: string
 	status: string
 	_id: string
 	profilePicture?: string
 	country?: string
+	city?: string
 	state?: string
 	address?: string
+	businessAddress?: string
 }
 
 export interface OTPInterface {

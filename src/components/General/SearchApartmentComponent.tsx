@@ -13,10 +13,15 @@ const SearchApartmentComponent = () => {
 	const [checkOut, setCheckOut] = useState('')
 	const [apartmentType, setApartmentType] = useState('')
 
+	console.log('====================================')
+	console.log('loc', loc)
+	console.log('====================================')
+
 	const submitHandler = () => {
 		dispatch(
 			get_search_apartments({
-				loc: loc?.formatted_address,
+				// loc: loc?.formatted_address,
+				loc,
 				checkIn,
 				checkOut,
 				apartmentType,
@@ -38,14 +43,20 @@ const SearchApartmentComponent = () => {
 							<span>
 								<i className='icofont-google-map' aria-hidden='true'></i>
 							</span>
-							<Autocomplete
+							<input
+								type='text'
+								className='form-control'
+								placeholder='Enter State'
+								onChange={(e) => setLoc(e.target.value)}
+							/>
+							{/* <Autocomplete
 								apiKey={process.env.REACT_APP_GOOGLE_MAPS_API}
 								onPlaceSelected={(place) => {
 									setLoc(place)
 								}}
 								className='form-control'
 								placeholder='Enter a location'
-							/>
+							/> */}
 						</div>
 						<div className='col-lg-8 col-md-12'>
 							<div className='row no-gutters'>

@@ -41,8 +41,7 @@ const NavHeader = ({ openMenu, toggleMenu, handle }) => {
 								/>
 							)}
 							<span className='user_name' style={{ color: '#3f4d67' }}>
-								{user_detail &&
-									user_detail.firstName + ' ' + user_detail.lastName}
+								{user_detail && user_detail.fullName}
 							</span>
 						</div>
 					</li>

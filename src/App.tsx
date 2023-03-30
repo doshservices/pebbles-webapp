@@ -23,6 +23,8 @@ import UserListings from './pages/Dashboard/UserListings'
 import UserNotifications from './pages/Dashboard/UserNotifications'
 import UserUpgrade from './pages/Dashboard/UserUpgrade'
 import UserGuests from './pages/Dashboard/UserGuests'
+import AllApartments from './pages/General/AllApartments'
+import NearApartments from './pages/General/NearApartments'
 
 function App() {
 	return (
@@ -35,6 +37,8 @@ function App() {
 						<Route path='/' element={<GeneralPath />}>
 							<Route path='home' element={<Index />} />
 							<Route path='search-apartments' element={<SearchApartments />} />
+							<Route path='all-apartments' element={<AllApartments />} />
+							<Route path='apartments-near-you' element={<NearApartments />} />
 							<Route path='apartments/:id' element={<ApartmentDetails />} />
 							<Route path='about-us' element={<About />} />
 							<Route path='contact' element={<Contact />} />

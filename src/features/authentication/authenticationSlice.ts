@@ -7,6 +7,7 @@ import { authHeader, header } from '../../utils/headers'
 import config from '../../utils/config'
 import { RehydrateAppAction } from '../../types/types'
 import { newState } from '../../utils/newState'
+import { store } from '../../app/store'
 
 let url = config.liveUrl
 
@@ -24,8 +25,8 @@ export const user_signup = createAsyncThunk(
 	'auth/user_signup',
 	async (
 		payload: {
-			firstName: string
-			lastName: string
+			fullName: string
+			businessName: string
 			email: string
 			password: string
 			phoneNumber: string
@@ -104,27 +105,62 @@ export const user_login = createAsyncThunk(
 	}
 )
 
-// export const get_search_apartments = createAsyncThunk(
-// 	'apartments/get_search_apartments',
-// 	async (
-// 		payload: {
-// 			loc: string
-// 			checkIn: string
-// 			checkOut: string
-// 			apartmentType: string
-// 		},
-// 		thunkAPI
-// 	) => {
-// 		const { rejectWithValue } = thunkAPI
-// 		try {
-// 			const response = await axios.get(
-// 				`${url}/apartments-one/search?apartmentSearch=${payload.loc}`,
-// 				{
-// 					headers: authHeader(token),
-// 				}
-// 			)
+export const user_update = createAsyncThunk(
+	'auth/user_update',
+	async (
+		payload: {
+			fullName: string | undefined
+			// firstName: string | undefined
+			// lastName: string | undefined
+			phoneNumber: string | undefined
+			state: string | undefined
+			country: string | undefined
+			city: string | undefined
+			profilePicture: string | undefined
+			validId: string | undefined
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
 
-// 			return response.data
+		try {
+			const response = await axios.put(`${url}/users`, payload, {
+				headers: authHeader(token ? token : '123'),
+			})
+			// store.dispatch(user_refresh_profile())
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+// export const user_refresh_profile = createAsyncThunk(
+// 	'auth/user_refresh_profile',
+// 	async (_, thunkAPI) => {
+// 		const { rejectWithValue } = thunkAPI
+// 		let token: string | null = store.getState()?.auth?.token
+
+// 		try {
+// 			const response = await axios.get(`${url}/users`, {
+// 				headers: authHeader(token ? token : '123'),
+// 			})
+
+// 			let passedData = {
+// 				...response.data,
+// 				token: store.getState()?.auth?.token,
+// 			}
+
+// 			return passedData
 // 		} catch (error: any) {
 // 			const message =
 // 				(error.response &&
@@ -183,6 +219,28 @@ export const { reducer: AuthReducer, actions } = createSlice({
 		builder.addCase(user_login.rejected, (state, action) => {
 			state.isLoading = false
 		})
+		builder.addCase(user_update.fulfilled, (state, action) => {
+			state.user_detail = action.payload.data.userDetails
+			state.token = action.payload.data.token
+			state.isLoading = false
+		})
+		builder.addCase(user_update.pending, (state, action) => {
+			state.isLoading = true
+		})
+		builder.addCase(user_update.rejected, (state, action) => {
+			state.isLoading = false
+		})
+		// builder.addCase(user_refresh_profile.fulfilled, (state, action) => {
+		// 	state.user_detail = action.payload
+		// 	state.token = action.payload.token
+		// 	state.isLoading = false
+		// })
+		// builder.addCase(user_refresh_profile.pending, (state, action) => {
+		// 	state.isLoading = true
+		// })
+		// builder.addCase(user_refresh_profile.rejected, (state, action) => {
+		// 	state.isLoading = false
+		// })
 	},
 })
 

@@ -114,3 +114,8 @@
 .dashboard_bookings .td_pad_top {
 	padding-top: 3.5rem;
 }
+
+.dashboard .apartment_card {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 1rem;
+}

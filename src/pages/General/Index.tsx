@@ -3,7 +3,10 @@ import '../../styles/index.css'
 import HomeCarousel from '../../components/General/HomeCarousel'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import apartmentImg from '../../assets/picture.png'
-// import { getNearbyApartments } from '../../features/apartment/apartmentSlice'
+import {
+	get_nearby_apartments,
+	get_all_apartments,
+} from '../../features/apartment/apartmentSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import bgImage from '../../assets/carouselBackground1.png'
@@ -90,13 +93,20 @@ const reviewData = [
 const Index = () => {
 	const dispatch = useAppDispatch()
 
-	const { nearbyApartments } = useAppSelector((state) => state.apartment)
+	const { nearbyApartments, allApartments } = useAppSelector(
+		(state) => state.apartment
+	)
+	const { user_detail } = useAppSelector((state) => state.auth)
 
 	useEffect(() => {
-		// dispatch(getNearbyApartments())
+		console.log('allApartments', allApartments)
 
-		console.log('nearbyApartments', nearbyApartments)
-	}, [dispatch])
+		if (user_detail) {
+			dispatch(get_nearby_apartments())
+		} else {
+			dispatch(get_all_apartments())
+		}
+	}, [dispatch, user_detail])
 
 	return (
 		<>
@@ -104,14 +114,33 @@ const Index = () => {
 				<HomeCarousel />
 
 				<section className='explore_apartments'>
-					<PageHeaderComponent
-						topHeader='EXPLORE'
-						topHeaderColor='rgba(21, 94, 239, 0.8)'
-						header='APARTMENTS NEAR YOU'
-						link='/apartments-near-you'
-						linkText='View all'
-					/>
-					<ApartmentSlider data={data} />
+					{user_detail ? (
+						<>
+							<PageHeaderComponent
+								topHeader='EXPLORE'
+								topHeaderColor='rgba(21, 94, 239, 0.8)'
+								header='APARTMENTS NEAR YOU'
+								link='/apartments-near-you'
+								linkText='View all'
+							/>
+							<ApartmentSlider
+								data={nearbyApartments ? nearbyApartments?.apartments : []}
+							/>
+						</>
+					) : (
+						<>
+							<PageHeaderComponent
+								topHeader='EXPLORE'
+								topHeaderColor='rgba(21, 94, 239, 0.8)'
+								header='OUR APARTMENTS'
+								link='/all-apartments'
+								linkText='View all'
+							/>
+							<ApartmentSlider
+								data={allApartments ? allApartments?.apartments : []}
+							/>
+						</>
+					)}
 				</section>
 
 				<section
@@ -205,10 +234,12 @@ const Index = () => {
 						topHeader='FEATURED'
 						topHeaderColor='rgba(21, 94, 239, 0.8)'
 						header='MOST TRENDY APARTMENTS'
-						link='/trendy-apartments'
+						link='/all-apartments'
 						linkText='View all'
 					/>
-					<ApartmentSlider data={data} />
+					<ApartmentSlider
+						data={allApartments ? allApartments?.apartments : []}
+					/>
 				</section>
 
 				<section

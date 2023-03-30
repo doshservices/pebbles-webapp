@@ -20,8 +20,8 @@ const Signup = () => {
 	const [showIndividual, setShowIndividual] = useState(true)
 	const [message, setMessage] = useState<string | null>(null)
 	const [OTP, setOTP] = useState('')
-	const [firstName, setFirstName] = useState('')
-	const [lastName, setLastName] = useState('')
+	const [fullName, setFullName] = useState('')
+	const [businessName, setBusinessName] = useState('')
 	const [email, setEmail] = useState('')
 	const [phoneNumber, setPhoneNumber] = useState('')
 	const [password, setPassword] = useState('')
@@ -58,8 +58,8 @@ const Signup = () => {
 		e.preventDefault()
 		dispatch(
 			user_signup({
-				firstName,
-				lastName,
+				businessName,
+				fullName,
 				email,
 				googleSigned: true,
 				password,
@@ -73,7 +73,13 @@ const Signup = () => {
 	const submitSignupHandler = (e: any, role: string) => {
 		e.preventDefault()
 		setRole(role)
-		if (firstName && email && phoneNumber && password && confirmPassword) {
+		if (
+			(fullName || businessName) &&
+			email &&
+			phoneNumber &&
+			password &&
+			confirmPassword
+		) {
 			if (password === confirmPassword) {
 				// if (otp?.status === 200) {
 				dispatch(get_otp({ email }))
@@ -213,24 +219,16 @@ const Signup = () => {
 										{showIndividual ? (
 											<form>
 												<div className='row'>
-													<div className='col-md-6'>
-														<label htmlFor='fullName'>First Name</label>
+													<div className='col-md-12'>
+														<label htmlFor='fullName'>Full Name</label>
 														<input
 															type='text'
 															placeholder='First name here'
 															className='form-control'
-															onChange={(e) => setFirstName(e.target.value)}
+															onChange={(e) => setFullName(e.target.value)}
 														/>
 													</div>
-													<div className='col-md-6'>
-														<label htmlFor='fullName'>Last Name</label>
-														<input
-															type='text'
-															placeholder='Last name here'
-															className='form-control'
-															onChange={(e) => setLastName(e.target.value)}
-														/>
-													</div>
+
 													<div className='col-md-6'>
 														<label htmlFor='fullName'>Email Address</label>
 														<input
@@ -305,12 +303,12 @@ const Signup = () => {
 											<form>
 												<div className='row'>
 													<div className='col-md-12'>
-														<label htmlFor='fullName'>Company Name</label>
+														<label htmlFor='fullName'>Business Name</label>
 														<input
 															type='text'
-															placeholder='Company name here'
+															placeholder='Business name here'
 															className='form-control'
-															onChange={(e) => setFirstName(e.target.value)}
+															onChange={(e) => setBusinessName(e.target.value)}
 														/>
 													</div>
 

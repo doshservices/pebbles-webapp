@@ -4,18 +4,19 @@ import { ApartmentInitialState } from './apartmentState'
 import { authHeader, header } from '../../utils/headers'
 // import toast from 'react-hot-toast'
 import config from '../../utils/config'
+import { store } from '../../app/store'
 
 let url = config.liveUrl
-let token: string = '123'
 
 export const get_nearby_apartments = createAsyncThunk(
 	'apartments/get_nearby_apartments',
 	async (_, thunkAPI) => {
 		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
 
 		try {
 			const response = await axios.get(`${url}/apartments/near/you`, {
-				headers: authHeader(token),
+				headers: authHeader(token ? token : '123'),
 			})
 
 			return response.data
@@ -46,11 +47,62 @@ export const get_search_apartments = createAsyncThunk(
 		const { rejectWithValue } = thunkAPI
 		try {
 			const response = await axios.get(
-				`${url}/apartments-one/search?apartmentSearch=${payload.loc}`,
+				`${url}/apartments-one/search?state=${payload.loc}&type=${payload.apartmentType}`,
 				{
 					headers: header,
 				}
 			)
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const get_all_apartments = createAsyncThunk(
+	'apartments/get_all_apartments',
+	async (_, thunkAPI) => {
+		const { rejectWithValue } = thunkAPI
+		try {
+			const response = await axios.get(`${url}/apartments/all-apartments`, {
+				headers: header,
+			})
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const get_apartment_by_id = createAsyncThunk(
+	'apartments/get_apartment_by_id',
+	async (
+		payload: {
+			id: string | undefined
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		try {
+			const response = await axios.get(`${url}/apartments/${payload.id}`, {
+				headers: header,
+			})
 
 			return response.data
 		} catch (error: any) {
@@ -90,6 +142,26 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 		})
 		builder.addCase(get_search_apartments.rejected, (state, action) => {
 			state.isFetchingSearchApartments = false
+		})
+		builder.addCase(get_all_apartments.fulfilled, (state, action) => {
+			state.allApartments = action.payload.data
+			state.isFetchingAllApartments = false
+		})
+		builder.addCase(get_all_apartments.pending, (state, action) => {
+			state.isFetchingAllApartments = true
+		})
+		builder.addCase(get_all_apartments.rejected, (state, action) => {
+			state.isFetchingAllApartments = false
+		})
+		builder.addCase(get_apartment_by_id.fulfilled, (state, action) => {
+			state.apartment = action.payload.data
+			state.isFetchingApartment = false
+		})
+		builder.addCase(get_apartment_by_id.pending, (state, action) => {
+			state.isFetchingApartment = true
+		})
+		builder.addCase(get_apartment_by_id.rejected, (state, action) => {
+			state.isFetchingApartment = false
 		})
 	},
 })

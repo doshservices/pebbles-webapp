@@ -24,6 +24,8 @@ import Lightbox from 'react-18-image-lightbox'
 import 'react-18-image-lightbox/style.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { get_apartment_by_id } from '../../features/apartment/apartmentSlice'
+import Loader from '../../components/Loader'
+import axios from 'axios'
 
 const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
@@ -32,31 +34,12 @@ const ApartmentDetails = () => {
 	const { allApartments, apartment, isFetchingApartment } = useAppSelector(
 		(state) => state.apartment
 	)
-	const pressHandler = async (e: any, id: number) => {
-		// e.preventDefault()
-		// setIsLoading(true)
-		// await axios({
-		// 	url: `${url}/apartments/is-available`,
-		// 	method: "POST",
-		// 	headers: authHeader(userDetail.token),
-		// 	data: { apartmentId: id },
-		// })
-		// 	.then((res) => {
-		// 		setAvailability(res?.data?.data?.message)
-		// 		toast.success(res?.data?.data?.message, { position: "top-right" })
-		// 		setIsLoading(false)
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log("error with fetching apartment availability", err)
-		// 		setIsLoading(false)
-		// 	})
-		// setIsLoading(false)
-	}
 
 	const [limitValue, setLimitValue] = useState<number>(3)
 	const [limit, setLimit] = useState<boolean>(false)
 	const [photoIndex, setPhotoIndex] = useState<number>(0)
 	const [isOpen, setIsOpen] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const images = [bgImage, bgImage2]
 
@@ -101,39 +84,6 @@ const ApartmentDetails = () => {
 		},
 	]
 
-	const data = [
-		{
-			address: 'Surulere, Lagos, Nigeria',
-			no_of_rooms: 5,
-			amount: '12000',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			address: 'Ogba, Lagos, Nigeria',
-			no_of_rooms: 5,
-			amount: '12000',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			address: 'Surulere, Lagos, Nigeria',
-			no_of_rooms: 5,
-			amount: '12000',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			address: 'Ogba, Lagos, Nigeria',
-			no_of_rooms: 5,
-			amount: '12000',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			address: 'Surulere, Lagos, Nigeria',
-			no_of_rooms: 5,
-			amount: '12000',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-	]
-
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
 	}
@@ -142,9 +92,32 @@ const ApartmentDetails = () => {
 		RouteToTop()
 	}, [])
 
+	console.log('apartment', apartment)
+
+	const pressHandler = async (e: any, id: number) => {
+		e.preventDefault()
+		// setIsLoading(true)
+		// await axios({
+		// 	url: `${url}/apartments/is-available`,
+		// 	method: "POST",
+		// 	headers: authHeader(userDetail.token),
+		// 	data: { apartmentId: id },
+		// })
+		// 	.then((res) => {
+		// 		setAvailability(res?.data?.data?.message)
+		// 		toast.success(res?.data?.data?.message, { position: "top-right" })
+		// 		setIsLoading(false)
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log("error with fetching apartment availability", err)
+		// 		setIsLoading(false)
+		// 	})
+		setIsLoading(false)
+	}
+
 	useEffect(() => {
 		dispatch(get_apartment_by_id({ id: params?.id }))
-	}, [limitValue, limit, params.id])
+	}, [limitValue, limit, params?.id, dispatch])
 
 	return (
 		<main className='apartment_details_page page_padding'>
@@ -152,328 +125,374 @@ const ApartmentDetails = () => {
 				<SearchApartmentComponent />
 			</div>
 
-			<div className='container'>
-				<div style={{ position: 'relative' }}>
-					<div className='row mb-4'>
-						<div className='col-md-7'>
-							<img src={bgImage} alt='' className='intro_image intro_full' />
-						</div>
-						<div className='col-md-5'>
-							<div style={{ marginBottom: '1.5rem' }}>
-								<img src={bgImage} alt='' className='intro_image intro_half' />
+			{isFetchingApartment ? (
+				<Loader />
+			) : apartment && apartment?.apartment ? (
+				<div className='container'>
+					<div style={{ position: 'relative' }}>
+						<div className='row mb-4'>
+							<div className='col-md-7'>
+								<img
+									src={apartment?.apartment?.apartmentImages[0]}
+									alt=''
+									className='intro_image intro_full'
+								/>
 							</div>
-							<div>
-								<img src={bgImage2} alt='' className='intro_image intro_half' />
-							</div>
-						</div>
-					</div>
-
-					<button className='lightbox_btn' onClick={() => setIsOpen(true)}>
-						VIEW 10 PHOTOS
-					</button>
-					{isOpen && (
-						<Lightbox
-							mainSrc={images[photoIndex]}
-							nextSrc={images[(photoIndex + 1) % images.length]}
-							prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-							onCloseRequest={() => setIsOpen(false)}
-							onMovePrevRequest={() =>
-								setPhotoIndex((photoIndex + images.length - 1) % images.length)
-							}
-							onMoveNextRequest={() =>
-								setPhotoIndex((photoIndex + 1) % images.length)
-							}
-							imagePadding={100}
-						/>
-					)}
-				</div>
-
-				<div>
-					<div className='row'>
-						<div className='col-md-7'>
-							<div>
-								<h3 className='intro_header'>3 Bedroom Detached Duplex</h3>
-								<p className='intro_para'>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-									do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud exercitation ullamco
-									laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-									irure dolor in reprehenderit in voluptate velit esse cillum
-									dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-									cupidatat non proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum
-								</p>
-							</div>
-
-							<div
-								style={{
-									borderBottom: '1.14691px solid rgba(45, 45, 45, 0.2)',
-									paddingBottom: '2rem',
-								}}
-							>
-								<h2 className='sect_head'>HOUSE DETAILS</h2>
-								<h5 className='mb-3'>Available Amenities</h5>
-
-								<div className='row'>
-									{amenities.map((item, index) => (
-										<>
-											{index <= limitValue ? (
-												<div className='col-md-6 col-sm-6' key={index}>
-													<div className='d-flex amenities_div'>
-														{item === '24hrs Power Supply' ? (
-															<HiOutlineLightBulb size={22} />
-														) : item === 'Air conditioning' ? (
-															<FaSnowflake size={22} />
-														) : item === 'Fast Wi-Fi' ? (
-															<AiOutlineWifi size={22} />
-														) : item === 'Swimming pool' ? (
-															<MdOutlinePool size={22} />
-														) : item === 'TV with Netflix, Amazon and Julu' ? (
-															<SlScreenDesktop size={22} />
-														) : (
-															<CgGym size={24} />
-														)}
-														<p> {item} </p>
-													</div>
-												</div>
-											) : null}
-										</>
-									))}
+							<div className='col-md-5'>
+								<div style={{ marginBottom: '1.5rem' }}>
+									<img
+										src={apartment?.apartment?.apartmentImages[1]}
+										alt=''
+										className='intro_image intro_half'
+									/>
 								</div>
-
-								<button
-									onClick={() => toggleMore()}
-									className='btn btn-primary mt-3  btn_white_blue'
-								>
-									Show all 20 Amenities
-								</button>
-							</div>
-
-							<div
-								style={{
-									borderBottom: '1.14691px solid rgba(45, 45, 45, 0.2)',
-									paddingBottom: '2rem',
-								}}
-							>
-								<h5 className='pt-4 mb-0'>Neighbourhood</h5>
-								<p className='intro_para mb-0'>
-									Surulere is a residential and commercial Local Government Area
-									located on the mainland of Lagos in Lagos State, Nigeria, with
-									an area of 23 km2 (8.9 sq mi). The local government area is
-									bordered by Yaba, Mushin and Ebute-Metta. It is home to the
-									Lagos National Stadium (capacity 60,000) built in 1972 for the
-									All-Africa Games. Surulere also houses the Teslim Balogun
-									Stadium, a multi use Stadium used mainly for football matches
-									with an over twenty four thousand sitting capacity. The main
-									commercial streets in Surulere are Western Avenue, Adeniran
-									Ogunsanya, Adelabu, Ogunalana drive and Aguda, various open
-									markets are dispersed in different neighborhoods. Industrial
-									establishments are predominantly located at Iponri, Coker and
-									Iganmu.
-								</p>
-							</div>
-
-							<div className='booking_policy'>
-								<h5 className='pt-4 mb-4'> Booking Policies </h5>
 								<div>
+									<img
+										src={apartment?.apartment?.apartmentImages[2]}
+										alt=''
+										className='intro_image intro_half'
+									/>
+								</div>
+							</div>
+						</div>
+
+						<button className='lightbox_btn' onClick={() => setIsOpen(true)}>
+							VIEW 10 PHOTOS
+						</button>
+						{isOpen && (
+							<Lightbox
+								mainSrc={apartment?.apartment?.apartmentImages[photoIndex]}
+								nextSrc={
+									apartment?.apartment?.apartmentImages[
+										(photoIndex + 1) %
+											apartment?.apartment?.apartmentImages.length
+									]
+								}
+								prevSrc={
+									apartment?.apartment?.apartmentImages[
+										(photoIndex +
+											apartment?.apartment?.apartmentImages.length -
+											1) %
+											apartment?.apartment?.apartmentImages.length
+									]
+								}
+								onCloseRequest={() => setIsOpen(false)}
+								onMovePrevRequest={() =>
+									setPhotoIndex(
+										(photoIndex +
+											apartment?.apartment?.apartmentImages.length -
+											1) %
+											apartment?.apartment?.apartmentImages.length
+									)
+								}
+								onMoveNextRequest={() =>
+									setPhotoIndex(
+										(photoIndex + 1) %
+											apartment?.apartment?.apartmentImages.length
+									)
+								}
+								imagePadding={100}
+							/>
+						)}
+					</div>
+
+					<div>
+						<div className='row'>
+							<div className='col-md-7'>
+								<div>
+									<h3 className='intro_header'>
+										{' '}
+										{apartment?.apartment?.apartmentName}{' '}
+									</h3>
+									<p className='intro_para'>
+										{apartment?.apartment?.apartmentInfo}
+									</p>
+								</div>
+
+								<div
+									style={{
+										borderBottom: '1.14691px solid rgba(45, 45, 45, 0.2)',
+										paddingBottom: '2rem',
+									}}
+								>
+									<h2 className='sect_head'>HOUSE DETAILS</h2>
+									<h5 className='mb-3'>Available Amenities</h5>
+
 									<div className='row'>
-										<div className='col-lg-6 col-md-12'>
-											<div className='d-flex'>
-												<div>
-													<AiOutlineClockCircle />
-												</div>
-												<div className='detail_div'>
-													<h6> Check-in is at 3:00pm </h6>
-													<h6> Check-out is at 11:00pm </h6>
-													<p className='intro_para'>
-														You may request early check-in and/or late check-out
-														after booking. Our team will do our best to
-														accommodate any requests based on availability.
-													</p>
+										{amenities.map((item, index) => (
+											<div key={index}>
+												{index <= limitValue ? (
+													<div className='col-md-6 col-sm-6'>
+														<div className='d-flex amenities_div'>
+															{item === '24hrs Power Supply' ? (
+																<HiOutlineLightBulb size={22} />
+															) : item === 'Air conditioning' ? (
+																<FaSnowflake size={22} />
+															) : item === 'Fast Wi-Fi' ? (
+																<AiOutlineWifi size={22} />
+															) : item === 'Swimming pool' ? (
+																<MdOutlinePool size={22} />
+															) : item ===
+															  'TV with Netflix, Amazon and Julu' ? (
+																<SlScreenDesktop size={22} />
+															) : (
+																<CgGym size={24} />
+															)}
+															<p> {item} </p>
+														</div>
+													</div>
+												) : null}
+											</div>
+										))}
+									</div>
+
+									<button
+										onClick={() => toggleMore()}
+										className='btn btn-primary mt-3  btn_white_blue'
+									>
+										Show all 20 Amenities
+									</button>
+								</div>
+
+								<div
+									style={{
+										borderBottom: '1.14691px solid rgba(45, 45, 45, 0.2)',
+										paddingBottom: '2rem',
+									}}
+								>
+									<h5 className='pt-4 mb-0'>Neighbourhood</h5>
+									<p className='intro_para mb-0'>
+										Surulere is a residential and commercial Local Government
+										Area located on the mainland of Lagos in Lagos State,
+										Nigeria, with an area of 23 km2 (8.9 sq mi). The local
+										government area is bordered by Yaba, Mushin and Ebute-Metta.
+										It is home to the Lagos National Stadium (capacity 60,000)
+										built in 1972 for the All-Africa Games. Surulere also houses
+										the Teslim Balogun Stadium, a multi use Stadium used mainly
+										for football matches with an over twenty four thousand
+										sitting capacity. The main commercial streets in Surulere
+										are Western Avenue, Adeniran Ogunsanya, Adelabu, Ogunalana
+										drive and Aguda, various open markets are dispersed in
+										different neighborhoods. Industrial establishments are
+										predominantly located at Iponri, Coker and Iganmu.
+									</p>
+								</div>
+
+								<div className='booking_policy'>
+									<h5 className='pt-4 mb-4'> Booking Policies </h5>
+									<div>
+										<div className='row'>
+											<div className='col-lg-6 col-md-12'>
+												<div className='d-flex'>
+													<div>
+														<AiOutlineClockCircle />
+													</div>
+													<div className='detail_div'>
+														<h6> Check-in is at 3:00pm </h6>
+														<h6> Check-out is at 11:00pm </h6>
+														<p className='intro_para'>
+															You may request early check-in and/or late
+															check-out after booking. Our team will do our best
+															to accommodate any requests based on availability.
+														</p>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div className='col-lg-6 col-md-12'>
-											<div className='d-flex'>
-												<div>
-													<AiOutlineStop />
-												</div>
-												<div className='detail_div'>
-													<h6> House Rules </h6>
+											<div className='col-lg-6 col-md-12'>
+												<div className='d-flex'>
+													<div>
+														<AiOutlineStop />
+													</div>
+													<div className='detail_div'>
+														<h6> House Rules </h6>
 
-													<ul className='intro_para'>
-														<li>No smoking (not even on balconies/patios)</li>
-														<li>
-															No pets (not even really cute ones) unless
-															otherwise stated
-														</li>
-														<li> No parties (not even really quiet ones) </li>
-													</ul>
+														<ul className='intro_para'>
+															<li>No smoking (not even on balconies/patios)</li>
+															<li>
+																No pets (not even really cute ones) unless
+																otherwise stated
+															</li>
+															<li> No parties (not even really quiet ones) </li>
+														</ul>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div className='col-lg-6 col-md-12'>
-											<div className='d-flex'>
-												<div>
-													<TbMessageReport />
-												</div>
-												<div className='detail_div'>
-													<h6> Note </h6>
+											<div className='col-lg-6 col-md-12'>
+												<div className='d-flex'>
+													<div>
+														<TbMessageReport />
+													</div>
+													<div className='detail_div'>
+														<h6> Note </h6>
 
-													<ul className='intro_para'>
-														<li> A mini fridge is available on request.</li>
-														<li>
-															No room service or on-site parking available.
-														</li>
-													</ul>
+														<ul className='intro_para'>
+															<li> A mini fridge is available on request.</li>
+															<li>
+																No room service or on-site parking available.
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div className='d-flex'>
+													<div>
+														<TbDisabled />
+													</div>
+													<div className='detail_div'>
+														<h6> Accessibity </h6>
+
+														<ul className='intro_para'>
+															<li> Wheelchair accessibility not available</li>
+															<li>Elevators available</li>
+														</ul>
+													</div>
 												</div>
 											</div>
-											<div className='d-flex'>
-												<div>
-													<TbDisabled />
-												</div>
-												<div className='detail_div'>
-													<h6> Accessibity </h6>
+											<div className='col-lg-6 col-md-12'>
+												<div className='d-flex'>
+													<div>
+														<TbMessageReport />
+													</div>
+													<div className='detail_div'>
+														<h6> Refund Policy </h6>
 
-													<ul className='intro_para'>
-														<li> Wheelchair accessibility not available</li>
-														<li>Elevators available</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-										<div className='col-lg-6 col-md-12'>
-											<div className='d-flex'>
-												<div>
-													<TbMessageReport />
-												</div>
-												<div className='detail_div'>
-													<h6> Refund Policy </h6>
-
-													<p className='intro_para'>
-														We offer flexible cancellations for all bookings.
-														Select the Flex Rate to cancel your booking up to
-														24hrs before check-in and receive a full refund. For
-														longer stays that are paid monthly, we require at
-														least 15 days notice to cancel or modify without
-														fees.
-													</p>
+														<p className='intro_para'>
+															We offer flexible cancellations for all bookings.
+															Select the Flex Rate to cancel your booking up to
+															24hrs before check-in and receive a full refund.
+															For longer stays that are paid monthly, we require
+															at least 15 days notice to cancel or modify
+															without fees.
+														</p>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div className='col-lg-5 col-md-5'>
-							<div className='apartment_formform_pad'>
-								<div className='apartment_formform'>
-									<div className='row'>
-										<div className='col-12'>
-											<div className='d-flex sect1'>
-												<img src={two_users} alt='' />
-												<div>
-													<p style={{ fontWeight: '600', fontSize: '14px' }}>
-														Sleeps up to 12
+							<div className='col-lg-5 col-md-5'>
+								<div className='apartment_formform_pad'>
+									<div className='apartment_formform'>
+										<div className='row'>
+											<div className='col-12'>
+												<div className='d-flex sect1'>
+													<img src={two_users} alt='' />
+													<div>
+														<p style={{ fontWeight: '600', fontSize: '14px' }}>
+															Sleeps up to{' '}
+															{apartment?.apartment?.numberOfGuests}
+														</p>
+														<p>
+															{' '}
+															{
+																apartment?.apartment?.numberOfBedrooms
+															} bedrooms,{' '}
+															{apartment?.apartment?.numberOfToilets} Bathrooms{' '}
+														</p>
+													</div>
+												</div>
+												<div className='sect2'>
+													<p
+														style={{ fontSize: '14px', marginBottom: '.3rem' }}
+													>
+														<strong style={{ fontSize: '18px' }}>
+															&#8358;
+															{comma(String(apartment?.apartment?.price))}/
+														</strong>{' '}
+														night
 													</p>
-													<p> 3 bedrooms, 4 Bathrooms </p>
+													<div
+														className='d-flex'
+														style={{ alignItems: 'center' }}
+													>
+														<MdOutlinePayments
+															size={28}
+															color='#155EEF'
+															className='me-2'
+														/>
+														<p style={{ width: '80%' }}>
+															Full refund when you cancel 24hrs before check-in
+														</p>
+													</div>
 												</div>
 											</div>
-											<div className='sect2'>
-												<p style={{ fontSize: '14px', marginBottom: '.3rem' }}>
-													<strong style={{ fontSize: '18px' }}>
-														&#8358;{comma('120000')}/
-													</strong>{' '}
-													night
-												</p>
-												<div
-													className='d-flex'
-													style={{ alignItems: 'center' }}
-												>
-													<MdOutlinePayments
-														size={28}
-														color='#155EEF'
-														className='me-2'
-													/>
-													<p style={{ width: '80%' }}>
-														Full refund when you cancel 24hrs before check-in
-													</p>
-												</div>
-											</div>
-										</div>
 
-										<div className='col-md-12'>
-											<form
-												action=''
-												style={{
-													borderBottom: '1px solid rgba(45, 45, 45, 0.2)',
-													marginBottom: '1rem',
-												}}
-											>
-												<div className='apartment_formform_div'>
-													<div className='row g-0'>
-														<div className='col-lg-6 col-6'>
-															<div
-																className='p-2 bor_bottom bor_right'
-																style={{ alignItems: 'center' }}
-															>
-																<input
-																	type='text'
-																	placeholder='Check In'
-																	className='form-control'
-																	onFocus={(e) => (e.target.type = 'date')}
-																	onBlur={(e) => (e.target.type = 'text')}
-																	// onChange={(e) => setCheckOut(e.target.value)}
-																/>
+											<div className='col-md-12'>
+												<form
+													action=''
+													style={{
+														borderBottom: '1px solid rgba(45, 45, 45, 0.2)',
+														marginBottom: '1rem',
+													}}
+												>
+													<div className='apartment_formform_div'>
+														<div className='row g-0'>
+															<div className='col-lg-6 col-6'>
+																<div
+																	className='p-2 bor_bottom bor_right'
+																	style={{ alignItems: 'center' }}
+																>
+																	<input
+																		type='text'
+																		placeholder='Check In'
+																		className='form-control'
+																		onFocus={(e) => (e.target.type = 'date')}
+																		onBlur={(e) => (e.target.type = 'text')}
+																		// onChange={(e) => setCheckOut(e.target.value)}
+																	/>
+																</div>
 															</div>
-														</div>
-														<div className='col-lg-6 col-6 '>
-															<div
-																className='p-2 bor_bottom'
-																style={{ alignItems: 'center' }}
-															>
-																<input
-																	type='text'
-																	placeholder='Check Out'
-																	className='form-control'
-																	onFocus={(e) => (e.target.type = 'date')}
-																	onBlur={(e) => (e.target.type = 'text')}
-																	// onChange={(e) => setCheckOut(e.target.value)}
-																/>
+															<div className='col-lg-6 col-6 '>
+																<div
+																	className='p-2 bor_bottom'
+																	style={{ alignItems: 'center' }}
+																>
+																	<input
+																		type='text'
+																		placeholder='Check Out'
+																		className='form-control'
+																		onFocus={(e) => (e.target.type = 'date')}
+																		onBlur={(e) => (e.target.type = 'text')}
+																		// onChange={(e) => setCheckOut(e.target.value)}
+																	/>
+																</div>
 															</div>
-														</div>
-														<div className='col-md-12'>
-															<div className='p-2'>
-																<input
-																	type='number'
-																	placeholder='Guest'
-																	className='form-control'
-																	// required
-																/>
+															<div className='col-md-12'>
+																<div className='p-2'>
+																	<input
+																		type='number'
+																		placeholder='Guest'
+																		className='form-control'
+																		// required
+																	/>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div className='text-center'>
-													<button className='btn form-control btn_save'>
-														Book Now
-													</button>
-												</div>
-												{/* {availability && <p> {availability} </p>} */}
-											</form>
-										</div>
-										<div className='sect3'>
-											<div className='d-flex justify-content-between'>
-												<p>Nights</p>
-												<p> 10 </p>
+													<div className='text-center'>
+														<button className='btn form-control btn_save'>
+															Check Availability
+														</button>
+														<button className='btn form-control btn_save'>
+															Book Now
+														</button>
+													</div>
+													{/* {availability && <p> {availability} </p>} */}
+												</form>
 											</div>
-											<div className='d-flex justify-content-between'>
-												<p>Base price/night</p>
-												<p> &#8358;{comma('12000')} </p>
-											</div>
-											<div className='d-flex justify-content-between'>
-												<p> Total </p>
-												<p> &#8358;{comma('120000')} </p>
+											<div className='sect3'>
+												<div className='d-flex justify-content-between'>
+													<p>Nights</p>
+													<p> 10 </p>
+												</div>
+												<div className='d-flex justify-content-between'>
+													<p>Base price/night</p>
+													<p> &#8358;{comma('12000')} </p>
+												</div>
+												<div className='d-flex justify-content-between'>
+													<p> Total </p>
+													<p> &#8358;{comma('120000')} </p>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -482,7 +501,11 @@ const ApartmentDetails = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			) : (
+				<div className='container'>
+					<p>Apartment not found.</p>
+				</div>
+			)}
 
 			<div className='grey_bg'>
 				<div className='container'>

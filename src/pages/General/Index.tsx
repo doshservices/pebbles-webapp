@@ -99,8 +99,6 @@ const Index = () => {
 	const { user_detail } = useAppSelector((state) => state.auth)
 
 	useEffect(() => {
-		console.log('allApartments', allApartments)
-
 		if (user_detail) {
 			dispatch(get_nearby_apartments())
 		} else {

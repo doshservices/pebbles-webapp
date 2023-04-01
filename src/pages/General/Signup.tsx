@@ -14,7 +14,7 @@ const Signup = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_register } = useAppSelector((state) => state.auth)
+	const { user_register, isLoading } = useAppSelector((state) => state.auth)
 
 	const [verify, setVerify] = useState(false)
 	const [showIndividual, setShowIndividual] = useState(true)
@@ -142,6 +142,7 @@ const Signup = () => {
 												<button
 													className='btn btn-primary form-control'
 													onClick={(e) => submitHandler(e)}
+													disabled={isLoading}
 												>
 													Verify
 												</button>
@@ -223,7 +224,7 @@ const Signup = () => {
 														<label htmlFor='fullName'>Full Name</label>
 														<input
 															type='text'
-															placeholder='First name here'
+															placeholder='Full name here'
 															className='form-control'
 															onChange={(e) => setFullName(e.target.value)}
 														/>
@@ -241,7 +242,7 @@ const Signup = () => {
 													<div className='col-md-6'>
 														<label htmlFor='fullName'>Phone Number</label>
 														<input
-															type='telephone'
+															type='number'
 															placeholder='Phone Number here'
 															className='form-control'
 															onChange={(e) => setPhoneNumber(e.target.value)}
@@ -288,6 +289,7 @@ const Signup = () => {
 													<button
 														className='btn btn-primary form-control'
 														onClick={(e) => submitSignupHandler(e, 'USER')}
+														disabled={isLoading}
 													>
 														Create Account
 													</button>
@@ -371,6 +373,7 @@ const Signup = () => {
 													<button
 														className='btn btn-primary form-control '
 														onClick={(e) => submitSignupHandler(e, 'BUSINESS')}
+														disabled={isLoading}
 													>
 														Create Account
 													</button>

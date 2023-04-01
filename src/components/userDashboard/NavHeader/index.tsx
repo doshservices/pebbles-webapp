@@ -3,18 +3,19 @@ import { Link } from 'react-router-dom'
 import NavRight from './NavRight'
 import logo from '../../../assets/Logo_blue.png'
 import NavLeft from './NavLeft'
-import { useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import Avatar1 from '../../../assets/profile-circle-black.png'
 import { Dropdown } from 'react-bootstrap'
+import { reset } from '../../../features/authentication/authenticationSlice'
 
 const NavHeader = ({ openMenu, toggleMenu, handle }) => {
+	const dispatch = useAppDispatch()
 	const { user_detail } = useAppSelector((state) => state.auth)
 
 	const logoutHandler = (e) => {
 		e.preventDefault()
-		// dispatch(user_logout())
+		dispatch(reset())
 	}
-
 	return (
 		<header
 			className={`navbar pcoded-header navbar-expand-lg header-default bg-white`}

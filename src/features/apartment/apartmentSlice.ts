@@ -99,6 +99,7 @@ export const get_apartment_by_id = createAsyncThunk(
 		thunkAPI
 	) => {
 		const { rejectWithValue } = thunkAPI
+
 		try {
 			const response = await axios.get(`${url}/apartments/${payload.id}`, {
 				headers: header,
@@ -112,6 +113,7 @@ export const get_apartment_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+			console.log(error)
 
 			return rejectWithValue(message)
 		}

@@ -2,7 +2,7 @@ export interface ApartmentInitialInterface {
 	nearbyApartments: NearbyApartmentsInterface | null
 	allApartments: NearbyApartmentsInterface | null
 	searchApartments: NearbyApartmentsInterface | null
-	apartment: ApartmentInterface | null
+	apartment: ApartmentDetailInterface | null
 	isFetchingNearbyApartments: boolean
 	isFetchingSearchApartments: boolean
 	isFetchingAllApartments: boolean
@@ -22,6 +22,10 @@ export const ApartmentInitialState: ApartmentInitialInterface = {
 
 export interface NearbyApartmentsInterface {
 	apartments: ApartmentInterface[]
+}
+
+export interface ApartmentDetailInterface {
+	apartment: ApartmentInterface
 }
 
 export interface ApartmentInterface {

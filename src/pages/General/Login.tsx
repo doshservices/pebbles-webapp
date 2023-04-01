@@ -41,15 +41,10 @@ const Login = () => {
 		)
 	}
 
-	console.log('user', user_detail)
-
 	useEffect(() => {
 		if (user_detail) {
 			navigate('/user/dashboard/home')
 		}
-		console.log('====================================')
-		console.log('user', user_detail)
-		console.log('====================================')
 	}, [user_detail])
 
 	return (

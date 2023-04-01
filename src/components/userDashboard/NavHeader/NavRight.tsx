@@ -11,7 +11,7 @@ const NavRight = () => {
 	const dispatch = useAppDispatch()
 	const { user_detail } = useAppSelector((state) => state.auth)
 
-	const logoutHandler = (e) => {
+	const logoutHandler = (e: any) => {
 		e.preventDefault()
 		dispatch(reset())
 	}

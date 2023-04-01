@@ -8,6 +8,7 @@ import config from '../../utils/config'
 import { RehydrateAppAction } from '../../types/types'
 import { newState } from '../../utils/newState'
 import { store } from '../../app/store'
+import toast from 'react-hot-toast'
 
 let url = config.liveUrl
 
@@ -51,6 +52,7 @@ export const user_signup = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+			toast.error(message?._message)
 
 			return rejectWithValue(message)
 		}

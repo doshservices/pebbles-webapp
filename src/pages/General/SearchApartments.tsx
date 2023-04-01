@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { useAppSelector } from '../../app/hooks'
 import ApartmentCard from '../../components/ApartmentCard'
-import apartmentImg from '../../assets/picture.png'
 import GoogleMapReact from 'google-map-react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
@@ -26,10 +25,6 @@ const SearchApartments = () => {
 	const { searchApartments, isFetchingSearchApartments } = useAppSelector(
 		(state) => state.apartment
 	)
-
-	console.log('====================================')
-	console.log('searchApartments', searchApartments)
-	console.log('====================================')
 
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)

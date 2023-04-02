@@ -17,6 +17,7 @@ export const AuthInitialState: AuthInitialInterface = {
 export interface AuthInterface {
 	email: string
 	fullName?: string
+	firstName?: string
 	isVerified: boolean
 	businessName?: string
 	phoneNumber: string

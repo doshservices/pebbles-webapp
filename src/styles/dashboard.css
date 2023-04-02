@@ -119,3 +119,71 @@
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 1rem;
 }
+
+.listing_form h5 {
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 32px;
+	letter-spacing: 0.616145px;
+	color: #071f50;
+	margin-bottom: 1rem;
+}
+
+.listing_form label {
+	font-weight: 400;
+	font-size: 16px;
+	margin-bottom: 1rem;
+	letter-spacing: 0.227791px;
+	color: #2d2d2d;
+}
+
+.listing_form .input_div {
+	border-bottom: 1px solid #2d2d2d;
+	padding: 0 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.listing_form input,
+.listing_form input:disabled,
+.listing_form input:focus,
+.listing_form input::placeholder,
+.listing_form select,
+.listing_form select:focus,
+.listing_form select::placeholder,
+.listing_form .form-control:focus,
+.listing_form .rmsc .dropdown-container:focus {
+	border: none;
+	font-weight: 400;
+	font-size: 14px;
+	letter-spacing: 0.227791px;
+	color: rgba(45, 45, 45, 0.5);
+	box-shadow: none;
+	background-color: #fff;
+}
+
+.listing_form .input_div img {
+	display: inline-block;
+	height: 1rem;
+	object-fit: cover;
+	margin-top: 0.5rem;
+}
+
+.listing_form .mapp {
+	height: 30rem;
+	width: 100%;
+	border-radius: 1rem;
+	overflow: hidden;
+	margin: 1rem 0 2rem;
+}
+
+.listing_form .rmsc .dropdown-container,
+.listing_form .form-control {
+	border: none;
+}
+
+.listing_form textarea.form-control,
+.listing_form textarea.form-control:focus {
+	border: 1px solid rgba(45, 45, 45, 0.6);
+	border-radius: 10px;
+	height: 10rem;
+}

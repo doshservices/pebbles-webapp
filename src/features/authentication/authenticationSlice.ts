@@ -112,6 +112,7 @@ export const user_update = createAsyncThunk(
 	async (
 		payload: {
 			fullName: string | undefined
+			businessName: string | undefined
 			// firstName: string | undefined
 			// lastName: string | undefined
 			phoneNumber: string | undefined
@@ -130,7 +131,7 @@ export const user_update = createAsyncThunk(
 			const response = await axios.put(`${url}/users`, payload, {
 				headers: authHeader(token ? token : '123'),
 			})
-			// store.dispatch(user_refresh_profile())
+			store.dispatch(user_refresh_profile())
 
 			return response.data
 		} catch (error: any) {
@@ -146,35 +147,41 @@ export const user_update = createAsyncThunk(
 	}
 )
 
-// export const user_refresh_profile = createAsyncThunk(
-// 	'auth/user_refresh_profile',
-// 	async (_, thunkAPI) => {
-// 		const { rejectWithValue } = thunkAPI
-// 		let token: string | null = store.getState()?.auth?.token
+export const user_refresh_profile = createAsyncThunk(
+	'auth/user_refresh_profile',
+	async (_, thunkAPI) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+		console.log('====================================')
+		console.log('starting', token)
+		console.log('====================================')
+		try {
+			const response = await axios.get(`${url}/users`, {
+				headers: authHeader(token ? token : '123'),
+			})
 
-// 		try {
-// 			const response = await axios.get(`${url}/users`, {
-// 				headers: authHeader(token ? token : '123'),
-// 			})
+			let passedData = {
+				data: { ...response.data },
+				token,
+			}
 
-// 			let passedData = {
-// 				...response.data,
-// 				token: store.getState()?.auth?.token,
-// 			}
+			console.log('====================================')
+			console.log('passedData', passedData)
+			console.log('====================================')
 
-// 			return passedData
-// 		} catch (error: any) {
-// 			const message =
-// 				(error.response &&
-// 					error.response.data &&
-// 					error.response.data.message) ||
-// 				error.message ||
-// 				error.toString()
+			return passedData
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
 
-// 			return rejectWithValue(message)
-// 		}
-// 	}
-// )
+			return rejectWithValue(message)
+		}
+	}
+)
 
 export const { reducer: AuthReducer, actions } = createSlice({
 	name: 'auth',
@@ -232,17 +239,17 @@ export const { reducer: AuthReducer, actions } = createSlice({
 		builder.addCase(user_update.rejected, (state, action) => {
 			state.isLoading = false
 		})
-		// builder.addCase(user_refresh_profile.fulfilled, (state, action) => {
-		// 	state.user_detail = action.payload
-		// 	state.token = action.payload.token
-		// 	state.isLoading = false
-		// })
-		// builder.addCase(user_refresh_profile.pending, (state, action) => {
-		// 	state.isLoading = true
-		// })
-		// builder.addCase(user_refresh_profile.rejected, (state, action) => {
-		// 	state.isLoading = false
-		// })
+		builder.addCase(user_refresh_profile.fulfilled, (state, action) => {
+			state.user_detail = action.payload.data.data.user
+			state.token = action.payload.token
+			state.isLoading = false
+		})
+		builder.addCase(user_refresh_profile.pending, (state, action) => {
+			state.isLoading = true
+		})
+		builder.addCase(user_refresh_profile.rejected, (state, action) => {
+			state.isLoading = false
+		})
 	},
 })
 

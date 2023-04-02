@@ -187,6 +187,16 @@ const Signup = () => {
 								<div className='pebbles_form1_div'>
 									<div className='pebbles_form'>
 										<h4 className='text-center'> CREATE AN ACCOUNT </h4>
+										<p
+											style={{
+												fontSize: '11px',
+												textAlign: 'center',
+												color: '#0d6efd',
+												fontWeight: '500',
+											}}
+										>
+											Please select the appropriate user type
+										</p>
 										<div className='d-flex justify-content-center'>
 											<div
 												style={{

@@ -30,6 +30,7 @@ const NavRight = () => {
 						<img
 							src={user_detail.profilePicture}
 							className='dashboard_avatar'
+							style={{ objectFit: 'cover', objectPosition: 'center' }}
 							alt='User Profile'
 						/>
 					) : (

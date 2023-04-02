@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import picture from '../../assets/fav.jpg'
-import { Country, State, City } from 'country-state-city'
+import { Country, State } from 'country-state-city'
 import { user_update } from '../../features/authentication/authenticationSlice'
 
 const UserProfile = () => {
@@ -11,7 +10,6 @@ const UserProfile = () => {
 	const [fullName, setFullName] = useState(
 		user_detail ? user_detail.fullName : ''
 	)
-	const [email, setEmail] = useState(user_detail ? user_detail.email : '')
 	const [businessName, setBusinessName] = useState(
 		user_detail ? user_detail.businessName : ''
 	)
@@ -60,12 +58,16 @@ const UserProfile = () => {
 
 	const [imageFile, setImageFile] = useState('')
 	const [idFile, setIdFile] = useState('')
+	const [cacFile, setCacFile] = useState('')
 	const [imageFormat, setImageFormat] = useState('')
 	const [idFormat, setIdFormat] = useState('')
+	const [cacFormat, setCacFormat] = useState('')
 	const [mainImage, setMainImage] = useState<string | Blob>('')
 	const [mainId, setMainId] = useState<string | Blob>('')
+	const [mainCac, setMainCac] = useState<string | Blob>('')
 	const [uploadedImage, setUploadedImage] = useState('')
 	const [uploadedId, setUploadedId] = useState('')
+	const [uploadedCac, setUploadedCac] = useState('')
 	const [uploading, setUploading] = useState(false)
 	const [uploadedValidID, setUploadedValidID] = useState('')
 	const [mainValidID, setMainValidID] = useState(null)
@@ -87,22 +89,27 @@ const UserProfile = () => {
 		let file = e.target.files[0]
 
 		if (text === 'image') setMainImage(file)
-		else setMainId(file)
+		else if (text === 'id') setMainId(file)
+		else setMainCac(file)
 
 		getBase64(file)
 			.then((result) => {
 				file['base64'] = result
-				console.log('File Is', file)
+				// console.log('File Is', file)
 				let split = file.base64.split(',')
 
 				if (text === 'image') {
 					setImageFile(split[1])
 					let type = file.type.split('/')
 					setImageFormat(type[1])
-				} else {
+				} else if (text === 'id') {
 					setIdFile(split[1])
 					let type = file.type.split('/')
 					setIdFormat(type[1])
+				} else {
+					setCacFile(split[1])
+					let type = file.type.split('/')
+					setCacFormat(type[1])
 				}
 			})
 			.catch((err) => {
@@ -166,18 +173,47 @@ const UserProfile = () => {
 			})
 	}
 
+	const uploadCacHandler = () => {
+		const formData = new FormData()
+		formData.append('file', mainCac)
+		formData.append('image', mainCac)
+		formData.append('upload_preset', 'pebbles')
+		formData.append('cloud_name', 'pebbles-signature')
+
+		setUploading(true)
+
+		fetch('https://api.cloudinary.com/v1_1/pebbles-signature/image/upload', {
+			method: 'POST',
+			body: formData,
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setUploading(false)
+				setMainCac('')
+				setUploadedCac(data.url)
+				setCacFile('')
+			})
+			.catch((err) => {
+				console.log(err)
+				setUploading(false)
+				setMainCac('')
+				setCacFile('')
+			})
+	}
+
 	const updateHandler = (e: any) => {
 		e.preventDefault()
 		let data = {
 			fullName,
 			businessName,
-			businessaddress,
+			// businessaddress,
 			phoneNumber,
 			state,
 			country,
 			city,
 			profilePicture: uploadedImage,
 			validId: uploadedId,
+			cacDocument: uploadedCac,
 		}
 		dispatch(user_update(data))
 	}
@@ -189,11 +225,19 @@ const UserProfile = () => {
 				<div className='col-lg-9 col-11'>
 					<div className='dashboard_pad'>
 						<div className='d-flex' style={{}}>
-							<img
-								src={picture}
-								alt=''
-								style={{ width: '6rem', height: '6rem', borderRadius: '50%' }}
-							/>
+							{user_detail?.profilePicture && (
+								<img
+									src={user_detail?.profilePicture}
+									alt=''
+									style={{
+										width: '6rem',
+										height: '6rem',
+										borderRadius: '50%',
+										objectFit: 'cover',
+										objectPosition: 'center',
+									}}
+								/>
+							)}
 						</div>
 						<div
 							className='pebbles_form pb-5 mb-2'
@@ -210,7 +254,9 @@ const UserProfile = () => {
 											</label>
 											<input
 												type='text'
-												value={fullName}
+												value={
+													user_detail?.role === 'USER' ? fullName : businessName
+												}
 												placeholder='Enter First name here'
 												className='form-control'
 												onChange={(e) =>
@@ -222,24 +268,18 @@ const UserProfile = () => {
 										</div>
 									</>
 
-									<div className='col-md-6'>
-										<label htmlFor='address'>
-											{user_detail?.role === 'USER'
-												? 'Address'
-												: 'Business Address'}
-										</label>
-										<input
-											type='text'
-											placeholder='Enter Address here'
-											value={address}
-											className='form-control'
-											onChange={(e) =>
-												user_detail?.role === 'USER'
-													? setAddress(e.target.value)
-													: setBusinessAddress(e.target.value)
-											}
-										/>
-									</div>
+									{user_detail?.role === 'BUSINESS' && (
+										<div className='col-md-6'>
+											<label htmlFor='address'>Business Address</label>
+											<input
+												type='text'
+												placeholder='Enter Address here'
+												value={address}
+												className='form-control'
+												onChange={(e) => setBusinessAddress(e.target.value)}
+											/>
+										</div>
+									)}
 									<div className='col-md-6'>
 										<label htmlFor='city'> City </label>
 										<input
@@ -271,6 +311,8 @@ const UserProfile = () => {
 										<select
 											className='form-select'
 											onChange={(e) => setState(e.target.value)}
+											value={state}
+											defaultValue={state}
 										>
 											<option value=''>Select State</option>
 											{State.getStatesOfCountry(country).map((item, index) => (
@@ -281,7 +323,13 @@ const UserProfile = () => {
 										</select>
 									</div>
 
-									<div className='col-md-6 col-sm-6'>
+									<div
+										className={
+											user_detail?.role === 'BUSINESS'
+												? 'col-md-4 col-sm-6'
+												: 'col-md-6-col-sm-6'
+										}
+									>
 										<div className='facilities__images'>
 											<label className='facilities__images-text'>
 												Profile Picture
@@ -310,6 +358,7 @@ const UserProfile = () => {
 													</div>
 												</div>
 											)}
+
 											<input
 												type='text'
 												value={uploadedImage}
@@ -318,7 +367,13 @@ const UserProfile = () => {
 											/>
 										</div>
 									</div>
-									<div className='col-md-6 col-sm-6'>
+									<div
+										className={
+											user_detail?.role === 'BUSINESS'
+												? 'col-md-4 col-sm-6'
+												: 'col-md-6-col-sm-6'
+										}
+									>
 										<div className='facilities__images'>
 											<label className='facilities__images-text'>
 												Valid ID
@@ -338,7 +393,7 @@ const UserProfile = () => {
 															onClick={uploadIdHandler}
 															disabled={uploading ? true : false}
 														>
-															Save{' '}
+															Upload Image{' '}
 															{uploading && (
 																<i className='fas fa-spinner fa-spin'></i>
 															)}
@@ -354,6 +409,45 @@ const UserProfile = () => {
 											/>
 										</div>
 									</div>
+
+									{user_detail?.role === 'BUSINESS' && (
+										<div className='col-md-4 col-sm-6'>
+											<div className='facilities__images'>
+												<label className='facilities__images-text'>
+													CAC Document
+												</label>
+
+												<input
+													type='file'
+													className='form-control'
+													onChange={(e) => handleFileInputChange(e, 'cac')}
+													style={{ borderBottom: 'none' }}
+												/>
+												{cacFile && (
+													<div className='col-md-12'>
+														<div className='mt-2'>
+															<button
+																className='btn btn-primary'
+																onClick={uploadCacHandler}
+																disabled={uploading ? true : false}
+															>
+																Upload Image{' '}
+																{uploading && (
+																	<i className='fas fa-spinner fa-spin'></i>
+																)}
+															</button>
+														</div>
+													</div>
+												)}
+												<input
+													type='text'
+													value={uploadedCac}
+													onChange={(e) => setUploadedCac(e.target.value)}
+													className='site-form mb-3 d-none'
+												/>
+											</div>
+										</div>
+									)}
 
 									<div className='col-12 d-flex justify-content-end'>
 										<button

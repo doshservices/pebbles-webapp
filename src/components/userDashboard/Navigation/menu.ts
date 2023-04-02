@@ -36,7 +36,7 @@ items = [
 				title: 'Bookings',
 				type: 'item',
 				url: '/user/dashboard/bookings',
-				icon: 'fa fa-buildings',
+				icon: 'fa fa-city',
 				permission: ['BUSINESS'],
 			},
 			{

@@ -1,8 +1,10 @@
 export interface ApartmentInitialInterface {
 	nearbyApartments: NearbyApartmentsInterface | null
 	allApartments: NearbyApartmentsInterface | null
+	userApartments: NearbyApartmentsInterface | null
 	searchApartments: NearbyApartmentsInterface | null
 	apartment: ApartmentDetailInterface | null
+	createSuccess: boolean
 	isFetchingNearbyApartments: boolean
 	isFetchingSearchApartments: boolean
 	isFetchingAllApartments: boolean
@@ -12,11 +14,13 @@ export interface ApartmentInitialInterface {
 export const ApartmentInitialState: ApartmentInitialInterface = {
 	isFetchingNearbyApartments: false,
 	isFetchingSearchApartments: false,
+	createSuccess: false,
 	isFetchingAllApartments: false,
 	isFetchingApartment: false,
 	nearbyApartments: null,
 	searchApartments: null,
 	allApartments: null,
+	userApartments: null,
 	apartment: null,
 }
 
@@ -37,12 +41,15 @@ export interface ApartmentInterface {
 	apartmentState: string
 	facilities: string[]
 	isAvailable: boolean
-	landmark: string[]
+	landmark: any[]
+	featuredImages: string[]
 	numberOfBedrooms: number
+	latitude: string
+	longitude: string
 	numberOfGuests: number
-	numberOfRooms: number
 	numberOfToilets: number
 	price: number
+	status: string
 	typeOfApartment: string
 	userId: string
 	_id: string

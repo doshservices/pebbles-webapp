@@ -16,7 +16,7 @@ const ApartmentCard = ({
 				<div className='apartment_card_div'>
 					<h6> {apartmentInfo.address} </h6>
 					<p className='no_of_rooms' style={{ color: '#2d2d2d' }}>
-						{apartmentInfo.numberOfRooms} bedroom apartment
+						{apartmentInfo.numberOfBedrooms} bedroom apartment
 					</p>
 					<p className='amount'>
 						<span>&#8358;{comma(String(apartmentInfo.price))} </span> avg/night

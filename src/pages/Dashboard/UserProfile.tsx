@@ -134,7 +134,7 @@ const UserProfile = () => {
 			.then((data) => {
 				setUploading(false)
 				setMainImage('')
-				setUploadedImage(data.url)
+				setUploadedImage(data.secure_url)
 				setImageFile('')
 			})
 			.catch((err) => {
@@ -453,7 +453,7 @@ const UserProfile = () => {
 										<button
 											className='btn btn-primary form-control'
 											onClick={(e) => updateHandler(e)}
-											disabled={isLoading ? true : false}
+											disabled={isLoading}
 										>
 											Update
 											{isLoading && <i className='fas fa-spinner fa-spin'></i>}

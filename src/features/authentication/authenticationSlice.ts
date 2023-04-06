@@ -141,6 +141,7 @@ export const user_update = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+			toast.error(message)
 
 			return rejectWithValue(message)
 		}
@@ -152,9 +153,6 @@ export const user_refresh_profile = createAsyncThunk(
 	async (_, thunkAPI) => {
 		const { rejectWithValue } = thunkAPI
 		let token: string | null = store.getState()?.auth?.token
-		console.log('====================================')
-		console.log('starting', token)
-		console.log('====================================')
 		try {
 			const response = await axios.get(`${url}/users`, {
 				headers: authHeader(token ? token : '123'),
@@ -164,10 +162,6 @@ export const user_refresh_profile = createAsyncThunk(
 				data: { ...response.data },
 				token,
 			}
-
-			console.log('====================================')
-			console.log('passedData', passedData)
-			console.log('====================================')
 
 			return passedData
 		} catch (error: any) {

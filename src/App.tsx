@@ -25,6 +25,7 @@ import UserUpgrade from './pages/Dashboard/UserUpgrade'
 import UserGuests from './pages/Dashboard/UserGuests'
 import AllApartments from './pages/General/AllApartments'
 import NearApartments from './pages/General/NearApartments'
+import CreateListing from './pages/Dashboard/CreateListing'
 
 function App() {
 	return (
@@ -60,6 +61,8 @@ function App() {
 							<Route path='bookings' element={<UserBusinessBookings />} />
 							<Route path='wishlist' element={<UserWishlist />} />
 							<Route path='listings' element={<UserListings />} />
+							<Route path='listings/new/' element={<CreateListing />} />
+							<Route path='listings/new/:id' element={<CreateListing />} />
 							<Route path='notifications' element={<UserNotifications />} />
 							<Route path='upgrade-account' element={<UserUpgrade />} />
 							<Route path='guests' element={<UserGuests />} />

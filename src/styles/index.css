@@ -291,6 +291,10 @@ a {
 	box-shadow: none;
 }
 
+.map_section {
+	margin: 2rem 0;
+}
+
 @media (min-width: 992px) {
 	.map_section {
 		display: inline;
@@ -302,9 +306,9 @@ a {
 		padding-top: 10rem;
 	}
 
-	.map_section {
+	/* .map_section {
 		display: none;
-	}
+	} */
 
 	.navbar_search .search_component_main_div {
 		padding: 0;

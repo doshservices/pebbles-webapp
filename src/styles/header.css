@@ -254,8 +254,19 @@ header .prof_circle {
 	}
 }
 
+@media (max-width: 767px) {
+	.def_navbar3 .logo {
+		width: 15rem;
+		object-fit: cover;
+	}
+}
+
 @media (max-width: 576px) {
 	.js_scroll {
 		font-size: 8px;
+	}
+	.def_navbar3 .logo {
+		width: 10rem;
+		object-fit: cover;
 	}
 }

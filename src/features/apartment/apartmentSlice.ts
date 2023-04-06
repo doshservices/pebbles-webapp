@@ -5,6 +5,7 @@ import { authHeader, header } from '../../utils/headers'
 // import toast from 'react-hot-toast'
 import config from '../../utils/config'
 import { store } from '../../app/store'
+import { toast } from 'react-hot-toast'
 
 let url = config.liveUrl
 
@@ -120,6 +121,77 @@ export const get_apartment_by_id = createAsyncThunk(
 	}
 )
 
+export const create_apartment = createAsyncThunk(
+	'auth/create_apartment',
+	async (
+		payload: {
+			apartmentName: String
+			address: String
+			apartmentCountry: String
+			apartmentState: String
+			price: Number
+			typeOfApartment: String
+			facilities: String[]
+			featuredImages: String[]
+			apartmentImages: String[]
+			apartmentInfo: String
+			numberOfBedrooms: Number
+			numberOfToilets: Number
+			numberOfGuests: Number
+			longitude: String
+			latitude: String
+			landmark: any[]
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.post(`${url}/apartments`, payload, {
+				headers: authHeader(token ? token : '123'),
+			})
+			toast.success(response?.data.data.message)
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			toast.error(message[0])
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const get_apartments_by_user = createAsyncThunk(
+	'apartments/get_apartments_by_user',
+	async (_, thunkAPI) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.get(`${url}/apartments/user`, {
+				headers: authHeader(token ? token : '123'),
+			})
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
 export const { reducer: ApartmentReducer, actions } = createSlice({
 	name: 'apartment',
 	initialState: ApartmentInitialState,
@@ -164,6 +236,29 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 		})
 		builder.addCase(get_apartment_by_id.rejected, (state, action) => {
 			state.isFetchingApartment = false
+		})
+		builder.addCase(create_apartment.fulfilled, (state, action) => {
+			state.createSuccess = true
+			state.isFetchingApartment = false
+		})
+		builder.addCase(create_apartment.pending, (state, action) => {
+			state.isFetchingApartment = true
+			state.createSuccess = false
+		})
+		builder.addCase(create_apartment.rejected, (state, action) => {
+			state.isFetchingApartment = false
+			state.createSuccess = false
+		})
+		builder.addCase(get_apartments_by_user.fulfilled, (state, action) => {
+			state.userApartments = action.payload.data
+			state.isFetchingAllApartments = false
+		})
+		builder.addCase(get_apartments_by_user.pending, (state, action) => {
+			state.isFetchingAllApartments = true
+		})
+		builder.addCase(get_apartments_by_user.rejected, (state, action) => {
+			state.isFetchingAllApartments = false
+			state.createSuccess = false
 		})
 	},
 })

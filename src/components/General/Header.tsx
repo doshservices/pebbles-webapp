@@ -78,9 +78,11 @@ const Header = ({ type }: { type: number }) => {
 							</Navbar.Toggle>
 							<Navbar.Collapse id='basic-navbar-nav'>
 								<Nav className='ms-auto nav_box'>
-									<LinkContainer to='/auth/signup' className='host_btn'>
-										<Nav.Link> Become a Host </Nav.Link>
-									</LinkContainer>
+									{!user_detail && (
+										<LinkContainer to='/auth/signup' className='host_btn'>
+											<Nav.Link> Become a Host </Nav.Link>
+										</LinkContainer>
+									)}
 
 									<Dropdown className=''>
 										<Dropdown.Toggle
@@ -266,9 +268,11 @@ const Header = ({ type }: { type: number }) => {
 							</Navbar.Toggle>
 							<Navbar.Collapse id='basic-navbar-nav'>
 								<Nav className='ms-auto nav_box'>
-									<LinkContainer to='/auth/signup' className='host_btn'>
-										<Nav.Link> Become a Host </Nav.Link>
-									</LinkContainer>
+									{!user_detail && (
+										<LinkContainer to='/auth/signup' className='host_btn'>
+											<Nav.Link> Become a Host </Nav.Link>
+										</LinkContainer>
+									)}
 
 									<Dropdown className=''>
 										<Dropdown.Toggle

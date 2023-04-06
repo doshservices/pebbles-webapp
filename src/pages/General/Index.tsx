@@ -121,9 +121,15 @@ const Index = () => {
 								link='/apartments-near-you'
 								linkText='View all'
 							/>
-							<ApartmentSlider
-								data={nearbyApartments ? nearbyApartments?.apartments : []}
-							/>
+							{nearbyApartments && nearbyApartments?.apartments.length > 0 ? (
+								<ApartmentSlider
+									data={nearbyApartments ? nearbyApartments?.apartments : []}
+								/>
+							) : (
+								<ApartmentSlider
+									data={allApartments ? allApartments?.apartments : []}
+								/>
+							)}
 						</>
 					) : (
 						<>

@@ -31,9 +31,9 @@ const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
 
-	const { allApartments, apartment, isFetchingApartment } = useAppSelector(
-		(state) => state.apartment
-	)
+	const { user_detail } = useAppSelector((state) => state.auth)
+	const { allApartments, apartment, isFetchingApartment, nearbyApartments } =
+		useAppSelector((state) => state.apartment)
 
 	const [limitValue, setLimitValue] = useState<number>(3)
 	const [limit, setLimit] = useState<boolean>(false)
@@ -133,7 +133,7 @@ const ApartmentDetails = () => {
 						<div className='row mb-4'>
 							<div className='col-md-7'>
 								<img
-									src={apartment?.apartment?.apartmentImages[0]}
+									src={apartment?.apartment?.featuredImages[0]}
 									alt=''
 									className='intro_image intro_full'
 								/>
@@ -141,14 +141,14 @@ const ApartmentDetails = () => {
 							<div className='col-md-5'>
 								<div style={{ marginBottom: '1.5rem' }}>
 									<img
-										src={apartment?.apartment?.apartmentImages[1]}
+										src={apartment?.apartment?.featuredImages[1]}
 										alt=''
 										className='intro_image intro_half'
 									/>
 								</div>
 								<div>
 									<img
-										src={apartment?.apartment?.apartmentImages[2]}
+										src={apartment?.apartment?.featuredImages[2]}
 										alt=''
 										className='intro_image intro_half'
 									/>
@@ -218,43 +218,49 @@ const ApartmentDetails = () => {
 									<h2 className='sect_head'>HOUSE DETAILS</h2>
 									<h5 className='mb-3'>Available Amenities</h5>
 
-									<div className='row'>
-										{amenities.map((item, index) => (
-											<div key={index}>
-												{index <= limitValue ? (
-													<div className='col-md-6 col-sm-6'>
-														<div className='d-flex amenities_div'>
-															{item === '24hrs Power Supply' ? (
-																<HiOutlineLightBulb size={22} />
-															) : item === 'Air conditioning' ? (
-																<FaSnowflake size={22} />
-															) : item === 'Fast Wi-Fi' ? (
-																<AiOutlineWifi size={22} />
-															) : item === 'Swimming pool' ? (
-																<MdOutlinePool size={22} />
-															) : item ===
-															  'TV with Netflix, Amazon and Julu' ? (
-																<SlScreenDesktop size={22} />
-															) : (
-																<CgGym size={24} />
-															)}
-															<p> {item} </p>
-														</div>
-													</div>
-												) : null}
-											</div>
+									<div className='d-flex'>
+										{apartment?.apartment?.facilities.map((item, index) => (
+											<span style={{ paddingRight: 3 }}>
+												{item}
+												{index === apartment?.apartment?.facilities.length - 1
+													? '.'
+													: ','}
+											</span>
+											// <div key={index}>
+											// 	{index <= limitValue ? (
+											// 		<div className='col-md-6 col-sm-6'>
+											// 			<div className='d-flex amenities_div'>
+											// 				{item === '24hrs Power Supply' ? (
+											// 					<HiOutlineLightBulb size={22} />
+											// 				) : item === 'Air conditioning' ? (
+											// 					<FaSnowflake size={22} />
+											// 				) : item === 'Fast Wi-Fi' ? (
+											// 					<AiOutlineWifi size={22} />
+											// 				) : item === 'Swimming pool' ? (
+											// 					<MdOutlinePool size={22} />
+											// 				) : item ===
+											// 				  'TV with Netflix, Amazon and Julu' ? (
+											// 					<SlScreenDesktop size={22} />
+											// 				) : (
+											// 					<CgGym size={24} />
+											// 				)}
+											// 				<p> {item} </p>
+											// 			</div>
+											// 		</div>
+											// 	) : null}
+											// </div>
 										))}
 									</div>
 
-									<button
+									{/* <button
 										onClick={() => toggleMore()}
 										className='btn btn-primary mt-3  btn_white_blue'
 									>
 										Show all 20 Amenities
-									</button>
+									</button> */}
 								</div>
 
-								<div
+								{/* <div
 									style={{
 										borderBottom: '1.14691px solid rgba(45, 45, 45, 0.2)',
 										paddingBottom: '2rem',
@@ -276,7 +282,7 @@ const ApartmentDetails = () => {
 										different neighborhoods. Industrial establishments are
 										predominantly located at Iponri, Coker and Iganmu.
 									</p>
-								</div>
+								</div> */}
 
 								<div className='booking_policy'>
 									<h5 className='pt-4 mb-4'> Booking Policies </h5>
@@ -521,36 +527,61 @@ const ApartmentDetails = () => {
 				</div>
 			</div>
 
-			<section className='explore_apartments trendy_apartments mb-0 pb-0'>
-				<PageHeaderComponent
-					topHeader='POPULAR'
-					topHeaderColor='rgba(21, 94, 239, 0.8)'
-					header='LANDMARKS AROUND HERE'
-				/>
-				<div className='container landmarks'>
-					<div className='row row-mobile px-4'>
-						{landmarks.map((item, index) => (
-							<div className='col' key={index}>
-								<img src={item.image} alt='' />
-								<h5> {item.name} </h5>
-								<p> {item.distance}mins Drive </p>
-							</div>
-						))}
+			{apartment && apartment?.apartment ? (
+				<section className='explore_apartments trendy_apartments mb-0 pb-0'>
+					<PageHeaderComponent
+						topHeader='POPULAR'
+						topHeaderColor='rgba(21, 94, 239, 0.8)'
+						header='LANDMARKS AROUND HERE'
+					/>
+					<div className='container landmarks'>
+						<div className='row row-mobile px-4'>
+							{apartment?.apartment.landmark.map((item, index) => (
+								<div className='col-3' key={index}>
+									<img src={item.image} alt='' />
+									<h5> {item.landmark} </h5>
+									<p> {item.address} </p>
+								</div>
+							))}
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			) : null}
 
-			<section className='explore_apartments sim'>
-				<PageHeaderComponent
-					topHeader='SIMILAR'
-					topHeaderColor='rgba(21, 94, 239, 0.8)'
-					header='APARTMENTS NEAR YOU'
-					link='/apartments-near-you'
-					linkText='View all'
-				/>
-				<ApartmentSlider
-					data={allApartments ? allApartments?.apartments : []}
-				/>
+			<section className='explore_apartments'>
+				{user_detail ? (
+					<>
+						<PageHeaderComponent
+							topHeader='EXPLORE'
+							topHeaderColor='rgba(21, 94, 239, 0.8)'
+							header='APARTMENTS NEAR YOU'
+							link='/apartments-near-you'
+							linkText='View all'
+						/>
+						{nearbyApartments && nearbyApartments?.apartments.length > 0 ? (
+							<ApartmentSlider
+								data={nearbyApartments ? nearbyApartments?.apartments : []}
+							/>
+						) : (
+							<ApartmentSlider
+								data={allApartments ? allApartments?.apartments : []}
+							/>
+						)}
+					</>
+				) : (
+					<>
+						<PageHeaderComponent
+							topHeader='EXPLORE'
+							topHeaderColor='rgba(21, 94, 239, 0.8)'
+							header='OUR APARTMENTS'
+							link='/all-apartments'
+							linkText='View all'
+						/>
+						<ApartmentSlider
+							data={allApartments ? allApartments?.apartments : []}
+						/>
+					</>
+				)}
 			</section>
 		</main>
 	)

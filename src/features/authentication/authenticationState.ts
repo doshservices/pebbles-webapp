@@ -30,6 +30,8 @@ export interface AuthInterface {
 	state?: string
 	address?: string
 	businessAddress?: string
+	cacDocument?: string
+	validId?: string
 }
 
 export interface OTPInterface {

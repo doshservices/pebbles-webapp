@@ -113,7 +113,7 @@ export const user_update = createAsyncThunk(
 		payload: {
 			fullName: string | undefined
 			businessName: string | undefined
-			// firstName: string | undefined
+			businessAddress: string | undefined
 			// lastName: string | undefined
 			phoneNumber: string | undefined
 			state: string | undefined

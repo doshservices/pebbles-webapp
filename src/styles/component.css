@@ -164,10 +164,15 @@
 	align-items: center;
 	letter-spacing: 0.15px;
 	color: rgba(6, 6, 6, 0.9);
+	height: 2rem;
+	/* margin-bottom: 0; */
 }
 
 .apartment_card img {
 	border-radius: 0px 0px 8px 8px;
+	height: 15rem;
+	width: 100%;
+	object-fit: cover;
 }
 
 .apartment_card p {

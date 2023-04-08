@@ -9,6 +9,9 @@ export interface ApartmentInitialInterface {
 	isFetchingSearchApartments: boolean
 	isFetchingAllApartments: boolean
 	isFetchingApartment: boolean
+	isDeleting: boolean
+	deleteSuccess: boolean
+	isCreatingApartment: boolean
 }
 
 export const ApartmentInitialState: ApartmentInitialInterface = {
@@ -17,11 +20,14 @@ export const ApartmentInitialState: ApartmentInitialInterface = {
 	createSuccess: false,
 	isFetchingAllApartments: false,
 	isFetchingApartment: false,
+	isDeleting: false,
 	nearbyApartments: null,
 	searchApartments: null,
 	allApartments: null,
 	userApartments: null,
 	apartment: null,
+	deleteSuccess: false,
+	isCreatingApartment: false,
 }
 
 export interface NearbyApartmentsInterface {

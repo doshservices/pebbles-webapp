@@ -47,14 +47,14 @@ items = [
 				icon: 'fa fa-hotel',
 				permission: ['BUSINESS'],
 			},
-			{
-				id: 'guests',
-				title: 'Guests',
-				type: 'item',
-				url: '/user/dashboard/guests',
-				icon: 'fa fa-users',
-				permission: ['BUSINESS'],
-			},
+			// {
+			// 	id: 'guests',
+			// 	title: 'Guests',
+			// 	type: 'item',
+			// 	url: '/user/dashboard/guests',
+			// 	icon: 'fa fa-users',
+			// 	permission: ['BUSINESS'],
+			// },
 			{
 				id: 'wishlist',
 				title: 'Wishlist',

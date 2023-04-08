@@ -141,6 +141,7 @@ export const create_apartment = createAsyncThunk(
 			longitude: String
 			latitude: String
 			landmark: any[]
+			id?: string
 		},
 		thunkAPI
 	) => {
@@ -186,6 +187,88 @@ export const get_apartments_by_user = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const delete_apartment = createAsyncThunk(
+	'apartments/delete_apartment',
+	async (
+		payload: {
+			id: string | undefined
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.delete(`${url}/apartments/${payload.id}`, {
+				headers: authHeader(token ? token : '123'),
+			})
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			console.log(error)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const update_apartment = createAsyncThunk(
+	'auth/update_apartment',
+	async (
+		payload: {
+			apartmentName: String
+			address: String
+			apartmentCountry: String
+			apartmentState: String
+			price: Number
+			typeOfApartment: String
+			facilities: String[]
+			featuredImages: String[]
+			apartmentImages: String[]
+			apartmentInfo: String
+			numberOfBedrooms: Number
+			numberOfToilets: Number
+			numberOfGuests: Number
+			longitude: String
+			latitude: String
+			landmark: any[]
+			id?: string
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.put(
+				`${url}/apartments/${payload.id}`,
+				payload,
+				{
+					headers: authHeader(token ? token : '123'),
+				}
+			)
+			toast.success(response?.data.data.message)
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			toast.error(message[0])
 
 			return rejectWithValue(message)
 		}
@@ -239,14 +322,14 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 		})
 		builder.addCase(create_apartment.fulfilled, (state, action) => {
 			state.createSuccess = true
-			state.isFetchingApartment = false
+			state.isCreatingApartment = false
 		})
 		builder.addCase(create_apartment.pending, (state, action) => {
-			state.isFetchingApartment = true
+			state.isCreatingApartment = true
 			state.createSuccess = false
 		})
 		builder.addCase(create_apartment.rejected, (state, action) => {
-			state.isFetchingApartment = false
+			state.isCreatingApartment = false
 			state.createSuccess = false
 		})
 		builder.addCase(get_apartments_by_user.fulfilled, (state, action) => {
@@ -258,6 +341,30 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 		})
 		builder.addCase(get_apartments_by_user.rejected, (state, action) => {
 			state.isFetchingAllApartments = false
+			state.createSuccess = false
+		})
+		builder.addCase(delete_apartment.fulfilled, (state, action) => {
+			state.deleteSuccess = true
+			state.isDeleting = false
+		})
+		builder.addCase(delete_apartment.pending, (state, action) => {
+			state.deleteSuccess = false
+			state.isDeleting = true
+		})
+		builder.addCase(delete_apartment.rejected, (state, action) => {
+			state.isDeleting = false
+			state.deleteSuccess = false
+		})
+		builder.addCase(update_apartment.fulfilled, (state, action) => {
+			state.createSuccess = true
+			state.isCreatingApartment = false
+		})
+		builder.addCase(update_apartment.pending, (state, action) => {
+			state.isCreatingApartment = true
+			state.createSuccess = false
+		})
+		builder.addCase(update_apartment.rejected, (state, action) => {
+			state.isCreatingApartment = false
 			state.createSuccess = false
 		})
 	},

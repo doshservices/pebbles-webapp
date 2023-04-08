@@ -17,7 +17,7 @@ const UserProfile = () => {
 		user_detail ? user_detail.phoneNumber : ''
 	)
 	const [address, setAddress] = useState(user_detail ? user_detail.address : '')
-	const [businessaddress, setBusinessAddress] = useState(
+	const [businessAddress, setBusinessAddress] = useState(
 		user_detail ? user_detail.businessAddress : ''
 	)
 	const [state, setState] = useState(user_detail ? user_detail.state : '')
@@ -65,9 +65,15 @@ const UserProfile = () => {
 	const [mainImage, setMainImage] = useState<string | Blob>('')
 	const [mainId, setMainId] = useState<string | Blob>('')
 	const [mainCac, setMainCac] = useState<string | Blob>('')
-	const [uploadedImage, setUploadedImage] = useState('')
-	const [uploadedId, setUploadedId] = useState('')
-	const [uploadedCac, setUploadedCac] = useState('')
+	const [uploadedImage, setUploadedImage] = useState(
+		user_detail ? user_detail.profilePicture : ''
+	)
+	const [uploadedId, setUploadedId] = useState(
+		user_detail ? user_detail.validId : ''
+	)
+	const [uploadedCac, setUploadedCac] = useState(
+		user_detail ? user_detail.cacDocument : ''
+	)
 	const [uploading, setUploading] = useState(false)
 	const [uploadedValidID, setUploadedValidID] = useState('')
 	const [mainValidID, setMainValidID] = useState(null)
@@ -206,7 +212,7 @@ const UserProfile = () => {
 		let data = {
 			fullName,
 			businessName,
-			// businessaddress,
+			businessAddress,
 			phoneNumber,
 			state,
 			country,
@@ -268,15 +274,26 @@ const UserProfile = () => {
 										</div>
 									</>
 
-									{user_detail?.role === 'BUSINESS' && (
+									{user_detail?.role === 'BUSINESS' ? (
 										<div className='col-md-6'>
 											<label htmlFor='address'>Business Address</label>
 											<input
 												type='text'
 												placeholder='Enter Address here'
-												value={address}
+												value={businessAddress}
 												className='form-control'
 												onChange={(e) => setBusinessAddress(e.target.value)}
+											/>
+										</div>
+									) : (
+										<div className='col-md-6'>
+											<label htmlFor='address'> Address</label>
+											<input
+												type='text'
+												placeholder='Enter Address here'
+												value={address}
+												className='form-control'
+												onChange={(e) => setAddress(e.target.value)}
 											/>
 										</div>
 									)}
@@ -327,7 +344,7 @@ const UserProfile = () => {
 										className={
 											user_detail?.role === 'BUSINESS'
 												? 'col-md-4 col-sm-6'
-												: 'col-md-6-col-sm-6'
+												: 'col-md-6 col-sm-6'
 										}
 									>
 										<div className='facilities__images'>
@@ -371,7 +388,7 @@ const UserProfile = () => {
 										className={
 											user_detail?.role === 'BUSINESS'
 												? 'col-md-4 col-sm-6'
-												: 'col-md-6-col-sm-6'
+												: 'col-md-6 col-sm-6'
 										}
 									>
 										<div className='facilities__images'>

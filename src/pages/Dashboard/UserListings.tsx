@@ -1,21 +1,23 @@
-import React, { useEffect } from 'react'
-import building from '../../assets/building.png'
+import React, { useEffect, useState } from 'react'
 import SliderImages from '../../components/SliderImages'
-import apartmentImg from '../../assets/picture.png'
 import { Link } from 'react-router-dom'
 import { FaEye, FaPen, FaPlus, FaTrash } from 'react-icons/fa'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Loader from '../../components/Loader'
-import { get_apartments_by_user } from '../../features/apartment/apartmentSlice'
+import {
+	delete_apartment,
+	get_apartments_by_user,
+} from '../../features/apartment/apartmentSlice'
 
 const UserListings = () => {
 	const dispatch = useAppDispatch()
 
-	const { userApartments, isFetchingAllApartments } = useAppSelector(
-		(state) => state.apartment
-	)
+	const { userApartments, isFetchingAllApartments, isDeleting, deleteSuccess } =
+		useAppSelector((state) => state.apartment)
+
+	const [apartmentID, setApartmentID] = useState('')
 
 	const tableHeaders = [
 		'Apartment name',
@@ -28,75 +30,15 @@ const UserListings = () => {
 		'Action',
 	]
 
-	const data = [
-		{
-			type: 'Mansion',
-			id: 1,
-			name: "Favour's Mansion",
-			status: 'pending',
-			amenities:
-				'24hrs Power Supply, Fast Wi-Fi, LED TV, AC,Heater, Gym, Pool, Kitchen, Pet-friendly, CCTV.',
-			location: 'Surulere',
-			date: 'Feb 10 - 27',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			type: 'Mansion',
-			id: 2,
-			name: "Favour's Mansion",
-			status: 'active',
-			amenities:
-				'24hrs Power Supply, Fast Wi-Fi, LED TV, AC,Heater, Gym, Pool, Kitchen, Pet-friendly, CCTV.',
-			location: 'Surulere',
-			date: 'Feb 10 - 27',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			type: 'Mansion',
-			id: 3,
-			name: "Favour's Mansion",
-			status: 'closed',
-			amenities:
-				'24hrs Power Supply, Fast Wi-Fi, LED TV, AC,Heater, Gym, Pool, Kitchen, Pet-friendly, CCTV.',
-			location: 'Surulere',
-			date: 'Feb 10 - 27',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			type: 'Mansion',
-			id: 4,
-			name: "Favour's Mansion",
-			status: 'closed',
-			amenities:
-				'24hrs Power Supply, Fast Wi-Fi, LED TV, AC,Heater, Gym, Pool, Kitchen, Pet-friendly, CCTV.',
-			location: 'Surulere',
-			date: 'Feb 10 - 27',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-		{
-			type: 'Mansion',
-			id: 5,
-			name: "Favour's Mansion",
-			status: 'closed',
-			amenities:
-				'24hrs Power Supply, Fast Wi-Fi, LED TV, AC,Heater, Gym, Pool, Kitchen, Pet-friendly, CCTV.',
-			location: 'Surulere',
-			date: 'Feb 10 - 27',
-			images: [apartmentImg, apartmentImg, apartmentImg],
-		},
-	]
-
-	const deleteHandler = async (e, obj) => {
+	const deleteHandler = async (e: any, string: string) => {
 		e.preventDefault()
+		setApartmentID(string)
+		dispatch(delete_apartment({ id: string }))
 	}
-
-	console.log('====================================')
-	console.log('userApartments', userApartments)
-	console.log('====================================')
 
 	useEffect(() => {
 		dispatch(get_apartments_by_user())
-	}, [dispatch])
+	}, [dispatch, deleteSuccess])
 
 	return (
 		<main className='dashboard dashboard_bookings dashboard_listings'>
@@ -108,9 +50,28 @@ const UserListings = () => {
 						<div className='row'>
 							<div className='col-md-6 col-sm-8 '>
 								<TabList className='d-flex justify-content-between roww'>
-									<Tab> All Apartments (30) </Tab>
-									<Tab> Available (10) </Tab>
-									<Tab> Booked (20) </Tab>
+									<Tab>
+										All Apartments ({userApartments?.apartments?.length})
+									</Tab>
+									<Tab>
+										Available (
+										{
+											userApartments?.apartments?.filter(
+												(item) => item.isAvailable
+											).length
+										}
+										)
+									</Tab>
+									<Tab>
+										{' '}
+										Booked (
+										{
+											userApartments?.apartments?.filter(
+												(item) => item.isAvailable === false
+											).length
+										}
+										){' '}
+									</Tab>
 								</TabList>
 							</div>
 							<div className='col-md-6 col-sm-4'>
@@ -131,7 +92,7 @@ const UserListings = () => {
 						</div>
 
 						<TabPanel>
-							{data?.length > 0 ? (
+							{userApartments?.apartments?.length > 0 ? (
 								<div className='table-responsive'>
 									<table className='table ' style={{ fontSize: '12px' }}>
 										<thead className=''>
@@ -153,10 +114,12 @@ const UserListings = () => {
 													<td className='td_pad_top'>
 														{apartment.typeOfApartment}
 													</td>
-													<td className='td_pad_top'>{apartment.address}</td>
+													<td className='td_pad_top' style={{ width: '16rem' }}>
+														{apartment.address}
+													</td>
 													<td className='td_pad_top' style={{ width: '20rem' }}>
 														{apartment.facilities.map((item, index) => (
-															<span style={{ paddingRight: 3 }}>
+															<span key={index} style={{ paddingRight: 3 }}>
 																{item}
 																{index === apartment.facilities.length - 1
 																	? '.'
@@ -183,26 +146,222 @@ const UserListings = () => {
 														</Link>
 													</td>
 													<td className='td_pad_top'>
-														<a
-															href='#/'
-															className='me-3 link-dark'
-															onClick={(e) => deleteHandler(e, apartment)}
+														<button
+															className='border-none bg-white'
+															style={{ border: 'none' }}
+															onClick={(e) => deleteHandler(e, apartment._id)}
 														>
-															<FaTrash size={18} color={'red'} />
-														</a>
+															{isDeleting && apartmentID === apartment._id ? (
+																<i
+																	className='fas fa-spinner fa-spin'
+																	style={{ color: 'red' }}
+																></i>
+															) : (
+																<FaTrash size={18} color={'red'} />
+															)}
+														</button>
 													</td>
 												</tr>
 											))}
 										</tbody>
 									</table>
 								</div>
-							) : null}
+							) : (
+								<div className='container'>
+									<p style={{ fontSize: '12px', marginTop: '1rem' }}>
+										No apartments found
+									</p>
+								</div>
+							)}
 						</TabPanel>
 						<TabPanel>
-							<h2>Any content 2</h2>
+							{userApartments?.apartments?.filter((item) => item.isAvailable)
+								.length > 0 ? (
+								<div className='table-responsive'>
+									<table className='table ' style={{ fontSize: '12px' }}>
+										<thead className=''>
+											<tr>
+												{tableHeaders.map((item, index) => (
+													<th key={index}> {item} </th>
+												))}
+											</tr>
+										</thead>
+										<tbody>
+											{userApartments?.apartments
+												?.filter((item) => item.isAvailable)
+												.map((apartment) => (
+													<tr key={apartment._id}>
+														<td>
+															<SliderImages
+																images={apartment?.featuredImages}
+															/>
+															<p className='apart_name'>
+																{apartment.apartmentName}
+															</p>
+														</td>
+														<td className='td_pad_top'>
+															{apartment.typeOfApartment}
+														</td>
+														<td
+															className='td_pad_top'
+															style={{ width: '16rem' }}
+														>
+															{apartment.address}
+														</td>
+														<td
+															className='td_pad_top'
+															style={{ width: '20rem' }}
+														>
+															{apartment.facilities.map((item, index) => (
+																<span key={index} style={{ paddingRight: 3 }}>
+																	{item}
+																	{index === apartment.facilities.length - 1
+																		? '.'
+																		: ','}
+																</span>
+															))}
+														</td>
+
+														<td className='td_pad_top'> {apartment.status} </td>
+														<td className='td_pad_top'>
+															<Link
+																to={`/apartments/${apartment._id}`}
+																className='link-dark'
+															>
+																<FaEye size={18} />
+															</Link>
+														</td>
+														<td className='td_pad_top'>
+															<Link
+																to={`/user/dashboard/listings/new/${apartment._id}`}
+																className='link-dark'
+															>
+																<FaPen size={18} />
+															</Link>
+														</td>
+														<td className='td_pad_top'>
+															<button
+																className='border-none bg-white'
+																style={{ border: 'none' }}
+																onClick={(e) => deleteHandler(e, apartment._id)}
+															>
+																{isDeleting && apartmentID === apartment._id ? (
+																	<i
+																		className='fas fa-spinner fa-spin'
+																		style={{ color: 'red' }}
+																	></i>
+																) : (
+																	<FaTrash size={18} color={'red'} />
+																)}
+															</button>
+														</td>
+													</tr>
+												))}
+										</tbody>
+									</table>
+								</div>
+							) : (
+								<div className='container'>
+									<p style={{ fontSize: '12px', marginTop: '1rem' }}>
+										No available apartments found
+									</p>
+								</div>
+							)}
 						</TabPanel>
 						<TabPanel>
-							<h2>Any content 3</h2>
+							{userApartments?.apartments?.filter(
+								(item) => item.isAvailable === false
+							).length > 0 ? (
+								<div className='table-responsive'>
+									<table className='table ' style={{ fontSize: '12px' }}>
+										<thead className=''>
+											<tr>
+												{tableHeaders.map((item, index) => (
+													<th key={index}> {item} </th>
+												))}
+											</tr>
+										</thead>
+										<tbody>
+											{userApartments?.apartments
+												?.filter((item) => item.isAvailable === false)
+												.map((apartment) => (
+													<tr key={apartment._id}>
+														<td>
+															<SliderImages
+																images={apartment?.featuredImages}
+															/>
+															<p className='apart_name'>
+																{apartment.apartmentName}
+															</p>
+														</td>
+														<td className='td_pad_top'>
+															{apartment.typeOfApartment}
+														</td>
+														<td
+															className='td_pad_top'
+															style={{ width: '16rem' }}
+														>
+															{apartment.address}
+														</td>
+														<td
+															className='td_pad_top'
+															style={{ width: '20rem' }}
+														>
+															{apartment.facilities.map((item, index) => (
+																<span key={index} style={{ paddingRight: 3 }}>
+																	{item}
+																	{index === apartment.facilities.length - 1
+																		? '.'
+																		: ','}
+																</span>
+															))}
+														</td>
+
+														<td className='td_pad_top'> {apartment.status} </td>
+														<td className='td_pad_top'>
+															<Link
+																to={`/apartments/${apartment._id}`}
+																className='link-dark'
+															>
+																<FaEye size={18} />
+															</Link>
+														</td>
+														<td className='td_pad_top'>
+															<Link
+																to={`/user/dashboard/listings/new/${apartment._id}`}
+																className='link-dark'
+															>
+																<FaPen size={18} />
+															</Link>
+														</td>
+														<td className='td_pad_top'>
+															<button
+																className='border-none bg-white'
+																style={{ border: 'none' }}
+																onClick={(e) => deleteHandler(e, apartment._id)}
+															>
+																{isDeleting && apartmentID === apartment._id ? (
+																	<i
+																		className='fas fa-spinner fa-spin'
+																		style={{ color: 'red' }}
+																	></i>
+																) : (
+																	<FaTrash size={18} color={'red'} />
+																)}
+															</button>
+														</td>
+													</tr>
+												))}
+										</tbody>
+									</table>
+								</div>
+							) : (
+								<div className='container'>
+									<p style={{ fontSize: '12px', marginTop: '1rem' }}>
+										No booked apartments found
+									</p>
+								</div>
+							)}
 						</TabPanel>
 					</Tabs>
 				) : (

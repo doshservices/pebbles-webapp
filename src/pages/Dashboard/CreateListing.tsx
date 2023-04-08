@@ -8,6 +8,7 @@ import { MultiSelect } from 'react-multi-select-component'
 import {
 	create_apartment,
 	get_apartment_by_id,
+	update_apartment,
 } from '../../features/apartment/apartmentSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
@@ -19,9 +20,8 @@ const CreateListing = () => {
 	const params = useParams()
 
 	const { user_detail, isLoading } = useAppSelector((state) => state.auth)
-	const { isFetchingApartment, createSuccess, apartment } = useAppSelector(
-		(state) => state.apartment
-	)
+	const { isFetchingApartment, createSuccess, apartment, isCreatingApartment } =
+		useAppSelector((state) => state.apartment)
 
 	const [apartmentName, setApartmentName] = useState<string>('')
 	const [address, setAddress] = useState<string>('')
@@ -337,7 +337,7 @@ const CreateListing = () => {
 			})
 	}
 
-	const createHandler = async (e: any) => {
+	const createHandler = async (e: any, string: string) => {
 		e.preventDefault()
 		let data = {
 			apartmentName,
@@ -359,7 +359,11 @@ const CreateListing = () => {
 		}
 
 		if (user_detail?.cacDocument && user_detail?.validId) {
-			await dispatch(create_apartment(data))
+			if (string === 'create') {
+				await dispatch(create_apartment(data))
+			} else {
+				await dispatch(update_apartment({ ...data, id: params?.id }))
+			}
 
 			if (createSuccess) {
 				navigate('/user/dashboard/listings')
@@ -411,10 +415,6 @@ const CreateListing = () => {
 			toast('Please update your profile before listing an apartment.')
 		}
 	}, [user_detail?.cacDocument, user_detail?.validId])
-
-	console.log('====================================')
-	console.log('params', params, 'apartment', apartment)
-	console.log('====================================')
 
 	useEffect(() => {
 		if (!apartment || apartment?.apartment?._id !== params?.id) {
@@ -1008,12 +1008,19 @@ const CreateListing = () => {
 
 									<div className='col-12 mt-5'>
 										<button
-											onClick={(e) => createHandler(e)}
+											onClick={(e) =>
+												params?.id
+													? createHandler(e, 'update')
+													: createHandler(e, 'create')
+											}
 											className='btn btn-primary form-control'
 											style={{ width: '13rem' }}
 											disabled={isFetchingApartment}
 										>
 											{params?.id ? 'Update Listing' : 'Upload Listing'}
+											{isCreatingApartment && (
+												<i className='fas fa-spinner fa-spin'></i>
+											)}
 										</button>
 									</div>
 								</div>

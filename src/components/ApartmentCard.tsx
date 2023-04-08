@@ -14,7 +14,11 @@ const ApartmentCard = ({
 			<Link to={`/apartments/${apartmentInfo._id}`}>
 				<SliderImages images={apartmentInfo.apartmentImages} />
 				<div className='apartment_card_div'>
-					<h6> {apartmentInfo.address} </h6>
+					<h6>
+						{apartmentInfo.address.length >= 50
+							? apartmentInfo.address.substring(0, 50) + '...'
+							: apartmentInfo.address}
+					</h6>
 					<p className='no_of_rooms' style={{ color: '#2d2d2d' }}>
 						{apartmentInfo.numberOfBedrooms} bedroom apartment
 					</p>

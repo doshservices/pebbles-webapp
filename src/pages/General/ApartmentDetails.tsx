@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import bgImage from '../../assets/carouselBackground1.png'
 import bgImage2 from '../../assets/Registration1.jpg'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { comma } from '../../utils/helper'
 import { FaSnowflake } from 'react-icons/fa'
 import {
@@ -26,20 +26,29 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { get_apartment_by_id } from '../../features/apartment/apartmentSlice'
 import Loader from '../../components/Loader'
 import axios from 'axios'
+import { create_booking, reset } from '../../features/booking/bookingSlice'
 
 const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
+	const navigate = useNavigate()
 
 	const { user_detail } = useAppSelector((state) => state.auth)
 	const { allApartments, apartment, isFetchingApartment, nearbyApartments } =
 		useAppSelector((state) => state.apartment)
+	const { booking, isCreatingBooking } = useAppSelector(
+		(state) => state.booking
+	)
 
 	const [limitValue, setLimitValue] = useState<number>(3)
 	const [limit, setLimit] = useState<boolean>(false)
 	const [photoIndex, setPhotoIndex] = useState<number>(0)
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
+
+	const [checkInDate, setCheckInDate] = useState<string>('')
+	const [checkOutDate, setCheckOutDate] = useState<string>('')
+	const [numberOfGuests, setNumberOfGuests] = useState<string>('')
 
 	const images = [bgImage, bgImage2]
 
@@ -92,7 +101,7 @@ const ApartmentDetails = () => {
 		RouteToTop()
 	}, [])
 
-	console.log('apartment', apartment)
+	console.log('apartment', apartment, 'booking', booking)
 
 	const pressHandler = async (e: any, id: number) => {
 		e.preventDefault()
@@ -112,11 +121,35 @@ const ApartmentDetails = () => {
 		// 		console.log("error with fetching apartment availability", err)
 		// 		setIsLoading(false)
 		// 	})
-		setIsLoading(false)
+		// setIsLoading(false)
+	}
+
+	const createBookingHandler = (e: any) => {
+		if (user_detail) {
+			e.preventDefault()
+			let data = {
+				apartmentOwnerId: apartment?.apartment?.userId,
+				apartmentId: apartment?.apartment?._id,
+				checkInDate,
+				checkOutDate,
+				bookingAmount: apartment?.apartment?.price,
+				numberOfGuests: Number(numberOfGuests),
+			}
+			dispatch(create_booking(data))
+		} else {
+			alert('You must have an account before you can book an apartment.')
+			setTimeout(() => {
+				navigate('/auth/login')
+			}, 1000)
+		}
 	}
 
 	useEffect(() => {
 		dispatch(get_apartment_by_id({ id: params?.id }))
+
+		return () => {
+			dispatch(reset())
+		}
 	}, [limitValue, limit, params?.id, dispatch])
 
 	return (
@@ -218,7 +251,7 @@ const ApartmentDetails = () => {
 									<h2 className='sect_head'>HOUSE DETAILS</h2>
 									<h5 className='mb-3'>Available Amenities</h5>
 
-									<div className='d-flex'>
+									<div className='d-flex' style={{ flexWrap: 'wrap' }}>
 										{apartment?.apartment?.facilities.map((item, index) => (
 											<span style={{ paddingRight: 3 }}>
 												{item}
@@ -444,7 +477,9 @@ const ApartmentDetails = () => {
 																		className='form-control'
 																		onFocus={(e) => (e.target.type = 'date')}
 																		onBlur={(e) => (e.target.type = 'text')}
-																		// onChange={(e) => setCheckOut(e.target.value)}
+																		onChange={(e) =>
+																			setCheckInDate(e.target.value)
+																		}
 																	/>
 																</div>
 															</div>
@@ -459,7 +494,9 @@ const ApartmentDetails = () => {
 																		className='form-control'
 																		onFocus={(e) => (e.target.type = 'date')}
 																		onBlur={(e) => (e.target.type = 'text')}
-																		// onChange={(e) => setCheckOut(e.target.value)}
+																		onChange={(e) =>
+																			setCheckOutDate(e.target.value)
+																		}
 																	/>
 																</div>
 															</div>
@@ -469,7 +506,10 @@ const ApartmentDetails = () => {
 																		type='number'
 																		placeholder='Guest'
 																		className='form-control'
-																		// required
+																		onChange={(e) =>
+																			setNumberOfGuests(e.target.value)
+																		}
+																		required
 																	/>
 																</div>
 															</div>
@@ -479,7 +519,11 @@ const ApartmentDetails = () => {
 														<button className='btn form-control btn_save'>
 															Check Availability
 														</button>
-														<button className='btn form-control btn_save'>
+														<button
+															className='btn form-control btn_save'
+															onClick={createBookingHandler}
+															disabled={isCreatingBooking}
+														>
 															Book Now
 														</button>
 													</div>
@@ -500,6 +544,22 @@ const ApartmentDetails = () => {
 													<p> &#8358;{comma('120000')} </p>
 												</div>
 											</div>
+
+											{booking && (
+												<div className='col-12 pb-4'>
+													<p>
+														{' '}
+														You have successfully booked an apartment. Please
+														proceed to view booking and make payment.{' '}
+													</p>
+													<Link
+														to={`/user/dashboard/my-bookings/${booking._id}`}
+														className='btn btn-info text-white'
+													>
+														Proceed
+													</Link>
+												</div>
+											)}
 										</div>
 									</div>
 								</div>

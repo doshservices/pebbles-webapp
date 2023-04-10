@@ -90,16 +90,35 @@ const Header = ({ type }: { type: number }) => {
 											className=''
 											id='dropdown-basic'
 										>
-											<img
-												src={profileCircle}
-												alt=''
-												className='prof_circle profile_light'
-											/>
-											<img
-												src={profileCircleBlack}
-												alt=''
-												className='prof_circle profile_dark'
-											/>
+											{!user_detail ? (
+												<>
+													<img
+														src={profileCircle}
+														alt=''
+														className='prof_circle profile_light'
+													/>
+													<img
+														src={profileCircleBlack}
+														alt=''
+														className='prof_circle profile_dark'
+													/>
+												</>
+											) : (
+												<>
+													<img
+														src={user_detail?.profilePicture}
+														alt=''
+														style={{ objectFit: 'cover', borderRadius: '50%' }}
+														className='prof_circle profile_light'
+													/>
+													<img
+														src={user_detail?.profilePicture}
+														alt=''
+														style={{ objectFit: 'cover', borderRadius: '50%' }}
+														className='prof_circle profile_dark'
+													/>
+												</>
+											)}
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu
@@ -280,11 +299,20 @@ const Header = ({ type }: { type: number }) => {
 											className=''
 											id='dropdown-basic'
 										>
-											<img
-												src={profileCircleBlack}
-												alt=''
-												className='prof_circle profile_dark'
-											/>
+											{!user_detail ? (
+												<img
+													src={profileCircleBlack}
+													alt=''
+													className='prof_circle profile_dark'
+												/>
+											) : (
+												<img
+													src={user_detail?.profilePicture}
+													alt=''
+													style={{ objectFit: 'cover', borderRadius: '50%' }}
+													className='prof_circle profile_dark'
+												/>
+											)}
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu

@@ -26,6 +26,8 @@ import UserGuests from './pages/Dashboard/UserGuests'
 import AllApartments from './pages/General/AllApartments'
 import NearApartments from './pages/General/NearApartments'
 import CreateListing from './pages/Dashboard/CreateListing'
+import UserBookingDetail from './pages/Dashboard/UserBookingDetail'
+import UserBookingDetailBusiness from './pages/Dashboard/UserBookingDetailBusiness'
 
 function App() {
 	return (
@@ -58,6 +60,11 @@ function App() {
 							<Route path='home' element={<UserDashboardHome />} />
 							<Route path='profile' element={<UserProfile />} />
 							<Route path='my-bookings' element={<UserBookings />} />
+							<Route path='my-bookings/:id' element={<UserBookingDetail />} />
+							<Route
+								path='bookings/:id'
+								element={<UserBookingDetailBusiness />}
+							/>
 							<Route path='bookings' element={<UserBusinessBookings />} />
 							<Route path='wishlist' element={<UserWishlist />} />
 							<Route path='listings' element={<UserListings />} />

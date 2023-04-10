@@ -122,7 +122,7 @@ export const get_apartment_by_id = createAsyncThunk(
 )
 
 export const create_apartment = createAsyncThunk(
-	'auth/create_apartment',
+	'apartments/create_apartment',
 	async (
 		payload: {
 			apartmentName: String
@@ -225,7 +225,7 @@ export const delete_apartment = createAsyncThunk(
 )
 
 export const update_apartment = createAsyncThunk(
-	'auth/update_apartment',
+	'apartments/update_apartment',
 	async (
 		payload: {
 			apartmentName: String
@@ -276,7 +276,7 @@ export const update_apartment = createAsyncThunk(
 )
 
 export const { reducer: ApartmentReducer, actions } = createSlice({
-	name: 'apartment',
+	name: 'apartments',
 	initialState: ApartmentInitialState,
 	reducers: {},
 	extraReducers: (builder) => {

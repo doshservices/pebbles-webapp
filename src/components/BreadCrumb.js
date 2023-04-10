@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import items from './userDashboard/Navigation/menu'
+import { useAppSelector } from '../app/hooks'
 
 const BreadCrumb = ({ loc }) => {
-	// const adminAuth = useSelector((state) => state.adminAuth)
-	// const { detail } = adminAuth
-	const userDetail = true
+	const { user_detail } = useAppSelector((state) => state.auth)
 
-	// const userAuth = useSelector((state) => state.userAuth)
-	// const { userDetail } = userAuth
-
-	const [main, setMain] = useState({})
+	const [main, setMain] = useState('')
 	const [item, setItem] = useState({})
 
 	useEffect(() => {
-		if (userDetail) {
+		if (loc.pathname.split('/')[4]) {
+			setMain(loc.pathname.split('/')[4])
+		} else {
+			setMain(loc.pathname.split('/')[3])
+		}
+		if (user_detail) {
 			items.map((item, index) => {
 				if (item.type && item.type === 'group') {
 					getCollapse(item, index)
@@ -23,7 +24,7 @@ const BreadCrumb = ({ loc }) => {
 				return false
 			})
 		}
-	}, [loc, userDetail])
+	}, [loc, user_detail])
 
 	const getCollapse = (item) => {
 		if (item.children) {
@@ -33,15 +34,13 @@ const BreadCrumb = ({ loc }) => {
 				} else if (collapse.type && collapse.type === 'item') {
 					if (collapse.url === loc.pathname) {
 						setItem(item)
-						setMain(collapse)
+						// setMain(collapse)
 					}
 				}
 				return false
 			})
 		}
 	}
-
-	// console.log(item)
 
 	return (
 		<div className='page-header'>
@@ -60,16 +59,21 @@ const BreadCrumb = ({ loc }) => {
 									/>
 								</Link>
 							</li>
-							{item?.type === 'collapse' && (
+							{/* {item?.type === 'item' && (
 								<li className='breadcrumb-item'>
 									<a href='/#'>{item.title}</a>
 								</li>
-							)}
-							{main?.type === 'item' && (
+							)} */}
+							{main && (
 								<li className='breadcrumb-item'>
-									<span>{main.title}</span>
+									<span>{main}</span>
 								</li>
 							)}
+							{/* {main?.type === 'collapse' && (
+								<li className='breadcrumb-item'>
+									<span>{main}</span>
+								</li>
+							)} */}
 						</ul>
 					</div>
 				</div>

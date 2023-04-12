@@ -167,6 +167,40 @@ export const get_business_bookings = createAsyncThunk(
 	}
 )
 
+export const cancel_booking = createAsyncThunk(
+	'booking/cancel_booking',
+	async (
+		payload: {
+			bookingId: string | undefined
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.get(
+				`${url}/bookings/cancel-booking/${payload.bookingId}`,
+				{
+					headers: authHeader(token ? token : '123'),
+				}
+			)
+			toast.success(response?.data?.data?.message)
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			console.log(error)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
 export const { reducer: BookingReducer, actions } = createSlice({
 	name: 'booking',
 	initialState: BookingInitialState,
@@ -226,6 +260,18 @@ export const { reducer: BookingReducer, actions } = createSlice({
 		})
 		builder.addCase(get_business_bookings.rejected, (state, action) => {
 			state.isFetchingBooking = false
+		})
+		builder.addCase(cancel_booking.fulfilled, (state, action) => {
+			state.cancelSuccess = true
+			state.isCancellingBooking = false
+		})
+		builder.addCase(cancel_booking.pending, (state, action) => {
+			state.isCancellingBooking = true
+			state.cancelSuccess = false
+		})
+		builder.addCase(cancel_booking.rejected, (state, action) => {
+			state.isCancellingBooking = false
+			state.cancelSuccess = false
 		})
 	},
 })

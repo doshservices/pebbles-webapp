@@ -28,6 +28,7 @@ import NearApartments from './pages/General/NearApartments'
 import CreateListing from './pages/Dashboard/CreateListing'
 import UserBookingDetail from './pages/Dashboard/UserBookingDetail'
 import UserBookingDetailBusiness from './pages/Dashboard/UserBookingDetailBusiness'
+import ApprovePayment from './pages/General/ApprovePayment'
 
 function App() {
 	return (
@@ -64,6 +65,10 @@ function App() {
 							<Route
 								path='bookings/:id'
 								element={<UserBookingDetailBusiness />}
+							/>
+							<Route
+								path='booking/:id/payment-status'
+								element={<ApprovePayment />}
 							/>
 							<Route path='bookings' element={<UserBusinessBookings />} />
 							<Route path='wishlist' element={<UserWishlist />} />

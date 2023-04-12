@@ -9,6 +9,8 @@ export interface BookingInitialInterface {
 	isFetchingBooking: boolean
 	flutterBooking: FlutterBookingInterface | null
 	isFlutterBooking: boolean
+	isCancellingBooking: boolean
+	cancelSuccess: boolean
 }
 
 export const BookingInitialState: BookingInitialInterface = {
@@ -19,6 +21,8 @@ export const BookingInitialState: BookingInitialInterface = {
 	isFetchingBooking: false,
 	flutterBooking: null,
 	isFlutterBooking: false,
+	isCancellingBooking: false,
+	cancelSuccess: false,
 }
 
 export interface BookingsInterface {

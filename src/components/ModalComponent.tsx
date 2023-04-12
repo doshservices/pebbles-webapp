@@ -12,9 +12,9 @@ const ModalComponent = ({
 	children: ReactNode
 	open: boolean
 	toggle: () => void
-	title: string
-	className: string
-	size: string
+	title?: string
+	className?: string
+	size?: string
 }) => {
 	return (
 		<>

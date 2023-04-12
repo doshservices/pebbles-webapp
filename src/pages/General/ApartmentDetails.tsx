@@ -1,25 +1,21 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
-import bgImage from '../../assets/carouselBackground1.png'
-import bgImage2 from '../../assets/Registration1.jpg'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { comma } from '../../utils/helper'
-import { FaSnowflake } from 'react-icons/fa'
 import {
-	AiOutlineWifi,
+	// AiOutlineWifi,
 	AiOutlineStop,
 	AiOutlineClockCircle,
 } from 'react-icons/ai'
-import { HiOutlineLightBulb } from 'react-icons/hi'
+// import { HiOutlineLightBulb } from 'react-icons/hi'
 import { MdOutlinePool, MdOutlinePayments } from 'react-icons/md'
-import { SlScreenDesktop } from 'react-icons/sl'
-import { CgGym } from 'react-icons/cg'
+// import { SlScreenDesktop } from 'react-icons/sl'
+// import { CgGym } from 'react-icons/cg'
 import { TbMessageReport, TbDisabled } from 'react-icons/tb'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import abuja from '../../assets/abuja.png'
 import two_users from '../../assets/two_users.png'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
-import apartmentImg from '../../assets/picture.png'
 import Lightbox from 'react-18-image-lightbox'
 import 'react-18-image-lightbox/style.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -27,13 +23,19 @@ import { get_apartment_by_id } from '../../features/apartment/apartmentSlice'
 import Loader from '../../components/Loader'
 import axios from 'axios'
 import { create_booking, reset } from '../../features/booking/bookingSlice'
+import { authHeader } from '../../utils/headers'
+import { toast } from 'react-hot-toast'
+import ModalComponent from '../../components/ModalComponent'
+import moment from 'moment'
 
 const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
 	const navigate = useNavigate()
 
-	const { user_detail } = useAppSelector((state) => state.auth)
+	let url = 'https://pubblessignature-production.up.railway.app/api'
+
+	const { user_detail, token } = useAppSelector((state) => state.auth)
 	const { allApartments, apartment, isFetchingApartment, nearbyApartments } =
 		useAppSelector((state) => state.apartment)
 	const { booking, isCreatingBooking } = useAppSelector(
@@ -49,8 +51,8 @@ const ApartmentDetails = () => {
 	const [checkInDate, setCheckInDate] = useState<string>('')
 	const [checkOutDate, setCheckOutDate] = useState<string>('')
 	const [numberOfGuests, setNumberOfGuests] = useState<string>('')
-
-	const images = [bgImage, bgImage2]
+	const [availability, setAvailability] = useState<string[]>([])
+	const [openModal, setOpenModal] = useState(false)
 
 	const amenities: string[] = [
 		'24hrs Power Supply',
@@ -101,27 +103,28 @@ const ApartmentDetails = () => {
 		RouteToTop()
 	}, [])
 
-	console.log('apartment', apartment, 'booking', booking)
+	console.log('availability', availability)
 
-	const pressHandler = async (e: any, id: number) => {
+	const pressHandler = async (e: any) => {
 		e.preventDefault()
-		// setIsLoading(true)
-		// await axios({
-		// 	url: `${url}/apartments/is-available`,
-		// 	method: "POST",
-		// 	headers: authHeader(userDetail.token),
-		// 	data: { apartmentId: id },
-		// })
-		// 	.then((res) => {
-		// 		setAvailability(res?.data?.data?.message)
-		// 		toast.success(res?.data?.data?.message, { position: "top-right" })
-		// 		setIsLoading(false)
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log("error with fetching apartment availability", err)
-		// 		setIsLoading(false)
-		// 	})
-		// setIsLoading(false)
+		setIsLoading(true)
+		await axios({
+			url: `${url}/bookings/booking/${apartment?.apartment?._id}`,
+			method: 'GET',
+			headers: authHeader(token ? token : '123'),
+			// data: { apartmentId: id },
+		})
+			.then((res) => {
+				setAvailability(res?.data?.data?.bookings)
+				toast.success(res?.data?.data?.message, { position: 'top-center' })
+				setOpenModal(true)
+				setIsLoading(false)
+			})
+			.catch((err) => {
+				console.log('error with fetching apartment availability', err)
+				setIsLoading(false)
+			})
+		setIsLoading(false)
 	}
 
 	const createBookingHandler = (e: any) => {
@@ -253,7 +256,7 @@ const ApartmentDetails = () => {
 
 									<div className='d-flex' style={{ flexWrap: 'wrap' }}>
 										{apartment?.apartment?.facilities.map((item, index) => (
-											<span style={{ paddingRight: 3 }}>
+											<span style={{ paddingRight: 3 }} key={index}>
 												{item}
 												{index === apartment?.apartment?.facilities.length - 1
 													? '.'
@@ -516,7 +519,10 @@ const ApartmentDetails = () => {
 														</div>
 													</div>
 													<div className='text-center'>
-														<button className='btn form-control btn_save'>
+														<button
+															className='btn form-control btn_save'
+															onClick={pressHandler}
+														>
 															Check Availability
 														</button>
 														<button
@@ -548,12 +554,11 @@ const ApartmentDetails = () => {
 											{booking && (
 												<div className='col-12 pb-4'>
 													<p>
-														{' '}
 														You have successfully booked an apartment. Please
-														proceed to view booking and make payment.{' '}
+														proceed to view booking and make payment.
 													</p>
 													<Link
-														to={`/user/dashboard/my-bookings/${booking._id}`}
+														to={`/user/dashboard/my-bookings`}
 														className='btn btn-info text-white'
 													>
 														Proceed
@@ -643,6 +648,21 @@ const ApartmentDetails = () => {
 					</>
 				)}
 			</section>
+			<ModalComponent
+				open={openModal}
+				toggle={() => setOpenModal(false)}
+				title='Booked Dates'
+			>
+				<div className='container'>
+					<ul>
+						{availability.map((item, index) => (
+							<li style={{ fontSize: '14px' }} key={index}>
+								{moment(item).format('MMMM Do, YYYY')}
+							</li>
+						))}
+					</ul>
+				</div>
+			</ModalComponent>
 		</main>
 	)
 }

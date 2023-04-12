@@ -93,6 +93,28 @@ const Signup = () => {
 		}
 	}
 
+	const submitSignupHandlerr = (role: string) => {
+		setRole(role)
+		if (
+			(fullName || businessName) &&
+			email &&
+			phoneNumber &&
+			password &&
+			confirmPassword
+		) {
+			if (password === confirmPassword) {
+				// if (otp?.status === 200) {
+				dispatch(get_otp({ email }))
+				setVerify(true)
+				// }
+			} else {
+				setMessage('Passwords do not match.')
+			}
+		} else {
+			setMessage('All fields are required.')
+		}
+	}
+
 	useEffect(() => {
 		if (user_register) {
 			navigate('/auth/login')
@@ -123,7 +145,7 @@ const Signup = () => {
 									<div className='pebbles_form'>
 										<h4 className='text-center mb-3'> VERIFY ACCOUNT </h4>
 										<p className='text-center'>
-											A One-Time Password has been sent to shai****d@gmail.com
+											A One-Time Password has been sent to {email}
 										</p>
 										<form className='mt-5 pt-5'>
 											<div className='d-flex justify-content-center'>
@@ -154,9 +176,7 @@ const Signup = () => {
 												<ResendOTP
 													maxTime={120}
 													style={{}}
-													onResendClick={(e: any) =>
-														submitSignupHandler(e, role)
-													}
+													onResendClick={() => submitSignupHandlerr(role)}
 												/>
 											</div>
 										</div>

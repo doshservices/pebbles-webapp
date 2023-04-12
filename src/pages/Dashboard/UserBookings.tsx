@@ -4,14 +4,19 @@ import SliderImages from '../../components/SliderImages'
 import apartmentImg from '../../assets/picture.png'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { get_user_bookings, reset } from '../../features/booking/bookingSlice'
+import {
+	cancel_booking,
+	get_user_bookings,
+	reset,
+} from '../../features/booking/bookingSlice'
 import { FaEye } from 'react-icons/fa'
 import moment from 'moment'
+import Loader from '../../components/Loader'
 
 const UserBookings = () => {
 	const dispatch = useAppDispatch()
 
-	const { bookings, isFetchingBooking } = useAppSelector(
+	const { bookings, isFetchingBooking, cancelSuccess } = useAppSelector(
 		(state) => state.booking
 	)
 
@@ -24,11 +29,14 @@ const UserBookings = () => {
 		'Booking Status',
 		'Payment Status',
 		'View',
-		// 'Action',
+		'Action',
 	]
 
-	const deleteHandler = async (e, obj) => {
+	const cancelHandler = async (e: any, id: string) => {
 		e.preventDefault()
+		if (window.confirm('Are you sure want to cancel this booking?')) {
+			dispatch(cancel_booking({ bookingId: id }))
+		}
 	}
 
 	useEffect(() => {
@@ -37,13 +45,15 @@ const UserBookings = () => {
 		return () => {
 			dispatch(reset())
 		}
-	}, [dispatch])
+	}, [dispatch, cancelSuccess])
 
 	return (
 		<main className='dashboard dashboard_bookings'>
 			<div>
 				<h6>Booking History</h6>
-				{bookings && bookings?.bookings?.length > 0 ? (
+				{isFetchingBooking ? (
+					<Loader />
+				) : bookings && bookings?.bookings?.length > 0 ? (
 					<div className='table-responsive'>
 						<table className='table ' style={{ fontSize: '12px' }}>
 							<thead className=''>
@@ -101,15 +111,21 @@ const UserBookings = () => {
 												<FaEye size={18} />
 											</Link>
 										</td>
-										{/* <td className='td_pad_top'>
-											<a
-												href='#/'
-												className='me-3 link-dark'
-												onClick={(e) => deleteHandler(e, booking)}
+										<td className='td_pad_top'>
+											<button
+												className='me-3 btn'
+												style={{
+													backgroundColor: 'red',
+													color: '#fff',
+													borderRadius: '8px',
+													fontSize: '12px',
+													borderColor: 'red',
+												}}
+												onClick={(e) => cancelHandler(e, booking._id)}
 											>
-												
-											</a>
-										</td> */}
+												Cancel
+											</button>
+										</td>
 									</tr>
 								))}
 							</tbody>

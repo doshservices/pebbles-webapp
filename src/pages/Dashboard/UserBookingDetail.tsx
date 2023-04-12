@@ -23,7 +23,7 @@ const UserBookingDetail = () => {
 
 		let data = {
 			bookingId: bookingDetail?.booking?._id,
-			paymentMethod: 'PAYSTACK',
+			paymentMethod: 'FLUTTERWAVE',
 		}
 
 		dispatch(flutter_pay_booking(data))

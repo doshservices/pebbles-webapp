@@ -10,6 +10,7 @@ import {
 } from '../../features/booking/bookingSlice'
 import { FaEye } from 'react-icons/fa'
 import moment from 'moment'
+import Loader from '../../components/Loader'
 
 const UserBusinessBookings = () => {
 	const dispatch = useAppDispatch()
@@ -42,7 +43,9 @@ const UserBusinessBookings = () => {
 		<main className='dashboard dashboard_bookings'>
 			<div>
 				<h6>Booking History</h6>
-				{bookings && bookings?.bookings?.length > 0 ? (
+				{isFetchingBooking ? (
+					<Loader />
+				) : bookings && bookings?.bookings?.length > 0 ? (
 					<div className='table-responsive'>
 						<table className='table ' style={{ fontSize: '12px' }}>
 							<thead className=''>

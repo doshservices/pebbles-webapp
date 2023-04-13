@@ -254,7 +254,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/events' className='js_scroll'>
 												<div className='text-center'>
 													<img className='sub_img_light' src={events} alt='' />
 													<i className='fa fa-calendar sub_img_dark' />
@@ -432,7 +432,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='events' className='js_scroll'>
 												<div className='text-center'>
 													<i className='fa fa-calendar sub_img_dark' />
 												</div>

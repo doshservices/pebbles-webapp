@@ -13,6 +13,7 @@ const GeneralPath = () => {
 				type={
 					location?.pathname === '/home' ||
 					location?.pathname === '/about-us' ||
+					location?.pathname === '/events' ||
 					location?.pathname === '/contact'
 						? 1
 						: 2

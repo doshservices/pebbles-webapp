@@ -271,3 +271,14 @@ header .prof_circle {
 		object-fit: cover;
 	}
 }
+
+.d-showw {
+	transform: scale(1);
+	transition-timing-function: ease-in-out;
+}
+
+.d-nonee {
+	transform: scale(0);
+	transition-timing-function: ease-in-out;
+	display: none;
+}

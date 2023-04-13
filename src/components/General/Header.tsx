@@ -47,7 +47,11 @@ const Header = ({ type }: { type: number }) => {
 			{type === 1 ? (
 				<>
 					<Navbar
-						className={colorChange ? 'nav_light def_navbar1' : 'def_navbar1'}
+						className={
+							colorChange
+								? 'nav_light def_navbar1 d-nonee'
+								: 'def_navbar1 d-showw'
+						}
 						expand='lg'
 						collapseOnSelect
 					>
@@ -271,7 +275,11 @@ const Header = ({ type }: { type: number }) => {
 			) : (
 				<>
 					<Navbar
-						className={colorChange ? 'nav_light def_navbar3' : 'def_navbar3'}
+						className={
+							colorChange
+								? 'nav_light def_navbar3 d-nonee'
+								: 'def_navbar3 d-showw'
+						}
 						expand='lg'
 						collapseOnSelect
 					>

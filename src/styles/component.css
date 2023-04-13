@@ -12,6 +12,7 @@
 }
 
 .search_component_div input,
+.search_component_div .input,
 .search_component_div select {
 	font-size: 14px;
 	padding-left: 2.2rem;
@@ -30,6 +31,13 @@
 	background-color: transparent;
 }
 
+.search_component_div_date {
+	position: absolute;
+	z-index: 999;
+	left: 33%;
+	right: 33%;
+}
+
 @media (max-width: 1200px) {
 	.search_component_main_div {
 		padding: 0 10%;
@@ -43,8 +51,14 @@
 	}
 
 	.search_component_div input,
+	.search_component_div .input,
 	.search_component_div select {
 		margin-bottom: 1rem;
+	}
+
+	.search_component_div_date {
+		top: 7rem;
+		left: 10%;
 	}
 }
 

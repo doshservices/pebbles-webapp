@@ -3,6 +3,10 @@ import Autocomplete from 'react-google-autocomplete'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import { get_search_apartments } from '../../features/apartment/apartmentSlice'
+import { DateRange } from 'react-date-range'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
+import moment from 'moment'
 
 const SearchApartmentComponent = () => {
 	const dispatch = useAppDispatch()
@@ -12,14 +16,34 @@ const SearchApartmentComponent = () => {
 	const [checkIn, setCheckIn] = useState('')
 	const [checkOut, setCheckOut] = useState('')
 	const [apartmentType, setApartmentType] = useState('')
+	const [showDate, setShowDate] = useState(false)
+
+	const [state, setState] = useState([
+		{
+			startDate: new Date(),
+			endDate: new Date(),
+			key: 'selection',
+		},
+	])
+
+	console.log('====================================')
+	console.log(
+		'state',
+		moment(state[0].startDate).format(),
+		moment(new Date()).format()
+	)
+	console.log('====================================')
+
+	const showDateHandler = () => {
+		setShowDate(!showDate)
+	}
 
 	const submitHandler = () => {
 		dispatch(
 			get_search_apartments({
-				// loc: loc?.formatted_address,
-				loc,
-				checkIn,
-				checkOut,
+				loc: loc?.formatted_address,
+				checkIn: moment(state[0].startDate).format(),
+				checkOut: moment(state[0].endDate).format(),
 				apartmentType,
 			})
 		)
@@ -29,68 +53,55 @@ const SearchApartmentComponent = () => {
 
 	return (
 		<div className='search_component_main_div'>
-			<div className='container'>
+			<div className='container position-relative'>
 				<div className='search_component_div'>
 					<div className='row no-gutters'>
 						<div
 							className='col-lg-4 col-md-12 p-1'
 							style={{ position: 'relative' }}
+							onClick={() => setShowDate(false)}
 						>
 							<span>
 								<i className='icofont-google-map' aria-hidden='true'></i>
 							</span>
-							<input
-								type='text'
-								className='form-control'
-								placeholder='Enter State'
-								onChange={(e) => setLoc(e.target.value)}
-							/>
-							{/* <Autocomplete
+
+							<Autocomplete
 								apiKey={process.env.REACT_APP_GOOGLE_MAPS_API}
 								onPlaceSelected={(place) => {
 									setLoc(place)
 								}}
 								className='form-control'
 								placeholder='Enter a location'
-							/> */}
+							/>
 						</div>
 						<div className='col-lg-8 col-md-12'>
 							<div className='row no-gutters'>
 								<div
-									className='col-lg-3 col-md-4 col-sm-6 col-6 p-1'
+									className='col-lg-6 col-md-8 col-sm-12 col-12 p-1'
 									style={{ position: 'relative' }}
 								>
 									<span>
 										<i className='icofont-calendar' aria-hidden='true'></i>
 									</span>
-									<input
-										type='text'
-										placeholder='Check In'
-										className='form-control'
-										onFocus={(e) => (e.target.type = 'date')}
-										onBlur={(e) => (e.target.type = 'text')}
-										onChange={(e) => setCheckIn(e.target.value)}
-									/>
-								</div>
-								<div
-									className='col-lg-3 col-md-4 col-sm-6 col-6 p-1'
-									style={{ position: 'relative' }}
-								>
-									<span>
-										<i className='icofont-calendar' aria-hidden='true'></i>
-									</span>
-									<input
-										type='text'
-										placeholder='Check Out'
-										className='form-control'
-										onFocus={(e) => (e.target.type = 'date')}
-										onBlur={(e) => (e.target.type = 'text')}
-										onChange={(e) => setCheckOut(e.target.value)}
-									/>
+									<div className='form-control input' onClick={showDateHandler}>
+										<p className='mb-0 pb-0' style={{ fontSize: '14px' }}>
+											{moment(state[0].startDate).format('YYYY-MM-DD') ===
+												String(moment(new Date()).format('YYYY-MM-DD')) &&
+											moment(state[0].endDate).format('YYYY-MM-DD') ===
+												String(moment(new Date()).format('YYYY-MM-DD'))
+												? 'Check-in Date - Check-out Date'
+												: `${moment(state[0].startDate).format(
+														'ddd, MMMM Do'
+												  )} - ${moment(state[0].endDate).format(
+														'ddd, MMMM Do'
+												  )}`}
+										</p>
+									</div>
 								</div>
 								<div
 									className='col-lg-3 col-md-4 col-sm-12 p-1'
 									style={{ position: 'relative' }}
+									onClick={() => setShowDate(false)}
 								>
 									<span>
 										<i className='fa fa-home-alt' aria-hidden='true'></i>
@@ -127,7 +138,10 @@ const SearchApartmentComponent = () => {
 										<option value='Villa/Mansions'>Villa/Mansions</option>
 									</select>
 								</div>
-								<div className='col-lg-3 col-sm-12 p-1'>
+								<div
+									className='col-lg-3 col-sm-12 p-1'
+									onClick={() => setShowDate(false)}
+								>
 									<button
 										type='submit'
 										className='btn btn-primary form-control'
@@ -140,6 +154,17 @@ const SearchApartmentComponent = () => {
 						</div>
 					</div>
 				</div>
+				{showDate && (
+					<div className='search_component_div_date'>
+						<DateRange
+							editableDateInputs={true}
+							onChange={(item) => setState([item.selection])}
+							moveRangeOnFirstSelection={false}
+							ranges={state}
+							minDate={new Date()}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	)

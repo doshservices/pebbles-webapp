@@ -31,6 +31,7 @@ import UserBookingDetailBusiness from './pages/Dashboard/UserBookingDetailBusine
 import ApprovePayment from './pages/General/ApprovePayment'
 import Events from './pages/General/Events'
 import EventDetails from './pages/General/EventDetails'
+import UserSignup from './pages/General/UserSignup'
 
 function App() {
 	return (
@@ -53,6 +54,7 @@ function App() {
 						</Route>
 						<Route path='/auth/' element={<AuthPath />}>
 							<Route path='signup' element={<Signup />} />
+							<Route path='user/signup' element={<UserSignup />} />
 							<Route path='login' element={<Login />} />
 							<Route path='forgot-password' element={<ForgotPassword />} />
 						</Route>

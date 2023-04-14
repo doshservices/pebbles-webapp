@@ -20,7 +20,8 @@ const Signup = () => {
 	const [showIndividual, setShowIndividual] = useState(true)
 	const [message, setMessage] = useState<string | null>(null)
 	const [OTP, setOTP] = useState('')
-	const [fullName, setFullName] = useState('')
+	const [firstName, setFirstName] = useState('')
+	const [lastName, setLastName] = useState('')
 	const [businessName, setBusinessName] = useState('')
 	const [email, setEmail] = useState('')
 	const [phoneNumber, setPhoneNumber] = useState('')
@@ -59,7 +60,8 @@ const Signup = () => {
 		dispatch(
 			user_signup({
 				businessName,
-				fullName,
+				firstName,
+				lastName,
 				email,
 				googleSigned: true,
 				password,
@@ -74,7 +76,7 @@ const Signup = () => {
 		e.preventDefault()
 		setRole(role)
 		if (
-			(fullName || businessName) &&
+			(firstName || businessName) &&
 			email &&
 			phoneNumber &&
 			password &&
@@ -96,7 +98,7 @@ const Signup = () => {
 	const submitSignupHandlerr = (role: string) => {
 		setRole(role)
 		if (
-			(fullName || businessName) &&
+			(firstName || businessName) &&
 			email &&
 			phoneNumber &&
 			password &&
@@ -250,18 +252,27 @@ const Signup = () => {
 										{showIndividual ? (
 											<form>
 												<div className='row'>
-													<div className='col-md-12'>
-														<label htmlFor='fullName'>Full Name</label>
+													<div className='col-md-6'>
+														<label htmlFor='firstName'>First Name</label>
 														<input
 															type='text'
-															placeholder='Full name here'
+															placeholder='First name here'
 															className='form-control'
-															onChange={(e) => setFullName(e.target.value)}
+															onChange={(e) => setFirstName(e.target.value)}
+														/>
+													</div>
+													<div className='col-md-6'>
+														<label htmlFor='lastName'>Last Name</label>
+														<input
+															type='text'
+															placeholder='Last name here'
+															className='form-control'
+															onChange={(e) => setLastName(e.target.value)}
 														/>
 													</div>
 
 													<div className='col-md-6'>
-														<label htmlFor='fullName'>Email Address</label>
+														<label htmlFor='email'>Email Address</label>
 														<input
 															type='email'
 															placeholder='Email address here'
@@ -270,7 +281,7 @@ const Signup = () => {
 														/>
 													</div>
 													<div className='col-md-6'>
-														<label htmlFor='fullName'>Phone Number</label>
+														<label htmlFor='phoneNumber'>Phone Number</label>
 														<input
 															type='number'
 															placeholder='Phone Number here'
@@ -315,10 +326,12 @@ const Signup = () => {
 														</div>
 													</div>
 												</div>
-												<div className='mt-3'>
+												<div className='mt-5'>
 													<button
 														className='btn btn-primary form-control'
-														onClick={(e) => submitSignupHandler(e, 'USER')}
+														onClick={(e) =>
+															submitSignupHandler(e, 'INDIVIDUAL')
+														}
 														disabled={isLoading}
 													>
 														Create Account
@@ -399,13 +412,17 @@ const Signup = () => {
 														</div>
 													</div>
 												</div>
-												<div className='mt-3'>
+												<div className='mt-5'>
 													<button
 														className='btn btn-primary form-control '
 														onClick={(e) => submitSignupHandler(e, 'BUSINESS')}
 														disabled={isLoading}
 													>
-														Create Account
+														{isLoading ? (
+															<i className='fas fa-spinner fa-spin'></i>
+														) : (
+															'Create Account'
+														)}
 													</button>
 												</div>
 												<p

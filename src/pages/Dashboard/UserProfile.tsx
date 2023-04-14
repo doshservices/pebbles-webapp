@@ -7,8 +7,11 @@ const UserProfile = () => {
 	const dispatch = useAppDispatch()
 	const { user_detail, isLoading } = useAppSelector((state) => state.auth)
 
-	const [fullName, setFullName] = useState(
-		user_detail ? user_detail.fullName : ''
+	const [lastName, setLastName] = useState(
+		user_detail ? user_detail.lastName : ''
+	)
+	const [firstName, setFirstName] = useState(
+		user_detail ? user_detail.firstName : ''
 	)
 	const [businessName, setBusinessName] = useState(
 		user_detail ? user_detail.businessName : ''
@@ -210,7 +213,8 @@ const UserProfile = () => {
 	const updateHandler = (e: any) => {
 		e.preventDefault()
 		let data = {
-			fullName,
+			firstName,
+			lastName,
 			businessName,
 			businessAddress,
 			phoneNumber,
@@ -251,28 +255,41 @@ const UserProfile = () => {
 						>
 							<form autoComplete='off'>
 								<div className='row'>
-									<>
+									{user_detail?.role === 'BUSINESS' ? (
 										<div className='col-md-12'>
-											<label htmlFor='firstName'>
-												{user_detail?.role === 'USER'
-													? 'Full Name'
-													: 'Business Name'}
-											</label>
+											<label htmlFor=''>Business Name</label>
 											<input
 												type='text'
-												value={
-													user_detail?.role === 'USER' ? fullName : businessName
-												}
-												placeholder='Enter First name here'
+												value={businessName}
+												placeholder='Enter Company name here'
 												className='form-control'
-												onChange={(e) =>
-													user_detail?.role === 'USER'
-														? setFullName(e.target.value)
-														: setBusinessName(e.target.value)
-												}
+												onChange={(e) => setBusinessName(e.target.value)}
 											/>
 										</div>
-									</>
+									) : (
+										<>
+											<div className='col-md-6'>
+												<label htmlFor=''>First Name</label>
+												<input
+													type='text'
+													value={firstName}
+													placeholder='Enter First name here'
+													className='form-control'
+													onChange={(e) => setFirstName(e.target.value)}
+												/>
+											</div>
+											<div className='col-md-6'>
+												<label htmlFor=''>Last Name</label>
+												<input
+													type='text'
+													value={lastName}
+													placeholder='Enter First name here'
+													className='form-control'
+													onChange={(e) => setLastName(e.target.value)}
+												/>
+											</div>
+										</>
+									)}
 
 									{user_detail?.role === 'BUSINESS' ? (
 										<div className='col-md-6'>
@@ -472,8 +489,11 @@ const UserProfile = () => {
 											onClick={(e) => updateHandler(e)}
 											disabled={isLoading}
 										>
-											Update
-											{isLoading && <i className='fas fa-spinner fa-spin'></i>}
+											{isLoading ? (
+												<i className='fas fa-spinner fa-spin'></i>
+											) : (
+												'Update'
+											)}
 										</button>
 									</div>
 								</div>

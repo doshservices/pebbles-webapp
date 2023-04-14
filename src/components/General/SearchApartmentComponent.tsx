@@ -26,14 +26,6 @@ const SearchApartmentComponent = () => {
 		},
 	])
 
-	console.log('====================================')
-	console.log(
-		'state',
-		moment(state[0].startDate).format(),
-		moment(new Date()).format()
-	)
-	console.log('====================================')
-
 	const showDateHandler = () => {
 		setShowDate(!showDate)
 	}

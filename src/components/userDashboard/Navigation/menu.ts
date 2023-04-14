@@ -13,7 +13,7 @@ items = [
 				type: 'item',
 				url: '/user/dashboard/home',
 				icon: 'fa fa-cube',
-				permission: ['USER', 'BUSINESS'],
+				permission: ['USER', 'INDIVIDUAL', 'BUSINESS'],
 			},
 			{
 				id: 'profile',
@@ -21,7 +21,7 @@ items = [
 				type: 'item',
 				url: '/user/dashboard/profile',
 				icon: 'fa fa-user',
-				permission: ['USER', 'BUSINESS'],
+				permission: ['USER', 'INDIVIDUAL', 'BUSINESS'],
 			},
 			{
 				id: 'my-bookings',
@@ -29,7 +29,7 @@ items = [
 				type: 'item',
 				url: '/user/dashboard/my-bookings',
 				icon: 'fas fa-building',
-				permission: ['USER', 'BUSINESS'],
+				permission: ['USER', 'INDIVIDUAL', 'BUSINESS'],
 			},
 			{
 				id: 'bookings',
@@ -37,7 +37,7 @@ items = [
 				type: 'item',
 				url: '/user/dashboard/bookings',
 				icon: 'fa fa-city',
-				permission: ['BUSINESS'],
+				permission: ['BUSINESS', 'INDIVIDUAL'],
 			},
 			{
 				id: 'listings',
@@ -45,7 +45,7 @@ items = [
 				type: 'item',
 				url: '/user/dashboard/listings',
 				icon: 'fa fa-hotel',
-				permission: ['BUSINESS'],
+				permission: ['INDIVIDUAL', 'BUSINESS'],
 			},
 			// {
 			// 	id: 'guests',
@@ -61,7 +61,7 @@ items = [
 				type: 'item',
 				url: '/user/dashboard/wishlist',
 				icon: 'fa fa-heart',
-				permission: ['USER', 'BUSINESS'],
+				permission: ['USER', 'INDIVIDUAL', 'BUSINESS'],
 			},
 			{
 				id: 'notifications',
@@ -69,7 +69,7 @@ items = [
 				type: 'item',
 				url: '/user/dashboard/notifications',
 				icon: 'fa fa-bell',
-				permission: ['USER', 'BUSINESS'],
+				permission: ['USER', 'INDIVIDUAL', 'BUSINESS'],
 			},
 			{
 				id: 'upgrade-account',

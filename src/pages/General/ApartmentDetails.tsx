@@ -22,7 +22,11 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { get_apartment_by_id } from '../../features/apartment/apartmentSlice'
 import Loader from '../../components/Loader'
 import axios from 'axios'
-import { create_booking, reset } from '../../features/booking/bookingSlice'
+import {
+	create_booking,
+	reset,
+	save_booking_to_state,
+} from '../../features/booking/bookingSlice'
 import { authHeader } from '../../utils/headers'
 import { toast } from 'react-hot-toast'
 import ModalComponent from '../../components/ModalComponent'
@@ -38,12 +42,10 @@ const ApartmentDetails = () => {
 	const { user_detail, token } = useAppSelector((state) => state.auth)
 	const { allApartments, apartment, isFetchingApartment, nearbyApartments } =
 		useAppSelector((state) => state.apartment)
-	const { booking, isCreatingBooking } = useAppSelector(
+	const { booking, isCreatingBooking, bookingState } = useAppSelector(
 		(state) => state.booking
 	)
 
-	const [limitValue, setLimitValue] = useState<number>(3)
-	const [limit, setLimit] = useState<boolean>(false)
 	const [photoIndex, setPhotoIndex] = useState<number>(0)
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -54,47 +56,6 @@ const ApartmentDetails = () => {
 	const [availability, setAvailability] = useState<string[]>([])
 	const [openModal, setOpenModal] = useState(false)
 
-	const amenities: string[] = [
-		'24hrs Power Supply',
-		'Air conditioning',
-		'Fast Wi-Fi',
-		'Swimming pool',
-		'TV with Netflix, Amazon and Julu',
-		'Fitness Gym',
-	]
-
-	const toggleMore = () => {
-		setLimit(!limit)
-		if (limit) {
-			setLimitValue(amenities?.length - 1)
-		} else {
-			setLimitValue(3)
-		}
-	}
-
-	const landmarks = [
-		{
-			image: abuja,
-			name: 'Teslim Balogun Stadium',
-			distance: '10',
-		},
-		{
-			image: abuja,
-			name: 'Costain Plc',
-			distance: '10',
-		},
-		{
-			image: abuja,
-			name: 'Costain Plc',
-			distance: '10',
-		},
-		{
-			image: abuja,
-			name: 'Teslim Balogun Stadium',
-			distance: '10',
-		},
-	]
-
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
 	}
@@ -102,8 +63,6 @@ const ApartmentDetails = () => {
 	useLayoutEffect(() => {
 		RouteToTop()
 	}, [])
-
-	console.log('availability', availability)
 
 	const pressHandler = async (e: any) => {
 		e.preventDefault()
@@ -127,23 +86,31 @@ const ApartmentDetails = () => {
 		setIsLoading(false)
 	}
 
+	console.log('====================================')
+	console.log('bookingState', bookingState)
+	console.log('====================================')
+
 	const createBookingHandler = (e: any) => {
+		e.preventDefault()
+		let data = {
+			apartmentOwnerId: apartment?.apartment?.userId,
+			apartmentId: apartment?.apartment?._id,
+			checkInDate,
+			checkOutDate,
+			bookingAmount: apartment?.apartment?.price,
+			numberOfGuests: Number(numberOfGuests),
+		}
 		if (user_detail) {
-			e.preventDefault()
-			let data = {
-				apartmentOwnerId: apartment?.apartment?.userId,
-				apartmentId: apartment?.apartment?._id,
-				checkInDate,
-				checkOutDate,
-				bookingAmount: apartment?.apartment?.price,
-				numberOfGuests: Number(numberOfGuests),
-			}
 			dispatch(create_booking(data))
 		} else {
-			alert('You must have an account before you can book an apartment.')
-			setTimeout(() => {
-				navigate('/auth/login')
-			}, 1000)
+			dispatch(save_booking_to_state(data))
+			toast(
+				'You have saved this apartment. Please create an account before you proceed to view booking and make payment.'
+			)
+			// alert('You must have an account before you can book an apartment.')
+			// setTimeout(() => {
+			// 	navigate('/auth/login')
+			// }, 1000)
 		}
 	}
 
@@ -153,7 +120,7 @@ const ApartmentDetails = () => {
 		return () => {
 			dispatch(reset())
 		}
-	}, [limitValue, limit, params?.id, dispatch])
+	}, [params?.id, dispatch])
 
 	return (
 		<main className='apartment_details_page page_padding'>
@@ -262,63 +229,9 @@ const ApartmentDetails = () => {
 													? '.'
 													: ','}
 											</span>
-											// <div key={index}>
-											// 	{index <= limitValue ? (
-											// 		<div className='col-md-6 col-sm-6'>
-											// 			<div className='d-flex amenities_div'>
-											// 				{item === '24hrs Power Supply' ? (
-											// 					<HiOutlineLightBulb size={22} />
-											// 				) : item === 'Air conditioning' ? (
-											// 					<FaSnowflake size={22} />
-											// 				) : item === 'Fast Wi-Fi' ? (
-											// 					<AiOutlineWifi size={22} />
-											// 				) : item === 'Swimming pool' ? (
-											// 					<MdOutlinePool size={22} />
-											// 				) : item ===
-											// 				  'TV with Netflix, Amazon and Julu' ? (
-											// 					<SlScreenDesktop size={22} />
-											// 				) : (
-											// 					<CgGym size={24} />
-											// 				)}
-											// 				<p> {item} </p>
-											// 			</div>
-											// 		</div>
-											// 	) : null}
-											// </div>
 										))}
 									</div>
-
-									{/* <button
-										onClick={() => toggleMore()}
-										className='btn btn-primary mt-3  btn_white_blue'
-									>
-										Show all 20 Amenities
-									</button> */}
 								</div>
-
-								{/* <div
-									style={{
-										borderBottom: '1.14691px solid rgba(45, 45, 45, 0.2)',
-										paddingBottom: '2rem',
-									}}
-								>
-									<h5 className='pt-4 mb-0'>Neighbourhood</h5>
-									<p className='intro_para mb-0'>
-										Surulere is a residential and commercial Local Government
-										Area located on the mainland of Lagos in Lagos State,
-										Nigeria, with an area of 23 km2 (8.9 sq mi). The local
-										government area is bordered by Yaba, Mushin and Ebute-Metta.
-										It is home to the Lagos National Stadium (capacity 60,000)
-										built in 1972 for the All-Africa Games. Surulere also houses
-										the Teslim Balogun Stadium, a multi use Stadium used mainly
-										for football matches with an over twenty four thousand
-										sitting capacity. The main commercial streets in Surulere
-										are Western Avenue, Adeniran Ogunsanya, Adelabu, Ogunalana
-										drive and Aguda, various open markets are dispersed in
-										different neighborhoods. Industrial establishments are
-										predominantly located at Iponri, Coker and Iganmu.
-									</p>
-								</div> */}
 
 								<div className='booking_policy'>
 									<h5 className='pt-4 mb-4'> Booking Policies </h5>
@@ -522,21 +435,29 @@ const ApartmentDetails = () => {
 														<button
 															className='btn form-control btn_save'
 															onClick={pressHandler}
+															disabled={isLoading}
 														>
-															Check Availability
+															{isLoading ? (
+																<i className='fas fa-spinner fa-spin'></i>
+															) : (
+																'Check Availability'
+															)}
 														</button>
 														<button
 															className='btn form-control btn_save'
 															onClick={createBookingHandler}
 															disabled={isCreatingBooking}
 														>
-															Book Now
+															{isCreatingBooking ? (
+																<i className='fas fa-spinner fa-spin'></i>
+															) : (
+																'Book Now'
+															)}
 														</button>
 													</div>
-													{/* {availability && <p> {availability} </p>} */}
 												</form>
 											</div>
-											<div className='sect3'>
+											{/* <div className='sect3'>
 												<div className='d-flex justify-content-between'>
 													<p>Nights</p>
 													<p> 10 </p>
@@ -549,9 +470,9 @@ const ApartmentDetails = () => {
 													<p> Total </p>
 													<p> &#8358;{comma('120000')} </p>
 												</div>
-											</div>
+											</div> */}
 
-											{booking && (
+											{booking ? (
 												<div className='col-12 pb-4'>
 													<p>
 														You have successfully booked an apartment. Please
@@ -564,7 +485,21 @@ const ApartmentDetails = () => {
 														Proceed
 													</Link>
 												</div>
-											)}
+											) : bookingState ? (
+												<div className='col-12 pb-4'>
+													<p>
+														You have saved this apartment. Please create an
+														account before you proceed to view booking and make
+														payment.
+													</p>
+													<Link
+														to={`/auth/login`}
+														className='btn btn-info text-white'
+													>
+														Proceed
+													</Link>
+												</div>
+											) : null}
 										</div>
 									</div>
 								</div>

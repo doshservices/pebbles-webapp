@@ -209,6 +209,12 @@ export const { reducer: BookingReducer, actions } = createSlice({
 			state.booking = null
 			state.bookings = null
 		},
+		save_booking_to_state: (state, action) => {
+			state.bookingState = action.payload
+		},
+		delete_booking_from_state: (state) => {
+			state.bookingState = null
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(create_booking.fulfilled, (state, action) => {
@@ -276,4 +282,5 @@ export const { reducer: BookingReducer, actions } = createSlice({
 	},
 })
 
-export const { reset } = actions
+export const { reset, save_booking_to_state, delete_booking_from_state } =
+	actions

@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import LineChart from '../../components/LineChart'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import {
+	create_booking,
+	delete_booking_from_state,
+} from '../../features/booking/bookingSlice'
 
 const UserDashboardHome = () => {
+	const dispatch = useAppDispatch()
 	const dataData1 = [8, 29, 7, 8, 5, 1, 2]
 	const dataData2 = [12, 19, 3, 5, 2, 3, 6]
+
+	const { bookingState } = useAppSelector((state) => state.booking)
+
+	console.log('====================================')
+	console.log('bookingState', bookingState)
+	console.log('====================================')
+
+	useEffect(() => {
+		if (bookingState) {
+			dispatch(create_booking(bookingState))
+
+			setTimeout(() => {
+				dispatch(delete_booking_from_state())
+			}, 100)
+		}
+	}, [dispatch])
 
 	return (
 		<main className='dashboard'>

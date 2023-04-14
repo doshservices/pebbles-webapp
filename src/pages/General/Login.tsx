@@ -9,7 +9,9 @@ const Login = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_detail, token } = useAppSelector((state) => state.auth)
+	const { user_detail, token, isLoading } = useAppSelector(
+		(state) => state.auth
+	)
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -121,16 +123,30 @@ const Login = () => {
 											<button
 												className='btn btn-primary form-control'
 												onClick={(e) => submitHandler(e)}
+												disabled={isLoading}
 											>
-												Log In
+												{isLoading ? (
+													<i className='fas fa-spinner fa-spin'></i>
+												) : (
+													'Log In'
+												)}
 											</button>
 										</div>
 									</form>
 									<div className='mt-3 text-center'>
 										<p>
 											Don’t have an account?{' '}
-											<Link to='/auth/signup' style={{ fontWeight: '500' }}>
+											<Link
+												to='/auth/user/signup'
+												style={{ fontWeight: '500' }}
+											>
 												Create account
+											</Link>
+										</p>
+										<p>
+											Want to signup as a host?{' '}
+											<Link to='/auth/signup' style={{ fontWeight: '500' }}>
+												Become a host
 											</Link>
 										</p>
 									</div>

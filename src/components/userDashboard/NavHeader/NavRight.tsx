@@ -45,7 +45,11 @@ const NavRight = () => {
 							className='mb-0 pb-0 mt-0 pt-0'
 							style={{ fontSize: '12px', fontWeight: '700' }}
 						>
-							{user_detail && user_detail.fullName}
+							{user_detail
+								? user_detail.role === 'BUSINESS'
+									? `${user_detail.businessName}`
+									: `${user_detail.firstName} ${user_detail.lastName}`
+								: null}
 						</span>
 						<p
 							className='mb-0 pb-0 mt-0 pt-0'
@@ -58,7 +62,9 @@ const NavRight = () => {
 							{user_detail
 								? user_detail.role === 'USER'
 									? 'Personal'
-									: 'Business'
+									: user_detail.role === 'INDIVIDUAL'
+									? 'Individual Host'
+									: 'Business Host'
 								: null}
 						</p>
 					</span>

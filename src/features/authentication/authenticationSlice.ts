@@ -26,8 +26,9 @@ export const user_signup = createAsyncThunk(
 	'auth/user_signup',
 	async (
 		payload: {
-			fullName: string
-			businessName: string
+			firstName?: string | undefined
+			lastName?: string | undefined
+			businessName?: string | undefined
 			email: string
 			password: string
 			phoneNumber: string
@@ -111,10 +112,10 @@ export const user_update = createAsyncThunk(
 	'auth/user_update',
 	async (
 		payload: {
-			fullName: string | undefined
-			businessName: string | undefined
-			businessAddress: string | undefined
-			// lastName: string | undefined
+			firstName: string | undefined
+			businessName?: string | undefined
+			businessAddress?: string | undefined
+			lastName?: string | undefined
 			phoneNumber: string | undefined
 			state: string | undefined
 			country: string | undefined

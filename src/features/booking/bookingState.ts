@@ -11,6 +11,7 @@ export interface BookingInitialInterface {
 	isFlutterBooking: boolean
 	isCancellingBooking: boolean
 	cancelSuccess: boolean
+	bookingState: SaveBookingInterface | null
 }
 
 export const BookingInitialState: BookingInitialInterface = {
@@ -23,6 +24,7 @@ export const BookingInitialState: BookingInitialInterface = {
 	isFlutterBooking: false,
 	isCancellingBooking: false,
 	cancelSuccess: false,
+	bookingState: null,
 }
 
 export interface BookingsInterface {
@@ -52,4 +54,13 @@ export interface BookingInterface {
 
 export interface FlutterBookingInterface {
 	booking: string
+}
+
+export interface SaveBookingInterface {
+	apartmentOwnerId: String | undefined
+	apartmentId: String | undefined
+	checkInDate: String | undefined
+	checkOutDate: String | undefined
+	bookingAmount: Number | undefined
+	numberOfGuests: Number | undefined
 }

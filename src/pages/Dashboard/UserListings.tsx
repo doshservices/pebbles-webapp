@@ -366,6 +366,16 @@ const UserListings = () => {
 					</Tabs>
 				) : (
 					<div className='container'>
+						<div className='text-end add_new_row'>
+							<Link to='/user/dashboard/listings/new' className='add_new_btn'>
+								<FaPlus
+									className='me-2'
+									style={{ marginBottom: '.2rem' }}
+									size={11}
+								/>{' '}
+								Add New
+							</Link>
+						</div>
 						<p>No apartment listing found.</p>
 					</div>
 				)}

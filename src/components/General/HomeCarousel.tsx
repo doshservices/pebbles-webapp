@@ -20,8 +20,8 @@ const HomeCarousel = () => {
 		slidesToShow: 1,
 		arrows: false,
 		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 9000,
+		autoplay: false,
+		autoplaySpeed: 12000,
 		pauseOnHover: false,
 	}
 

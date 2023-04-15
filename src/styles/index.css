@@ -295,6 +295,12 @@ a {
 	margin: 2rem 0;
 }
 
+@media (max-width: 1200px) {
+	.navbar_search .search_component_main_div {
+		padding: 0 8%;
+	}
+}
+
 @media (min-width: 992px) {
 	.map_section {
 		display: inline;

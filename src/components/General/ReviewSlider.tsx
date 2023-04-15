@@ -6,10 +6,10 @@ const ReviewSlider = ({ data }: { data: any[] }) => {
 	const settings = {
 		dots: false,
 		infinite: true,
-		speed: 5050,
+		speed: 400,
 		slidesToShow: 3,
 		arrows: true,
-		slidesToScroll: 3,
+		slidesToScroll: 1,
 		autoplay: false,
 		autoplaySpeed: 3000,
 		pauseOnHover: false,

@@ -20,7 +20,7 @@ const RideCarousel = () => {
 		slidesToShow: 1,
 		arrows: false,
 		slidesToScroll: 1,
-		autoplay: true,
+		autoplay: false,
 		autoplaySpeed: 9000,
 		pauseOnHover: false,
 	}

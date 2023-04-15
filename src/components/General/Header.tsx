@@ -109,18 +109,41 @@ const Header = ({ type }: { type: number }) => {
 												</>
 											) : (
 												<>
-													<img
-														src={user_detail?.profilePicture}
-														alt=''
-														style={{ objectFit: 'cover', borderRadius: '50%' }}
-														className='prof_circle profile_light'
-													/>
-													<img
-														src={user_detail?.profilePicture}
-														alt=''
-														style={{ objectFit: 'cover', borderRadius: '50%' }}
-														className='prof_circle profile_dark'
-													/>
+													{user_detail?.profilePicture ? (
+														<>
+															<img
+																src={user_detail?.profilePicture}
+																alt=''
+																style={{
+																	objectFit: 'cover',
+																	borderRadius: '50%',
+																}}
+																className='prof_circle profile_light'
+															/>
+															<img
+																src={user_detail?.profilePicture}
+																alt=''
+																style={{
+																	objectFit: 'cover',
+																	borderRadius: '50%',
+																}}
+																className='prof_circle profile_dark'
+															/>
+														</>
+													) : (
+														<>
+															<img
+																src={profileCircle}
+																alt=''
+																className='prof_circle profile_light'
+															/>
+															<img
+																src={profileCircleBlack}
+																alt=''
+																className='prof_circle profile_dark'
+															/>
+														</>
+													)}
 												</>
 											)}
 										</Dropdown.Toggle>
@@ -310,12 +333,25 @@ const Header = ({ type }: { type: number }) => {
 													className='prof_circle profile_dark'
 												/>
 											) : (
-												<img
-													src={user_detail?.profilePicture}
-													alt=''
-													style={{ objectFit: 'cover', borderRadius: '50%' }}
-													className='prof_circle profile_dark'
-												/>
+												<>
+													{user_detail?.profilePicture ? (
+														<img
+															src={user_detail?.profilePicture}
+															alt=''
+															style={{
+																objectFit: 'cover',
+																borderRadius: '50%',
+															}}
+															className='prof_circle profile_dark'
+														/>
+													) : (
+														<img
+															src={profileCircleBlack}
+															alt=''
+															className='prof_circle profile_dark'
+														/>
+													)}
+												</>
 											)}
 										</Dropdown.Toggle>
 

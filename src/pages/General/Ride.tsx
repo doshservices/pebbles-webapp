@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import '../../styles/index.css'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import apartmentImg from '../../assets/picture.png'
@@ -59,6 +59,14 @@ const reviewData = [
 
 const Ride = () => {
 	const dispatch = useAppDispatch()
+
+	const RouteToTop = () => {
+		window.scrollTo(0, 0)
+	}
+
+	useLayoutEffect(() => {
+		RouteToTop()
+	}, [])
 
 	const { nearbyApartments, allApartments } = useAppSelector(
 		(state) => state.apartment

@@ -39,6 +39,7 @@ const SearchRideComponent = () => {
 
 	const setBookRoundHandler = () => {
 		setBookRound(!bookRound)
+		setShowDateFalse()
 	}
 
 	return (

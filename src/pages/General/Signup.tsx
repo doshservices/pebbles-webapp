@@ -128,7 +128,7 @@ const Signup = () => {
 			{verify ? (
 				<section
 					style={{ backgroundImage: `url(${Registration4})` }}
-					className='about_page_bg auth_page_bg'
+					className='about_page_bg auth_page_bg pb-5'
 				>
 					<div className='container'>
 						<div className='row'>
@@ -191,7 +191,7 @@ const Signup = () => {
 			) : (
 				<section
 					style={{ backgroundImage: `url(${carouselBackground1})` }}
-					className='about_page_bg auth_page_bg'
+					className='about_page_bg auth_page_bg pb-5'
 				>
 					<div className='container'>
 						<div className='row'>
@@ -351,12 +351,31 @@ const Signup = () => {
 										) : (
 											<form>
 												<div className='row'>
+													<div className='col-md-6'>
+														<label htmlFor='firstName'>First Name</label>
+														<input
+															type='text'
+															placeholder='First name here'
+															className='form-control'
+															onChange={(e) => setFirstName(e.target.value)}
+														/>
+													</div>
+													<div className='col-md-6'>
+														<label htmlFor='lastName'>Last Name</label>
+														<input
+															type='text'
+															placeholder='Last name here'
+															className='form-control'
+															onChange={(e) => setLastName(e.target.value)}
+														/>
+													</div>
 													<div className='col-md-12'>
 														<label htmlFor='fullName'>Business Name</label>
 														<input
 															type='text'
 															placeholder='Business name here'
 															className='form-control'
+															required
 															onChange={(e) => setBusinessName(e.target.value)}
 														/>
 													</div>

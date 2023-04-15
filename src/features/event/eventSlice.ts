@@ -12,11 +12,10 @@ export const get_events = createAsyncThunk(
 	'event/get_events',
 	async (_, thunkAPI) => {
 		const { rejectWithValue } = thunkAPI
-		let token: string | null = store.getState()?.auth?.token
 
 		try {
 			const response = await axios.get(`${url}/events`, {
-				headers: authHeader(token ? token : '123'),
+				headers: header,
 			})
 
 			return response.data
@@ -42,11 +41,12 @@ export const get_event_by_id = createAsyncThunk(
 		thunkAPI
 	) => {
 		const { rejectWithValue } = thunkAPI
-		let token: string | null = store.getState()?.auth?.token
+		// let token: string | null = store.getState()?.auth?.token
 
 		try {
 			const response = await axios.get(`${url}/events/${payload.id}`, {
-				headers: authHeader(token ? token : '123'),
+				// headers: authHeader(token ? token : '123'),
+				headers: header,
 			})
 
 			return response.data

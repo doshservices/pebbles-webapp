@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import '../../styles/index.css'
-import HomeCarousel from '../../components/General/HomeCarousel'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import apartmentImg from '../../assets/picture.png'
 import {
@@ -9,7 +8,7 @@ import {
 } from '../../features/apartment/apartmentSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
-import bgImage from '../../assets/carouselBackground1.png'
+import bgImage from '../../assets/Become_a_Host.jpg'
 import lagos from '../../assets/lagos.png'
 import ph from '../../assets/ph.png'
 import ibadan from '../../assets/ibadan.png'
@@ -17,6 +16,7 @@ import abuja from '../../assets/abuja.png'
 import enugu from '../../assets/enugu.png'
 import { Link } from 'react-router-dom'
 import ReviewSlider from '../../components/General/ReviewSlider'
+import RideCarousel from '../../components/General/RideCarousel'
 
 const reviewData = [
 	{
@@ -57,7 +57,7 @@ const reviewData = [
 	},
 ]
 
-const Index = () => {
+const Ride = () => {
 	const dispatch = useAppDispatch()
 
 	const { nearbyApartments, allApartments } = useAppSelector(
@@ -76,7 +76,7 @@ const Index = () => {
 	return (
 		<>
 			<main>
-				<HomeCarousel />
+				<RideCarousel />
 
 				<section className='explore_apartments'>
 					{user_detail ? (
@@ -115,106 +115,10 @@ const Index = () => {
 				</section>
 
 				<section
-					style={{ backgroundImage: `url(${bgImage})` }}
-					className='new_apartments'
-				>
-					<div className='container'>
-						<h1> New Apartments Added Weekly </h1>
-
-						<div
-							className='row align-middle g-0 row-mobile gxc'
-							style={{ padding: 0 }}
-						>
-							<div
-								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
-							>
-								<Link to='/'>
-									<div>
-										<img src={lagos} alt='' />
-										<div className='bg-white'>
-											<p className='text_black'> Lagos </p>
-										</div>
-									</div>
-								</Link>
-							</div>
-							<div
-								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
-							>
-								<Link to='/'>
-									<div>
-										<img src={ph} alt='' />
-										<div className='bg-white'>
-											<p className='text_black'> Port Harcourt </p>
-										</div>
-									</div>
-								</Link>
-							</div>
-							<div
-								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
-							>
-								<Link to='/'>
-									<div>
-										<img src={ibadan} alt='' />
-										<div className='bg-white'>
-											<p className='text_black'> Ibadan </p>
-										</div>
-									</div>
-								</Link>
-							</div>
-							<div
-								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
-							>
-								<Link to='/'>
-									<div>
-										<img src={abuja} alt='' />
-										<div className='bg-white'>
-											<p className='text_black'> Abuja </p>
-										</div>
-									</div>
-								</Link>
-							</div>
-							<div
-								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
-							>
-								<Link to='/'>
-									<div>
-										<img src={enugu} alt='' />
-										<div className='bg-white'>
-											<p className='text_black'> Enugu </p>
-										</div>
-									</div>
-								</Link>
-							</div>
-						</div>
-
-						<div className='text-center mt-5 pt-2'>
-							<Link to='/' className='explore'>
-								Explore Destinations
-							</Link>
-						</div>
-					</div>
-				</section>
-
-				<section className='explore_apartments trendy_apartments'>
-					<PageHeaderComponent
-						topHeader='FEATURED'
-						topHeaderColor='rgba(21, 94, 239, 0.8)'
-						header='MOST TRENDY APARTMENTS'
-						link='/all-apartments'
-						linkText='View all'
-					/>
-					<ApartmentSlider
-						data={allApartments ? allApartments?.apartments : []}
-					/>
-				</section>
-
-				<section
-					style={{ backgroundImage: `url(${bgImage})` }}
+					style={{
+						backgroundImage: `url(${bgImage})`,
+						backgroundSize: 'cover',
+					}}
 					className='new_apartments unlock_your'
 				>
 					<div className='container' style={{ position: 'relative' }}>
@@ -239,20 +143,21 @@ const Index = () => {
 					</div>
 				</section>
 
-				<section className='explore_apartments trendy_apartments pb-5'>
+				<section className='explore_apartments trendy_apartments'>
 					<PageHeaderComponent
-						topHeader='reviews'
+						topHeader='FEATURED'
 						topHeaderColor='rgba(21, 94, 239, 0.8)'
-						header='what others have to say'
-						link='/trendy-apartments'
+						header='MOST TRENDY APARTMENTS'
+						link='/all-apartments'
 						linkText='View all'
 					/>
-
-					<ReviewSlider data={reviewData} />
+					<ApartmentSlider
+						data={allApartments ? allApartments?.apartments : []}
+					/>
 				</section>
 			</main>
 		</>
 	)
 }
 
-export default Index
+export default Ride

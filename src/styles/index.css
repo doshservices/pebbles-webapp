@@ -869,3 +869,40 @@ a {
 		display: none;
 	}
 }
+
+/* ------------------------------------------------------- events page -------------------------------------------------------- */
+.event_bg {
+	min-height: 70vh;
+}
+
+.event_bg .homepage_div {
+	height: 70vh;
+}
+
+.event_card {
+	margin-bottom: 2rem;
+}
+
+/* ------------------------------------------------------- rides page -------------------------------------------------------- */
+.ride_carousel .search_apartment_div {
+	margin-top: -13rem;
+}
+
+.ride_carousel .search_apartment_div input {
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 992px) {
+	.ride_carousel .search_apartment_div {
+		margin-top: -20rem;
+	}
+}
+
+.rdrDayDisabled .rdrDayNumber span {
+	color: #aeb9bf !important;
+}
+
+.rdrDayNumber span {
+	color: #000 !important;
+	font-weight: 500;
+}

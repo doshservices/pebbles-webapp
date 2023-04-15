@@ -34,7 +34,7 @@ export const user_signup = createAsyncThunk(
 			phoneNumber: string
 			googleSigned: boolean
 			role: string
-			otp: string
+			// otp: string
 		},
 		thunkAPI
 	) => {
@@ -44,7 +44,7 @@ export const user_signup = createAsyncThunk(
 			const response = await axios.post(`${url}/users`, payload, {
 				headers: header,
 			})
-
+			toast.success(`${payload.email} signed up successfully`)
 			return response.data
 		} catch (error: any) {
 			const message =
@@ -70,6 +70,30 @@ export const get_otp = createAsyncThunk(
 				headers: header,
 			})
 
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const verify_otp = createAsyncThunk(
+	'auth/verify_otp',
+	async (payload: { token: string }, thunkAPI) => {
+		const { rejectWithValue } = thunkAPI
+
+		try {
+			const response = await axios.post(`${url}/users/verify`, payload, {
+				headers: header,
+			})
+			toast.success('OTP verified successfully')
 			return response.data
 		} catch (error: any) {
 			const message =
@@ -178,6 +202,41 @@ export const user_refresh_profile = createAsyncThunk(
 	}
 )
 
+export const forgot_password = createAsyncThunk(
+	'auth/forgot_password',
+	async (
+		payload: {
+			newPassword: string
+			token: string
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+
+		try {
+			const response = await axios.post(
+				`${url}/users/reset-password`,
+				payload,
+				{
+					headers: header,
+				}
+			)
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			toast.error(message?._message)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
 export const { reducer: AuthReducer, actions } = createSlice({
 	name: 'auth',
 	initialState: AuthInitialState,
@@ -212,6 +271,16 @@ export const { reducer: AuthReducer, actions } = createSlice({
 		builder.addCase(get_otp.rejected, (state, action) => {
 			state.isLoading = false
 		})
+		builder.addCase(verify_otp.fulfilled, (state, action) => {
+			state.verifyOtp = action.payload.data
+			state.isLoading = false
+		})
+		builder.addCase(verify_otp.pending, (state, action) => {
+			state.isLoading = true
+		})
+		builder.addCase(verify_otp.rejected, (state, action) => {
+			state.isLoading = false
+		})
 		builder.addCase(user_login.fulfilled, (state, action) => {
 			state.user_detail = action.payload.data.userDetails
 			state.token = action.payload.data.token
@@ -243,6 +312,16 @@ export const { reducer: AuthReducer, actions } = createSlice({
 			state.isLoading = true
 		})
 		builder.addCase(user_refresh_profile.rejected, (state, action) => {
+			state.isLoading = false
+		})
+		builder.addCase(forgot_password.fulfilled, (state, action) => {
+			state.user_register = action.payload.data
+			state.isLoading = false
+		})
+		builder.addCase(forgot_password.pending, (state, action) => {
+			state.isLoading = true
+		})
+		builder.addCase(forgot_password.rejected, (state, action) => {
 			state.isLoading = false
 		})
 	},

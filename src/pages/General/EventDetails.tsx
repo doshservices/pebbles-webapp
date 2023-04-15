@@ -25,6 +25,10 @@ import Loader from '../../components/Loader'
 import { toast } from 'react-hot-toast'
 import ModalComponent from '../../components/ModalComponent'
 import moment from 'moment'
+import {
+	get_all_apartments,
+	get_nearby_apartments,
+} from '../../features/apartment/apartmentSlice'
 
 const EventDetails = () => {
 	const dispatch = useAppDispatch()
@@ -59,6 +63,8 @@ const EventDetails = () => {
 
 	useEffect(() => {
 		dispatch(get_event_by_id({ id: params?.id }))
+		dispatch(get_all_apartments())
+		dispatch(get_nearby_apartments())
 
 		let data = {
 			eventId: params?.id,
@@ -77,36 +83,20 @@ const EventDetails = () => {
 			{isFetchingEvent ? (
 				<Loader />
 			) : event ? (
-				<div className='container'>
+				<div className='container mt-5'>
 					<div style={{ position: 'relative' }}>
 						<div className='row mb-4'>
-							<div className='col-md-7'>
+							<div className='col-md-12'>
 								<img
 									src={event?.eventImages[0]}
 									alt=''
 									className='intro_image intro_full'
 								/>
 							</div>
-							<div className='col-md-5'>
-								<div style={{ marginBottom: '1.5rem' }}>
-									<img
-										src={event?.eventImages[1]}
-										alt=''
-										className='intro_image intro_half'
-									/>
-								</div>
-								<div>
-									<img
-										src={event?.eventImages[2]}
-										alt=''
-										className='intro_image intro_half'
-									/>
-								</div>
-							</div>
 						</div>
 
 						<button className='lightbox_btn' onClick={() => setIsOpen(true)}>
-							VIEW 10 PHOTOS
+							VIEW {event?.eventImages?.length} PHOTOS
 						</button>
 						{isOpen && (
 							<Lightbox

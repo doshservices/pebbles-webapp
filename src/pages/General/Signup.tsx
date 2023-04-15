@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
 	user_signup,
-	get_otp,
+	verify_otp,
 } from '../../features/authentication/authenticationSlice'
 import OTPInput, { ResendOTP } from 'otp-input-react'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
@@ -14,7 +14,9 @@ const Signup = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_register, isLoading } = useAppSelector((state) => state.auth)
+	const { user_register, isLoading, verifyOtp } = useAppSelector(
+		(state) => state.auth
+	)
 
 	const [verify, setVerify] = useState(false)
 	const [showIndividual, setShowIndividual] = useState(true)
@@ -57,24 +59,19 @@ const Signup = () => {
 
 	const submitHandler = (e: any) => {
 		e.preventDefault()
-		dispatch(
-			user_signup({
-				businessName,
-				firstName,
-				lastName,
-				email,
-				googleSigned: true,
-				password,
-				phoneNumber,
-				role,
-				otp: OTP,
-			})
-		)
+		// setRole(role)
+		if (OTP) {
+			dispatch(verify_otp({ token: OTP }))
+			setVerify(true)
+		} else {
+			setMessage('Please type in your OTP.')
+		}
 	}
 
 	const submitSignupHandler = (e: any, role: string) => {
 		e.preventDefault()
 		setRole(role)
+
 		if (
 			(firstName || businessName) &&
 			email &&
@@ -83,10 +80,19 @@ const Signup = () => {
 			confirmPassword
 		) {
 			if (password === confirmPassword) {
-				// if (otp?.status === 200) {
-				dispatch(get_otp({ email }))
+				dispatch(
+					user_signup({
+						businessName,
+						firstName,
+						lastName,
+						email,
+						googleSigned: true,
+						password,
+						phoneNumber,
+						role,
+					})
+				)
 				setVerify(true)
-				// }
 			} else {
 				setMessage('Passwords do not match.')
 			}
@@ -97,24 +103,18 @@ const Signup = () => {
 
 	const submitSignupHandlerr = (role: string) => {
 		setRole(role)
-		if (
-			(firstName || businessName) &&
-			email &&
-			phoneNumber &&
-			password &&
-			confirmPassword
-		) {
-			if (password === confirmPassword) {
-				// if (otp?.status === 200) {
-				dispatch(get_otp({ email }))
-				setVerify(true)
-				// }
-			} else {
-				setMessage('Passwords do not match.')
-			}
-		} else {
-			setMessage('All fields are required.')
-		}
+		dispatch(
+			user_signup({
+				businessName,
+				firstName,
+				lastName,
+				email,
+				googleSigned: true,
+				password,
+				phoneNumber,
+				role,
+			})
+		)
 	}
 
 	useEffect(() => {
@@ -334,7 +334,11 @@ const Signup = () => {
 														}
 														disabled={isLoading}
 													>
-														Create Account
+														{isLoading ? (
+															<i className='fas fa-spinner fa-spin'></i>
+														) : (
+															'Create Account'
+														)}
 													</button>
 												</div>
 												<p

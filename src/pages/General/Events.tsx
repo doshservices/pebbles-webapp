@@ -6,6 +6,7 @@ import Loader from '../../components/Loader'
 import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { comma } from '../../utils/helper'
+import moment from 'moment'
 
 const Events = () => {
 	const dispatch = useAppDispatch()
@@ -33,17 +34,17 @@ const Events = () => {
 
 	return (
 		<>
-			<main>
+			<main className='events_page'>
 				<EventCarousel />
 
-				<div className='container'>
+				<div className='container' style={{ marginTop: '3rem' }}>
 					<div className='row'>
 						{isFetchingEvent ? (
 							<Loader />
 						) : events && events?.length > 0 ? (
 							events?.map((item, index) => (
 								<div className='col-lg-3 col-md-4 col-sm-6' key={index}>
-									<div className='apartment_card'>
+									<div className='apartment_card event_card'>
 										<Link to={`/events/${item._id}`}>
 											<SliderImages images={item.eventImages} />
 											<div className='apartment_card_div'>
@@ -53,10 +54,12 @@ const Events = () => {
 														: item.eventName}
 												</h6>
 												<p className='no_of_rooms' style={{ color: '#2d2d2d' }}>
-													{item.eventLocation}
+													{moment(item.eventDate).format('ddd, MMMM DD')},{' '}
+													{item.eventTime}
 												</p>
 												<p className='amount'>
-													<span>&#8358;{comma(String(item.eventCost))} </span>
+													<span>&#8358;{comma(String(item.eventCost))}</span>
+													/Ticket
 												</p>
 											</div>
 										</Link>

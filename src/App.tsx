@@ -32,6 +32,7 @@ import ApprovePayment from './pages/General/ApprovePayment'
 import Events from './pages/General/Events'
 import EventDetails from './pages/General/EventDetails'
 import UserSignup from './pages/General/UserSignup'
+import Ride from './pages/General/Ride'
 
 function App() {
 	return (
@@ -49,6 +50,7 @@ function App() {
 							<Route path='apartments/:id' element={<ApartmentDetails />} />
 							<Route path='about-us' element={<About />} />
 							<Route path='contact' element={<Contact />} />
+							<Route path='add-ons/ride' element={<Ride />} />
 							<Route path='events' element={<Events />} />
 							<Route path='events/:id' element={<EventDetails />} />
 						</Route>

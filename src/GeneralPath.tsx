@@ -14,6 +14,10 @@ const GeneralPath = () => {
 					location?.pathname === '/home' ||
 					location?.pathname === '/about-us' ||
 					location?.pathname === '/events' ||
+					location?.pathname === '/add-ons/ride' ||
+					location?.pathname === '/add-ons/food' ||
+					location?.pathname === '/add-ons/laundry' ||
+					location?.pathname === '/voucher' ||
 					location?.pathname === '/contact'
 						? 1
 						: 2

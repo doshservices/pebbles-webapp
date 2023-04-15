@@ -169,7 +169,7 @@ const Header = ({ type }: { type: number }) => {
 								<div className='col-lg-4 col-md-6 col-6'>
 									<div className='row'>
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/all-apartments' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_light'
@@ -187,7 +187,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/add-ons/ride' className='js_scroll'>
 												<div className='text-center'>
 													<img className='sub_img_light' src={ride} alt='' />
 													<img
@@ -201,7 +201,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/add-ons/laundry' className='js_scroll'>
 												<div className='text-center'>
 													<img className='sub_img_light' src={laundry} alt='' />
 													<img
@@ -226,7 +226,7 @@ const Header = ({ type }: { type: number }) => {
 								<div className='col-lg-4 col-md-6 col-6'>
 									<div className='row'>
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/add-ons/food' className='js_scroll'>
 												<div className='text-center'>
 													<img className='sub_img_light' src={food} alt='' />
 													<img
@@ -240,7 +240,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/voucher' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_light'
@@ -363,7 +363,7 @@ const Header = ({ type }: { type: number }) => {
 								<div className='col-lg-4 col-md-6 col-6'>
 									<div className='row'>
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/all-apartments' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_dark'
@@ -376,7 +376,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/add-ons/ride' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_dark'
@@ -389,7 +389,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/add-ons/laundry' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_dark'
@@ -410,7 +410,7 @@ const Header = ({ type }: { type: number }) => {
 								<div className='col-lg-4 col-md-6 col-6'>
 									<div className='row'>
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/add-ons/food' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_dark'
@@ -423,7 +423,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='' className='js_scroll'>
+											<Link to='/voucher' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_dark'

@@ -86,10 +86,6 @@ const ApartmentDetails = () => {
 		setIsLoading(false)
 	}
 
-	console.log('====================================')
-	console.log('bookingState', bookingState)
-	console.log('====================================')
-
 	const createBookingHandler = (e: any) => {
 		e.preventDefault()
 		let data = {
@@ -160,7 +156,7 @@ const ApartmentDetails = () => {
 						</div>
 
 						<button className='lightbox_btn' onClick={() => setIsOpen(true)}>
-							VIEW 10 PHOTOS
+							VIEW {apartment?.apartment?.apartmentImages?.length} PHOTOS
 						</button>
 						{isOpen && (
 							<Lightbox

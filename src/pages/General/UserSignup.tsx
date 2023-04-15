@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
 	user_signup,
 	get_otp,
+	verify_otp,
 } from '../../features/authentication/authenticationSlice'
 import OTPInput, { ResendOTP } from 'otp-input-react'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
@@ -14,7 +15,9 @@ const UserSignup = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_register, isLoading } = useAppSelector((state) => state.auth)
+	const { user_register, isLoading, verifyOtp } = useAppSelector(
+		(state) => state.auth
+	)
 
 	const [verify, setVerify] = useState(false)
 	const [message, setMessage] = useState<string | null>(null)
@@ -55,23 +58,19 @@ const UserSignup = () => {
 
 	const submitHandler = (e: any) => {
 		e.preventDefault()
-		dispatch(
-			user_signup({
-				firstName,
-				lastName,
-				email,
-				googleSigned: true,
-				password,
-				phoneNumber,
-				role,
-				otp: OTP,
-			})
-		)
+		setRole(role)
+		if (OTP) {
+			dispatch(verify_otp({ token: OTP }))
+			setVerify(true)
+		} else {
+			setMessage('Please type in your OTP.')
+		}
 	}
 
 	const submitSignupHandler = (e: any, role: string) => {
 		e.preventDefault()
 		setRole(role)
+
 		if (
 			(firstName || lastName) &&
 			email &&
@@ -80,7 +79,17 @@ const UserSignup = () => {
 			confirmPassword
 		) {
 			if (password === confirmPassword) {
-				dispatch(get_otp({ email }))
+				dispatch(
+					user_signup({
+						firstName,
+						lastName,
+						email,
+						googleSigned: true,
+						password,
+						phoneNumber,
+						role,
+					})
+				)
 				setVerify(true)
 			} else {
 				setMessage('Passwords do not match.')
@@ -91,25 +100,17 @@ const UserSignup = () => {
 	}
 
 	const submitSignupHandlerr = (role: string) => {
-		setRole(role)
-		if (
-			(firstName || lastName) &&
-			email &&
-			phoneNumber &&
-			password &&
-			confirmPassword
-		) {
-			if (password === confirmPassword) {
-				// if (otp?.status === 200) {
-				dispatch(get_otp({ email }))
-				setVerify(true)
-				// }
-			} else {
-				setMessage('Passwords do not match.')
-			}
-		} else {
-			setMessage('All fields are required.')
-		}
+		dispatch(
+			user_signup({
+				firstName,
+				lastName,
+				email,
+				googleSigned: true,
+				password,
+				phoneNumber,
+				role,
+			})
+		)
 	}
 
 	useEffect(() => {

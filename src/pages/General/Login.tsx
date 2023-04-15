@@ -82,7 +82,7 @@ const Login = () => {
 										<div className='password_div'>
 											<label htmlFor='fullName'>Password</label>
 											<input
-												placeholder='First name here'
+												placeholder='Password here'
 												className='form-control'
 												id='password'
 												type='password'

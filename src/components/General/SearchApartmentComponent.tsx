@@ -117,7 +117,9 @@ const SearchApartmentComponent = () => {
 										<option value='8 Bedrooms Flat'>8 Bedrooms Flat</option>
 										<option value='9 Bedrooms Flat'>9 Bedrooms Flat</option>
 										<option value='10 Bedrooms Flat'>10 Bedrooms Flat</option>
-
+										<option value='Party House/Bash Pad'>
+											Party House/Bash Pad
+										</option>
 										<option value='Flat'>Flat</option>
 										<option value='Hotel Boutique'>Hotel Boutique</option>
 										<option value='Terrace'>Terrace</option>

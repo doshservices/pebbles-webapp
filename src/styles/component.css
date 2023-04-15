@@ -1,5 +1,5 @@
 /* ---------------- search apartment bar component styles -------------------- */
-.search_component_main_div {
+.search_apartment_div {
 	padding: 0 15%;
 	margin-top: -8.1rem;
 }
@@ -39,15 +39,20 @@
 }
 
 @media (max-width: 1200px) {
-	.search_component_main_div {
-		padding: 0 10%;
+	.search_apartment_div {
+		padding: 0 8%;
 	}
 }
 
 @media (max-width: 992px) {
-	.search_component_main_div {
+	.search_apartment_div {
 		padding: 0 7%;
-		margin-top: -15.1rem;
+		margin-top: -20.1rem;
+	}
+
+	.events_page .search_apartment_div {
+		padding: 0 7%;
+		margin-top: -8.1rem;
 	}
 
 	.search_component_div input,
@@ -63,14 +68,14 @@
 }
 
 @media (max-width: 767px) {
-	.search_component_main_div {
+	.search_apartment_div {
 		padding: 0 7%;
 		margin-top: -19.1rem;
 	}
 }
 
 @media (max-width: 576px) {
-	.search_component_main_div {
+	.search_apartment_div {
 		padding: 0;
 		margin-top: -14.1rem;
 		background-color: #fff;
@@ -178,7 +183,7 @@
 	align-items: center;
 	letter-spacing: 0.15px;
 	color: rgba(6, 6, 6, 0.9);
-	height: 2rem;
+	min-height: 1.5rem;
 	/* margin-bottom: 0; */
 }
 

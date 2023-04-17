@@ -118,10 +118,10 @@ const Signup = () => {
 	}
 
 	useEffect(() => {
-		if (user_register) {
+		if (verifyOtp) {
 			navigate('/auth/login')
 		}
-	}, [user_register])
+	}, [verifyOtp])
 
 	return (
 		<main className='about_page auth_page'>

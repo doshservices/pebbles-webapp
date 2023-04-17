@@ -53,7 +53,7 @@ export const user_signup = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast.error(message?._message)
+			toast.error(message?.message)
 
 			return rejectWithValue(message)
 		}
@@ -136,7 +136,7 @@ export const user_update = createAsyncThunk(
 	'auth/user_update',
 	async (
 		payload: {
-			firstName: string | undefined
+			firstName?: string | undefined
 			businessName?: string | undefined
 			businessAddress?: string | undefined
 			lastName?: string | undefined
@@ -157,6 +157,8 @@ export const user_update = createAsyncThunk(
 				headers: authHeader(token ? token : '123'),
 			})
 			store.dispatch(user_refresh_profile())
+
+			toast.success('Profile updated successfully')
 
 			return response.data
 		} catch (error: any) {
@@ -221,6 +223,78 @@ export const forgot_password = createAsyncThunk(
 					headers: header,
 				}
 			)
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			toast.error(message?._message)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+// export const reset_password = createAsyncThunk(
+// 	'auth/reset_password',
+// 	async (
+// 		payload: {
+// 			newPassword: string
+// 			token: string
+// 		},
+// 		thunkAPI
+// 	) => {
+// 		const { rejectWithValue } = thunkAPI
+
+// 		try {
+// 			const response = await axios.post(
+// 				`${url}/users/reset-password`,
+// 				payload,
+// 				{
+// 					headers: header,
+// 				}
+// 			)
+
+// 			return response.data
+// 		} catch (error: any) {
+// 			const message =
+// 				(error.response &&
+// 					error.response.data &&
+// 					error.response.data.message) ||
+// 				error.message ||
+// 				error.toString()
+// 			toast.error(message?._message)
+
+// 			return rejectWithValue(message)
+// 		}
+// 	}
+// )
+
+export const change_user_type = createAsyncThunk(
+	'auth/change_user_type',
+	async (
+		payload: {
+			validId: string
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.post(
+				`${url}/users/change-user-type`,
+				payload,
+				{
+					headers: authHeader(token ? token : '123'),
+				}
+			)
+
+			toast.success('Form submitted successfully.')
 
 			return response.data
 		} catch (error: any) {
@@ -322,6 +396,16 @@ export const { reducer: AuthReducer, actions } = createSlice({
 			state.isLoading = true
 		})
 		builder.addCase(forgot_password.rejected, (state, action) => {
+			state.isLoading = false
+		})
+		builder.addCase(change_user_type.fulfilled, (state, action) => {
+			// state.user_detail = action.payload.data.userDetails
+			state.isLoading = false
+		})
+		builder.addCase(change_user_type.pending, (state, action) => {
+			state.isLoading = true
+		})
+		builder.addCase(change_user_type.rejected, (state, action) => {
 			state.isLoading = false
 		})
 	},

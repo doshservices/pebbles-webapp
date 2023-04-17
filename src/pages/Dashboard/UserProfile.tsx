@@ -227,7 +227,6 @@ const UserProfile = () => {
 		}
 		dispatch(user_update(data))
 	}
-	// useEffect(() => {}, [uploadedImage])
 
 	return (
 		<main className='dashboard'>
@@ -255,7 +254,27 @@ const UserProfile = () => {
 						>
 							<form autoComplete='off'>
 								<div className='row'>
-									{user_detail?.role === 'BUSINESS' ? (
+									<div className='col-md-6'>
+										<label htmlFor=''>First Name</label>
+										<input
+											type='text'
+											value={firstName}
+											placeholder='Enter First name here'
+											className='form-control'
+											onChange={(e) => setFirstName(e.target.value)}
+										/>
+									</div>
+									<div className='col-md-6'>
+										<label htmlFor=''>Last Name</label>
+										<input
+											type='text'
+											value={lastName}
+											placeholder='Enter First name here'
+											className='form-control'
+											onChange={(e) => setLastName(e.target.value)}
+										/>
+									</div>
+									{user_detail?.role === 'BUSINESS' && (
 										<div className='col-md-12'>
 											<label htmlFor=''>Business Name</label>
 											<input
@@ -266,29 +285,6 @@ const UserProfile = () => {
 												onChange={(e) => setBusinessName(e.target.value)}
 											/>
 										</div>
-									) : (
-										<>
-											<div className='col-md-6'>
-												<label htmlFor=''>First Name</label>
-												<input
-													type='text'
-													value={firstName}
-													placeholder='Enter First name here'
-													className='form-control'
-													onChange={(e) => setFirstName(e.target.value)}
-												/>
-											</div>
-											<div className='col-md-6'>
-												<label htmlFor=''>Last Name</label>
-												<input
-													type='text'
-													value={lastName}
-													placeholder='Enter First name here'
-													className='form-control'
-													onChange={(e) => setLastName(e.target.value)}
-												/>
-											</div>
-										</>
 									)}
 
 									{user_detail?.role === 'BUSINESS' ? (
@@ -504,7 +500,7 @@ const UserProfile = () => {
 							className='pebbles_form pb-5 mb-3'
 							style={{ borderBottom: '1px solid rgba(45, 45, 45, 0.4)' }}
 						>
-							<h5 className='pt-4'>Password</h5>
+							<h5 className='pt-4'>Reset Password</h5>
 							<form autoComplete='off'>
 								<div className='row'>
 									<div className='col-md-5'>

@@ -358,7 +358,7 @@ const CreateListing = () => {
 			landmark: inputFields,
 		}
 
-		if (user_detail?.cacDocument && user_detail?.validId) {
+		if (user_detail?.cacDocument || user_detail?.validId) {
 			if (string === 'create') {
 				await dispatch(create_apartment(data))
 			} else {

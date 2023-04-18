@@ -120,7 +120,7 @@ const SearchRideComponent = () => {
 						</div>
 						<div className='col-12'>
 							<input type='checkbox' onChange={(e) => setBookRoundHandler()} />{' '}
-							<label className='text-white'> Book roundtrip </label>
+							<label className='book_trip_text'> Book roundtrip </label>
 						</div>
 						{bookRound && (
 							<div className='col-lg-7'>

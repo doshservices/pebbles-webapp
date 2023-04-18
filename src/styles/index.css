@@ -898,9 +898,20 @@ a {
 	margin-bottom: 1rem;
 }
 
+.book_trip_text {
+	color: white;
+	font-size: 14px;
+}
+
 @media (max-width: 992px) {
 	.ride_carousel .search_apartment_div {
-		margin-top: -20rem;
+		margin-top: -17rem;
+	}
+}
+
+@media (max-width: 767px) {
+	.book_trip_text {
+		color: #111;
 	}
 }
 

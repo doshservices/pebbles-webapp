@@ -358,7 +358,7 @@ const CreateListing = () => {
 			landmark: inputFields,
 		}
 
-		if (user_detail?.cacDocument || user_detail?.validId) {
+		if (user_detail?.isVerified) {
 			if (string === 'create') {
 				await dispatch(create_apartment(data))
 			} else {
@@ -411,10 +411,10 @@ const CreateListing = () => {
 	])
 
 	useEffect(() => {
-		if (!user_detail?.cacDocument && !user_detail?.validId) {
+		if (!user_detail?.isVerified) {
 			toast('Please update your profile before listing an apartment.')
 		}
-	}, [user_detail?.cacDocument, user_detail?.validId])
+	}, [user_detail?.isVerified])
 
 	useEffect(() => {
 		if (!apartment || apartment?.apartment?._id !== params?.id) {

@@ -17,6 +17,12 @@ const UserListings = () => {
 	const { userApartments, isFetchingAllApartments, isDeleting, deleteSuccess } =
 		useAppSelector((state) => state.apartment)
 
+	const { user_detail } = useAppSelector((state) => state.auth)
+
+	console.log('====================================')
+	console.log('user', user_detail)
+	console.log('====================================')
+
 	const [apartmentID, setApartmentID] = useState('')
 
 	const tableHeaders = [

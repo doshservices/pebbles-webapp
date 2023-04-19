@@ -48,7 +48,7 @@ export const get_search_apartments = createAsyncThunk(
 		const { rejectWithValue } = thunkAPI
 		try {
 			const response = await axios.get(
-				`${url}/apartments-one/search?state=${payload.loc}&type=${payload.apartmentType}`,
+				`${url}/apartments-one/search?location=${payload.loc}&type=${payload.apartmentType}`,
 				{
 					headers: header,
 				}

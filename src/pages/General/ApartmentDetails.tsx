@@ -27,7 +27,7 @@ import {
 	reset,
 	save_booking_to_state,
 } from '../../features/booking/bookingSlice'
-import { authHeader } from '../../utils/headers'
+import { authHeader, header } from '../../utils/headers'
 import { toast } from 'react-hot-toast'
 import ModalComponent from '../../components/ModalComponent'
 import moment from 'moment'
@@ -70,8 +70,7 @@ const ApartmentDetails = () => {
 		await axios({
 			url: `${url}/bookings/booking/${apartment?.apartment?._id}`,
 			method: 'GET',
-			headers: authHeader(token ? token : '123'),
-			// data: { apartmentId: id },
+			headers: header,
 		})
 			.then((res) => {
 				setAvailability(res?.data?.data?.bookings)

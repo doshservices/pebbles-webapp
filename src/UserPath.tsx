@@ -12,7 +12,7 @@ const UserPath = () => {
 	const navigate = useNavigate()
 	const { user_detail } = useAppSelector((state) => state.auth)
 
-	const [allow, setAllow] = useState(false)
+	const [allow, setAllow] = useState(true)
 
 	const handle = useFullScreenHandle()
 
@@ -37,22 +37,31 @@ const UserPath = () => {
 	// const head = location.pathname.split('/')
 	// const title = head[head.length - 1]
 
-	const checkPermissionHandler = (pathname: string) => {
-		// let pathnameArray = pathname.trim().split('/')
-		// let newPath = '/' + pathnameArray[1] + '/' + pathnameArray[2]
-		let check = items[0].children.find((e) => e.url === location.pathname)
+	// const checkPermissionHandler = (pathname: string) => {
+	// 	let pathnameArray = pathname.trim().split('/')
+	// 	let newPath = '/' + pathnameArray[1] + '/' + pathnameArray[2]
+	// 	let check = items[0].children.find((e) => e.url === pathname)
+	// 	// let check = items[0].children.find((e) => e.url === location.pathname)
+	// 	console.log('====================================')
+	// 	console.log('pathname', pathname)
+	// 	console.log('newPath', newPath)
+	// 	console.log('pathnameArray', pathnameArray)
+	// 	console.log('items', items)
+	// 	console.log('check', check)
+	// 	console.log('====================================')
 
-		if (check && user_detail) {
-			if (check.permission.includes(user_detail?.role)) {
-				setAllow(true)
-			} else {
-				setAllow(false)
-				navigate('/user/dashboard/home') //Navigate to a common page
-			}
-		} else {
-			console.log('Path not found') //Navigate to 404 page
-		}
-	}
+	// 	if (check && user_detail) {
+	// 		if (check.permission.includes(user_detail?.role)) {
+	// 			setAllow(true)
+	// 		} else {
+	// 			setAllow(false)
+	// 			navigate('/user/dashboard/home') //Navigate to a common page
+	// 		}
+	// 	} else {
+	// 		navigate('/user/dashboard/home') //Navigate to a common page
+	// 		console.log('Path not found') //Navigate to 404 page
+	// 	}
+	// }
 
 	useEffect(() => {
 		if (user_detail === null) {
@@ -60,13 +69,13 @@ const UserPath = () => {
 		}
 	}, [user_detail])
 
-	useEffect(() => {
-		if (user_detail) {
-			checkPermissionHandler(location.pathname)
-		}
-	}, [user_detail, location.pathname])
+	// useEffect(() => {
+	// 	if (user_detail) {
+	// 		checkPermissionHandler(location.pathname)
+	// 	}
+	// }, [user_detail, location.pathname])
 
-	return allow ? (
+	return user_detail ? (
 		<FullScreen handle={handle}>
 			<Navigation openMenu={openMenu} toggleMenu={outsideClick} />
 			<NavHeader

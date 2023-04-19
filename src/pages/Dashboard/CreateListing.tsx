@@ -166,6 +166,14 @@ const CreateListing = () => {
 		},
 	]
 
+	const deleteMainFeaturedImage = () => {
+		setMainFeaturedImage([])
+	}
+
+	const deleteMainImage = () => {
+		setMainImage([])
+	}
+
 	const getBase64 = (file: any) => {
 		return new Promise((resolve) => {
 			let baseURL: string | ArrayBuffer | null = ''
@@ -179,12 +187,13 @@ const CreateListing = () => {
 		})
 	}
 
-	const handleFileInputChange = (e: any, text: string) => {
+	const handleFileInputChange = async (e: any, text: string) => {
 		let file = e.target.files
 		setFileLength(file.length)
 
-		if (text === 'f_image') mainFeaturedImage.push(...file)
-		else mainImage.push(...file)
+		if (text === 'f_image') {
+			mainFeaturedImage.push(...file)
+		} else mainImage.push(...file)
 
 		for (let i = 0; i < file.length; i++) {
 			getBase64(file[i])
@@ -193,7 +202,7 @@ const CreateListing = () => {
 					let split = file[i].base64.split(',')
 					if (text === 'f_image') {
 						setFeaturedImageFile(split[1])
-						let type = file.type.split('/')
+						let type = file[i].type.split('/')
 						setFeaturedImageFormat(type[1])
 					} else {
 						setImageFile(split[1])
@@ -505,6 +514,9 @@ const CreateListing = () => {
 															<option value=''> Choose Apartment Type </option>
 															<option value='BQ'>BQ</option>
 															<option value='Studio'>Studio</option>
+															<option value='Party house/Pad'>
+																Party house/Pad
+															</option>
 															<option value='1 Bedroom Flat'>
 																1 Bedroom Flat
 															</option>
@@ -718,9 +730,25 @@ const CreateListing = () => {
 															}
 															style={{ borderBottom: 'none' }}
 														/>
+														{mainFeaturedImage?.length > 0 && (
+															<p
+																onClick={deleteMainFeaturedImage}
+																className='mt-2'
+																style={{
+																	fontSize: '11.5px',
+																	textDecoration: 'underline',
+																}}
+															>
+																<i
+																	className='fa fa-trash'
+																	style={{ color: 'red' }}
+																></i>{' '}
+																Clear all selected images{' '}
+															</p>
+														)}
 														{featuredImageFile && (
 															<div className='col-md-12'>
-																<div className='mt-2'>
+																<div className='mt-1'>
 																	<button
 																		className='btn btn-primary'
 																		onClick={(e) =>
@@ -764,9 +792,25 @@ const CreateListing = () => {
 															}
 															style={{ borderBottom: 'none' }}
 														/>
+														{mainImage?.length > 0 && (
+															<p
+																onClick={deleteMainImage}
+																className='mt-2'
+																style={{
+																	fontSize: '11.5px',
+																	textDecoration: 'underline',
+																}}
+															>
+																<i
+																	className='fa fa-trash'
+																	style={{ color: 'red' }}
+																></i>{' '}
+																Clear all selected images{' '}
+															</p>
+														)}
 														{imageFile && (
 															<div className='col-md-12'>
-																<div className='mt-2'>
+																<div className='mt-1'>
 																	<button
 																		className='btn btn-primary'
 																		onClick={uploadFileHandler}

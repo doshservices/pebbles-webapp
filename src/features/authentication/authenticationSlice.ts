@@ -126,6 +126,7 @@ export const user_login = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+			toast.error(message)
 
 			return rejectWithValue(message)
 		}

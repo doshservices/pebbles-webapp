@@ -12,7 +12,9 @@ const ApartmentCard = ({
 	return (
 		<div className='apartment_card'>
 			<Link to={`/apartments/${apartmentInfo._id}`}>
-				<SliderImages images={apartmentInfo.apartmentImages} />
+				<div className='apartment_card_img_div'>
+					<SliderImages images={apartmentInfo.featuredImages} />
+				</div>
 				<div className='apartment_card_div'>
 					<h6>
 						{apartmentInfo.address.length >= 50

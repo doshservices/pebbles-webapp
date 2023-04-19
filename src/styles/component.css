@@ -187,6 +187,10 @@
 	/* margin-bottom: 0; */
 }
 
+.apartment_card_img_div {
+	height: 15rem;
+}
+
 .apartment_card img {
 	border-radius: 0px 0px 8px 8px;
 	height: 15rem;

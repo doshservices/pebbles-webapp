@@ -108,7 +108,11 @@ const Index = () => {
 								linkText='View all'
 							/>
 							<ApartmentSlider
-								data={allApartments ? allApartments?.apartments : []}
+								data={
+									allApartments && allApartments?.apartments.length > 0
+										? allApartments?.apartments
+										: []
+								}
 							/>
 						</>
 					)}

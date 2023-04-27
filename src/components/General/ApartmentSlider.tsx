@@ -7,11 +7,11 @@ const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
 	const settings = {
 		dots: false,
 		infinite: true,
-		speed: 400,
+		speed: 1000,
 		slidesToShow: 3,
 		arrows: true,
 		slidesToScroll: 1,
-		autoplay: false,
+		autoplay: true,
 		autoplaySpeed: 9000,
 		pauseOnHover: true,
 		responsive: [

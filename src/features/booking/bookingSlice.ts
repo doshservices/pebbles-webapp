@@ -97,7 +97,6 @@ export const get_booking_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
 
 			return rejectWithValue(message)
 		}
@@ -132,7 +131,6 @@ export const flutter_pay_booking = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
 
 			return rejectWithValue(message)
 		}
@@ -194,7 +192,39 @@ export const cancel_booking = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const flutter_verify_booking = createAsyncThunk(
+	'booking/flutter_verify_booking',
+	async (
+		payload: {
+			transaction_id: any
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.get(
+				`${url}/bookings/verify-payment/${payload.transaction_id}`,
+				{
+					headers: authHeader(token ? token : '123'),
+				}
+			)
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
 
 			return rejectWithValue(message)
 		}
@@ -278,6 +308,16 @@ export const { reducer: BookingReducer, actions } = createSlice({
 		builder.addCase(cancel_booking.rejected, (state, action) => {
 			state.isCancellingBooking = false
 			state.cancelSuccess = false
+		})
+		builder.addCase(flutter_verify_booking.fulfilled, (state, action) => {
+			state.flutterVerify = action.payload.data
+			state.isFlutterVerify = false
+		})
+		builder.addCase(flutter_verify_booking.pending, (state, action) => {
+			state.isFlutterVerify = true
+		})
+		builder.addCase(flutter_verify_booking.rejected, (state, action) => {
+			state.isFlutterVerify = false
 		})
 	},
 })

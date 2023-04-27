@@ -21,10 +21,6 @@ const Events = () => {
 		RouteToTop()
 	}, [])
 
-	console.log('====================================')
-	console.log('events', events)
-	console.log('====================================')
-
 	useEffect(() => {
 		dispatch(get_events())
 		return () => {

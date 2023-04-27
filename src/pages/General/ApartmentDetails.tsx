@@ -2,18 +2,10 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { comma } from '../../utils/helper'
-import {
-	// AiOutlineWifi,
-	AiOutlineStop,
-	AiOutlineClockCircle,
-} from 'react-icons/ai'
-// import { HiOutlineLightBulb } from 'react-icons/hi'
-import { MdOutlinePool, MdOutlinePayments } from 'react-icons/md'
-// import { SlScreenDesktop } from 'react-icons/sl'
-// import { CgGym } from 'react-icons/cg'
+import { AiOutlineStop, AiOutlineClockCircle } from 'react-icons/ai'
+import { MdOutlinePayments } from 'react-icons/md'
 import { TbMessageReport, TbDisabled } from 'react-icons/tb'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
-import abuja from '../../assets/abuja.png'
 import two_users from '../../assets/two_users.png'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import Lightbox from 'react-18-image-lightbox'
@@ -27,7 +19,7 @@ import {
 	reset,
 	save_booking_to_state,
 } from '../../features/booking/bookingSlice'
-import { authHeader, header } from '../../utils/headers'
+import { header } from '../../utils/headers'
 import { toast } from 'react-hot-toast'
 import ModalComponent from '../../components/ModalComponent'
 import moment from 'moment'
@@ -102,10 +94,6 @@ const ApartmentDetails = () => {
 			toast(
 				'You have saved this apartment. Please create an account before you proceed to view booking and make payment.'
 			)
-			// alert('You must have an account before you can book an apartment.')
-			// setTimeout(() => {
-			// 	navigate('/auth/login')
-			// }, 1000)
 		}
 	}
 
@@ -584,13 +572,17 @@ const ApartmentDetails = () => {
 				title='Booked Dates'
 			>
 				<div className='container'>
-					<ul>
-						{availability.map((item, index) => (
-							<li style={{ fontSize: '14px' }} key={index}>
-								{moment(item).format('MMMM Do, YYYY')}
-							</li>
-						))}
-					</ul>
+					{availability?.length > 0 ? (
+						<ul>
+							{availability.map((item, index) => (
+								<li style={{ fontSize: '14px' }} key={index}>
+									{moment(item).format('MMMM Do, YYYY')}
+								</li>
+							))}
+						</ul>
+					) : (
+						<p style={{ fontSize: '14px' }}> Apartment has no booked dates. </p>
+					)}
 				</div>
 			</ModalComponent>
 		</main>

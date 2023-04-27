@@ -36,7 +36,8 @@ const EventDetails = () => {
 	const navigate = useNavigate()
 
 	const { user_detail } = useAppSelector((state) => state.auth)
-	const { event, isFetchingEvent } = useAppSelector((state) => state.event)
+	const { event, isFetchingEvent, flutterEvent, isFlutterEvent } =
+		useAppSelector((state) => state.event)
 	const { apartment, allApartments, nearbyApartments } = useAppSelector(
 		(state) => state.apartment
 	)
@@ -190,14 +191,14 @@ const EventDetails = () => {
 												</div>
 											</div>
 
-											{user_detail ? (
+											{user_detail && flutterEvent && event.eventCost > 0 ? (
 												<div className='col-12 pb-4'>
 													<p>Please proceed to make payment.</p>
 													<Link
-														to={`/user/dashboard/my-bookings`}
+														to={flutterEvent.event}
 														className='btn btn-info text-white'
 													>
-														Proceed
+														Pay With Flutterwave
 													</Link>
 												</div>
 											) : (
@@ -217,7 +218,7 @@ const EventDetails = () => {
 				</div>
 			) : (
 				<div className='container'>
-					<p>Apartment not found.</p>
+					<p>Event not found.</p>
 				</div>
 			)}
 

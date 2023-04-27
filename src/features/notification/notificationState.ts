@@ -2,7 +2,7 @@ export interface NotificationInitialInterface {
 	notifications: NotificationsInterface | null
 	notification: NotificationDetailInterface | null
 	isLoading: boolean
-	deleteSuccess: boolean
+	deleteSuccess: NotificationsInterface | null
 	isDeleting: boolean
 	updateSuccess: boolean
 	isUpdating: boolean
@@ -12,7 +12,7 @@ export const NotificationInitialState: NotificationInitialInterface = {
 	notifications: null,
 	notification: null,
 	isLoading: false,
-	deleteSuccess: false,
+	deleteSuccess: null,
 	isDeleting: false,
 	updateSuccess: false,
 	isUpdating: false,

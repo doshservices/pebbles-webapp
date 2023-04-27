@@ -12,6 +12,8 @@ export interface ApartmentInitialInterface {
 	isDeleting: boolean
 	deleteSuccess: boolean
 	isCreatingApartment: boolean
+	savedApartments: NearbyApartmentsInterface | null
+	isSavingApartment: boolean
 }
 
 export const ApartmentInitialState: ApartmentInitialInterface = {
@@ -28,6 +30,8 @@ export const ApartmentInitialState: ApartmentInitialInterface = {
 	apartment: null,
 	deleteSuccess: false,
 	isCreatingApartment: false,
+	savedApartments: null,
+	isSavingApartment: false,
 }
 
 export interface NearbyApartmentsInterface {

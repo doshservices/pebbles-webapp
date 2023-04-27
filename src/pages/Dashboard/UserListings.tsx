@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { FaEye, FaPen, FaPlus, FaTrash } from 'react-icons/fa'
@@ -17,12 +17,6 @@ const UserListings = () => {
 	const { userApartments, isFetchingAllApartments, isDeleting, deleteSuccess } =
 		useAppSelector((state) => state.apartment)
 
-	const { user_detail } = useAppSelector((state) => state.auth)
-
-	console.log('====================================')
-	console.log('user', user_detail)
-	console.log('====================================')
-
 	const [apartmentID, setApartmentID] = useState('')
 
 	const tableHeaders = [
@@ -35,6 +29,11 @@ const UserListings = () => {
 		'Edit',
 		'Action',
 	]
+
+	useMemo(
+		() => dispatch(get_apartments_by_user()),
+		[dispatch, userApartments?.apartments?.length]
+	)
 
 	const deleteHandler = async (e: any, string: string) => {
 		e.preventDefault()
@@ -140,7 +139,13 @@ const UserListings = () => {
 															to={`/apartments/${apartment._id}`}
 															className='link-dark'
 														>
-															<FaEye size={18} />
+															<div className='tooltipp'>
+																<FaEye size={18} color='#000' />
+
+																<span className='tooltipptext'>
+																	View Details
+																</span>
+															</div>
 														</Link>
 													</td>
 													<td className='td_pad_top'>
@@ -148,7 +153,13 @@ const UserListings = () => {
 															to={`/user/dashboard/listings/new/${apartment._id}`}
 															className='link-dark'
 														>
-															<FaPen size={18} />
+															<div className='tooltipp'>
+																<FaPen size={18} color='#000' />
+
+																<span className='tooltipptext'>
+																	Edit Details
+																</span>
+															</div>
 														</Link>
 													</td>
 													<td className='td_pad_top'>
@@ -163,7 +174,11 @@ const UserListings = () => {
 																	style={{ color: 'red' }}
 																></i>
 															) : (
-																<FaTrash size={18} color={'red'} />
+																<div className='tooltipp'>
+																	<FaTrash size={18} color={'red'} />
+
+																	<span className='tooltipptext'>Delete</span>
+																</div>
 															)}
 														</button>
 													</td>
@@ -329,7 +344,13 @@ const UserListings = () => {
 																to={`/apartments/${apartment._id}`}
 																className='link-dark'
 															>
-																<FaEye size={18} />
+																<div className='tooltipp'>
+																	<FaEye size={18} color='#000' />
+
+																	<span className='tooltipptext'>
+																		View Details
+																	</span>
+																</div>
 															</Link>
 														</td>
 														<td className='td_pad_top'>

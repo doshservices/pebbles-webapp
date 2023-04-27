@@ -9,8 +9,8 @@ const SliderImages = ({ images }: { images: any[] }) => {
 		slidesToShow: 1,
 		arrows: true,
 		slidesToScroll: 1,
-		autoplay: false,
-		autoplaySpeed: 7000,
+		autoplay: true,
+		autoplaySpeed: 1000,
 		pauseOnHover: false,
 	}
 

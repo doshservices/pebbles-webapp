@@ -42,7 +42,7 @@ const UserNotifications = () => {
 							<div className='col-md-6 col-sm-8 '>
 								<TabList className='d-flex justify-content-between roww'>
 									<Tab>
-										All Apartments ({notifications?.notifications?.length})
+										All Notifications ({notifications?.notifications?.length})
 									</Tab>
 									{/* <Tab>
 										Available (

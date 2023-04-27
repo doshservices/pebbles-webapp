@@ -44,7 +44,7 @@ export const get_event_by_id = createAsyncThunk(
 		// let token: string | null = store.getState()?.auth?.token
 
 		try {
-			const response = await axios.get(`${url}/events/${payload.id}`, {
+			const response = await axios.get(`${url}/events/one/${payload.id}`, {
 				// headers: authHeader(token ? token : '123'),
 				headers: header,
 			})
@@ -99,6 +99,72 @@ export const flutter_pay_event = createAsyncThunk(
 	}
 )
 
+export const flutter_verify_event = createAsyncThunk(
+	'booking/flutter_verify_booking',
+	async (
+		payload: {
+			transaction_id: any
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.get(
+				`${url}/events/verify-payment/${payload.transaction_id}`,
+				{
+					headers: authHeader(token ? token : '123'),
+				}
+			)
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			console.log(error)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const get_search_events = createAsyncThunk(
+	'events/get_search_events',
+	async (
+		payload: {
+			loc: string
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		try {
+			const response = await axios.get(
+				`${url}/events/?location=${payload.loc}`,
+				{
+					headers: header,
+				}
+			)
+			console.log('resp', response.data)
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
 export const { reducer: EventReducer, actions } = createSlice({
 	name: 'event',
 	initialState: EventInitialState,
@@ -117,6 +183,16 @@ export const { reducer: EventReducer, actions } = createSlice({
 			state.isFetchingEvent = true
 		})
 		builder.addCase(get_events.rejected, (state, action) => {
+			state.isFetchingEvent = false
+		})
+		builder.addCase(get_search_events.fulfilled, (state, action) => {
+			state.events = action.payload.data
+			state.isFetchingEvent = false
+		})
+		builder.addCase(get_search_events.pending, (state, action) => {
+			state.isFetchingEvent = true
+		})
+		builder.addCase(get_search_events.rejected, (state, action) => {
 			state.isFetchingEvent = false
 		})
 		builder.addCase(get_event_by_id.fulfilled, (state, action) => {

@@ -100,7 +100,7 @@ export const delete_notification = createAsyncThunk(
 )
 
 export const update_notification = createAsyncThunk(
-	'auth/update_notification',
+	'notifications/update_notification',
 	async (
 		payload: {
 			id?: string
@@ -134,6 +134,39 @@ export const update_notification = createAsyncThunk(
 	}
 )
 
+export const post_newsletter = createAsyncThunk(
+	'notifications/post_newsletter',
+	async (
+		payload: {
+			email: string
+			name?: string
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+
+		try {
+			const response = await axios.post(`${url}/users/subscribe`, payload, {
+				headers: header,
+			})
+			toast.success(
+				'You have successfully registered to receive our newsletters.'
+			)
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			toast.error(message)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
 export const { reducer: NotificationReducer, actions } = createSlice({
 	name: 'notifications',
 	initialState: NotificationInitialState,
@@ -150,16 +183,14 @@ export const { reducer: NotificationReducer, actions } = createSlice({
 			state.isLoading = false
 		})
 		builder.addCase(delete_notification.fulfilled, (state, action) => {
-			state.deleteSuccess = true
+			state.deleteSuccess = action.payload.data
 			state.isDeleting = false
 		})
 		builder.addCase(delete_notification.pending, (state, action) => {
-			state.deleteSuccess = false
 			state.isDeleting = true
 		})
 		builder.addCase(delete_notification.rejected, (state, action) => {
 			state.isDeleting = false
-			state.deleteSuccess = false
 		})
 		builder.addCase(update_notification.fulfilled, (state, action) => {
 			state.updateSuccess = true
@@ -170,6 +201,18 @@ export const { reducer: NotificationReducer, actions } = createSlice({
 			state.updateSuccess = false
 		})
 		builder.addCase(update_notification.rejected, (state, action) => {
+			state.isUpdating = false
+			state.updateSuccess = false
+		})
+		builder.addCase(post_newsletter.fulfilled, (state, action) => {
+			state.updateSuccess = true
+			state.isUpdating = false
+		})
+		builder.addCase(post_newsletter.pending, (state, action) => {
+			state.isUpdating = true
+			state.updateSuccess = false
+		})
+		builder.addCase(post_newsletter.rejected, (state, action) => {
 			state.isUpdating = false
 			state.updateSuccess = false
 		})

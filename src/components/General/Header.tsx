@@ -158,7 +158,7 @@ const Header = ({ type }: { type: number }) => {
 												</LinkContainer>
 											) : (
 												<div className='text-center'>
-													<LinkContainer to={`/user/dashboard`}>
+													<LinkContainer to={`/user/dashboard/home`}>
 														<Nav.Link className=''> My Dashboard </Nav.Link>
 													</LinkContainer>
 													<div className='text-center'>
@@ -365,7 +365,7 @@ const Header = ({ type }: { type: number }) => {
 												</LinkContainer>
 											) : (
 												<div className='text-center'>
-													<LinkContainer to={`/user/dashboard`}>
+													<LinkContainer to={`/user/dashboard/home`}>
 														<Nav.Link className=''> My Dashboard </Nav.Link>
 													</LinkContainer>
 													<div className='text-center'>

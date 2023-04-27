@@ -283,7 +283,6 @@ const CreateListing = () => {
 						setFeaturedImageFile('')
 					})
 					.catch((err) => {
-						console.log(err)
 						setUploading(false)
 						// setMainImage(null)
 						setFeaturedImageFile('')
@@ -308,9 +307,7 @@ const CreateListing = () => {
 				let type = file.type.split('/')
 				setLandmarkImageFormat(type[1])
 			})
-			.catch((err) => {
-				console.log(err)
-			})
+			.catch((err) => {})
 	}
 
 	const uploadLandmarkFileHandler = (e: any) => {
@@ -340,7 +337,6 @@ const CreateListing = () => {
 				setLandmarkImageFile('')
 			})
 			.catch((err) => {
-				console.log(err)
 				setUploading(false)
 				setLandmarkImageFile('')
 			})
@@ -367,7 +363,7 @@ const CreateListing = () => {
 			landmark: inputFields,
 		}
 
-		if (user_detail?.isVerified) {
+		if (user_detail?.isVerified && user_detail?.validId) {
 			if (string === 'create') {
 				await dispatch(create_apartment(data))
 			} else {
@@ -420,10 +416,12 @@ const CreateListing = () => {
 	])
 
 	useEffect(() => {
-		if (!user_detail?.isVerified) {
+		if (!user_detail?.isVerified || !user_detail?.validId) {
+			console.log('djdjdhhjd')
+
 			toast('Please update your profile before listing an apartment.')
 		}
-	}, [user_detail?.isVerified])
+	}, [user_detail?.isVerified, user_detail?.validId])
 
 	useEffect(() => {
 		if (!apartment || apartment?.apartment?._id !== params?.id) {

@@ -68,6 +68,7 @@ const Index = () => {
 	useEffect(() => {
 		if (user_detail) {
 			dispatch(get_nearby_apartments())
+			dispatch(get_all_apartments())
 		} else {
 			dispatch(get_all_apartments())
 		}

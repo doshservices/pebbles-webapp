@@ -280,6 +280,8 @@ export const change_user_type = createAsyncThunk(
 	async (
 		payload: {
 			validId: string
+			businessAddress: string
+			businessName: string
 		},
 		thunkAPI
 	) => {
@@ -322,6 +324,7 @@ export const { reducer: AuthReducer, actions } = createSlice({
 			state.token = null
 			state.user_detail = null
 			state.user_register = null
+			state.verifyOtp = null
 		},
 	},
 	extraReducers: (builder) => {

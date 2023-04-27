@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
-import building from '../../assets/building.png'
+import React, { useEffect, useMemo } from 'react'
 import SliderImages from '../../components/SliderImages'
-import apartmentImg from '../../assets/picture.png'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
 	cancel_booking,
 	get_user_bookings,
-	reset,
 } from '../../features/booking/bookingSlice'
 import { FaEye } from 'react-icons/fa'
 import moment from 'moment'
@@ -39,12 +36,13 @@ const UserBookings = () => {
 		}
 	}
 
+	// useMemo(
+	// 	() => dispatch(get_user_bookings()),
+	// 	[dispatch, bookings?.bookings?.length]
+	// )
+
 	useEffect(() => {
 		dispatch(get_user_bookings())
-
-		return () => {
-			dispatch(reset())
-		}
 	}, [dispatch, cancelSuccess])
 
 	return (
@@ -108,10 +106,31 @@ const UserBookings = () => {
 												to={`/user/dashboard/my-bookings/${booking._id}`}
 												className='link-dark'
 											>
-												<FaEye size={18} />
+												<div className='tooltipp'>
+													<FaEye size={18} color='#000' />
+
+													<span className='tooltipptext'>View Details</span>
+												</div>
 											</Link>
 										</td>
 										<td className='td_pad_top'>
+											{booking?.paymentStatus === 'PENDING' && (
+												<Link
+													to={`/user/dashboard/my-bookings/${booking._id}`}
+													className='me-3 btn'
+													style={{
+														backgroundColor: 'blue',
+														color: '#fff',
+														borderRadius: '8px',
+														fontSize: '12px',
+														borderColor: 'blue',
+														marginBottom: '.5rem',
+													}}
+												>
+													Pay
+												</Link>
+											)}
+
 											<button
 												className='me-3 btn'
 												style={{
@@ -120,6 +139,7 @@ const UserBookings = () => {
 													borderRadius: '8px',
 													fontSize: '12px',
 													borderColor: 'red',
+													marginBottom: '.5rem',
 												}}
 												onClick={(e) => cancelHandler(e, booking._id)}
 											>

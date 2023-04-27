@@ -1,25 +1,30 @@
 import React, { useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
-import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
+import { get_search_events } from '../../features/event/eventSlice'
 
 const SearchEventComponent = () => {
 	const dispatch = useAppDispatch()
-	const navigate = useNavigate()
 
 	const [loc, setLoc] = useState<any>({})
 
 	const submitHandler = () => {
-		// dispatch(
-		// 	get_search_apartments({
-		// 		loc: loc?.formatted_address,
-		// 	})
-		// )
-
-		navigate('/search-apartments')
+		dispatch(
+			get_search_events({
+				loc: loc?.formatted_address,
+			})
+		)
 	}
+
+	// useEffect(() => {
+	// 	dispatch(
+	// 		get_search_events({
+	// 			loc: loc?.formatted_address,
+	// 		})
+	// 	)
+	// }, [loc, dispatch])
 
 	return (
 		<div className='search_component_main_div'>

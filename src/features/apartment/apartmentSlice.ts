@@ -48,7 +48,7 @@ export const get_search_apartments = createAsyncThunk(
 		const { rejectWithValue } = thunkAPI
 		try {
 			const response = await axios.get(
-				`${url}/apartments-one/search?location=${payload.loc}&type=${payload.apartmentType}`,
+				`${url}/apartments-one/search?check_in=${payload.checkIn}&location=${payload.loc}&type=${payload.apartmentType}&check_out=${payload.checkOut}`,
 				{
 					headers: header,
 				}
@@ -114,7 +114,9 @@ export const get_apartment_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
+			console.log('message', message)
+
+			toast.error(message)
 
 			return rejectWithValue(message)
 		}
@@ -217,7 +219,7 @@ export const delete_apartment = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
+			toast(message[0])
 
 			return rejectWithValue(message)
 		}
@@ -254,6 +256,41 @@ export const update_apartment = createAsyncThunk(
 		try {
 			const response = await axios.put(
 				`${url}/apartments/${payload.id}`,
+				payload,
+				{
+					headers: authHeader(token ? token : '123'),
+				}
+			)
+			toast.success(response?.data.data.message)
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			toast.error(message[0])
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const save_apartment = createAsyncThunk(
+	'apartments/save_apartment',
+	async (
+		payload: {
+			apartmentId: String
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.post(
+				`${url}/apartments/save-apartment`,
 				payload,
 				{
 					headers: authHeader(token ? token : '123'),
@@ -366,6 +403,16 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 		builder.addCase(update_apartment.rejected, (state, action) => {
 			state.isCreatingApartment = false
 			state.createSuccess = false
+		})
+		builder.addCase(save_apartment.fulfilled, (state, action) => {
+			state.savedApartments = action.payload.data
+			state.isSavingApartment = false
+		})
+		builder.addCase(save_apartment.pending, (state, action) => {
+			state.isSavingApartment = true
+		})
+		builder.addCase(save_apartment.rejected, (state, action) => {
+			state.isSavingApartment = false
 		})
 	},
 })

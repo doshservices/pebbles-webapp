@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/Logo.png'
 import '../../styles/component.css'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { post_newsletter } from '../../features/notification/notificationSlice'
 
 const Footer = () => {
+	const dispatch = useAppDispatch()
+
+	const [email, setEmail] = useState<string>('')
+	const [name, setName] = useState<string>('')
+	const [message, setMessage] = useState<string | null>(null)
+
+	const { isUpdating } = useAppSelector((state) => state.notification)
+
+	const submitHandler = (e: any) => {
+		e.preventDefault()
+		let validRegex =
+			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+		if (email && email.match(validRegex))
+			dispatch(post_newsletter({ email, name }))
+		else setMessage('Please enter a valid email')
+	}
+
 	return (
 		<footer>
 			<div className='footer1'>
@@ -34,19 +53,45 @@ const Footer = () => {
 								subscribe to our newsletter to recieve new offers and promotions
 							</p>
 							<div className='row'>
-								<div className='col-md-6'></div>
-								<div className='col-md-6'>
+								<div className='col-lg-6 col-md-4'></div>
+								<div className='col-lg-6 col-md-8'>
 									<div className='input-group mb-3 input_div'>
 										<input
 											type='email'
 											className='form-control'
 											placeholder=''
 											aria-label='Enter email'
+											onChange={(e) => setEmail(e.target.value)}
 										/>
-										<button className='btn btn-outline-secondary' type='button'>
-											SEND
+										<div style={{ position: 'absolute', left: '-2000px' }}>
+											<input
+												type='text'
+												onChange={(e) => setName(e.target.value)}
+											/>
+										</div>
+
+										<button
+											className='btn btn-outline-secondary'
+											onClick={submitHandler}
+											type='button'
+											disabled={isUpdating}
+										>
+											{isUpdating ? (
+												<i className='fas fa-spinner fa-spin'></i>
+											) : (
+												'SEND'
+											)}
 										</button>
 									</div>
+									<p
+										style={{
+											fontSize: '12px',
+											color: '#f00',
+											textTransform: 'lowercase',
+										}}
+									>
+										{message}
+									</p>
 								</div>
 							</div>
 						</div>

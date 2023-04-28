@@ -47,23 +47,16 @@ const ApartmentCard = ({
 						<div className='col-2'>
 							{user_detail ? (
 								<>
-									<button
+									<img
 										onClick={(e) => saveHandler(e, apartmentInfo._id)}
+										src={white_heart}
+										alt=''
 										style={{
-											border: 'none',
-											backgroundColor: 'white',
+											height: '1.5rem',
+											width: '1.5rem',
+											objectFit: 'contain',
 										}}
-									>
-										<img
-											src={white_heart}
-											alt=''
-											style={{
-												height: '1.5rem',
-												width: '1.5rem',
-												objectFit: 'contain',
-											}}
-										/>
-									</button>
+									/>
 								</>
 							) : null}
 						</div>

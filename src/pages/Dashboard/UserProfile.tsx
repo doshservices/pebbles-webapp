@@ -503,7 +503,7 @@ const UserProfile = () => {
 							<h5 className='pt-4'>Reset Password</h5>
 							<form autoComplete='off'>
 								<div className='row'>
-									<div className='col-md-5'>
+									<div className='col-md-6'>
 										<div className='password_div'>
 											<label htmlFor='fullName'>Current Password</label>
 											<input
@@ -520,8 +520,8 @@ const UserProfile = () => {
 											></i>
 										</div>
 									</div>
-									<div className='col-md-7'></div>
-									<div className='col-md-5'>
+									<div className='col-md-6'></div>
+									<div className='col-md-6'>
 										<div className='password_div'>
 											<label htmlFor='new_password'>New Password</label>
 											<input
@@ -539,8 +539,8 @@ const UserProfile = () => {
 											></i>
 										</div>
 									</div>
-									<div className='col-md-7'></div>
-									<div className='col-md-5'>
+									<div className='col-md-6'></div>
+									<div className='col-md-6'>
 										<div className='password_div'>
 											<label htmlFor='confirm_password'>Confirm Password</label>
 											<input
@@ -558,7 +558,7 @@ const UserProfile = () => {
 											></i>
 										</div>
 									</div>
-									<div className='col-md-7'></div>
+									<div className='col-md-6'></div>
 									<div className='col-12 d-flex justify-content-end'>
 										<button
 											className='btn btn-primary form-control'

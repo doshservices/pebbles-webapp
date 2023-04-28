@@ -33,6 +33,7 @@ import Events from './pages/General/Events'
 import EventDetails from './pages/General/EventDetails'
 import UserSignup from './pages/General/UserSignup'
 import Ride from './pages/General/Ride'
+import ApproveEventPayment from './pages/General/ApproveEventPayment'
 
 function App() {
 	return (
@@ -52,6 +53,10 @@ function App() {
 							<Route path='contact' element={<Contact />} />
 							<Route path='add-ons/ride' element={<Ride />} />
 							<Route path='events' element={<Events />} />
+							<Route
+								path='event/approve-payment/:id/payment-status'
+								element={<ApproveEventPayment />}
+							/>
 							<Route path='events/:id' element={<EventDetails />} />
 						</Route>
 						<Route path='/auth/' element={<AuthPath />}>

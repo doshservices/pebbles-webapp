@@ -57,7 +57,6 @@ export const get_event_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
 
 			return rejectWithValue(message)
 		}
@@ -92,7 +91,6 @@ export const flutter_pay_event = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
 
 			return rejectWithValue(message)
 		}
@@ -104,6 +102,7 @@ export const flutter_verify_event = createAsyncThunk(
 	async (
 		payload: {
 			transaction_id: any
+			amount: string
 		},
 		thunkAPI
 	) => {
@@ -112,7 +111,7 @@ export const flutter_verify_event = createAsyncThunk(
 
 		try {
 			const response = await axios.get(
-				`${url}/events/verify-payment/${payload.transaction_id}`,
+				`${url}/events/verify-event-payment/?transaction_id=${payload.transaction_id}&amount=${payload.amount}`,
 				{
 					headers: authHeader(token ? token : '123'),
 				}

@@ -38,5 +38,9 @@ export interface EventInterface {
 }
 
 export interface FlutterEventInterface {
-	event: string
+	event: FlutterEventLinkInterface
+}
+
+export interface FlutterEventLinkInterface {
+	link: string
 }

@@ -252,15 +252,14 @@ export const update_apartment = createAsyncThunk(
 	) => {
 		const { rejectWithValue } = thunkAPI
 		let token: string | null = store.getState()?.auth?.token
+		let idd = payload.id
+		delete payload.id
+		console.log('payload', payload)
 
 		try {
-			const response = await axios.put(
-				`${url}/apartments/${payload.id}`,
-				payload,
-				{
-					headers: authHeader(token ? token : '123'),
-				}
-			)
+			const response = await axios.put(`${url}/apartments/${idd}`, payload, {
+				headers: authHeader(token ? token : '123'),
+			})
 			toast.success(response?.data.data.message)
 			return response.data
 		} catch (error: any) {
@@ -296,7 +295,7 @@ export const save_apartment = createAsyncThunk(
 					headers: authHeader(token ? token : '123'),
 				}
 			)
-			toast.success(response?.data.data.message)
+			toast.success('Apartment has been added to your wishlist.')
 			return response.data
 		} catch (error: any) {
 			const message =
@@ -305,7 +304,32 @@ export const save_apartment = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast.error(message[0])
+			toast.error(message)
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
+export const get_saved_apartments = createAsyncThunk(
+	'apartments/get_saved_apartments',
+	async (_, thunkAPI) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.get(`${url}/apartments/save-apartment/all`, {
+				headers: authHeader(token ? token : '123'),
+			})
+
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
 
 			return rejectWithValue(message)
 		}
@@ -405,13 +429,23 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 			state.createSuccess = false
 		})
 		builder.addCase(save_apartment.fulfilled, (state, action) => {
-			state.savedApartments = action.payload.data
+			// state.savedApartments = action.payload.data
 			state.isSavingApartment = false
 		})
 		builder.addCase(save_apartment.pending, (state, action) => {
 			state.isSavingApartment = true
 		})
 		builder.addCase(save_apartment.rejected, (state, action) => {
+			state.isSavingApartment = false
+		})
+		builder.addCase(get_saved_apartments.fulfilled, (state, action) => {
+			state.savedApartments = action.payload.data
+			state.isSavingApartment = false
+		})
+		builder.addCase(get_saved_apartments.pending, (state, action) => {
+			state.isSavingApartment = true
+		})
+		builder.addCase(get_saved_apartments.rejected, (state, action) => {
 			state.isSavingApartment = false
 		})
 	},

@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { BiError } from 'react-icons/bi'
 import Loader from '../../components/Loader'
-import { flutter_verify_booking } from '../../features/booking/bookingSlice'
+import { flutter_verify_event } from '../../features/event/eventSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { FaCheckCircle } from 'react-icons/fa'
 
-const ApprovePayment = () => {
+const ApproveEventPayment = () => {
 	const dispatch = useAppDispatch()
 	const location = useLocation()
 
@@ -20,7 +20,7 @@ const ApprovePayment = () => {
 
 	useEffect(() => {
 		dispatch(
-			flutter_verify_booking({
+			flutter_verify_event({
 				transaction_id: searchParams[3],
 				amount: searchParams[0],
 			})
@@ -49,11 +49,11 @@ const ApprovePayment = () => {
 
 								<h3 style={{ color: 'green' }}> Payment Successful! </h3>
 								<p>
-									The payment for your booking has been processed and verified
+									Your payment for the event has been processed and verified
 									successfully.
 								</p>
 
-								<Link to='/user/dashboard/my-bookings'> Go to Bookings </Link>
+								<Link to='/events'> Go to Events </Link>
 							</div>
 						</div>
 					</div>
@@ -76,15 +76,12 @@ const ApprovePayment = () => {
 
 								<h3 style={{ color: 'red' }}> Payment Not Successful! </h3>
 								<p>
-									The payment for your booking failed and was not verified
+									Your payment for the event failed and was not verified
 									successfully.
 								</p>
 
-								<Link
-									to='/user/dashboard/my-bookings'
-									style={{ background: 'red' }}
-								>
-									Go to Bookings
+								<Link to='/events' style={{ background: 'red' }}>
+									Go to Events
 								</Link>
 							</div>
 						</div>
@@ -95,4 +92,4 @@ const ApprovePayment = () => {
 	)
 }
 
-export default ApprovePayment
+export default ApproveEventPayment

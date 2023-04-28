@@ -203,6 +203,7 @@ export const flutter_verify_booking = createAsyncThunk(
 	async (
 		payload: {
 			transaction_id: any
+			amount: any
 		},
 		thunkAPI
 	) => {
@@ -211,7 +212,7 @@ export const flutter_verify_booking = createAsyncThunk(
 
 		try {
 			const response = await axios.get(
-				`${url}/bookings/verify-payment/${payload.transaction_id}`,
+				`${url}/bookings/verify-payment/?transaction_id=${payload.transaction_id}&amount=${payload.amount}`,
 				{
 					headers: authHeader(token ? token : '123'),
 				}

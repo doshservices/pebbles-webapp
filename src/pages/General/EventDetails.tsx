@@ -1,16 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-// import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { comma } from '../../utils/helper'
-import // AiOutlineWifi,
-// AiOutlineStop,
-// AiOutlineClockCircle,
-'react-icons/ai'
-// import { HiOutlineLightBulb } from 'react-icons/hi'
-// import { MdOutlinePool, MdOutlinePayments } from 'react-icons/md'
-// import { SlScreenDesktop } from 'react-icons/sl'
-// import { CgGym } from 'react-icons/cg'
-// import { TbMessageReport, TbDisabled } from 'react-icons/tb'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import Lightbox from 'react-18-image-lightbox'
@@ -22,7 +12,7 @@ import {
 	reset,
 } from '../../features/event/eventSlice'
 import Loader from '../../components/Loader'
-import { toast } from 'react-hot-toast'
+// import { toast } from 'react-hot-toast'
 import ModalComponent from '../../components/ModalComponent'
 import moment from 'moment'
 import {
@@ -33,26 +23,30 @@ import {
 const EventDetails = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
-	const navigate = useNavigate()
 
 	const { user_detail } = useAppSelector((state) => state.auth)
 	const { event, isFetchingEvent, flutterEvent, isFlutterEvent } =
 		useAppSelector((state) => state.event)
-	const { apartment, allApartments, nearbyApartments } = useAppSelector(
+	const { allApartments, nearbyApartments } = useAppSelector(
 		(state) => state.apartment
 	)
 
-	console.log('====================================')
-	console.log('event', event)
-	console.log('====================================')
-
 	const [photoIndex, setPhotoIndex] = useState<number>(0)
 	const [isOpen, setIsOpen] = useState<boolean>(false)
-	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const [ticket, setTicket] = useState<string>('1')
 	const [availability, setAvailability] = useState<string[]>([])
 	const [openModal, setOpenModal] = useState(false)
+
+	const submitHandler = (e: any) => {
+		e.preventDefault()
+		let data = {
+			eventId: params?.id,
+			paymentMethod: 'FLUTTERWAVE',
+		}
+
+		dispatch(flutter_pay_event(data))
+	}
 
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
@@ -66,17 +60,6 @@ const EventDetails = () => {
 		dispatch(get_event_by_id({ id: params?.id }))
 		dispatch(get_all_apartments())
 		dispatch(get_nearby_apartments())
-
-		let data = {
-			eventId: params?.id,
-			paymentMethod: 'FLUTTERWAVE',
-		}
-
-		dispatch(flutter_pay_event(data))
-
-		return () => {
-			dispatch(reset())
-		}
 	}, [params?.id, dispatch])
 
 	return (
@@ -166,9 +149,14 @@ const EventDetails = () => {
 													<div className='text-center'>
 														<button
 															className='btn form-control btn_save'
-															// disabled={isCreatingBooking}
+															disabled={isFlutterEvent}
+															onClick={submitHandler}
 														>
-															Book Now
+															{isFlutterEvent ? (
+																<i className='fas fa-spinner fa-spin'></i>
+															) : (
+																'Book Now'
+															)}
 														</button>
 													</div>
 												</form>
@@ -191,16 +179,18 @@ const EventDetails = () => {
 												</div>
 											</div>
 
-											{user_detail && flutterEvent && event.eventCost > 0 ? (
-												<div className='col-12 pb-4'>
-													<p>Please proceed to make payment.</p>
-													<Link
-														to={flutterEvent.event}
-														className='btn btn-info text-white'
-													>
-														Pay With Flutterwave
-													</Link>
-												</div>
+											{user_detail ? (
+												flutterEvent && event.eventCost > 0 ? (
+													<div className='col-12 pb-4'>
+														<p>Please proceed to make payment.</p>
+														<Link
+															to={flutterEvent.event.link}
+															className='btn btn-info text-white'
+														>
+															Pay With Flutterwave
+														</Link>
+													</div>
+												) : null
 											) : (
 												<div className='col-12 pb-4'>
 													<p>

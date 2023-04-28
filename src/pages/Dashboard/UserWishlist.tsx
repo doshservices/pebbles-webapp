@@ -1,16 +1,20 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-// import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import ApartmentCard from '../../components/ApartmentCard'
 import Loader from '../../components/Loader'
+import { get_saved_apartments } from '../../features/apartment/apartmentSlice'
 
 const UserWishlist = () => {
-	// const dispatch = useAppDispatch()
-	const { isFetchingAllApartments, allApartments } = useAppSelector(
+	const dispatch = useAppDispatch()
+
+	const { isSavingApartment, savedApartments } = useAppSelector(
 		(state) => state.apartment
 	)
 
-	// useEffect(() => {}, [])
+	useEffect(() => {
+		dispatch(get_saved_apartments())
+	}, [dispatch])
 
 	return (
 		<main className='dashboard search_page'>
@@ -20,10 +24,10 @@ const UserWishlist = () => {
 			<div className='row justify-content-center'>
 				<div className='col-md-11'>
 					<div className='row'>
-						{isFetchingAllApartments ? (
+						{isSavingApartment ? (
 							<Loader />
-						) : allApartments && allApartments.apartments?.length > 0 ? (
-							allApartments.apartments.map((item, index) => (
+						) : savedApartments && savedApartments.apartments?.length > 0 ? (
+							savedApartments.apartments.map((item, index) => (
 								<div className='col-lg-4 col-md-4 col-sm-6' key={index}>
 									<div key={index} className='p_4 mb-5'>
 										<ApartmentCard apartmentInfo={item} />

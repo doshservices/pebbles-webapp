@@ -26,11 +26,14 @@ const UserWishlist = () => {
 					<div className='row'>
 						{isSavingApartment ? (
 							<Loader />
-						) : savedApartments && savedApartments.apartments?.length > 0 ? (
-							savedApartments.apartments.map((item, index) => (
+						) : savedApartments && savedApartments.apartment?.length > 0 ? (
+							savedApartments.apartment?.map((item, index) => (
 								<div className='col-lg-4 col-md-4 col-sm-6' key={index}>
 									<div key={index} className='p_4 mb-5'>
-										<ApartmentCard apartmentInfo={item} />
+										<ApartmentCard
+											apartmentInfo={item?.apartmentId}
+											showfalse={false}
+										/>
 									</div>
 								</div>
 							))

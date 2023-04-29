@@ -12,7 +12,7 @@ export interface ApartmentInitialInterface {
 	isDeleting: boolean
 	deleteSuccess: boolean
 	isCreatingApartment: boolean
-	savedApartments: NearbyApartmentsInterface | null
+	savedApartments: SavedApartmentsInterface | null
 	isSavingApartment: boolean
 }
 
@@ -36,6 +36,15 @@ export const ApartmentInitialState: ApartmentInitialInterface = {
 
 export interface NearbyApartmentsInterface {
 	apartments: ApartmentInterface[]
+}
+
+export interface SavedApartmentsInterface {
+	apartment: SavedApartmentsInnerInterface[]
+}
+
+export interface SavedApartmentsInnerInterface {
+	apartmentId: ApartmentInterface
+	id: string
 }
 
 export interface ApartmentDetailInterface {

@@ -10,8 +10,10 @@ import { save_apartment } from '../features/apartment/apartmentSlice'
 
 const ApartmentCard = ({
 	apartmentInfo,
+	showfalse = true,
 }: {
 	apartmentInfo: ApartmentInterface
+	showfalse?: boolean
 }) => {
 	const dispatch = useAppDispatch()
 
@@ -45,7 +47,7 @@ const ApartmentCard = ({
 							</p>
 						</div>
 						<div className='col-2'>
-							{user_detail ? (
+							{user_detail && showfalse ? (
 								<>
 									<img
 										onClick={(e) => saveHandler(e, apartmentInfo._id)}

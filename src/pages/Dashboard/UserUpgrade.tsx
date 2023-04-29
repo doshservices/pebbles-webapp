@@ -84,6 +84,14 @@ const UserUpgrade = () => {
 			validId: uploadedCac,
 		}
 		dispatch(change_user_type(data))
+
+		setTimeout(() => {
+			setBusinessName('')
+			setBusinessAddress('')
+			setUploadedCac('')
+			setMainCac('')
+			setCacFile('')
+		}, 100)
 	}
 
 	return (

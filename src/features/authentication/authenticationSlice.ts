@@ -289,7 +289,7 @@ export const change_user_type = createAsyncThunk(
 		let token: string | null = store.getState()?.auth?.token
 
 		try {
-			const response = await axios.post(
+			const response = await axios.patch(
 				`${url}/users/change-user-type`,
 				payload,
 				{

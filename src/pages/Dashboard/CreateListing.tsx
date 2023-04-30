@@ -381,28 +381,31 @@ const CreateListing = () => {
 				if (string === 'create') {
 					await dispatch(create_apartment(data))
 
-					setTimeout(() => {
-						navigate('/user/dashboard/listings')
+					if (createSuccess) {
+						toast.success('Apartment listed successfully')
+						// setTimeout(() => {
+						// 	navigate('/user/dashboard/listings')
 
-						setApartmentName('')
-						setAddress('')
-						setApartmentCountry('NG')
-						setApartmentState('')
-						setPrice(0)
-						setTypeOfApartment('')
-						setFacilities([])
-						setApartmentInfo('')
-						setNumberOfBedrooms('')
-						setNumberOfToilets('')
-						setNumberOfGuests('')
-						setLandmark_image_values([])
-						setFeaturedImageFile('')
-						setImageFile('')
-						setLandmarkImageFile('')
-						setMainFeaturedImage([])
-						setMainImage([])
-						setMainLandmarkImage('')
-					}, 100)
+						// 	setApartmentName('')
+						// 	setAddress('')
+						// 	setApartmentCountry('NG')
+						// 	setApartmentState('')
+						// 	setPrice(0)
+						// 	setTypeOfApartment('')
+						// 	setFacilities([])
+						// 	setApartmentInfo('')
+						// 	setNumberOfBedrooms('')
+						// 	setNumberOfToilets('')
+						// 	setNumberOfGuests('')
+						// 	setLandmark_image_values([])
+						// 	setFeaturedImageFile('')
+						// 	setImageFile('')
+						// 	setLandmarkImageFile('')
+						// 	setMainFeaturedImage([])
+						// 	setMainImage([])
+						// 	setMainLandmarkImage('')
+						// }, 100)
+					}
 				} else {
 					await dispatch(update_apartment({ ...data, id: params?.id }))
 				}

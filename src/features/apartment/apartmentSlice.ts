@@ -162,7 +162,7 @@ export const create_apartment = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast.error(message[0])
+			toast.error(message)
 
 			return rejectWithValue(message)
 		}

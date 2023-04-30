@@ -363,39 +363,59 @@ const CreateListing = () => {
 			landmark: inputFields,
 		}
 
-		if (user_detail?.isVerified && user_detail?.validId) {
-			if (string === 'create') {
-				await dispatch(create_apartment(data))
+		if (
+			numberOfBedrooms &&
+			numberOfToilets &&
+			numberOfGuests &&
+			lng &&
+			lat &&
+			apartmentName &&
+			address &&
+			apartmentCountry &&
+			apartmentState &&
+			price &&
+			typeOfApartment &&
+			facilities?.length > 0 &&
+			featuredImageList?.length > 0 &&
+			imageList?.length > 0 &&
+			apartmentInfo
+		) {
+			if (user_detail?.isVerified && user_detail?.validId) {
+				if (string === 'create') {
+					await dispatch(create_apartment(data))
 
-				setTimeout(() => {
-					navigate('/user/dashboard/listings')
+					setTimeout(() => {
+						navigate('/user/dashboard/listings')
 
-					setApartmentName('')
-					setAddress('')
-					setApartmentCountry('NG')
-					setApartmentState('')
-					setPrice(0)
-					setTypeOfApartment('')
-					setFacilities([])
-					setApartmentInfo('')
-					setNumberOfBedrooms('')
-					setNumberOfToilets('')
-					setNumberOfGuests('')
-					setLandmark_image_values([])
-					setFeaturedImageFile('')
-					setImageFile('')
-					setLandmarkImageFile('')
-					setMainFeaturedImage([])
-					setMainImage([])
-					setMainLandmarkImage('')
-				}, 100)
+						setApartmentName('')
+						setAddress('')
+						setApartmentCountry('NG')
+						setApartmentState('')
+						setPrice(0)
+						setTypeOfApartment('')
+						setFacilities([])
+						setApartmentInfo('')
+						setNumberOfBedrooms('')
+						setNumberOfToilets('')
+						setNumberOfGuests('')
+						setLandmark_image_values([])
+						setFeaturedImageFile('')
+						setImageFile('')
+						setLandmarkImageFile('')
+						setMainFeaturedImage([])
+						setMainImage([])
+						setMainLandmarkImage('')
+					}, 100)
+				} else {
+					await dispatch(update_apartment({ ...data, id: params?.id }))
+				}
 			} else {
-				await dispatch(update_apartment({ ...data, id: params?.id }))
+				toast.error(
+					'Please update your profile before proceeding to list an apartment.'
+				)
 			}
 		} else {
-			toast.error(
-				'Please update your profile before proceeding to list an apartment.'
-			)
+			toast.error('Please fill all required fields.')
 		}
 	}
 
@@ -477,7 +497,10 @@ const CreateListing = () => {
 							<form autoComplete='off'>
 								<div className='row'>
 									<div className='col-12'>
-										<h5>Basic Information</h5>
+										<h5 className='d-flex' style={{ alignItems: 'center' }}>
+											Basic Information
+											<span className='span_important'> ! </span>
+										</h5>
 									</div>
 									<div className='row justify-content-center'>
 										<div className='col-11'>
@@ -570,7 +593,10 @@ const CreateListing = () => {
 									</div>
 
 									<div className='col-12 mt-2'>
-										<h5>Location/Contact</h5>
+										<h5 className='d-flex' style={{ alignItems: 'center' }}>
+											Location/Contact
+											<span className='span_important'> ! </span>
+										</h5>
 									</div>
 									<div className='row justify-content-center'>
 										<div className='col-11'>
@@ -706,7 +732,10 @@ const CreateListing = () => {
 									</div>
 
 									<div className='col-12 mt-2'>
-										<h5>Media</h5>
+										<h5 className='d-flex' style={{ alignItems: 'center' }}>
+											Media
+											<span className='span_important'> ! </span>
+										</h5>
 									</div>
 									<div className='row justify-content-center'>
 										<div className='col-11'>
@@ -836,7 +865,10 @@ const CreateListing = () => {
 									</div>
 
 									<div className='col-12 mt-4 pt-2'>
-										<h5>Apartment Details</h5>
+										<h5 className='d-flex' style={{ alignItems: 'center' }}>
+											Apartment Details
+											<span className='span_important'> ! </span>
+										</h5>
 									</div>
 									<div className='row justify-content-center'>
 										<div className='col-11'>

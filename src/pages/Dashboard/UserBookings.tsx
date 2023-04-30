@@ -153,7 +153,7 @@ const UserBookings = () => {
 					</div>
 				) : (
 					<div>
-						<p>No bookings found</p>
+						<p>You have not made any bookings yet</p>
 					</div>
 				)}
 			</div>

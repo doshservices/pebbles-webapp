@@ -40,7 +40,7 @@ const UserWishlist = () => {
 						) : (
 							<div className='col-12'>
 								<div className='p_4 mb-5'>
-									<p>No results found</p>
+									<p>No saved apartments found</p>
 								</div>
 							</div>
 						)}

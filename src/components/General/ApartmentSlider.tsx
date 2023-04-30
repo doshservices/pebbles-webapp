@@ -45,16 +45,22 @@ const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
 	}
 
 	return (
-		<div className='container px-5 '>
-			<Slider {...settings}>
-				{data.map((item, index) => {
-					return index <= 5 ? (
-						<div key={index} className='p_4'>
-							<ApartmentCard apartmentInfo={item} />
-						</div>
-					) : null
-				})}
-			</Slider>
+		<div className='container '>
+			{data?.length !== 0 ? (
+				<div className='px-5'>
+					<Slider {...settings}>
+						{data.map((item, index) => {
+							return index <= 5 ? (
+								<div key={index} className='p_4'>
+									<ApartmentCard apartmentInfo={item} />
+								</div>
+							) : null
+						})}
+					</Slider>
+				</div>
+			) : (
+				<p> No apartments found. </p>
+			)}
 		</div>
 	)
 }

@@ -232,6 +232,46 @@ export const flutter_verify_booking = createAsyncThunk(
 	}
 )
 
+export const book_ride = createAsyncThunk(
+	'booking/book_ride',
+	async (
+		payload: {
+			pickupAddress: String | undefined
+			destination: String | undefined
+			pickupDate: String | undefined
+			pickupTime: String | undefined
+			departureTime?: Number | undefined
+			departureDate?: Number | undefined
+		},
+		thunkAPI
+	) => {
+		const { rejectWithValue } = thunkAPI
+		let token: string | null = store.getState()?.auth?.token
+
+		try {
+			const response = await axios.post(
+				`${url}/bookings/create-booking`,
+				payload,
+				{
+					headers: authHeader(token ? token : '123'),
+				}
+			)
+			toast.success(response?.data.message)
+			return response.data
+		} catch (error: any) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			toast.error(message[0])
+
+			return rejectWithValue(message)
+		}
+	}
+)
+
 export const { reducer: BookingReducer, actions } = createSlice({
 	name: 'booking',
 	initialState: BookingInitialState,

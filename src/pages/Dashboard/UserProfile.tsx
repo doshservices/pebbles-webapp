@@ -496,7 +496,7 @@ const UserProfile = () => {
 							</form>
 						</div>
 
-						<div
+						{/* <div
 							className='pebbles_form pb-5 mb-3'
 							style={{ borderBottom: '1px solid rgba(45, 45, 45, 0.4)' }}
 						>
@@ -569,7 +569,7 @@ const UserProfile = () => {
 									</div>
 								</div>
 							</form>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>

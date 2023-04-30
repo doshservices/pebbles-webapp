@@ -6,19 +6,30 @@ import { get_search_apartments } from '../../features/apartment/apartmentSlice'
 import { Calendar } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
+import { MultiSelect } from 'react-multi-select-component'
 import moment from 'moment'
 
 const SearchRideComponent = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
-	const [loc, setLoc] = useState<any>({})
+	const [pickupAddress, setPickupAddress] = useState<any>({})
+	const [destination, setDestination] = useState<any>({})
 	const [pickupDate, setPickupDate] = useState('')
+	const [pickupTime, setPickupTime] = useState('')
+	const [carAmenities, setCarAmenities] = useState([])
+	const [departureTime, setDepartureTime] = useState('')
 	const [departureDate, setDepartureDate] = useState('')
 	const [bookRound, setBookRound] = useState(false)
-	const [apartmentType, setApartmentType] = useState('')
 	const [showDepartureDate, setShowDepartureDate] = useState(false)
 	const [showPickupDate, setShowPickupDate] = useState(false)
+
+	const options = [
+		{ label: 'Wi-Fi', value: 'Wi-Fi' },
+		{ label: 'On-site maintenance', value: 'On-site maintenance' },
+		{ label: 'On-site management', value: 'On-site management' },
+		{ label: '24/7 CCTV Surveillance', value: '24/7 CCTV Surveillance' },
+	]
 
 	const setShowDateFalse = () => {
 		setShowDepartureDate(false)
@@ -33,13 +44,20 @@ const SearchRideComponent = () => {
 		setShowDepartureDate(!showDepartureDate)
 	}
 
-	const submitHandler = () => {
-		navigate('/search-apartments')
-	}
-
 	const setBookRoundHandler = () => {
 		setBookRound(!bookRound)
 		setShowDateFalse()
+	}
+
+	const submitHandler = () => {
+		let data = {
+			pickupAddress,
+			destination,
+			pickupDate,
+			pickupTime,
+			departureDate,
+			departureTime,
+		}
 	}
 
 	return (
@@ -60,7 +78,7 @@ const SearchRideComponent = () => {
 									<Autocomplete
 										apiKey={process.env.REACT_APP_GOOGLE_MAPS_API}
 										onPlaceSelected={(place) => {
-											setLoc(place)
+											setPickupAddress(place)
 										}}
 										className='form-control'
 										placeholder='Pickup  Address'
@@ -74,7 +92,7 @@ const SearchRideComponent = () => {
 									<Autocomplete
 										apiKey={process.env.REACT_APP_GOOGLE_MAPS_API}
 										onPlaceSelected={(place) => {
-											setLoc(place)
+											setDestination(place)
 										}}
 										className='form-control'
 										placeholder='Destination'
@@ -114,14 +132,32 @@ const SearchRideComponent = () => {
 										type='text'
 										className='form-control'
 										placeholder='Pickup Time, e.g. 12pm'
+										onChange={(e) => setPickupTime(e.target.value)}
 									/>
 								</div>
 							</div>
 						</div>
-						<div className='col-12'>
+
+						<div className='col-4 mb-3'>
+							<label htmlFor='' className='book_trip_text'>
+								Select Ride Amenities
+							</label>
+							<div className='d-block'>
+								<MultiSelect
+									options={options}
+									value={carAmenities}
+									onChange={setCarAmenities}
+									labelledBy='Ride Amenities'
+									// className='form-control'
+									className='muu'
+								/>
+							</div>
+						</div>
+						<div className='col-5'>
 							<input type='checkbox' onChange={(e) => setBookRoundHandler()} />{' '}
 							<label className='book_trip_text'> Book roundtrip </label>
 						</div>
+
 						{bookRound && (
 							<div className='col-lg-7'>
 								<div className='row'>
@@ -155,6 +191,7 @@ const SearchRideComponent = () => {
 											type='text'
 											className='form-control'
 											placeholder='Departure Time, e.g. 12pm'
+											onChange={(e) => setDepartureTime(e.target.value)}
 										/>
 									</div>
 								</div>
@@ -169,7 +206,7 @@ const SearchRideComponent = () => {
 								className='btn btn-primary form-control'
 								onClick={() => submitHandler()}
 							>
-								Search
+								Submit
 							</button>
 						</div>
 					</div>

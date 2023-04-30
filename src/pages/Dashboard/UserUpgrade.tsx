@@ -75,8 +75,8 @@ const UserUpgrade = () => {
 	const submitHandler = (e: any) => {
 		e.preventDefault()
 		let data = {
-			businessName,
-			businessAddress,
+			// businessName,
+			// businessAddress,
 			validId: uploadedCac,
 		}
 		dispatch(change_user_type(data))
@@ -96,7 +96,7 @@ const UserUpgrade = () => {
 				<div className='col-lg-9 col-11'>
 					<div className='dashboard_pad'>
 						<p style={{ fontSize: '14px', fontWeight: '500' }}>
-							Upgrade your Personal account today. Become a Business host by
+							Upgrade your Personal account today. Become an Individual host by
 							providing us with the details below. An email will be sent after
 							verifying your information confirming the update.
 						</p>
@@ -106,7 +106,7 @@ const UserUpgrade = () => {
 						>
 							<form autoComplete='off'>
 								<div className='row'>
-									<div className='col-md-12'>
+									{/* <div className='col-md-12'>
 										<label htmlFor=''>Business Name</label>
 										<input
 											type='text'
@@ -126,12 +126,12 @@ const UserUpgrade = () => {
 											className='form-control'
 											onChange={(e) => setBusinessAddress(e.target.value)}
 										/>
-									</div>
+									</div> */}
 
-									<div className='col-md-4 col-sm-6'>
+									<div className='col-md-12 col-sm-12'>
 										<div className='facilities__images'>
 											<label className='facilities__images-text'>
-												CAC Document
+												Any Valid Document (NIN, Driver's licence, etc)
 											</label>
 
 											<input

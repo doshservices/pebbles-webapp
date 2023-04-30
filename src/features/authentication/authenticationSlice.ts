@@ -280,8 +280,8 @@ export const change_user_type = createAsyncThunk(
 	async (
 		payload: {
 			validId: string
-			businessAddress: string
-			businessName: string
+			// businessAddress: string
+			// businessName: string
 		},
 		thunkAPI
 	) => {

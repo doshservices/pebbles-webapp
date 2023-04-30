@@ -535,9 +535,7 @@ const CreateListing = () => {
 															<option value=''> Choose Apartment Type </option>
 															<option value='BQ'>BQ</option>
 															<option value='Studio'>Studio</option>
-															<option value='Party house/Pad'>
-																Party house/Pad
-															</option>
+
 															<option value='1 Bedroom Flat'>
 																1 Bedroom Flat
 															</option>
@@ -581,6 +579,9 @@ const CreateListing = () => {
 															</option>
 															<option value='Cottage/Farmhouse/Ranch'>
 																Cottage/Farmhouse/Ranch
+															</option>
+															<option value='Party house/Pad'>
+																Party house/Pad
 															</option>
 															<option value='Villa/Mansions'>
 																Villa/Mansions

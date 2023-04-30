@@ -36,16 +36,13 @@ const UserUpgrade = () => {
 		getBase64(file)
 			.then((result) => {
 				file['base64'] = result
-				// console.log('File Is', file)
 				let split = file.base64.split(',')
 
 				setCacFile(split[1])
 				let type = file.type.split('/')
 				setCacFormat(type[1])
 			})
-			.catch((err) => {
-				console.log(err)
-			})
+			.catch((err) => {})
 	}
 
 	const uploadCacHandler = () => {
@@ -69,7 +66,6 @@ const UserUpgrade = () => {
 				setCacFile('')
 			})
 			.catch((err) => {
-				console.log(err)
 				setUploading(false)
 				setMainCac('')
 				setCacFile('')

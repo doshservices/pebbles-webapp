@@ -58,7 +58,6 @@ export const get_notification_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
 
 			return rejectWithValue(message)
 		}
@@ -92,7 +91,6 @@ export const delete_notification = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
 
 			return rejectWithValue(message)
 		}
@@ -170,7 +168,13 @@ export const post_newsletter = createAsyncThunk(
 export const { reducer: NotificationReducer, actions } = createSlice({
 	name: 'notifications',
 	initialState: NotificationInitialState,
-	reducers: {},
+	reducers: {
+		notificationReset: (state) => {
+			state.notifications = null
+			state.notification = null
+			state.deleteSuccess = null
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(get_all_notifications.fulfilled, (state, action) => {
 			state.notifications = action.payload.data
@@ -219,4 +223,4 @@ export const { reducer: NotificationReducer, actions } = createSlice({
 	},
 })
 
-export const {} = actions
+export const { notificationReset } = actions

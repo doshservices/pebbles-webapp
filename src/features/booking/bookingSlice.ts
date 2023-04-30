@@ -276,9 +276,13 @@ export const { reducer: BookingReducer, actions } = createSlice({
 	name: 'booking',
 	initialState: BookingInitialState,
 	reducers: {
-		reset: (state) => {
+		bookingReset: (state) => {
 			state.booking = null
 			state.bookings = null
+			state.bookingDetail = null
+			state.flutterBooking = null
+			state.bookingState = null
+			state.flutterVerify = null
 		},
 		save_booking_to_state: (state, action) => {
 			state.bookingState = action.payload
@@ -363,5 +367,8 @@ export const { reducer: BookingReducer, actions } = createSlice({
 	},
 })
 
-export const { reset, save_booking_to_state, delete_booking_from_state } =
-	actions
+export const {
+	bookingReset,
+	save_booking_to_state,
+	delete_booking_from_state,
+} = actions

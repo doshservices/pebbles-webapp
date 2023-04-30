@@ -104,7 +104,6 @@ const UserProfile = () => {
 		getBase64(file)
 			.then((result) => {
 				file['base64'] = result
-				// console.log('File Is', file)
 				let split = file.base64.split(',')
 
 				if (text === 'image') {
@@ -121,9 +120,7 @@ const UserProfile = () => {
 					setCacFormat(type[1])
 				}
 			})
-			.catch((err) => {
-				console.log(err)
-			})
+			.catch((err) => {})
 	}
 
 	const uploadFileHandler = () => {
@@ -147,7 +144,6 @@ const UserProfile = () => {
 				setImageFile('')
 			})
 			.catch((err) => {
-				console.log(err)
 				setUploading(false)
 				setMainImage('')
 				setImageFile('')
@@ -175,7 +171,6 @@ const UserProfile = () => {
 				setIdFile('')
 			})
 			.catch((err) => {
-				console.log(err)
 				setUploading(false)
 				setMainId('')
 				setIdFile('')
@@ -203,7 +198,6 @@ const UserProfile = () => {
 				setCacFile('')
 			})
 			.catch((err) => {
-				console.log(err)
 				setUploading(false)
 				setMainCac('')
 				setCacFile('')

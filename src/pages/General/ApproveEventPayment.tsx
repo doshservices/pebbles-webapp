@@ -12,8 +12,6 @@ const ApproveEventPayment = () => {
 
 	const searchParams = location.search.split('&').map((e) => e.split('=')[1])
 
-	console.log(searchParams)
-
 	const { isFlutterVerify, flutterVerify } = useAppSelector(
 		(state) => state.booking
 	)

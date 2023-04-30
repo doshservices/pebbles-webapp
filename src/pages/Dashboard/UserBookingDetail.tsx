@@ -14,10 +14,6 @@ const UserBookingDetail = () => {
 		(state) => state.booking
 	)
 
-	console.log('====================================')
-	console.log('bookingDetail', bookingDetail)
-	console.log('====================================')
-
 	useEffect(() => {
 		dispatch(get_booking_by_id({ id: params?.id }))
 

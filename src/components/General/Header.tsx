@@ -21,6 +21,9 @@ import profileCircle from '../../assets/profile-circle.png'
 import profileCircleBlack from '../../assets/profile-circle-black.png'
 import '../../styles/header.css'
 import { reset } from '../../features/authentication/authenticationSlice'
+import { bookingReset } from '../../features/booking/bookingSlice'
+import { apartmentReset } from '../../features/apartment/apartmentSlice'
+import { notificationReset } from '../../features/notification/notificationSlice'
 
 const Header = ({ type }: { type: number }) => {
 	const dispatch = useAppDispatch()
@@ -40,6 +43,9 @@ const Header = ({ type }: { type: number }) => {
 	const logoutHandler = (e: any) => {
 		e.preventDefault()
 		dispatch(reset())
+		dispatch(bookingReset())
+		dispatch(apartmentReset())
+		dispatch(notificationReset())
 	}
 
 	return (

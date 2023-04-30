@@ -7,6 +7,9 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import Avatar1 from '../../../assets/profile-circle-black.png'
 import { Dropdown } from 'react-bootstrap'
 import { reset } from '../../../features/authentication/authenticationSlice'
+import { bookingReset } from '../../../features/booking/bookingSlice'
+import { apartmentReset } from '../../../features/apartment/apartmentSlice'
+import { notificationReset } from '../../../features/notification/notificationSlice'
 
 const NavHeader = ({ openMenu, toggleMenu, handle }) => {
 	const dispatch = useAppDispatch()
@@ -15,6 +18,9 @@ const NavHeader = ({ openMenu, toggleMenu, handle }) => {
 	const logoutHandler = (e) => {
 		e.preventDefault()
 		dispatch(reset())
+		dispatch(bookingReset())
+		dispatch(apartmentReset())
+		dispatch(notificationReset())
 	}
 	return (
 		<header

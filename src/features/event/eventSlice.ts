@@ -125,7 +125,6 @@ export const flutter_verify_event = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log(error)
 
 			return rejectWithValue(message)
 		}
@@ -148,7 +147,6 @@ export const get_search_events = createAsyncThunk(
 					headers: header,
 				}
 			)
-			console.log('resp', response.data)
 
 			return response.data
 		} catch (error: any) {

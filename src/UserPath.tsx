@@ -42,13 +42,6 @@ const UserPath = () => {
 	// 	let newPath = '/' + pathnameArray[1] + '/' + pathnameArray[2]
 	// 	let check = items[0].children.find((e) => e.url === pathname)
 	// 	// let check = items[0].children.find((e) => e.url === location.pathname)
-	// 	console.log('====================================')
-	// 	console.log('pathname', pathname)
-	// 	console.log('newPath', newPath)
-	// 	console.log('pathnameArray', pathnameArray)
-	// 	console.log('items', items)
-	// 	console.log('check', check)
-	// 	console.log('====================================')
 
 	// 	if (check && user_detail) {
 	// 		if (check.permission.includes(user_detail?.role)) {
@@ -59,7 +52,6 @@ const UserPath = () => {
 	// 		}
 	// 	} else {
 	// 		navigate('/user/dashboard/home') //Navigate to a common page
-	// 		console.log('Path not found') //Navigate to 404 page
 	// 	}
 	// }
 

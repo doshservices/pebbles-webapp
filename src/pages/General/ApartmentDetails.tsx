@@ -16,7 +16,7 @@ import Loader from '../../components/Loader'
 import axios from 'axios'
 import {
 	create_booking,
-	reset,
+	bookingReset,
 	save_booking_to_state,
 } from '../../features/booking/bookingSlice'
 import { header } from '../../utils/headers'
@@ -71,7 +71,6 @@ const ApartmentDetails = () => {
 				setIsLoading(false)
 			})
 			.catch((err) => {
-				console.log('error with fetching apartment availability', err)
 				setIsLoading(false)
 			})
 		setIsLoading(false)
@@ -101,7 +100,7 @@ const ApartmentDetails = () => {
 		dispatch(get_apartment_by_id({ id: params?.id }))
 
 		return () => {
-			dispatch(reset())
+			dispatch(bookingReset())
 		}
 	}, [params?.id, dispatch])
 

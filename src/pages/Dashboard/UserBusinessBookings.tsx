@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
-import building from '../../assets/building.png'
 import SliderImages from '../../components/SliderImages'
-import apartmentImg from '../../assets/picture.png'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
 	get_business_bookings,
-	reset,
+	bookingReset,
 } from '../../features/booking/bookingSlice'
 import { FaEye } from 'react-icons/fa'
 import moment from 'moment'
@@ -35,7 +33,7 @@ const UserBusinessBookings = () => {
 		dispatch(get_business_bookings())
 
 		return () => {
-			dispatch(reset())
+			dispatch(bookingReset())
 		}
 	}, [dispatch])
 

@@ -37,8 +37,6 @@ const About = () => {
 		RouteToTop()
 	}, [])
 
-	console.log(window.history)
-
 	return (
 		<main className='about_page'>
 			<section

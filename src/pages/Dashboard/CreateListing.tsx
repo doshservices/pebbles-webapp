@@ -210,9 +210,7 @@ const CreateListing = () => {
 						setImageFormat(type[1])
 					}
 				})
-				.catch((err) => {
-					console.log(err)
-				})
+				.catch((err) => {})
 		}
 	}
 
@@ -244,7 +242,6 @@ const CreateListing = () => {
 						setImageFile('')
 					})
 					.catch((err) => {
-						console.log(err)
 						setUploading(false)
 						// setMainImage(null)
 						setImageFile('')
@@ -437,8 +434,6 @@ const CreateListing = () => {
 
 	useEffect(() => {
 		if (!user_detail?.isVerified || !user_detail?.validId) {
-			console.log('djdjdhhjd')
-
 			toast('Please update your profile before listing an apartment.')
 		}
 	}, [user_detail?.isVerified, user_detail?.validId])

@@ -13,10 +13,6 @@ const UserDashboardHome = () => {
 
 	const { bookingState } = useAppSelector((state) => state.booking)
 
-	console.log('====================================')
-	console.log('bookingState', bookingState)
-	console.log('====================================')
-
 	useEffect(() => {
 		if (bookingState) {
 			dispatch(create_booking(bookingState))

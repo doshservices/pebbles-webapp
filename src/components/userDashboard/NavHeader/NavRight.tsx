@@ -6,6 +6,9 @@ import { useAppSelector } from '../../../app/hooks'
 import Avatar1 from '../../../assets/profile-circle-black.png'
 import { reset } from '../../../features/authentication/authenticationSlice'
 import { useAppDispatch } from '../../../app/hooks'
+import { bookingReset } from '../../../features/booking/bookingSlice'
+import { apartmentReset } from '../../../features/apartment/apartmentSlice'
+import { notificationReset } from '../../../features/notification/notificationSlice'
 
 const NavRight = () => {
 	const dispatch = useAppDispatch()
@@ -14,6 +17,9 @@ const NavRight = () => {
 	const logoutHandler = (e: any) => {
 		e.preventDefault()
 		dispatch(reset())
+		dispatch(bookingReset())
+		dispatch(apartmentReset())
+		dispatch(notificationReset())
 	}
 
 	return (

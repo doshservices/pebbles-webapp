@@ -114,7 +114,6 @@ export const get_apartment_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			console.log('message', message)
 
 			toast.error(message)
 
@@ -254,7 +253,6 @@ export const update_apartment = createAsyncThunk(
 		let token: string | null = store.getState()?.auth?.token
 		let idd = payload.id
 		delete payload.id
-		console.log('payload', payload)
 
 		try {
 			const response = await axios.put(`${url}/apartments/${idd}`, payload, {
@@ -339,7 +337,13 @@ export const get_saved_apartments = createAsyncThunk(
 export const { reducer: ApartmentReducer, actions } = createSlice({
 	name: 'apartments',
 	initialState: ApartmentInitialState,
-	reducers: {},
+	reducers: {
+		apartmentReset: (state) => {
+			state.nearbyApartments = null
+			state.userApartments = null
+			state.savedApartments = null
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(get_nearby_apartments.fulfilled, (state, action) => {
 			state.nearbyApartments = action.payload.data
@@ -451,4 +455,4 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 	},
 })
 
-export const {} = actions
+export const { apartmentReset } = actions

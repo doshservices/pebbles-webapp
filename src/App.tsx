@@ -34,6 +34,9 @@ import EventDetails from './pages/General/EventDetails'
 import UserSignup from './pages/General/UserSignup'
 import Ride from './pages/General/Ride'
 import ApproveEventPayment from './pages/General/ApproveEventPayment'
+import Food from './pages/General/Food'
+import Laundry from './pages/General/Laundry'
+import Voucher from './pages/General/Voucher'
 
 function App() {
 	return (
@@ -52,6 +55,9 @@ function App() {
 							<Route path='about-us' element={<About />} />
 							<Route path='contact' element={<Contact />} />
 							<Route path='add-ons/ride' element={<Ride />} />
+							<Route path='add-ons/voucher' element={<Voucher />} />
+							<Route path='add-ons/food' element={<Food />} />
+							<Route path='add-ons/laundry' element={<Laundry />} />
 							<Route path='events' element={<Events />} />
 							<Route
 								path='event/approve-payment/:id/payment-status'

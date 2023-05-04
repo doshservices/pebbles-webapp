@@ -210,7 +210,7 @@ export const forgot_password = createAsyncThunk(
 	async (
 		payload: {
 			newPassword: string
-			token: string
+			otp: string
 		},
 		thunkAPI
 	) => {
@@ -224,6 +224,8 @@ export const forgot_password = createAsyncThunk(
 					headers: header,
 				}
 			)
+
+			toast.success('Password changed successfully.')
 
 			return response.data
 		} catch (error: any) {

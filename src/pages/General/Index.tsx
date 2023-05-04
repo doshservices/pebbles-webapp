@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import '../../styles/index.css'
 import HomeCarousel from '../../components/General/HomeCarousel'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
-import apartmentImg from '../../assets/picture.png'
 import {
 	get_nearby_apartments,
 	get_all_apartments,
@@ -198,7 +197,7 @@ const Index = () => {
 						</div>
 
 						<div className='text-center mt-5 pt-2'>
-							<Link to='/' className='explore'>
+							<Link to='/all-apartments' className='explore'>
 								Explore Destinations
 							</Link>
 						</div>

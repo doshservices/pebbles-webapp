@@ -269,7 +269,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='/voucher' className='js_scroll'>
+											<Link to='/add-ons/voucher' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_light'
@@ -465,7 +465,7 @@ const Header = ({ type }: { type: number }) => {
 										</div>
 
 										<div className='col-md-4 col b_r_w navLink_div'>
-											<Link to='/voucher' className='js_scroll'>
+											<Link to='/add-ons/voucher' className='js_scroll'>
 												<div className='text-center'>
 													<img
 														className='sub_img_dark'

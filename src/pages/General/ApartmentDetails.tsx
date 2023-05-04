@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { comma } from '../../utils/helper'
 import { AiOutlineStop, AiOutlineClockCircle } from 'react-icons/ai'
 import { MdOutlinePayments } from 'react-icons/md'
@@ -23,15 +23,17 @@ import { header } from '../../utils/headers'
 import { toast } from 'react-hot-toast'
 import ModalComponent from '../../components/ModalComponent'
 import moment from 'moment'
+import { DateRange } from 'react-date-range'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
 
 const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
-	const navigate = useNavigate()
 
 	let url = 'https://pubblessignature-production.up.railway.app/api'
 
-	const { user_detail, token } = useAppSelector((state) => state.auth)
+	const { user_detail } = useAppSelector((state) => state.auth)
 	const { allApartments, apartment, isFetchingApartment, nearbyApartments } =
 		useAppSelector((state) => state.apartment)
 	const { booking, isCreatingBooking, bookingState } = useAppSelector(
@@ -42,11 +44,23 @@ const ApartmentDetails = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-	const [checkInDate, setCheckInDate] = useState<string>('')
-	const [checkOutDate, setCheckOutDate] = useState<string>('')
 	const [numberOfGuests, setNumberOfGuests] = useState<string>('')
 	const [availability, setAvailability] = useState<string[]>([])
 	const [openModal, setOpenModal] = useState(false)
+
+	const [showDate, setShowDate] = useState(false)
+
+	const [state, setState] = useState([
+		{
+			startDate: new Date(),
+			endDate: new Date(),
+			key: 'selection',
+		},
+	])
+
+	const showDateHandler = () => {
+		setShowDate(!showDate)
+	}
 
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
@@ -81,13 +95,19 @@ const ApartmentDetails = () => {
 		let data = {
 			apartmentOwnerId: apartment?.apartment?.userId,
 			apartmentId: apartment?.apartment?._id,
-			checkInDate,
-			checkOutDate,
+			checkInDate: moment(state[0].startDate).format(),
+			checkOutDate: moment(state[0].endDate).format(),
 			bookingAmount: apartment?.apartment?.price,
 			numberOfGuests: Number(numberOfGuests),
 		}
 		if (user_detail) {
-			dispatch(create_booking(data))
+			if (
+				Number(numberOfGuests) <= Number(apartment?.apartment?.numberOfGuests)
+			) {
+				dispatch(create_booking(data))
+			} else {
+				toast.error('Number of guests exceeds maximum apartment capacity')
+			}
 		} else {
 			dispatch(save_booking_to_state(data))
 			toast(
@@ -364,39 +384,59 @@ const ApartmentDetails = () => {
 												>
 													<div className='apartment_formform_div'>
 														<div className='row g-0'>
-															<div className='col-lg-6 col-6'>
+															<div
+																className='col-12'
+																style={{ position: 'relative' }}
+															>
 																<div
-																	className='p-2 bor_bottom bor_right'
-																	style={{ alignItems: 'center' }}
+																	className='form-control input'
+																	onClick={showDateHandler}
+																	style={{
+																		borderRadius: '2px 2px 0px 0px',
+																		borderBottom: '1px solid #000',
+																		height: 48,
+																	}}
 																>
-																	<input
-																		type='text'
-																		placeholder='Check In'
-																		className='form-control'
-																		onFocus={(e) => (e.target.type = 'date')}
-																		onBlur={(e) => (e.target.type = 'text')}
-																		onChange={(e) =>
-																			setCheckInDate(e.target.value)
-																		}
-																	/>
+																	<p
+																		className='mb-0 pb-0'
+																		style={{ fontSize: '14px' }}
+																	>
+																		{moment(state[0].startDate).format(
+																			'YYYY-MM-DD'
+																		) ===
+																			String(
+																				moment(new Date()).format('YYYY-MM-DD')
+																			) &&
+																		moment(state[0].endDate).format(
+																			'YYYY-MM-DD'
+																		) ===
+																			String(
+																				moment(new Date()).format('YYYY-MM-DD')
+																			)
+																			? 'Check-in Date - Check-out Date'
+																			: `${moment(state[0].startDate).format(
+																					'ddd, MMMM Do'
+																			  )} - ${moment(state[0].endDate).format(
+																					'ddd, MMMM Do'
+																			  )}`}
+																	</p>
 																</div>
-															</div>
-															<div className='col-lg-6 col-6 '>
-																<div
-																	className='p-2 bor_bottom'
-																	style={{ alignItems: 'center' }}
-																>
-																	<input
-																		type='text'
-																		placeholder='Check Out'
-																		className='form-control'
-																		onFocus={(e) => (e.target.type = 'date')}
-																		onBlur={(e) => (e.target.type = 'text')}
-																		onChange={(e) =>
-																			setCheckOutDate(e.target.value)
-																		}
-																	/>
-																</div>
+																{showDate && (
+																	<div className='search_component_div_date apart_det_date'>
+																		<DateRange
+																			editableDateInputs={true}
+																			onChange={(item) =>
+																				setState([item.selection])
+																			}
+																			moveRangeOnFirstSelection={false}
+																			ranges={state}
+																			minDate={new Date()}
+																			disabledDates={availability?.map(
+																				(item) => new Date(item)
+																			)}
+																		/>
+																	</div>
+																)}
 															</div>
 															<div className='col-md-12'>
 																<div className='p-2'>
@@ -404,6 +444,7 @@ const ApartmentDetails = () => {
 																		type='number'
 																		placeholder='Guest'
 																		className='form-control'
+																		max={apartment?.apartment?.numberOfGuests}
 																		onChange={(e) =>
 																			setNumberOfGuests(e.target.value)
 																		}

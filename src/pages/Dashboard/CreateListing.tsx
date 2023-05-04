@@ -19,7 +19,7 @@ const CreateListing = () => {
 	const navigate = useNavigate()
 	const params = useParams()
 
-	const { user_detail, isLoading } = useAppSelector((state) => state.auth)
+	const { user_detail } = useAppSelector((state) => state.auth)
 	const { isFetchingApartment, createSuccess, apartment, isCreatingApartment } =
 		useAppSelector((state) => state.apartment)
 
@@ -36,7 +36,6 @@ const CreateListing = () => {
 	const [numberOfGuests, setNumberOfGuests] = useState<string>('')
 	const [lat, setLat] = useState<number>()
 	const [lng, setLng] = useState<number>()
-	const [formFields, setFormFields] = useState([0])
 	const [landmark_image_values, setLandmark_image_values] = useState<any[]>([])
 	const [imageIndex, setImageIndex] = useState<number>()
 
@@ -56,7 +55,6 @@ const CreateListing = () => {
 	const [uploadedLandmarkImage, setUploadedLandmarkImage] = useState('')
 	const [featuredImageList, setFeaturedImageList] = React.useState<string[]>([])
 	const [imageList, setImageList] = React.useState<string[]>([])
-	const [landmarkImageList, setLandmarkImageList] = React.useState<string[]>([])
 	const [uploading, setUploading] = useState(false)
 	const [fileLength, setFileLength] = React.useState('')
 
@@ -383,28 +381,28 @@ const CreateListing = () => {
 
 					if (createSuccess) {
 						toast.success('Apartment listed successfully')
-						// setTimeout(() => {
-						// 	navigate('/user/dashboard/listings')
+						setTimeout(() => {
+							navigate('/user/dashboard/listings')
 
-						// 	setApartmentName('')
-						// 	setAddress('')
-						// 	setApartmentCountry('NG')
-						// 	setApartmentState('')
-						// 	setPrice(0)
-						// 	setTypeOfApartment('')
-						// 	setFacilities([])
-						// 	setApartmentInfo('')
-						// 	setNumberOfBedrooms('')
-						// 	setNumberOfToilets('')
-						// 	setNumberOfGuests('')
-						// 	setLandmark_image_values([])
-						// 	setFeaturedImageFile('')
-						// 	setImageFile('')
-						// 	setLandmarkImageFile('')
-						// 	setMainFeaturedImage([])
-						// 	setMainImage([])
-						// 	setMainLandmarkImage('')
-						// }, 100)
+							setApartmentName('')
+							setAddress('')
+							setApartmentCountry('NG')
+							setApartmentState('')
+							setPrice(0)
+							setTypeOfApartment('')
+							setFacilities([])
+							setApartmentInfo('')
+							setNumberOfBedrooms('')
+							setNumberOfToilets('')
+							setNumberOfGuests('')
+							setLandmark_image_values([])
+							setFeaturedImageFile('')
+							setImageFile('')
+							setLandmarkImageFile('')
+							setMainFeaturedImage([])
+							setMainImage([])
+							setMainLandmarkImage('')
+						}, 100)
 					}
 				} else {
 					await dispatch(update_apartment({ ...data, id: params?.id }))

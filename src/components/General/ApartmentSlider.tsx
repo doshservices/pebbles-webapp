@@ -11,7 +11,7 @@ const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
 		slidesToShow: 3,
 		arrows: true,
 		slidesToScroll: 1,
-		autoplay: true,
+		autoplay: false,
 		autoplaySpeed: 9000,
 		pauseOnHover: true,
 		responsive: [
@@ -47,7 +47,7 @@ const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
 	return (
 		<div className='container '>
 			{data?.length !== 0 ? (
-				<div className='px-5'>
+				<div className='px_5'>
 					<Slider {...settings}>
 						{data.map((item, index) => {
 							return index <= 5 ? (

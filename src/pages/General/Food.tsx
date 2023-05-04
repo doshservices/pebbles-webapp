@@ -9,9 +9,9 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import bgImage from '../../assets/Become_a_Host.jpg'
 import { Link } from 'react-router-dom'
-import RideCarousel from '../../components/General/RideCarousel'
+import FoodCarousel from '../../components/General/FoodCarousel'
 
-const Ride = () => {
+const Food = () => {
 	const dispatch = useAppDispatch()
 
 	const RouteToTop = () => {
@@ -38,7 +38,7 @@ const Ride = () => {
 	return (
 		<>
 			<main>
-				<RideCarousel />
+				<FoodCarousel />
 
 				<section className='explore_apartments'>
 					{user_detail ? (
@@ -122,4 +122,4 @@ const Ride = () => {
 	)
 }
 
-export default Ride
+export default Food

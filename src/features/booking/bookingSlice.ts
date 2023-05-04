@@ -232,16 +232,18 @@ export const flutter_verify_booking = createAsyncThunk(
 	}
 )
 
-export const book_ride = createAsyncThunk(
-	'booking/book_ride',
+export const book_add_on = createAsyncThunk(
+	'booking/book_add_on',
 	async (
 		payload: {
-			pickupAddress: String | undefined
-			destination: String | undefined
-			pickupDate: String | undefined
-			pickupTime: String | undefined
-			departureTime?: Number | undefined
-			departureDate?: Number | undefined
+			address: String | undefined
+			serviceType: String | undefined
+			destination?: String | undefined
+			pickUpDate?: String | undefined
+			pickUpTime?: String | undefined
+			departureTime?: String | undefined
+			departureDate?: String | undefined
+			amenities?: String[]
 		},
 		thunkAPI
 	) => {
@@ -249,14 +251,12 @@ export const book_ride = createAsyncThunk(
 		let token: string | null = store.getState()?.auth?.token
 
 		try {
-			const response = await axios.post(
-				`${url}/bookings/create-booking`,
-				payload,
-				{
-					headers: authHeader(token ? token : '123'),
-				}
+			const response = await axios.post(`${url}/addons`, payload, {
+				headers: authHeader(token ? token : '123'),
+			})
+			toast.success(
+				'Service booked successfully. We will reach out to you shortly.'
 			)
-			toast.success(response?.data.message)
 			return response.data
 		} catch (error: any) {
 			const message =
@@ -265,7 +265,7 @@ export const book_ride = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast.error(message[0])
+			toast.error(message)
 
 			return rejectWithValue(message)
 		}
@@ -363,6 +363,16 @@ export const { reducer: BookingReducer, actions } = createSlice({
 		})
 		builder.addCase(flutter_verify_booking.rejected, (state, action) => {
 			state.isFlutterVerify = false
+		})
+		builder.addCase(book_add_on.fulfilled, (state, action) => {
+			state.bookingAddOn = action.payload.data
+			state.isBooking = false
+		})
+		builder.addCase(book_add_on.pending, (state, action) => {
+			state.isBooking = true
+		})
+		builder.addCase(book_add_on.rejected, (state, action) => {
+			state.isBooking = false
 		})
 	},
 })

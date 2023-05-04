@@ -5,12 +5,13 @@ import {
 	get_booking_by_id,
 } from '../../features/booking/bookingSlice'
 import { Link, useParams } from 'react-router-dom'
+import flutter from '../../assets/flutterwave.svg'
 
 const UserBookingDetail = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
 
-	const { bookingDetail, flutterBooking } = useAppSelector(
+	const { bookingDetail, flutterBooking, isFlutterBooking } = useAppSelector(
 		(state) => state.booking
 	)
 
@@ -107,22 +108,29 @@ const UserBookingDetail = () => {
 
 				{bookingDetail?.booking?.bookingStatus.toLowerCase() === 'pending' &&
 				bookingDetail?.booking?.paymentStatus.toLowerCase() === 'pending' ? (
-					<div className='d-flex mt-4'>
-						<Link
+					<div className=' mt-4'>
+						{/* <Link
 							className='btn btn-primary mr-4 text-white'
 							to={`/dashboard/bookings/${bookingDetail?.booking._id}/wallet`}
 							style={{ fontSize: '12px' }}
 						>
 							Pay with wallet
-						</Link>
-						{/* <FlutterWaveButton {...fwConfig} className='btn btn-primary' /> */}
+						</Link> */}
+						<p className='d-block'> Pay with: </p>
 						{flutterBooking && (
 							<a
-								className='btn btn-primary mr-4 text-white'
+								className='btn btn-white mr-4'
 								href={flutterBooking.booking}
-								style={{ fontSize: '12px' }}
+								style={{ fontSize: '12px', border: '1px solid #000' }}
+								aria-disabled={isFlutterBooking}
 							>
-								Pay with Flutterwave
+								{isFlutterBooking ? (
+									<i className='fas fa-spinner fa-spin'></i>
+								) : (
+									<>
+										<img src={flutter} alt='' style={{ width: 120 }} />
+									</>
+								)}
 							</a>
 						)}
 					</div>

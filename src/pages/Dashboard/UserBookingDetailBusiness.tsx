@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { get_booking_by_id } from '../../features/booking/bookingSlice'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const UserBookingDetailBusiness = () => {
 	const dispatch = useAppDispatch()

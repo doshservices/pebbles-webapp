@@ -367,3 +367,26 @@
 		text-align: center;
 	}
 }
+
+/* ride search component */
+.search_component_div_date.ride_date {
+	position: absolute;
+	z-index: 999;
+	left: 33%;
+	right: 33%;
+	top: 3rem;
+}
+
+@media (max-width: 992px) {
+	.search_component_div_date.ride_date {
+		top: 7rem;
+		left: 10%;
+	}
+}
+
+/* @media (max-width: 576px) { */
+.search_component_div_date.apart_det_date {
+	top: 5rem;
+	left: -2rem;
+}
+/* } */

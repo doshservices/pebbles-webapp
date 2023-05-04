@@ -14,6 +14,8 @@ export interface BookingInitialInterface {
 	bookingState: SaveBookingInterface | null
 	flutterVerify: FlutterBookingInterface | null
 	isFlutterVerify: boolean
+	bookingAddOn: BookingInterface | null
+	isBooking: boolean
 }
 
 export const BookingInitialState: BookingInitialInterface = {
@@ -29,6 +31,8 @@ export const BookingInitialState: BookingInitialInterface = {
 	bookingState: null,
 	flutterVerify: null,
 	isFlutterVerify: false,
+	bookingAddOn: null,
+	isBooking: false,
 }
 
 export interface BookingsInterface {

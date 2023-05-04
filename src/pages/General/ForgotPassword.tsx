@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import OTPInput, { ResendOTP } from 'otp-input-react'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
 import Registration4 from '../../assets/Registration4.jpg'
@@ -12,6 +12,7 @@ import {
 
 const ForgotPassword = () => {
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
 	const { isLoading } = useAppSelector((state) => state.auth)
 
@@ -81,9 +82,13 @@ const ForgotPassword = () => {
 			if (newPassword === confirmPassword) {
 				let data = {
 					newPassword,
-					token: OTP,
+					otp: OTP,
 				}
 				dispatch(forgot_password(data))
+
+				setTimeout(() => {
+					navigate('/auth/login')
+				}, 1000)
 			} else {
 				setMessage("Passwords don't match")
 			}

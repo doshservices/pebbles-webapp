@@ -5,7 +5,6 @@ import { comma } from '../utils/helper'
 import SliderImages from './SliderImages'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import white_heart from '../assets/white_heart.png'
-import blue_heart from '../assets/blue_heart.png'
 import { save_apartment } from '../features/apartment/apartmentSlice'
 
 const ApartmentCard = ({

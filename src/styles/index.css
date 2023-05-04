@@ -90,6 +90,11 @@ a {
 	font-size: 28px;
 }
 
+.explore_apartments .px_5 {
+	padding-left: 3rem;
+	padding-right: 3rem;
+}
+
 .new_apartments {
 	position: relative;
 	padding-top: 4rem;
@@ -250,6 +255,11 @@ a {
 	.homepage_div h1 {
 		font-size: 32px;
 	}
+
+	.explore_apartments .px_5 {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
 }
 
 @media (max-width: 767px) {
@@ -264,6 +274,11 @@ a {
 
 	.unlock_your h1 {
 		font-size: 24px;
+	}
+
+	.explore_apartments .px_5 {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
@@ -901,6 +916,28 @@ a {
 .book_trip_text {
 	color: white;
 	font-size: 14px;
+}
+
+.input_multi {
+	background-color: #fff;
+	border-radius: 0.4rem;
+	height: 2.5rem;
+	padding-bottom: 1rem;
+}
+
+.input_multi .searchWrapper {
+	border: 1px solid transparent !important;
+}
+
+.search_component_div .input_multi input {
+	padding-left: 0;
+	margin-top: 0;
+}
+
+.search_component_div .input_multi span {
+	top: 0;
+	color: #fff;
+	left: 0;
 }
 
 @media (max-width: 992px) {

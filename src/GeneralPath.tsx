@@ -16,8 +16,8 @@ const GeneralPath = () => {
 					location?.pathname === '/events' ||
 					location?.pathname === '/add-ons/ride' ||
 					location?.pathname === '/add-ons/food' ||
+					location?.pathname === '/add-ons/voucher' ||
 					location?.pathname === '/add-ons/laundry' ||
-					location?.pathname === '/voucher' ||
 					location?.pathname === '/contact'
 						? 1
 						: 2

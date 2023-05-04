@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { comma } from '../../utils/helper'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
@@ -9,16 +9,13 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
 	flutter_pay_event,
 	get_event_by_id,
-	reset,
 } from '../../features/event/eventSlice'
 import Loader from '../../components/Loader'
-// import { toast } from 'react-hot-toast'
-import ModalComponent from '../../components/ModalComponent'
-import moment from 'moment'
 import {
 	get_all_apartments,
 	get_nearby_apartments,
 } from '../../features/apartment/apartmentSlice'
+import flutter from '../../assets/flutterwave.svg'
 
 const EventDetails = () => {
 	const dispatch = useAppDispatch()
@@ -35,8 +32,6 @@ const EventDetails = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 
 	const [ticket, setTicket] = useState<string>('1')
-	const [availability, setAvailability] = useState<string[]>([])
-	const [openModal, setOpenModal] = useState(false)
 
 	const submitHandler = (e: any) => {
 		e.preventDefault()
@@ -183,12 +178,27 @@ const EventDetails = () => {
 												flutterEvent && event.eventCost > 0 ? (
 													<div className='col-12 pb-4'>
 														<p>Please proceed to make payment.</p>
-														<Link
-															to={flutterEvent.event.link}
-															className='btn btn-info text-white'
+														<a
+															className='btn btn-white mr-4'
+															href={flutterEvent.event.link}
+															style={{
+																fontSize: '12px',
+																border: '1px solid #000',
+															}}
+															aria-disabled={isFlutterEvent}
 														>
-															Pay With Flutterwave
-														</Link>
+															{isFlutterEvent ? (
+																<i className='fas fa-spinner fa-spin'></i>
+															) : (
+																<>
+																	<img
+																		src={flutter}
+																		alt=''
+																		style={{ width: 120 }}
+																	/>
+																</>
+															)}
+														</a>
 													</div>
 												) : null
 											) : (
@@ -261,21 +271,6 @@ const EventDetails = () => {
 					</>
 				)}
 			</section>
-			<ModalComponent
-				open={openModal}
-				toggle={() => setOpenModal(false)}
-				title='Booked Dates'
-			>
-				<div className='container'>
-					<ul>
-						{availability.map((item, index) => (
-							<li style={{ fontSize: '14px' }} key={index}>
-								{moment(item).format('MMMM Do, YYYY')}
-							</li>
-						))}
-					</ul>
-				</div>
-			</ModalComponent>
 		</main>
 	)
 }

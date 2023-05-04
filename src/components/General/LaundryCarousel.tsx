@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
-import carouselBackground1 from '../../assets/ride_bg.png'
+import carouselBackground1 from '../../assets/laundry_bg.png'
 import carouselBackground2 from '../../assets/Registration1.jpg'
 import SearchLaundryComponent from './SearchLaundryComponent'
 

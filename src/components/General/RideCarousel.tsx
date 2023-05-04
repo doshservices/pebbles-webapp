@@ -1,18 +1,10 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
-// import { Link, useNavigate } from 'react-router-dom'
 import Slider from 'react-slick'
 import carouselBackground1 from '../../assets/ride_bg.png'
-import carouselBackground2 from '../../assets/Registration1.jpg'
-// import carouselBackground3 from '../../assets/Registration2.png'
+import carouselBackground2 from '../../assets/ride2.png'
 import SearchRideComponent from './SearchRideComponent'
 
 const RideCarousel = () => {
-	// const navigate = useNavigate()
-
-	// const userAuth = useSelector((state) => state.userAuth)
-	// const { userDetail } = userAuth
-
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -20,7 +12,7 @@ const RideCarousel = () => {
 		slidesToShow: 1,
 		arrows: false,
 		slidesToScroll: 1,
-		autoplay: false,
+		autoplay: true,
 		autoplaySpeed: 9000,
 		pauseOnHover: false,
 	}

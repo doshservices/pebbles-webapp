@@ -8,6 +8,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import bgImage from '../../assets/Become_a_Host.jpg'
+import coming_soon from '../../assets/coming_soon.jpg'
 import { Link } from 'react-router-dom'
 import FoodCarousel from '../../components/General/FoodCarousel'
 
@@ -38,7 +39,22 @@ const Voucher = () => {
 	return (
 		<>
 			<main>
-				<FoodCarousel />
+				<div
+					className='home_carousel ride_carousel'
+					style={{ position: 'relative', height: '70vh' }}
+				>
+					<div>
+						<div
+							style={{
+								backgroundImage: `url(${coming_soon})`,
+								minHeight: '70vh',
+								backgroundSize: 'contain',
+								backgroundPosition: 'center',
+							}}
+							className='homepage_bg'
+						></div>
+					</div>
+				</div>
 
 				<section className='explore_apartments'>
 					{user_detail ? (

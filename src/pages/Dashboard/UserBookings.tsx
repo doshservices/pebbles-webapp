@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -36,14 +36,39 @@ const UserBookings = () => {
 		}
 	}
 
-	// useMemo(
-	// 	() => dispatch(get_user_bookings()),
-	// 	[dispatch, bookings?.bookings?.length]
-	// )
-
 	useEffect(() => {
 		dispatch(get_user_bookings())
 	}, [dispatch, cancelSuccess])
+
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage, setPostsPerPage] = useState(12)
+	const [loading, setLoading] = useState(false)
+
+	const indexOfLastPost = currentPage * postsPerPage
+	const indexOfFirstPost = indexOfLastPost - postsPerPage
+	const currentPosts = bookings?.bookings?.slice(
+		indexOfFirstPost,
+		indexOfLastPost
+	)
+
+	const pageNumbers: number[] = []
+
+	for (
+		let i: number = 1;
+		i <=
+		Math.ceil(
+			bookings && bookings?.bookings
+				? bookings?.bookings?.length / postsPerPage
+				: 0
+		);
+		i++
+	) {
+		pageNumbers.push(i)
+	}
+
+	const setPage = (pageNum: number) => {
+		setCurrentPage(pageNum)
+	}
 
 	return (
 		<main className='dashboard dashboard_bookings'>
@@ -62,7 +87,7 @@ const UserBookings = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{bookings?.bookings?.map((booking) => (
+								{currentPosts?.map((booking) => (
 									<tr key={booking._id}>
 										<td>
 											<SliderImages
@@ -157,6 +182,21 @@ const UserBookings = () => {
 					</div>
 				)}
 			</div>
+			{pageNumbers?.length > 1 && (
+				<div className='my_paginate'>
+					{pageNumbers.map((pageNum, index) => (
+						<span
+							key={index}
+							className={pageNum === currentPage ? 'active' : ''}
+							onClick={() => {
+								setPage(pageNum)
+							}}
+						>
+							{pageNum}
+						</span>
+					))}
+				</div>
+			)}
 		</main>
 	)
 }

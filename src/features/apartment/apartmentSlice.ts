@@ -76,6 +76,7 @@ export const get_all_apartments = createAsyncThunk(
 			const response = await axios.get(`${url}/apartments/all-apartments`, {
 				headers: header,
 			})
+			console.log('response.data', response.data)
 
 			return response.data
 		} catch (error: any) {

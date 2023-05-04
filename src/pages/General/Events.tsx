@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import EventCarousel from '../../components/General/EventCarousel'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { get_events, reset } from '../../features/event/eventSlice'
@@ -28,6 +28,28 @@ const Events = () => {
 		}
 	}, [dispatch])
 
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage, setPostsPerPage] = useState(12)
+	const [loading, setLoading] = useState(false)
+
+	const indexOfLastPost = currentPage * postsPerPage
+	const indexOfFirstPost = indexOfLastPost - postsPerPage
+	const currentPosts = events?.slice(indexOfFirstPost, indexOfLastPost)
+
+	const pageNumbers: number[] = []
+
+	for (
+		let i: number = 1;
+		i <= Math.ceil(events ? events?.length / postsPerPage : 0);
+		i++
+	) {
+		pageNumbers.push(i)
+	}
+
+	const setPage = (pageNum: number) => {
+		setCurrentPage(pageNum)
+	}
+
 	return (
 		<>
 			<main className='events_page'>
@@ -38,7 +60,7 @@ const Events = () => {
 						{isFetchingEvent ? (
 							<Loader />
 						) : events && events?.length > 0 ? (
-							events?.map((item, index) => (
+							currentPosts?.map((item, index) => (
 								<div className='col-lg-3 col-md-4 col-sm-6' key={index}>
 									<div className='apartment_card event_card'>
 										<Link to={`/events/${item._id}`}>
@@ -69,6 +91,22 @@ const Events = () => {
 						)}
 					</div>
 				</div>
+
+				{pageNumbers?.length > 1 && (
+					<div className='my_paginate'>
+						{pageNumbers.map((pageNum, index) => (
+							<span
+								key={index}
+								className={pageNum === currentPage ? 'active' : ''}
+								onClick={() => {
+									setPage(pageNum)
+								}}
+							>
+								{pageNum}
+							</span>
+						))}
+					</div>
+				)}
 			</main>
 		</>
 	)

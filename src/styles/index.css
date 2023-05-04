@@ -1024,3 +1024,32 @@ a {
 	left: -3rem;
 	width: 10rem;
 }
+
+/* ------------------------------------ pagination ------------------------------ */
+.my_paginate {
+	margin: 3rem 0 1.2rem 0;
+	display: flex;
+	justify-content: center;
+}
+.my_paginate span {
+	background-color: #fff;
+	border: 1px solid #999;
+	color: #111;
+	padding: 0.5rem 1rem;
+	margin: 0.15rem;
+	font-weight: 600;
+	box-shadow: 4px 3px 9px #999;
+	transition: all 0.4s ease-in-out;
+	text-decoration: none;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
+.my_paginate span:hover {
+	text-decoration: none;
+	box-shadow: 2px 7px 9px #999;
+}
+.my_paginate .active {
+	background: #155eef;
+	border: 1px solid #155eef;
+	color: #fff;
+}

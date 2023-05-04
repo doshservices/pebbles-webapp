@@ -441,7 +441,9 @@ const CreateListing = () => {
 
 	useEffect(() => {
 		if (!apartment || apartment?.apartment?._id !== params?.id) {
-			dispatch(get_apartment_by_id({ id: params?.id }))
+			if (params?.id) {
+				dispatch(get_apartment_by_id({ id: params?.id }))
+			}
 		} else {
 			setApartmentName(apartment ? apartment?.apartment?.apartmentName : '')
 			setAddress(apartment ? apartment?.apartment?.address : '')

@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { useAppSelector } from '../../app/hooks'
 import ApartmentCard from '../../components/ApartmentCard'
-import apartmentImg from '../../assets/picture.png'
 import GoogleMapReact from 'google-map-react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
@@ -43,6 +42,34 @@ const AllApartments = () => {
 			lng: 3.406448,
 		},
 		zoom: 11,
+	}
+
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage, setPostsPerPage] = useState(12)
+	const [loading, setLoading] = useState(false)
+
+	const indexOfLastPost = currentPage * postsPerPage
+	const indexOfFirstPost = indexOfLastPost - postsPerPage
+	const currentPosts = allApartments?.apartments?.slice(
+		indexOfFirstPost,
+		indexOfLastPost
+	)
+
+	const pageNumbers: number[] = []
+
+	for (
+		let i: number = 1;
+		i <=
+		Math.ceil(
+			allApartments ? allApartments?.apartments?.length / postsPerPage : 0
+		);
+		i++
+	) {
+		pageNumbers.push(i)
+	}
+
+	const setPage = (pageNum: number) => {
+		setCurrentPage(pageNum)
 	}
 
 	return (
@@ -93,7 +120,7 @@ const AllApartments = () => {
 							{isFetchingAllApartments ? (
 								<Loader />
 							) : allApartments && allApartments?.apartments.length > 0 ? (
-								allApartments?.apartments.map((item, index) => (
+								currentPosts?.map((item, index) => (
 									<div className='col-md-4 col-sm-6' key={index}>
 										<div key={index} className='p_4 mb-5'>
 											<ApartmentCard apartmentInfo={item} />
@@ -128,6 +155,22 @@ const AllApartments = () => {
 					</div>
 				</div>
 			</div>
+
+			{pageNumbers?.length > 1 && (
+				<div className='my_paginate'>
+					{pageNumbers.map((pageNum, index) => (
+						<span
+							key={index}
+							className={pageNum === currentPage ? 'active' : ''}
+							onClick={() => {
+								setPage(pageNum)
+							}}
+						>
+							{pageNum}
+						</span>
+					))}
+				</div>
+			)}
 		</section>
 	)
 }

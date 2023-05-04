@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { FaEye, FaPen, FaPlus, FaTrash } from 'react-icons/fa'
@@ -29,11 +29,6 @@ const UserListings = () => {
 		'Edit',
 		'Action',
 	]
-
-	useMemo(
-		() => dispatch(get_apartments_by_user()),
-		[dispatch, userApartments?.apartments?.length]
-	)
 
 	const deleteHandler = async (e: any, string: string) => {
 		e.preventDefault()

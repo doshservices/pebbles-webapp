@@ -329,6 +329,9 @@ export const { reducer: AuthReducer, actions } = createSlice({
 			state.user_register = null
 			state.verifyOtp = null
 		},
+		resetVerifyOtp: (state) => {
+			state.verifyOtp = null
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(REHYDRATE, rehydrate)
@@ -418,4 +421,4 @@ export const { reducer: AuthReducer, actions } = createSlice({
 	},
 })
 
-export const { reset } = actions
+export const { reset, resetVerifyOtp } = actions

@@ -2,6 +2,7 @@ import React, { useState, useLayoutEffect, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
+	resetVerifyOtp,
 	user_signup,
 	verify_otp,
 } from '../../features/authentication/authenticationSlice'
@@ -122,6 +123,12 @@ const Signup = () => {
 			navigate('/auth/login')
 		}
 	}, [verifyOtp])
+
+	useEffect(() => {
+		return () => {
+			dispatch(resetVerifyOtp())
+		}
+	}, [dispatch])
 
 	return (
 		<main className='about_page auth_page'>

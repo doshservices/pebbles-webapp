@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { Country, State } from 'country-state-city'
 import { user_update } from '../../features/authentication/authenticationSlice'
+import { FaCheckCircle } from 'react-icons/fa'
 
 const UserProfile = () => {
 	const dispatch = useAppDispatch()
@@ -368,7 +369,17 @@ const UserProfile = () => {
 									>
 										<div className='facilities__images'>
 											<label className='facilities__images-text'>
-												Profile Picture
+												Profile Picture{' '}
+												<span>
+													{' '}
+													{user_detail?.profilePicture && (
+														<FaCheckCircle
+															color='#155eef'
+															size={12}
+															className='ms-1'
+														/>
+													)}{' '}
+												</span>
 											</label>
 
 											<input
@@ -412,7 +423,17 @@ const UserProfile = () => {
 									>
 										<div className='facilities__images'>
 											<label className='facilities__images-text'>
-												Valid ID
+												Valid ID{' '}
+												<span>
+													{' '}
+													{user_detail?.validId && (
+														<FaCheckCircle
+															color='#155eef'
+															size={12}
+															className='ms-1'
+														/>
+													)}{' '}
+												</span>
 											</label>
 
 											<input
@@ -450,7 +471,17 @@ const UserProfile = () => {
 										<div className='col-md-4 col-sm-6'>
 											<div className='facilities__images'>
 												<label className='facilities__images-text'>
-													CAC Document
+													CAC Document{' '}
+													<span>
+														{' '}
+														{user_detail?.cacDocument && (
+															<FaCheckCircle
+																color='#155eef'
+																size={12}
+																className='ms-1'
+															/>
+														)}{' '}
+													</span>
 												</label>
 
 												<input

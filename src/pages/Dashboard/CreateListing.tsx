@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import GoogleMapReact from 'google-map-react'
 import { Country, State } from 'country-state-city'
@@ -6,6 +6,7 @@ import blue_building from '../../assets/blue_building.png'
 import { FaMapMarkerAlt, FaPlus } from 'react-icons/fa'
 import { MultiSelect } from 'react-multi-select-component'
 import {
+	apartmentReset,
 	create_apartment,
 	get_apartment_by_id,
 	update_apartment,
@@ -18,6 +19,14 @@ const CreateListing = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const params = useParams()
+
+	const RouteToTop = () => {
+		window.scrollTo(0, 0)
+	}
+
+	useLayoutEffect(() => {
+		RouteToTop()
+	}, [])
 
 	const { user_detail } = useAppSelector((state) => state.auth)
 	const { isFetchingApartment, createSuccess, apartment, isCreatingApartment } =
@@ -362,8 +371,6 @@ const CreateListing = () => {
 			numberOfBedrooms &&
 			numberOfToilets &&
 			numberOfGuests &&
-			lng &&
-			lat &&
 			apartmentName &&
 			address &&
 			apartmentCountry &&
@@ -371,17 +378,14 @@ const CreateListing = () => {
 			price &&
 			typeOfApartment &&
 			facilities?.length > 0 &&
-			featuredImageList?.length > 0 &&
-			imageList?.length > 0 &&
 			apartmentInfo
 		) {
-			if (user_detail?.isVerified && user_detail?.validId) {
-				if (string === 'create') {
-					await dispatch(create_apartment(data))
+			if (imageList?.length > 0 && featuredImageList?.length > 0) {
+				if (user_detail?.isVerified && user_detail?.validId) {
+					if (string === 'create') {
+						await dispatch(create_apartment(data))
 
-					if (createSuccess) {
-						toast.success('Apartment listed successfully')
-						setTimeout(() => {
+						if (createSuccess) {
 							navigate('/user/dashboard/listings')
 
 							setApartmentName('')
@@ -402,14 +406,18 @@ const CreateListing = () => {
 							setMainFeaturedImage([])
 							setMainImage([])
 							setMainLandmarkImage('')
-						}, 100)
+						}
+					} else {
+						await dispatch(update_apartment({ ...data, id: params?.id }))
 					}
 				} else {
-					await dispatch(update_apartment({ ...data, id: params?.id }))
+					toast.error(
+						'Please update your profile before proceeding to list an apartment.'
+					)
 				}
 			} else {
 				toast.error(
-					'Please update your profile before proceeding to list an apartment.'
+					'Please upload the images before proceeding to list this apartment.'
 				)
 			}
 		} else {
@@ -438,6 +446,12 @@ const CreateListing = () => {
 			toast('Please update your profile before listing an apartment.')
 		}
 	}, [user_detail?.isVerified, user_detail?.validId])
+
+	useEffect(() => {
+		return () => {
+			dispatch(apartmentReset())
+		}
+	}, [dispatch])
 
 	useEffect(() => {
 		if (!apartment || apartment?.apartment?._id !== params?.id) {
@@ -660,70 +674,6 @@ const CreateListing = () => {
 																)
 															)}
 														</select>
-													</div>
-												</div>
-												<div className='col-md-6'>
-													<label htmlFor='city'>
-														{' '}
-														Longitude (Select position on the map){' '}
-													</label>
-
-													<div className='d-flex input_div'>
-														<img src={blue_building} alt='' />
-														<input
-															type='text'
-															required
-															placeholder='Longitude'
-															value={lng}
-															className='form-control'
-															disabled
-														/>
-													</div>
-												</div>
-												<div className='col-md-6'>
-													<label htmlFor='city'>
-														{' '}
-														Latitude (Select position on the map){' '}
-													</label>
-
-													<div className='d-flex input_div'>
-														<img src={blue_building} alt='' />
-														<input
-															type='text'
-															placeholder='Latitude'
-															value={lat}
-															required
-															className='form-control'
-															disabled
-														/>
-													</div>
-												</div>
-												<div className='col-12'>
-													<div className='mapp'>
-														<GoogleMapReact
-															bootstrapURLKeys={{
-																key: `${process.env.REACT_APP_GOOGLE_MAPS_API}`,
-															}}
-															defaultCenter={defaultProps.center}
-															defaultZoom={defaultProps.zoom}
-															onClick={(ev) => {
-																setLat(ev.lat)
-																setLng(ev.lng)
-															}}
-														>
-															{lng && lat && (
-																<AnyReactComponent
-																	lat={lat}
-																	lng={lng}
-																	text='My Marker'
-																/>
-															)}
-															<AnyReactComponent
-																lat={6.465422}
-																lng={3.406448}
-																text='My Marker'
-															/>
-														</GoogleMapReact>
 													</div>
 												</div>
 											</div>
@@ -965,6 +915,80 @@ const CreateListing = () => {
 										</div>
 									</div>
 
+									<div className='col-12 mt-4'>
+										<h5 className='d-flex' style={{ alignItems: 'center' }}>
+											Location Map
+										</h5>
+									</div>
+									<div className='row justify-content-center'>
+										<div className='col-11'>
+											<div className='row'>
+												<div className='col-md-6'>
+													<label htmlFor='city'>
+														Longitude (Select position on the map)
+													</label>
+
+													<div className='d-flex input_div'>
+														<img src={blue_building} alt='' />
+														<input
+															type='text'
+															required
+															placeholder='Longitude'
+															value={lng}
+															className='form-control'
+															disabled
+														/>
+													</div>
+												</div>
+												<div className='col-md-6'>
+													<label htmlFor='city'>
+														Latitude (Select position on the map)
+													</label>
+
+													<div className='d-flex input_div'>
+														<img src={blue_building} alt='' />
+														<input
+															type='text'
+															placeholder='Latitude'
+															value={lat}
+															required
+															className='form-control'
+															disabled
+														/>
+													</div>
+												</div>
+												<div className='col-12'>
+													<div className='mapp'>
+														<GoogleMapReact
+															bootstrapURLKeys={{
+																key: `${process.env.REACT_APP_GOOGLE_MAPS_API}`,
+															}}
+															defaultCenter={defaultProps.center}
+															defaultZoom={defaultProps.zoom}
+															onClick={(ev) => {
+																setLat(ev.lat)
+																setLng(ev.lng)
+															}}
+														>
+															{lng && lat && (
+																<AnyReactComponent
+																	lat={lat}
+																	lng={lng}
+																	text='My Marker'
+																/>
+															)}
+															<AnyReactComponent
+																lat={6.465422}
+																lng={3.406448}
+																text='My Marker'
+															/>
+														</GoogleMapReact>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
 									<div className='col-12 mt-4 pt-2'>
 										<h5> Landmark/Resturants </h5>
 									</div>
@@ -1086,7 +1110,7 @@ const CreateListing = () => {
 													? createHandler(e, 'update')
 													: createHandler(e, 'create')
 											}
-											className='btn btn-primary form-control'
+											className='btn btn_blue'
 											style={{ width: '13rem' }}
 											disabled={isFetchingApartment}
 										>

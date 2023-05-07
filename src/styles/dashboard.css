@@ -156,7 +156,7 @@
 	font-weight: 400;
 	font-size: 14px;
 	letter-spacing: 0.227791px;
-	color: rgba(45, 45, 45, 0.5);
+	/* color: rgba(45, 45, 45, 0.5); */
 	box-shadow: none;
 	background-color: #fff;
 }
@@ -260,4 +260,19 @@
 .tooltipp:hover .tooltipptext {
 	visibility: visible;
 	opacity: 1;
+}
+
+.btn_blue {
+	background-color: #155eef;
+	color: #fff;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn_blue:disabled {
+	background-color: #155eef;
+}
+
+.btn_blue:hover {
+	background-color: #071f50;
+	color: #fff;
 }

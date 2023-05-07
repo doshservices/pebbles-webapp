@@ -16,6 +16,7 @@ const UserProfile = () => {
 	const [businessName, setBusinessName] = useState(
 		user_detail ? user_detail.businessName : ''
 	)
+	const [email, setEmail] = useState(user_detail ? user_detail.email : '')
 	const [phoneNumber, setPhoneNumber] = useState(
 		user_detail ? user_detail.phoneNumber : ''
 	)
@@ -266,6 +267,17 @@ const UserProfile = () => {
 											placeholder='Enter First name here'
 											className='form-control'
 											onChange={(e) => setLastName(e.target.value)}
+										/>
+									</div>
+									<div className='col-md-12'>
+										<label htmlFor=''>Email</label>
+										<input
+											type='text'
+											value={email}
+											disabled
+											// placeholder='Enter First name here'
+											className='form-control'
+											// onChange={(e) => setLastName(e.target.value)}
 										/>
 									</div>
 									{user_detail?.role === 'BUSINESS' && (

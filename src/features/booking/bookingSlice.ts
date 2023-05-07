@@ -192,6 +192,7 @@ export const cancel_booking = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+			toast.error(message)
 
 			return rejectWithValue(message)
 		}

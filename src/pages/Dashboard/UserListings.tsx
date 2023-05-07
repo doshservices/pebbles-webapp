@@ -7,6 +7,7 @@ import 'react-tabs/style/react-tabs.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Loader from '../../components/Loader'
 import {
+	apartmentReset,
 	delete_apartment,
 	get_apartments_by_user,
 } from '../../features/apartment/apartmentSlice'
@@ -38,6 +39,9 @@ const UserListings = () => {
 
 	useEffect(() => {
 		dispatch(get_apartments_by_user())
+		return () => {
+			dispatch(apartmentReset())
+		}
 	}, [dispatch, deleteSuccess])
 
 	return (

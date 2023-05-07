@@ -23,25 +23,27 @@ const ApartmentCard = ({
 		dispatch(save_apartment({ apartmentId: id }))
 	}
 
+	console.log('apartmentInfo', apartmentInfo)
+
 	return (
 		<div className='apartment_card'>
-			<Link to={`/apartments/${apartmentInfo._id}`}>
+			<Link to={`/apartments/${apartmentInfo?._id}`}>
 				<div className='apartment_card_img_div'>
-					<SliderImages images={apartmentInfo.featuredImages} />
+					<SliderImages images={apartmentInfo?.featuredImages} />
 				</div>
 				<div className='apartment_card_div'>
 					<div className='row'>
 						<div className='col-10'>
 							<h6>
-								{apartmentInfo.address.length >= 50
-									? apartmentInfo.address.substring(0, 50) + '...'
-									: apartmentInfo.address}
+								{apartmentInfo?.address.length >= 50
+									? apartmentInfo?.address.substring(0, 50) + '...'
+									: apartmentInfo?.address}
 							</h6>
 							<p className='no_of_rooms' style={{ color: '#2d2d2d' }}>
-								{apartmentInfo.numberOfBedrooms} bedroom apartment
+								{apartmentInfo?.numberOfBedrooms} bedroom apartment
 							</p>
 							<p className='amount'>
-								<span>&#8358;{comma(String(apartmentInfo.price))} </span>{' '}
+								<span>&#8358;{comma(String(apartmentInfo?.price))} </span>{' '}
 								avg/night
 							</p>
 						</div>
@@ -49,7 +51,7 @@ const ApartmentCard = ({
 							{user_detail && showfalse ? (
 								<>
 									<img
-										onClick={(e) => saveHandler(e, apartmentInfo._id)}
+										onClick={(e) => saveHandler(e, apartmentInfo?._id)}
 										src={white_heart}
 										alt=''
 										style={{

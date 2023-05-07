@@ -6,6 +6,7 @@ import { authHeader, header } from '../../utils/headers'
 import config from '../../utils/config'
 import { store } from '../../app/store'
 import { toast } from 'react-hot-toast'
+import { reset } from '../authentication/authenticationSlice'
 
 let url = config.liveUrl
 
@@ -164,7 +165,9 @@ export const create_apartment = createAsyncThunk(
 				error.message ||
 				error.toString()
 			toast.error(message)
-
+			if (message == 'Unauthorized Access. Contact the admin.') {
+				store.dispatch(reset())
+			}
 			return rejectWithValue(message)
 		}
 	}
@@ -270,6 +273,10 @@ export const update_apartment = createAsyncThunk(
 				error.toString()
 			toast.error(message[0])
 
+			if (message == 'Unauthorized Access. Contact the admin.') {
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -343,6 +350,7 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 			state.nearbyApartments = null
 			state.userApartments = null
 			state.savedApartments = null
+			state.apartment = null
 		},
 	},
 	extraReducers: (builder) => {
@@ -387,16 +395,14 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 			state.isFetchingApartment = false
 		})
 		builder.addCase(create_apartment.fulfilled, (state, action) => {
-			state.createSuccess = true
+			state.createSuccess = action.payload.data
 			state.isCreatingApartment = false
 		})
 		builder.addCase(create_apartment.pending, (state, action) => {
 			state.isCreatingApartment = true
-			state.createSuccess = false
 		})
 		builder.addCase(create_apartment.rejected, (state, action) => {
 			state.isCreatingApartment = false
-			state.createSuccess = false
 		})
 		builder.addCase(get_apartments_by_user.fulfilled, (state, action) => {
 			state.userApartments = action.payload.data
@@ -407,7 +413,6 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 		})
 		builder.addCase(get_apartments_by_user.rejected, (state, action) => {
 			state.isFetchingAllApartments = false
-			state.createSuccess = false
 		})
 		builder.addCase(delete_apartment.fulfilled, (state, action) => {
 			state.deleteSuccess = true
@@ -422,16 +427,14 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 			state.deleteSuccess = false
 		})
 		builder.addCase(update_apartment.fulfilled, (state, action) => {
-			state.createSuccess = true
+			state.createSuccess = action.payload.data
 			state.isCreatingApartment = false
 		})
 		builder.addCase(update_apartment.pending, (state, action) => {
 			state.isCreatingApartment = true
-			state.createSuccess = false
 		})
 		builder.addCase(update_apartment.rejected, (state, action) => {
 			state.isCreatingApartment = false
-			state.createSuccess = false
 		})
 		builder.addCase(save_apartment.fulfilled, (state, action) => {
 			// state.savedApartments = action.payload.data

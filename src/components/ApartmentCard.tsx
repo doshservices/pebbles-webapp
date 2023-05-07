@@ -23,8 +23,6 @@ const ApartmentCard = ({
 		dispatch(save_apartment({ apartmentId: id }))
 	}
 
-	console.log('apartmentInfo', apartmentInfo)
-
 	return (
 		<div className='apartment_card'>
 			<Link to={`/apartments/${apartmentInfo?._id}`}>

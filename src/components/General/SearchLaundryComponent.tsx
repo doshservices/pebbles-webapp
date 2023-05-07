@@ -76,6 +76,9 @@ const SearchLaundryComponent = () => {
 										}}
 										className='form-control'
 										placeholder='Pickup  Address'
+										options={{
+											types: ['address'],
+										}}
 									/>
 								</div>
 							</div>

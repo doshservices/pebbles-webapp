@@ -66,6 +66,9 @@ const SearchFoodComponent = () => {
 										}}
 										className='form-control'
 										placeholder='Delivery  Address'
+										options={{
+											types: ['address'],
+										}}
 									/>
 								</div>
 							</div>

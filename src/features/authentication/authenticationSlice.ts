@@ -377,7 +377,7 @@ export const { reducer: AuthReducer, actions } = createSlice({
 			state.isLoading = false
 		})
 		builder.addCase(user_update.fulfilled, (state, action) => {
-			state.user_detail = action.payload.data.userDetails
+			state.user_detail = action.payload.data.user
 			state.token = action.payload.data.token
 			state.isLoading = false
 		})

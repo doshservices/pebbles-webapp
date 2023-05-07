@@ -384,29 +384,6 @@ const CreateListing = () => {
 				if (user_detail?.isVerified && user_detail?.validId) {
 					if (string === 'create') {
 						await dispatch(create_apartment(data))
-
-						if (createSuccess) {
-							navigate('/user/dashboard/listings')
-
-							setApartmentName('')
-							setAddress('')
-							setApartmentCountry('NG')
-							setApartmentState('')
-							setPrice(0)
-							setTypeOfApartment('')
-							setFacilities([])
-							setApartmentInfo('')
-							setNumberOfBedrooms('')
-							setNumberOfToilets('')
-							setNumberOfGuests('')
-							setLandmark_image_values([])
-							setFeaturedImageFile('')
-							setImageFile('')
-							setLandmarkImageFile('')
-							setMainFeaturedImage([])
-							setMainImage([])
-							setMainLandmarkImage('')
-						}
 					} else {
 						await dispatch(update_apartment({ ...data, id: params?.id }))
 					}
@@ -448,10 +425,32 @@ const CreateListing = () => {
 	}, [user_detail?.isVerified, user_detail?.validId])
 
 	useEffect(() => {
+		if (createSuccess) {
+			navigate('/user/dashboard/listings')
+
+			// setApartmentName('')
+			// setAddress('')
+			// setApartmentCountry('NG')
+			// setApartmentState('')
+			// setPrice(0)
+			// setTypeOfApartment('')
+			// setFacilities([])
+			// setApartmentInfo('')
+			// setNumberOfBedrooms('')
+			// setNumberOfToilets('')
+			// setNumberOfGuests('')
+			// setLandmark_image_values([])
+			// setFeaturedImageFile('')
+			// setImageFile('')
+			// setLandmarkImageFile('')
+			// setMainFeaturedImage([])
+			// setMainImage([])
+			// setMainLandmarkImage('')
+		}
 		return () => {
 			dispatch(apartmentReset())
 		}
-	}, [dispatch])
+	}, [dispatch, createSuccess])
 
 	useEffect(() => {
 		if (!apartment || apartment?.apartment?._id !== params?.id) {

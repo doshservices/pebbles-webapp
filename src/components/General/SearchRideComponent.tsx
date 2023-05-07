@@ -102,6 +102,9 @@ const SearchRideComponent = () => {
 											}}
 											className='form-control'
 											placeholder='Pickup  Address'
+											options={{
+												types: ['address'],
+											}}
 										/>
 									</div>
 									<div
@@ -119,6 +122,9 @@ const SearchRideComponent = () => {
 											}}
 											className='form-control'
 											placeholder='Destination'
+											options={{
+												types: ['address'],
+											}}
 										/>
 									</div>
 								</div>

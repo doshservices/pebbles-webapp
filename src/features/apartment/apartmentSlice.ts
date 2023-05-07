@@ -77,7 +77,6 @@ export const get_all_apartments = createAsyncThunk(
 			const response = await axios.get(`${url}/apartments/all-apartments`, {
 				headers: header,
 			})
-			console.log('response.data', response.data)
 
 			return response.data
 		} catch (error: any) {
@@ -262,7 +261,7 @@ export const update_apartment = createAsyncThunk(
 			const response = await axios.put(`${url}/apartments/${idd}`, payload, {
 				headers: authHeader(token ? token : '123'),
 			})
-			toast.success(response?.data.data.message)
+			toast.success(`${payload.apartmentName} updated successfully.`)
 			return response.data
 		} catch (error: any) {
 			const message =
@@ -351,6 +350,7 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 			state.userApartments = null
 			state.savedApartments = null
 			state.apartment = null
+			state.createSuccess = null
 		},
 	},
 	extraReducers: (builder) => {

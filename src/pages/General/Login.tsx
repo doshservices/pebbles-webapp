@@ -98,7 +98,7 @@ const Login = () => {
 										<div className='text-end mt-3'>
 											<Link to='/auth/forgot-password'>Forgot password?</Link>
 										</div>
-										<div
+										{/* <div
 											className='form-input-group checkbox'
 											style={{ alignItems: 'center', display: 'flex' }}
 										>
@@ -118,7 +118,7 @@ const Login = () => {
 											>
 												Keep me logged in
 											</label>
-										</div>
+										</div> */}
 										<div className='mt-1'>
 											<button
 												className='btn btn-primary form-control'

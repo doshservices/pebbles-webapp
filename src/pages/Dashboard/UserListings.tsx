@@ -37,6 +37,34 @@ const UserListings = () => {
 		dispatch(delete_apartment({ id: string }))
 	}
 
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage, setPostsPerPage] = useState(6)
+	const [loading, setLoading] = useState(false)
+
+	const indexOfLastPost = currentPage * postsPerPage
+	const indexOfFirstPost = indexOfLastPost - postsPerPage
+	const currentPosts = userApartments?.apartments?.slice(
+		indexOfFirstPost,
+		indexOfLastPost
+	)
+
+	const pageNumbers: number[] = []
+
+	for (
+		let i: number = 1;
+		i <=
+		Math.ceil(
+			userApartments ? userApartments?.apartments?.length / postsPerPage : 0
+		);
+		i++
+	) {
+		pageNumbers.push(i)
+	}
+
+	const setPage = (pageNum: number) => {
+		setCurrentPage(pageNum)
+	}
+
 	useEffect(() => {
 		dispatch(get_apartments_by_user())
 		return () => {
@@ -107,7 +135,7 @@ const UserListings = () => {
 											</tr>
 										</thead>
 										<tbody>
-											{userApartments?.apartments?.map((apartment) => (
+											{currentPosts?.map((apartment) => (
 												<tr key={apartment._id}>
 													<td>
 														<SliderImages images={apartment?.featuredImages} />
@@ -406,6 +434,21 @@ const UserListings = () => {
 					</div>
 				)}
 			</div>
+			{pageNumbers?.length > 1 && (
+				<div className='my_paginate'>
+					{pageNumbers.map((pageNum, index) => (
+						<span
+							key={index}
+							className={pageNum === currentPage ? 'active' : ''}
+							onClick={() => {
+								setPage(pageNum)
+							}}
+						>
+							{pageNum}
+						</span>
+					))}
+				</div>
+			)}
 		</main>
 	)
 }

@@ -1,17 +1,11 @@
-import React from 'react'
-// import { useSelector } from 'react-redux'
-// import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
 import Slider from 'react-slick'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
 import carouselBackground2 from '../../assets/Registration1.jpg'
-// import carouselBackground3 from '../../assets/Registration2.png'
 import SearchApartmentComponent from './SearchApartmentComponent'
 
 const HomeCarousel = () => {
-	// const navigate = useNavigate()
-
-	// const userAuth = useSelector((state) => state.userAuth)
-	// const { userDetail } = userAuth
+	const [showDateValue, setShowDateValue] = useState(true)
 
 	const settings = {
 		dots: true,
@@ -25,10 +19,14 @@ const HomeCarousel = () => {
 		pauseOnHover: false,
 	}
 
+	const dismissHandler = () => {
+		setShowDateValue(!showDateValue)
+	}
+
 	return (
 		<div className='home_carousel' style={{ position: 'relative' }}>
 			<Slider {...settings}>
-				<div>
+				<div onClick={() => dismissHandler()}>
 					<div
 						style={{ backgroundImage: `url(${carouselBackground1})` }}
 						className='homepage_bg'
@@ -43,7 +41,7 @@ const HomeCarousel = () => {
 						</div>
 					</div>
 				</div>
-				<div>
+				<div onClick={() => dismissHandler()}>
 					<div
 						style={{ backgroundImage: `url(${carouselBackground2})` }}
 						className='homepage_bg'
@@ -63,7 +61,7 @@ const HomeCarousel = () => {
 				<h3 className='text-center'> FIND AN APARTMENT </h3>
 				<div className='search_apartment_div_inner'>
 					<div>
-						<SearchApartmentComponent />
+						<SearchApartmentComponent showDateValue={showDateValue} />
 					</div>
 				</div>
 			</div>

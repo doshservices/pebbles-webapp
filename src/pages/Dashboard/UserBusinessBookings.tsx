@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -29,6 +29,36 @@ const UserBusinessBookings = () => {
 		// 'Action',
 	]
 
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage, setPostsPerPage] = useState(12)
+	const [loading, setLoading] = useState(false)
+
+	const indexOfLastPost = currentPage * postsPerPage
+	const indexOfFirstPost = indexOfLastPost - postsPerPage
+	const currentPosts = bookings?.bookings?.slice(
+		indexOfFirstPost,
+		indexOfLastPost
+	)
+
+	const pageNumbers: number[] = []
+
+	for (
+		let i: number = 1;
+		i <=
+		Math.ceil(
+			bookings && bookings?.bookings
+				? bookings?.bookings?.length / postsPerPage
+				: 0
+		);
+		i++
+	) {
+		pageNumbers.push(i)
+	}
+
+	const setPage = (pageNum: number) => {
+		setCurrentPage(pageNum)
+	}
+
 	useEffect(() => {
 		dispatch(get_business_bookings())
 
@@ -54,15 +84,20 @@ const UserBusinessBookings = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{bookings?.bookings?.map((booking) => (
+								{currentPosts?.map((booking) => (
 									<tr key={booking._id}>
 										<td>
 											<SliderImages
 												images={booking?.apartmentId?.apartmentImages}
 											/>
-											<p className='apart_name'>
+
+											<Link
+												to={`/user/dashboard/bookings/${booking._id}`}
+												className='link-dark apart_name mt-2 d-block'
+												style={{ fontWeight: '500' }}
+											>
 												{booking?.apartmentId?.apartmentName}
-											</p>
+											</Link>
 										</td>
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.typeOfApartment}
@@ -98,7 +133,11 @@ const UserBusinessBookings = () => {
 												to={`/user/dashboard/bookings/${booking._id}`}
 												className='link-dark'
 											>
-												<FaEye size={18} />
+												<div className='tooltipp'>
+													<FaEye size={18} color='#000' />
+
+													<span className='tooltipptext'>View Details</span>
+												</div>
 											</Link>
 										</td>
 										{/* <td className='td_pad_top'>
@@ -121,6 +160,21 @@ const UserBusinessBookings = () => {
 					</div>
 				)}
 			</div>
+			{pageNumbers?.length > 1 && (
+				<div className='my_paginate'>
+					{pageNumbers.map((pageNum, index) => (
+						<span
+							key={index}
+							className={pageNum === currentPage ? 'active' : ''}
+							onClick={() => {
+								setPage(pageNum)
+							}}
+						>
+							{pageNum}
+						</span>
+					))}
+				</div>
+			)}
 		</main>
 	)
 }

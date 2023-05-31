@@ -538,7 +538,7 @@ const ApartmentDetails = () => {
 
 			<div className='grey_bg'>
 				<div className='container'>
-					<h5> Stil have questions? </h5>
+					<h5> Still have questions? </h5>
 					<p className='intro_para mb-0 pb-0'>
 						For all stays less than 90 nights, call our team on +234 701 234
 						5678 or email us at info@pebbles-signature.coms

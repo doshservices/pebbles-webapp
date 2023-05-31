@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { change_user_type } from '../../features/authentication/authenticationSlice'
+import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const UserUpgrade = () => {
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
 	const { isLoading } = useAppSelector((state) => state.auth)
 
-	const [businessName, setBusinessName] = useState<string>('')
-	const [businessAddress, setBusinessAddress] = useState<string>('')
 	const [cacFile, setCacFile] = useState<any>('')
 	const [mainCac, setMainCac] = useState<string | Blob>('')
 	const [uploadedCac, setUploadedCac] = useState<string>('')
@@ -74,20 +75,18 @@ const UserUpgrade = () => {
 
 	const submitHandler = (e: any) => {
 		e.preventDefault()
-		let data = {
-			// businessName,
-			// businessAddress,
-			validId: uploadedCac,
-		}
-		dispatch(change_user_type(data))
+		if (uploadedCac !== '') {
+			let data = {
+				validId: uploadedCac,
+			}
+			dispatch(change_user_type(data))
 
-		setTimeout(() => {
-			setBusinessName('')
-			setBusinessAddress('')
-			setUploadedCac('')
-			setMainCac('')
-			setCacFile('')
-		}, 100)
+			setTimeout(() => {
+				navigate('/user/dashboard/home')
+			}, 100)
+		} else {
+			toast.error('Please upload image before submission.')
+		}
 	}
 
 	return (
@@ -106,28 +105,6 @@ const UserUpgrade = () => {
 						>
 							<form autoComplete='off'>
 								<div className='row'>
-									{/* <div className='col-md-12'>
-										<label htmlFor=''>Business Name</label>
-										<input
-											type='text'
-											value={businessName}
-											placeholder='Enter Company name here'
-											className='form-control'
-											onChange={(e) => setBusinessName(e.target.value)}
-										/>
-									</div>
-
-									<div className='col-md-6'>
-										<label htmlFor='address'>Business Address</label>
-										<input
-											type='text'
-											placeholder='Enter Address here'
-											value={businessAddress}
-											className='form-control'
-											onChange={(e) => setBusinessAddress(e.target.value)}
-										/>
-									</div> */}
-
 									<div className='col-md-12 col-sm-12'>
 										<div className='facilities__images'>
 											<label className='facilities__images-text'>

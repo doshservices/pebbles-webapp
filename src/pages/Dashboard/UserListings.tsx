@@ -38,6 +38,8 @@ const UserListings = () => {
 	}
 
 	const [currentPage, setCurrentPage] = useState(1)
+	const [currentPageAvailable, setCurrentPageAvailable] = useState(1)
+	const [currentPageBooked, setCurrentPageBooked] = useState(1)
 	const [postsPerPage, setPostsPerPage] = useState(6)
 	const [loading, setLoading] = useState(false)
 
@@ -49,6 +51,8 @@ const UserListings = () => {
 	)
 
 	const pageNumbers: number[] = []
+	const pageNumbersAvailable: number[] = []
+	const pageNumbersBooked: number[] = []
 
 	for (
 		let i: number = 1;
@@ -61,8 +65,43 @@ const UserListings = () => {
 		pageNumbers.push(i)
 	}
 
+	for (
+		let i: number = 1;
+		i <=
+		Math.ceil(
+			userApartments
+				? userApartments?.apartments?.filter((item) => item.isAvailable)
+						.length / postsPerPage
+				: 0
+		);
+		i++
+	) {
+		pageNumbersAvailable.push(i)
+	}
+
+	for (
+		let i: number = 1;
+		i <=
+		Math.ceil(
+			userApartments
+				? userApartments?.apartments?.filter(
+						(item) => item.isAvailable === false
+				  ).length / postsPerPage
+				: 0
+		);
+		i++
+	) {
+		pageNumbersBooked.push(i)
+	}
+
 	const setPage = (pageNum: number) => {
 		setCurrentPage(pageNum)
+	}
+	const setPageAvailable = (pageNum: number) => {
+		setCurrentPageAvailable(pageNum)
+	}
+	const setPageBooked = (pageNum: number) => {
+		setCurrentPageBooked(pageNum)
 	}
 
 	useEffect(() => {
@@ -213,6 +252,21 @@ const UserListings = () => {
 											))}
 										</tbody>
 									</table>
+									{pageNumbers?.length > 1 && (
+										<div className='my_paginate'>
+											{pageNumbers.map((pageNum, index) => (
+												<span
+													key={index}
+													className={pageNum === currentPage ? 'active' : ''}
+													onClick={() => {
+														setPage(pageNum)
+													}}
+												>
+													{pageNum}
+												</span>
+											))}
+										</div>
+									)}
 								</div>
 							) : (
 								<div className='container'>
@@ -307,6 +361,23 @@ const UserListings = () => {
 												))}
 										</tbody>
 									</table>
+									{pageNumbersAvailable?.length > 1 && (
+										<div className='my_paginate'>
+											{pageNumbersAvailable.map((pageNum, index) => (
+												<span
+													key={index}
+													className={
+														pageNum === currentPageAvailable ? 'active' : ''
+													}
+													onClick={() => {
+														setPageAvailable(pageNum)
+													}}
+												>
+													{pageNum}
+												</span>
+											))}
+										</div>
+									)}
 								</div>
 							) : (
 								<div className='container'>
@@ -408,6 +479,23 @@ const UserListings = () => {
 												))}
 										</tbody>
 									</table>
+									{pageNumbersBooked?.length > 1 && (
+										<div className='my_paginate'>
+											{pageNumbersBooked.map((pageNum, index) => (
+												<span
+													key={index}
+													className={
+														pageNum === currentPageBooked ? 'active' : ''
+													}
+													onClick={() => {
+														setPageBooked(pageNum)
+													}}
+												>
+													{pageNum}
+												</span>
+											))}
+										</div>
+									)}
 								</div>
 							) : (
 								<div className='container'>
@@ -434,21 +522,6 @@ const UserListings = () => {
 					</div>
 				)}
 			</div>
-			{pageNumbers?.length > 1 && (
-				<div className='my_paginate'>
-					{pageNumbers.map((pageNum, index) => (
-						<span
-							key={index}
-							className={pageNum === currentPage ? 'active' : ''}
-							onClick={() => {
-								setPage(pageNum)
-							}}
-						>
-							{pageNum}
-						</span>
-					))}
-				</div>
-			)}
 		</main>
 	)
 }

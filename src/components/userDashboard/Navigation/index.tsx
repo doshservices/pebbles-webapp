@@ -27,7 +27,10 @@ const Navigation = ({ openMenu, toggleMenu }) => {
 	}
 
 	return (
-		<nav className={toggleClass.join(' ')}>
+		<nav
+			className={toggleClass.join(' ')}
+			style={{ backgroundColor: '#f8f8f8' }}
+		>
 			<OutsideClick handleToggle={toggleMenu}>
 				<div className='navbar-wrapper'>
 					<NavHead

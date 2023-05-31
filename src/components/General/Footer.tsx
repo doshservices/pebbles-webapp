@@ -32,16 +32,19 @@ const Footer = () => {
 							<h6> SOCIAL MEDIA </h6>
 							<p> FOLLOW PEBBLES SIGNATURE </p>
 							<div className='social_links'>
-								<a href='/' className='me-3'>
+								<a
+									href='https://www.facebook.com/Pebbles.Signatures/?ref=page_internal'
+									className='me-3'
+								>
 									<i className='icofont-facebook'></i>
 								</a>
-								<a href='/' className='me-3'>
+								<a
+									href='https://twitter.com/pebblesignature?s=21&t=FULaJzEUkCahuTJMVL4XGA'
+									className='me-3'
+								>
 									<i className='icofont-twitter'></i>
 								</a>
-								<a href='/' className='me-3'>
-									<i className='icofont-linkedin'></i>
-								</a>
-								<a href='/'>
+								<a href='https://instagram.com/pebbles.signatures?igshid=MzRlODBiNWFlZA=='>
 									<i className='icofont-instagram'></i>
 								</a>
 							</div>
@@ -107,33 +110,23 @@ const Footer = () => {
 						</div>
 						<div className='foot_links'>
 							<div className='row justify-content-center'>
-								<div className='col-md-6 col-8'>
-									<div className='row sv'>
-										<div className='col'>
-											<Link to='/apartments' className=''>
-												APARTMENT
-											</Link>
-										</div>
-										<div className='col'>
-											<Link to='/about-us' className=''>
-												ABOUT
-											</Link>
-										</div>
-										<div className='col'>
-											<Link to='/contact' className=''>
-												CONTACT
-											</Link>
-										</div>
-										<div className='col'>
-											<Link to='/become-a-host' className=''>
-												BECOME A HOST
-											</Link>
-										</div>
-										<div className='col'>
-											<Link to='/privacy-policy' className=''>
-												PRIVACY POLICY
-											</Link>
-										</div>
+								<div className='col-lg-7 col-md-10 col-sm-11 col-12'>
+									<div className='d-flex flex-wrap justify-content-center sv'>
+										<Link to='/apartments' className=''>
+											APARTMENT
+										</Link>
+										<Link to='/about-us' className=''>
+											ABOUT
+										</Link>
+										<Link to='/contact' className=''>
+											CONTACT
+										</Link>
+										<Link to='/auth/signup' className=''>
+											BECOME A HOST
+										</Link>
+										<Link to='/privacy-policy' className=''>
+											PRIVACY POLICY
+										</Link>
 									</div>
 								</div>
 							</div>
@@ -141,16 +134,19 @@ const Footer = () => {
 					</div>
 					<div className=' foot_socials2'>
 						<div className='social_links'>
-							<a href='/' className='me-3'>
+							<a
+								href='https://www.facebook.com/Pebbles.Signatures/?ref=page_internal'
+								className='me-3'
+							>
 								<i className='icofont-facebook'></i>
 							</a>
-							<a href='/' className='me-3'>
+							<a
+								href='https://twitter.com/pebblesignature?s=21&t=FULaJzEUkCahuTJMVL4XGA'
+								className='me-3'
+							>
 								<i className='icofont-twitter'></i>
 							</a>
-							<a href='/' className='me-3'>
-								<i className='icofont-linkedin'></i>
-							</a>
-							<a href='/'>
+							<a href='https://instagram.com/pebbles.signatures?igshid=MzRlODBiNWFlZA=='>
 								<i className='icofont-instagram'></i>
 							</a>
 						</div>

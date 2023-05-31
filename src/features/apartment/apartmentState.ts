@@ -54,14 +54,14 @@ export interface ApartmentDetailInterface {
 export interface ApartmentInterface {
 	address: string
 	apartmentCountry: string
-	apartmentImages: string[]
+	apartmentImages: any
 	apartmentInfo: string
 	apartmentName: string
 	apartmentState: string
 	facilities: string[]
 	isAvailable: boolean
 	landmark: any[]
-	featuredImages: string[]
+	featuredImages: any
 	numberOfBedrooms: number
 	latitude: string
 	longitude: string

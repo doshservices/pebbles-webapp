@@ -63,16 +63,25 @@ const Header = ({ type }: { type: number }) => {
 					>
 						<Container style={{ zIndex: 99999999, position: 'relative' }}>
 							<div className='social_links'>
-								<a href='/' className='me-3 '>
+								<a
+									href='https://www.facebook.com/Pebbles.Signatures/?ref=page_internal'
+									className='me-3 '
+								>
 									<i className='icofont-facebook'></i>
 								</a>
-								<a href='/' className='me-3 '>
+								<a
+									href='https://instagram.com/pebbles.signatures?igshid=MzRlODBiNWFlZA=='
+									className='me-3 '
+								>
 									<i className='icofont-twitter'></i>
 								</a>
-								<a href='/' className='me-3 '>
+								{/* <a href='/' className='me-3 '>
 									<i className='icofont-linkedin'></i>
-								</a>
-								<a href='/' className=''>
+								</a> */}
+								<a
+									href='https://twitter.com/pebblesignature?s=21&t=FULaJzEUkCahuTJMVL4XGA'
+									className=''
+								>
 									<i className='icofont-instagram'></i>
 								</a>
 							</div>

@@ -53,6 +53,7 @@ export interface BookingInterface {
 	checkInDate: string
 	checkOutDate: string
 	createdAt: string
+	cancellable: boolean
 	dateList: string[]
 	isBooked: number
 	numberOfGuests: string

@@ -1,20 +1,29 @@
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { user_login } from '../../features/authentication/authenticationSlice'
+import {
+	keepUserLoggedIn,
+	user_login,
+} from '../../features/authentication/authenticationSlice'
 import carouselBackground1 from '../../assets/carouselBackground1.png'
 import logo from '../../assets/Logo_white.png'
+import { toast } from 'react-hot-toast'
 
 const Login = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_detail, token, isLoading } = useAppSelector(
+	const { user_detail, token, isLoading, keepLoggedIn } = useAppSelector(
 		(state) => state.auth
 	)
 
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [email, setEmail] = useState(keepLoggedIn ? keepLoggedIn?.email : '')
+	const [password, setPassword] = useState(
+		keepLoggedIn ? keepLoggedIn?.password : ''
+	)
+	const [keepState, setKeepState] = useState(
+		keepLoggedIn && keepLoggedIn?.value ? true : false
+	)
 
 	const viewHandler = () => {
 		let pass = document.getElementById('password')
@@ -27,6 +36,20 @@ const Login = () => {
 
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
+	}
+
+	const keepLoggedInHandler = () => {
+		let value = !keepState
+
+		if (email && password) {
+			let data = {
+				password: value ? password : '',
+				email: value ? email : '',
+				value: value,
+			}
+			dispatch(keepUserLoggedIn(data))
+		}
+		if (value) toast.success('Login details saved')
 	}
 
 	useLayoutEffect(() => {
@@ -76,6 +99,7 @@ const Login = () => {
 										<input
 											type='text'
 											placeholder='Email address here'
+											value={email}
 											className='form-control'
 											onChange={(e) => setEmail(e.target.value)}
 										/>
@@ -85,6 +109,7 @@ const Login = () => {
 												placeholder='Password here'
 												className='form-control'
 												id='password'
+												value={password}
 												type='password'
 												onChange={(e) => setPassword(e.target.value)}
 											/>
@@ -98,7 +123,7 @@ const Login = () => {
 										<div className='text-end mt-3'>
 											<Link to='/auth/forgot-password'>Forgot password?</Link>
 										</div>
-										{/* <div
+										<div
 											className='form-input-group checkbox'
 											style={{ alignItems: 'center', display: 'flex' }}
 										>
@@ -106,6 +131,8 @@ const Login = () => {
 												className='form-input'
 												type='checkbox'
 												name='checkbox'
+												defaultChecked={keepState}
+												onClick={keepLoggedInHandler}
 											/>
 											<label
 												className='form-input-label'
@@ -118,7 +145,7 @@ const Login = () => {
 											>
 												Keep me logged in
 											</label>
-										</div> */}
+										</div>
 										<div className='mt-1'>
 											<button
 												className='btn btn-primary form-control'

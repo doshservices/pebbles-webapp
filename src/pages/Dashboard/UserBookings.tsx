@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -93,9 +93,13 @@ const UserBookings = () => {
 											<SliderImages
 												images={booking?.apartmentId?.apartmentImages}
 											/>
-											<p className='apart_name'>
+											<Link
+												to={`/user/dashboard/my-bookings/${booking._id}`}
+												className='link-dark apart_name mt-2 d-block'
+												style={{ fontWeight: '500' }}
+											>
 												{booking?.apartmentId?.apartmentName}
-											</p>
+											</Link>
 										</td>
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.typeOfApartment}
@@ -139,37 +143,42 @@ const UserBookings = () => {
 											</Link>
 										</td>
 										<td className='td_pad_top'>
-											{booking?.paymentStatus === 'PENDING' && (
-												<Link
-													to={`/user/dashboard/my-bookings/${booking._id}`}
+											{booking?.bookingStatus.toLowerCase() === 'pending' &&
+												booking?.paymentStatus.toLowerCase() === 'pending' && (
+													<Link
+														to={`/user/dashboard/my-bookings/${booking._id}`}
+														className='me-3 btn'
+														style={{
+															backgroundColor: 'blue',
+															color: '#fff',
+															borderRadius: '8px',
+															fontSize: '12px',
+															borderColor: 'blue',
+															marginBottom: '.5rem',
+														}}
+													>
+														Pay
+													</Link>
+												)}
+
+											{booking?.cancellable ? (
+												<button
 													className='me-3 btn'
 													style={{
-														backgroundColor: 'blue',
+														backgroundColor: 'red',
 														color: '#fff',
 														borderRadius: '8px',
 														fontSize: '12px',
-														borderColor: 'blue',
+														borderColor: 'red',
 														marginBottom: '.5rem',
 													}}
+													onClick={(e) => cancelHandler(e, booking._id)}
 												>
-													Pay
-												</Link>
+													Cancel
+												</button>
+											) : (
+												''
 											)}
-
-											<button
-												className='me-3 btn'
-												style={{
-													backgroundColor: 'red',
-													color: '#fff',
-													borderRadius: '8px',
-													fontSize: '12px',
-													borderColor: 'red',
-													marginBottom: '.5rem',
-												}}
-												onClick={(e) => cancelHandler(e, booking._id)}
-											>
-												Cancel
-											</button>
 										</td>
 									</tr>
 								))}

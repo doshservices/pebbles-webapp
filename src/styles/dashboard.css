@@ -58,6 +58,7 @@
 
 .dashboard {
 	padding: 1rem 0;
+	background-color: #f8f8f8;
 }
 
 .dashboard h6 {
@@ -275,4 +276,63 @@
 .btn_blue:hover {
 	background-color: #071f50;
 	color: #fff;
+}
+
+/* ------------------------------------ Dashboard booking detail page ------------------------------------ */
+.detail_box {
+	padding: 0rem;
+}
+
+.detail_box .white_house {
+	padding: 1.1rem;
+	border-radius: 50%;
+	height: 61px;
+	width: 61px;
+	background-color: #155eef;
+	display: inline-block;
+	text-align: center;
+}
+
+.detail_box .white_house img {
+	object-fit: contain;
+	width: 24px;
+}
+
+.detail_box_div {
+	padding: 0 2rem;
+	margin-bottom: 1rem;
+}
+
+.detail_box_div .top_text {
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 14px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.109914px;
+	color: rgba(45, 45, 45, 0.5);
+	margin-bottom: 0.5rem;
+}
+.detail_box_div .bot_text {
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 0.109914px;
+	color: rgba(45, 45, 45, 0.8);
+}
+
+.detail_box_btn {
+	transition: all 0.3s ease-in-out;
+}
+
+.detail_box_btn:hover {
+	box-shadow: 2px 2px 5px #ccc;
+}
+
+@media (max-width: 1200px) {
+	.detail_box_div {
+		margin-bottom: 1rem;
+	}
 }

@@ -6,7 +6,7 @@ import ApartmentCard from '../ApartmentCard'
 const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
 	const settings = {
 		dots: false,
-		infinite: true,
+		infinite: data?.length > 3,
 		speed: 1000,
 		slidesToShow: 3,
 		arrows: true,

@@ -227,7 +227,7 @@ const UserProfile = () => {
 	return (
 		<main className='dashboard'>
 			<div className='row justify-content-center'>
-				<div className='col-lg-9 col-11'>
+				<div className='col-lg-9 col-11 bg-white p-4'>
 					<div className='dashboard_pad'>
 						<div className='d-flex' style={{}}>
 							{user_detail?.profilePicture && (

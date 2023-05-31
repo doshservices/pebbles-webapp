@@ -5,6 +5,7 @@ export interface AuthInitialInterface {
 	otp: OTPInterface | null
 	verifyOtp: OTPInterface | null
 	isLoading: boolean
+	keepLoggedIn: any | null
 }
 
 export const AuthInitialState: AuthInitialInterface = {
@@ -14,6 +15,7 @@ export const AuthInitialState: AuthInitialInterface = {
 	otp: null,
 	token: null,
 	verifyOtp: null,
+	keepLoggedIn: null,
 }
 
 export interface AuthInterface {

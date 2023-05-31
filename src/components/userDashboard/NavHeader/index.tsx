@@ -23,9 +23,7 @@ const NavHeader = ({ openMenu, toggleMenu, handle }) => {
 		dispatch(notificationReset())
 	}
 	return (
-		<header
-			className={`navbar pcoded-header navbar-expand-lg header-default bg-white`}
-		>
+		<header className='navbar pcoded-header navbar-expand-lg header-default'>
 			<div className='m-header mm_header'>
 				<Link to={'/'} className='b-brand'>
 					<img src={logo} alt='' style={{ width: '11rem' }} />

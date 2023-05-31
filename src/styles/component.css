@@ -301,12 +301,14 @@
 
 .foot_links a {
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 16px;
 	text-transform: uppercase;
 	color: rgba(248, 248, 248, 0.8);
 	display: inline-block;
 	margin-bottom: 1rem;
+	margin-right: 1rem;
+	margin-left: 1rem;
 	/* margin-right: 2rem; */
 }
 

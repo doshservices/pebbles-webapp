@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
@@ -8,7 +8,11 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import moment from 'moment'
 
-const SearchApartmentComponent = () => {
+const SearchApartmentComponent = ({
+	showDateValue,
+}: {
+	showDateValue?: boolean
+}) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
@@ -42,6 +46,12 @@ const SearchApartmentComponent = () => {
 
 		navigate('/search-apartments')
 	}
+
+	useEffect(() => {
+		if (!showDateValue) {
+			setShowDate(false)
+		}
+	}, [showDateValue])
 
 	return (
 		<div className='search_component_main_div'>
@@ -153,9 +163,10 @@ const SearchApartmentComponent = () => {
 						<DateRange
 							editableDateInputs={true}
 							onChange={(item) => setState([item.selection])}
-							moveRangeOnFirstSelection={false}
+							moveRangeOnFirstSelection={true}
 							ranges={state}
 							minDate={new Date()}
+							scroll={{ enabled: true }}
 						/>
 					</div>
 				)}

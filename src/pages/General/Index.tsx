@@ -248,8 +248,8 @@ const Index = () => {
 						topHeader='reviews'
 						topHeaderColor='rgba(21, 94, 239, 0.8)'
 						header='what others have to say'
-						link='/trendy-apartments'
-						linkText='View all'
+						link=''
+						linkText=''
 					/>
 
 					<ReviewSlider data={reviewData} />

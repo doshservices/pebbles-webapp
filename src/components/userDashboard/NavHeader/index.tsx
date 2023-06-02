@@ -103,7 +103,7 @@ const NavHeader = ({ openMenu, toggleMenu, handle }) => {
 			{/* <Link className='mobile-menu' id='mobile-header' to={'/#'}>
 				<i className='feather icon-more-horizontal' />
 			</Link> */}
-			<div className='collapse navbar-collapse d-flex justify-content-between bg-white nav_bottom '>
+			<div className='collapse navbar-collapse d-flex justify-content-between nav_bottom '>
 				<NavLeft handle={handle} />
 				<NavRight />
 			</div>

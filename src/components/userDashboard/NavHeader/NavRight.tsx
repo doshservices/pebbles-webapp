@@ -79,7 +79,7 @@ const NavRight = () => {
 			<li>
 				<Dropdown className='drp-user'>
 					<Dropdown.Toggle variant={'link'} id='dropdown-basic'>
-						<i className='icon feather icon-settings' />
+						{/* <i className='icon feather icon-settings' /> */}
 					</Dropdown.Toggle>
 					<Dropdown.Menu className='profile-notification'>
 						<ul className='pro-body'>

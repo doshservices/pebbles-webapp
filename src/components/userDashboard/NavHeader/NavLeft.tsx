@@ -15,7 +15,7 @@ const NavLeft = ({ handle }) => {
 				<button
 					className='full-screen'
 					onClick={handle}
-					style={{ border: 'none', backgroundColor: '#fff' }}
+					style={{ border: 'none', backgroundColor: '#f8f8f8' }}
 				>
 					<i className='feather icon-maximize' />
 				</button>

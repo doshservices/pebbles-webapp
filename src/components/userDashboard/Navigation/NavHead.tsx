@@ -18,14 +18,14 @@ const NavHead = ({ collapseMenu, windowWidth, onToggleNavigation }) => {
 					style={{ width: '10rem' }}
 				/>
 			</Link>
-			<a
+			{/* <a
 				href={'#/'}
 				className={toggleClass.join(' ')}
 				id='mobile-collapse'
 				onClick={onToggleNavigation}
 			>
 				<span />
-			</a>
+			</a> */}
 		</div>
 	)
 }

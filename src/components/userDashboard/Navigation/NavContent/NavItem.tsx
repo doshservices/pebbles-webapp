@@ -5,7 +5,7 @@ const NavItem = ({ item }) => {
 	return (
 		<li>
 			<NavLink to={item.url} className='nav-link'>
-				<span className='pcoded-micon'>
+				<span className='pcoded-micon me-3'>
 					<i className={item.icon} />
 				</span>
 				<span className='pcoded-mtext'>{item.title}</span>

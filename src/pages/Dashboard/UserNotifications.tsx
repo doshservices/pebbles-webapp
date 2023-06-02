@@ -44,25 +44,6 @@ const UserNotifications = () => {
 									<Tab>
 										All Notifications ({notifications?.notifications?.length})
 									</Tab>
-									{/* <Tab>
-										Available (
-										{
-											userApartments?.apartments?.filter(
-												(item) => item.isAvailable
-											).length
-										}
-										)
-									</Tab>
-									<Tab>
-										{' '}
-										Booked (
-										{
-											userApartments?.apartments?.filter(
-												(item) => item.isAvailable === false
-											).length
-										}
-										){' '}
-									</Tab> */}
 								</TabList>
 							</div>
 						</div>
@@ -100,22 +81,7 @@ const UserNotifications = () => {
 														{' '}
 														{notification?.bookingId?.bookingStatus}{' '}
 													</td>
-													{/* <td className='td_pad_top'>
-														<Link
-															to={`/notifications/${notification._id}`}
-															className='link-dark'
-														>
-															<FaEye size={18} />
-														</Link>
-													</td> */}
-													{/* <td className='td_pad_top'>
-														<Link
-															to={`/user/dashboard/listings/new/${notification._id}`}
-															className='link-dark'
-														>
-															<FaPen size={18} />
-														</Link>
-													</td> */}
+
 													<td className='td_pad_top'>
 														<button
 															className='border-none bg-white'
@@ -148,100 +114,6 @@ const UserNotifications = () => {
 								</div>
 							)}
 						</TabPanel>
-						{/* <TabPanel>
-							{userApartments?.apartments?.filter((item) => item.isAvailable)
-								.length > 0 ? (
-								<div className='table-responsive'>
-									<table className='table ' style={{ fontSize: '12px' }}>
-										<thead className=''>
-											<tr>
-												{tableHeaders.map((item, index) => (
-													<th key={index}> {item} </th>
-												))}
-											</tr>
-										</thead>
-										<tbody>
-											{userApartments?.apartments
-												?.filter((item) => item.isAvailable)
-												.map((apartment) => (
-													<tr key={apartment._id}>
-														<td>
-															<SliderImages
-																images={apartment?.featuredImages}
-															/>
-															<p className='apart_name'>
-																{apartment.apartmentName}
-															</p>
-														</td>
-														<td className='td_pad_top'>
-															{apartment.typeOfApartment}
-														</td>
-														<td
-															className='td_pad_top'
-															style={{ width: '16rem' }}
-														>
-															{apartment.address}
-														</td>
-														<td
-															className='td_pad_top'
-															style={{ width: '20rem' }}
-														>
-															{apartment.facilities.map((item, index) => (
-																<span key={index} style={{ paddingRight: 3 }}>
-																	{item}
-																	{index === apartment.facilities.length - 1
-																		? '.'
-																		: ','}
-																</span>
-															))}
-														</td>
-
-														<td className='td_pad_top'> {apartment.status} </td>
-														<td className='td_pad_top'>
-															<Link
-																to={`/apartments/${apartment._id}`}
-																className='link-dark'
-															>
-																<FaEye size={18} />
-															</Link>
-														</td>
-														<td className='td_pad_top'>
-															<Link
-																to={`/user/dashboard/listings/new/${apartment._id}`}
-																className='link-dark'
-															>
-																<FaPen size={18} />
-															</Link>
-														</td>
-														<td className='td_pad_top'>
-															<button
-																className='border-none bg-white'
-																style={{ border: 'none' }}
-																onClick={(e) => deleteHandler(e, apartment._id)}
-															>
-																{isDeleting && apartmentID === apartment._id ? (
-																	<i
-																		className='fas fa-spinner fa-spin'
-																		style={{ color: 'red' }}
-																	></i>
-																) : (
-																	<FaTrash size={18} color={'red'} />
-																)}
-															</button>
-														</td>
-													</tr>
-												))}
-										</tbody>
-									</table>
-								</div>
-							) : (
-								<div className='container'>
-									<p style={{ fontSize: '12px', marginTop: '1rem' }}>
-										No available apartments found
-									</p>
-								</div>
-							)}
-						</TabPanel> */}
 					</Tabs>
 				) : (
 					<div className='container'>

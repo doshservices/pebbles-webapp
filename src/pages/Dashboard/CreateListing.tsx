@@ -427,25 +427,6 @@ const CreateListing = () => {
 	useEffect(() => {
 		if (createSuccess) {
 			navigate('/user/dashboard/listings')
-
-			// setApartmentName('')
-			// setAddress('')
-			// setApartmentCountry('NG')
-			// setApartmentState('')
-			// setPrice(0)
-			// setTypeOfApartment('')
-			// setFacilities([])
-			// setApartmentInfo('')
-			// setNumberOfBedrooms('')
-			// setNumberOfToilets('')
-			// setNumberOfGuests('')
-			// setLandmark_image_values([])
-			// setFeaturedImageFile('')
-			// setImageFile('')
-			// setLandmarkImageFile('')
-			// setMainFeaturedImage([])
-			// setMainImage([])
-			// setMainLandmarkImage('')
 		}
 		return () => {
 			dispatch(apartmentReset())
@@ -500,7 +481,7 @@ const CreateListing = () => {
 	return (
 		<main className='dashboard'>
 			<div className='row justify-content-center'>
-				<div className='col-lg-10 col-11'>
+				<div className='col-lg-10 col-11 bg-white py-4'>
 					<div className='listing_form mb-2'>
 						{isFetchingApartment ? (
 							<Loader />

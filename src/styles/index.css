@@ -1053,3 +1053,38 @@ a {
 	border: 1px solid #155eef;
 	color: #fff;
 }
+
+/* navbar */
+.nav_upgrade {
+	font-style: italic;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 14px;
+	letter-spacing: 0.2px;
+	color: rgba(45, 45, 45, 0.7);
+	text-align: center;
+	margin-top: 20px;
+}
+
+.btn_upg {
+	color: #155eef !important;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 32px;
+	letter-spacing: 0.15px;
+	border: 1px solid #155eef;
+	background-color: #f8f8f8;
+	border-radius: 6px !important;
+	height: 2.5rem;
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn_upg:hover {
+	background-color: #155eef;
+	color: #fff !important;
+	box-shadow: 2px 2px 2px #ccc;
+}

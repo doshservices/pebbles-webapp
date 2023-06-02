@@ -582,7 +582,7 @@
 
 .navbar-brand {
 	// background: $menu-dark-background;
-	background: #fff;
+	background: #f8f8f8;
 }
 
 .pcoded-header,
@@ -598,7 +598,8 @@
 	z-index: 1029;
 	position: fixed;
 	transition: all 0.3s ease-in-out;
-	box-shadow: 1px 0 20px 0 rgb(63, 77, 103);
+	// box-shadow: 1px 0 20px 0 rgb(63, 77, 103);
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
 
 	ul {
 		padding-left: 0;
@@ -621,6 +622,7 @@
 		margin-right: 0;
 		padding: 10px 20px;
 		transition: all 0.3s ease-in-out;
+		border-right: 1px solid rgba(0, 0, 0, 0.1);
 
 		.logo-dark {
 			display: none;
@@ -719,13 +721,14 @@
 
 		li {
 			position: relative;
+			padding: 0 2rem;
 
 			> a {
 				text-align: left;
 				padding: 7px 15px;
 				margin: 5px 0 0;
 				display: block;
-				border-radius: 0;
+				border-radius: 10px;
 				position: relative;
 				color: #2d2d2db2;
 
@@ -858,6 +861,7 @@
 	.navbar-wrapper {
 		width: 100%;
 		height: 100%;
+		background-color: #f8f8f8;
 	}
 
 	&.navbar-collapsed {
@@ -1108,6 +1112,7 @@
 			&:hover {
 				color: #fff;
 				background-color: $primary-color;
+				border-radius: 10px;
 			}
 
 			.pcoded-submenu > li {

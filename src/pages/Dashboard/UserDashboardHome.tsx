@@ -15,8 +15,8 @@ import { get_all_notifications } from '../../features/notification/notificationS
 
 const UserDashboardHome = () => {
 	const dispatch = useAppDispatch()
-	const dataData1 = [8, 29, 7, 8, 5, 1, 2]
-	const dataData2 = [12, 19, 3, 5, 2, 3, 6]
+	const dataData1 = [0, 0, 0, 0, 0, 0, 0]
+	const dataData2 = [0, 0, 0, 0, 0, 0, 0]
 
 	const { bookingState, bookings } = useAppSelector((state) => state.booking)
 	const { user_detail } = useAppSelector((state) => state.auth)

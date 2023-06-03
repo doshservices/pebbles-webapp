@@ -9,6 +9,7 @@ import {
 import { FaEye } from 'react-icons/fa'
 import moment from 'moment'
 import Loader from '../../components/Loader'
+import EmptyPage from '../../components/EmptyPage'
 
 const UserBookings = () => {
 	const dispatch = useAppDispatch()
@@ -107,13 +108,24 @@ const UserBookings = () => {
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.address}
 										</td>
-										<td className='td_pad_top' style={{ width: '20rem' }}>
+										<td className='td_pad_top'>
 											{booking?.apartmentId?.facilities.map((item, index) => {
 												return (
-													index <= 5 && (
+													index <= 3 && (
 														<span key={index} style={{ paddingRight: 3 }}>
 															{item}
-															{index === 5 ? '...' : ','}
+															{index === 3 ? (
+																<span>
+																	<span>...</span>
+																	<Link
+																		to={`/user/dashboard/my-bookings/${booking?._id}`}
+																	>
+																		see more
+																	</Link>
+																</span>
+															) : (
+																','
+															)}
 														</span>
 													)
 												)
@@ -186,9 +198,10 @@ const UserBookings = () => {
 						</table>
 					</div>
 				) : (
-					<div>
-						<p>You have not made any bookings yet</p>
-					</div>
+					<EmptyPage
+						header='You have not made any bookings yet'
+						para='Your bookings will be shown here when you book an apartment'
+					/>
 				)}
 			</div>
 			{pageNumbers?.length > 1 && (

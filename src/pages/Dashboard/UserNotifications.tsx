@@ -10,6 +10,7 @@ import {
 	delete_notification,
 	get_all_notifications,
 } from '../../features/notification/notificationSlice'
+import EmptyPage from '../../components/EmptyPage'
 
 const UserNotifications = () => {
 	const dispatch = useAppDispatch()
@@ -116,9 +117,10 @@ const UserNotifications = () => {
 						</TabPanel>
 					</Tabs>
 				) : (
-					<div className='container'>
-						<p>No notifications found.</p>
-					</div>
+					<EmptyPage
+						header='No notifications found'
+						para='Your notifications will be shown here'
+					/>
 				)}
 			</div>
 		</main>

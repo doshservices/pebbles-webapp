@@ -164,8 +164,9 @@ a {
 	color: #f8f8f8;
 	position: relative;
 	border: 1px solid #f8f8f8;
-	padding: 0.4rem 1rem;
+	padding: 0.8rem 1rem;
 	font-weight: 500;
+	border-radius: 6px;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -194,17 +195,17 @@ a {
 }
 
 .review_0 {
-	background: #dfafb9;
+	background: #d0dffc;
 	border-radius: 100px 0px;
 }
 
 .review_1 {
-	background: #ffddee;
+	background: #d0dffc;
 	border-radius: 0px 100px;
 }
 
 .review_2 {
-	background: #d1b3cb;
+	background: #d0dffc;
 	border-radius: 100px 0px;
 }
 

@@ -22,7 +22,6 @@ import UserWishlist from './pages/Dashboard/UserWishlist'
 import UserListings from './pages/Dashboard/UserListings'
 import UserNotifications from './pages/Dashboard/UserNotifications'
 import UserUpgrade from './pages/Dashboard/UserUpgrade'
-import UserGuests from './pages/Dashboard/UserGuests'
 import AllApartments from './pages/General/AllApartments'
 import NearApartments from './pages/General/NearApartments'
 import CreateListing from './pages/Dashboard/CreateListing'
@@ -96,7 +95,6 @@ function App() {
 							<Route path='listings/new/:id' element={<CreateListing />} />
 							<Route path='notifications' element={<UserNotifications />} />
 							<Route path='upgrade-account' element={<UserUpgrade />} />
-							<Route path='guests' element={<UserGuests />} />
 						</Route>
 					</Routes>
 				</Suspense>

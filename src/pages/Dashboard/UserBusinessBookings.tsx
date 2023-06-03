@@ -9,6 +9,7 @@ import {
 import { FaEye } from 'react-icons/fa'
 import moment from 'moment'
 import Loader from '../../components/Loader'
+import EmptyPage from '../../components/EmptyPage'
 
 const UserBusinessBookings = () => {
 	const dispatch = useAppDispatch()
@@ -99,33 +100,44 @@ const UserBusinessBookings = () => {
 												{booking?.apartmentId?.apartmentName}
 											</Link>
 										</td>
-										<td className='td_pad_top'>
+										<td className='td_pad_top' style={{ width: '8rem' }}>
 											{booking?.apartmentId?.typeOfApartment}
 										</td>
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.address}
 										</td>
-										<td className='td_pad_top' style={{ width: '20rem' }}>
+										<td className='td_pad_top'>
 											{booking?.apartmentId?.facilities.map((item, index) => {
 												return (
-													index <= 5 && (
+													index <= 3 && (
 														<span key={index} style={{ paddingRight: 3 }}>
 															{item}
-															{index === 5 ? '...' : ','}
+															{index === 3 ? (
+																<span>
+																	<span>...</span>
+																	<Link
+																		to={`/user/dashboard/bookings/${booking?._id}`}
+																	>
+																		see more
+																	</Link>
+																</span>
+															) : (
+																','
+															)}
 														</span>
 													)
 												)
 											})}
 										</td>
-										<td className='td_pad_top'>
+										<td className='td_pad_top' style={{ width: '13rem' }}>
 											{moment(booking.checkInDate).format('MMMM Do') +
 												'-' +
 												moment(booking.checkOutDate).format('MMMM Do')}
 										</td>
-										<td className='td_pad_top'>
+										<td className='td_pad_top' style={{ width: '8rem' }}>
 											{booking.bookingStatus.toLowerCase()}
 										</td>
-										<td className='td_pad_top'>
+										<td className='td_pad_top' style={{ width: '8rem' }}>
 											{booking.paymentStatus.toLowerCase()}
 										</td>
 										<td className='td_pad_top'>
@@ -155,9 +167,10 @@ const UserBusinessBookings = () => {
 						</table>
 					</div>
 				) : (
-					<div>
-						<p>No bookings found</p>
-					</div>
+					<EmptyPage
+						header='No bookings have been made yet'
+						para='Bookings of your apartments will be shown here.'
+					/>
 				)}
 			</div>
 			{pageNumbers?.length > 1 && (

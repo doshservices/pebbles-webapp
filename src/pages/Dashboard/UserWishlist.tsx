@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import ApartmentCard from '../../components/ApartmentCard'
 import Loader from '../../components/Loader'
 import { get_saved_apartments } from '../../features/apartment/apartmentSlice'
+import EmptyPage from '../../components/EmptyPage'
 
 const UserWishlist = () => {
 	const dispatch = useAppDispatch()
@@ -38,11 +39,10 @@ const UserWishlist = () => {
 								</div>
 							))
 						) : (
-							<div className='col-12'>
-								<div className='p_4 mb-5'>
-									<p>No saved apartments found</p>
-								</div>
-							</div>
+							<EmptyPage
+								header='No saved apartments found'
+								para='Your saved apartments will be shown here'
+							/>
 						)}
 					</div>
 				</div>

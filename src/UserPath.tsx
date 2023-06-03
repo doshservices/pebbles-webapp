@@ -79,7 +79,7 @@ const UserPath = () => {
 				<div className='pcoded-wrapper'>
 					<div className='pcoded-content'>
 						<div className='pcoded-inner-content'>
-							<BreadCrumb loc={location} />
+							{/* <BreadCrumb loc={location} /> */}
 							<div className='main-body'>
 								<div className='page-wrapper'>
 									<Outlet />

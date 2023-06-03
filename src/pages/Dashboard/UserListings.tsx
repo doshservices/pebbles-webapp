@@ -11,6 +11,7 @@ import {
 	delete_apartment,
 	get_apartments_by_user,
 } from '../../features/apartment/apartmentSlice'
+import EmptyPage from '../../components/EmptyPage'
 
 const UserListings = () => {
 	const dispatch = useAppDispatch()
@@ -269,11 +270,10 @@ const UserListings = () => {
 									)}
 								</div>
 							) : (
-								<div className='container'>
-									<p style={{ fontSize: '12px', marginTop: '1rem' }}>
-										No apartments found
-									</p>
-								</div>
+								<EmptyPage
+									header='No apartments found'
+									para='Your apartments will be shown here'
+								/>
 							)}
 						</TabPanel>
 						<TabPanel>
@@ -380,11 +380,10 @@ const UserListings = () => {
 									)}
 								</div>
 							) : (
-								<div className='container'>
-									<p style={{ fontSize: '12px', marginTop: '1rem' }}>
-										No available apartments found
-									</p>
-								</div>
+								<EmptyPage
+									header='No available apartments found'
+									para='Your apartments that are available will be shown here'
+								/>
 							)}
 						</TabPanel>
 						<TabPanel>
@@ -498,27 +497,29 @@ const UserListings = () => {
 									)}
 								</div>
 							) : (
-								<div className='container'>
-									<p style={{ fontSize: '12px', marginTop: '1rem' }}>
-										No booked apartments found
-									</p>
-								</div>
+								<EmptyPage
+									header='No booked apartments found'
+									para='Your apartments that have been booked will be shown here'
+								/>
 							)}
 						</TabPanel>
 					</Tabs>
 				) : (
 					<div className='container'>
-						<div className='text-end add_new_row'>
+						<div className='text-center'>
+							<EmptyPage
+								header='Np apartment listing found'
+								para='Your listed apartments will be shown here'
+							/>
 							<Link to='/user/dashboard/listings/new' className='add_new_btn'>
 								<FaPlus
-									className='me-2'
+									className=''
 									style={{ marginBottom: '.2rem' }}
 									size={11}
 								/>{' '}
 								Add New
 							</Link>
 						</div>
-						<p>No apartment listing found.</p>
 					</div>
 				)}
 			</div>

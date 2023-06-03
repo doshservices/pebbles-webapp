@@ -226,8 +226,10 @@ const UserProfile = () => {
 
 	return (
 		<main className='dashboard'>
+			<h5> My Account </h5>
 			<div className='row justify-content-center'>
 				<div className='col-lg-9 col-11 bg-white p-4'>
+					<h6 className='mb-4'> Profile </h6>
 					<div className='dashboard_pad'>
 						<div className='d-flex' style={{}}>
 							{user_detail?.profilePicture && (

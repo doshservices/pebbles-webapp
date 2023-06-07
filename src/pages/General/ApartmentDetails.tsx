@@ -2,8 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import { Link, useParams } from 'react-router-dom'
 import { comma } from '../../utils/helper'
-import { AiOutlineStop, AiOutlineClockCircle } from 'react-icons/ai'
-import { MdOutlinePayments } from 'react-icons/md'
+import { MdOutlinePayments, MdOutlinePool } from 'react-icons/md'
 import { TbMessageReport, TbDisabled } from 'react-icons/tb'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import two_users from '../../assets/two_users.png'
@@ -26,6 +25,34 @@ import moment from 'moment'
 import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
+import ac_unit from '../../assets/apartment_icons/ac_unit.svg'
+import assured_workload from '../../assets/apartment_icons/assured_workload.svg'
+import balcony from '../../assets/apartment_icons/balcony.svg'
+import business_center from '../../assets/apartment_icons/business_center.svg'
+import deck from '../../assets/apartment_icons/deck.svg'
+import elevator from '../../assets/apartment_icons/elevator.svg'
+import engineering from '../../assets/apartment_icons/engineering.svg'
+import fitness_center from '../../assets/apartment_icons/fitness_center.svg'
+import garage from '../../assets/apartment_icons/garage.svg'
+import hot_tub from '../../assets/apartment_icons/hot_tub.svg'
+import kitchen from '../../assets/apartment_icons/kitchen.svg'
+import local_bar from '../../assets/apartment_icons/local_bar.svg'
+import local_laundry from '../../assets/apartment_icons/local_laundry.svg'
+import meeting_room from '../../assets/apartment_icons/meeting_room.svg'
+import mode_fan from '../../assets/apartment_icons/mode_fan.svg'
+import nest_cam from '../../assets/apartment_icons/nest_cam.svg'
+import pets from '../../assets/apartment_icons/pets.svg'
+import pool from '../../assets/apartment_icons/pool.svg'
+import smoke_free from '../../assets/apartment_icons/smoke_free.svg'
+import tv from '../../assets/apartment_icons/tv.svg'
+import warehouse from '../../assets/apartment_icons/warehouse.svg'
+import wifi from '../../assets/apartment_icons/wifi.svg'
+import pin_drop from '../../assets/apartment_icons/pin_drop.svg'
+import long_term from '../../assets/apartment_icons/long_term.png'
+import short_term from '../../assets/apartment_icons/short_term.svg'
+import furnished from '../../assets/apartment_icons/furnished.svg'
+import { HiOutlineLightBulb } from 'react-icons/hi'
+import { AiOutlineClockCircle, AiOutlineStop } from 'react-icons/ai'
 
 const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
@@ -40,6 +67,8 @@ const ApartmentDetails = () => {
 		(state) => state.booking
 	)
 
+	const [limitValue, setLimitValue] = useState<number | null>(3)
+	const [limit, setLimit] = useState<boolean>(false)
 	const [photoIndex, setPhotoIndex] = useState<number>(0)
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -69,6 +98,15 @@ const ApartmentDetails = () => {
 	useLayoutEffect(() => {
 		RouteToTop()
 	}, [])
+
+	const toggleMore = () => {
+		setLimit(!limit)
+		if (limit) {
+			setLimitValue(apartment && apartment?.apartment?.facilities?.length - 1)
+		} else {
+			setLimitValue(3)
+		}
+	}
 
 	const pressHandler = async (e: any) => {
 		e.preventDefault()
@@ -223,16 +261,187 @@ const ApartmentDetails = () => {
 									<h2 className='sect_head'>HOUSE DETAILS</h2>
 									<h5 className='mb-3'>Available Amenities</h5>
 
-									<div className='d-flex' style={{ flexWrap: 'wrap' }}>
-										{apartment?.apartment?.facilities.map((item, index) => (
-											<span style={{ paddingRight: 3 }} key={index}>
-												{item}
-												{index === apartment?.apartment?.facilities.length - 1
-													? '.'
-													: ','}
-											</span>
-										))}
+									<div className='row'>
+										{limitValue &&
+											apartment?.apartment?.facilities.map((item, index) => (
+												<div className='col-md-6 col-sm-6' key={index}>
+													{index <= limitValue ? (
+														<div className='d-flex amenities_div align-items-center mb-3'>
+															{item === '24hrs Power Supply' ? (
+																<HiOutlineLightBulb size={22} />
+															) : item === 'Wi-Fi' ? (
+																<img
+																	src={wifi}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item ===
+															  'Television- Netflix, dstv, Hulu, Amazon etc' ? (
+																<img
+																	src={tv}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Swimming pool' ? (
+																<img
+																	src={pool}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item ===
+															  'Kitchen with appliances such as refrigerator, stove, oven, and microwave' ? (
+																<img
+																	src={kitchen}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Washer and dryer' ? (
+																<img
+																	src={local_laundry}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Heating and air conditioning' ? (
+																<img
+																	src={ac_unit}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Parking (garage or covered)' ? (
+																<img
+																	src={garage}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Elevator' ? (
+																<img
+																	src={elevator}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Gym or fitness center' ? (
+																<img
+																	src={fitness_center}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Hot tub' ? (
+																<img
+																	src={hot_tub}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Business center' ? (
+																<img
+																	src={business_center}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Conference room' ? (
+																<img
+																	src={meeting_room}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Clubhouse' ? (
+																<img
+																	src={local_bar}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Controlled access' ? (
+																<img
+																	src={mode_fan}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Pet-friendly' ? (
+																<img
+																	src={pets}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Balcony or patio' ? (
+																<img
+																	src={balcony}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Storage space' ? (
+																<img
+																	src={warehouse}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Smoke-free' ? (
+																<img
+																	src={smoke_free}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'On-site maintenance' ? (
+																<img
+																	src={engineering}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'On-site management' ? (
+																<img
+																	src={assured_workload}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === '24/7 CCTV Surveillance' ? (
+																<img
+																	src={nest_cam}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item ===
+															  'Close to shops, restaurants, and entertainment' ? (
+																<img
+																	src={pin_drop}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Furnished options available' ? (
+																<img
+																	src={furnished}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : item === 'Short-term leases available' ? (
+																<img
+																	src={short_term}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															) : (
+																<img
+																	src={warehouse}
+																	alt='amenity icon'
+																	className='amenity_icon'
+																/>
+															)}
+															<p className='amenity_para'> {item} </p>
+														</div>
+													) : null}
+												</div>
+											))}
 									</div>
+									<button
+										onClick={() => toggleMore()}
+										className='btn btn-primary mt-3  btn_white_blue'
+									>
+										{limit ? (
+											<span>
+												Show all {apartment?.apartment?.facilities?.length}{' '}
+												Amenities
+											</span>
+										) : (
+											<span> Close </span>
+										)}
+									</button>
 								</div>
 
 								<div className='booking_policy'>
@@ -240,13 +449,17 @@ const ApartmentDetails = () => {
 									<div>
 										<div className='row'>
 											<div className='col-lg-6 col-md-12'>
-												<div className='d-flex'>
-													<div>
-														<AiOutlineClockCircle />
+												<div style={{ width: '90%' }}>
+													<div className='d-flex'>
+														<div>
+															<AiOutlineClockCircle />
+														</div>
+														<div className='detail_div'>
+															<h6> Check-in is at 3:00pm </h6>
+															<h6> Check-out is at 11:00pm </h6>
+														</div>
 													</div>
-													<div className='detail_div'>
-														<h6> Check-in is at 3:00pm </h6>
-														<h6> Check-out is at 11:00pm </h6>
+													<div>
 														<p className='intro_para'>
 															You may request early check-in and/or late
 															check-out after booking. Our team will do our best
@@ -256,71 +469,76 @@ const ApartmentDetails = () => {
 												</div>
 											</div>
 											<div className='col-lg-6 col-md-12'>
-												<div className='d-flex'>
-													<div>
-														<AiOutlineStop />
+												<div style={{ width: '90%' }}>
+													<div className='d-flex'>
+														<div>
+															<AiOutlineStop />
+														</div>
+														<div className='detail_div'>
+															<h6> House Rules </h6>
+														</div>
 													</div>
-													<div className='detail_div'>
-														<h6> House Rules </h6>
-
-														<ul className='intro_para'>
-															<li>No smoking (not even on balconies/patios)</li>
-															<li>
-																No pets (not even really cute ones) unless
-																otherwise stated
-															</li>
-															<li> No parties (not even really quiet ones) </li>
-														</ul>
-													</div>
+													<ul className='intro_para'>
+														<li>No smoking (not even on balconies/patios)</li>
+														<li>
+															No pets (not even really cute ones) unless
+															otherwise stated
+														</li>
+														<li> No parties (not even really quiet ones) </li>
+													</ul>
 												</div>
 											</div>
 											<div className='col-lg-6 col-md-12'>
-												<div className='d-flex'>
-													<div>
-														<TbMessageReport />
+												<div style={{ width: '90%' }}>
+													<div className='d-flex'>
+														<div>
+															<TbMessageReport />
+														</div>
+														<div className='detail_div'>
+															<h6> Note </h6>
+														</div>
 													</div>
-													<div className='detail_div'>
-														<h6> Note </h6>
-
-														<ul className='intro_para'>
-															<li> A mini fridge is available on request.</li>
-															<li>
-																No room service or on-site parking available.
-															</li>
-														</ul>
-													</div>
+													<ul className='intro_para'>
+														<li> A mini fridge is available on request.</li>
+														<li>
+															No room service or on-site parking available.
+														</li>
+													</ul>
 												</div>
-												<div className='d-flex'>
-													<div>
-														<TbDisabled />
-													</div>
-													<div className='detail_div'>
-														<h6> Accessibity </h6>
 
-														<ul className='intro_para'>
-															<li> Wheelchair accessibility not available</li>
-															<li>Elevators available</li>
-														</ul>
+												<div style={{ width: '90%' }}>
+													<div className='d-flex'>
+														<div>
+															<TbDisabled />
+														</div>
+														<div className='detail_div'>
+															<h6> Accessibity </h6>
+														</div>
 													</div>
+													<ul className='intro_para'>
+														<li> Wheelchair accessibility not available</li>
+														<li>Elevators available</li>
+													</ul>
 												</div>
 											</div>
 											<div className='col-lg-6 col-md-12'>
-												<div className='d-flex'>
-													<div>
-														<TbMessageReport />
+												<div style={{ width: '90%' }}>
+													<div className='d-flex'>
+														<div>
+															<TbMessageReport />
+														</div>
+														<div className='detail_div'>
+															<h6> Refund Policy </h6>
+														</div>
 													</div>
-													<div className='detail_div'>
-														<h6> Refund Policy </h6>
-
-														<p className='intro_para'>
-															We offer flexible cancellations for all bookings.
-															Select the Flex Rate to cancel your booking up to
-															24hrs before check-in and receive a full refund.
-															For longer stays that are paid monthly, we require
-															at least 15 days notice to cancel or modify
-															without fees.
-														</p>
-													</div>
+													<p className='intro_para'>
+														We offer flexible cancellations for all bookings.
+														Select the Flex Rate to cancel your booking up to
+														24hrs before check-in and receive a full refund. For
+														longer stays that are paid monthly, we require at
+														least 15 days notice to cancel or modify without
+														fees.
+													</p>
 												</div>
 											</div>
 										</div>
@@ -559,13 +777,17 @@ const ApartmentDetails = () => {
 					/>
 					<div className='container landmarks'>
 						<div className='row row-mobile px-4'>
-							{apartment?.apartment.landmark.map((item, index) => (
-								<div className='col-3' key={index}>
-									<img src={item.image} alt='' />
-									<h5> {item.landmark} </h5>
-									<p> {item.address} </p>
-								</div>
-							))}
+							{apartment?.apartment?.landmark?.length > 0 ? (
+								apartment?.apartment.landmark.map((item, index) => (
+									<div className='col-3' key={index}>
+										<img src={item.image} alt='' />
+										<h5> {item.landmark} </h5>
+										<p> {item.address} </p>
+									</div>
+								))
+							) : (
+								<p> There are no landmarks uploaded for this apartment yet. </p>
+							)}
 						</div>
 					</div>
 				</section>

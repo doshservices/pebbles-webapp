@@ -120,6 +120,7 @@ const CreateListing = () => {
 	}
 
 	const options = [
+		{ label: '24hrs Power Supply', value: '24hrs Power Supply' },
 		{ label: 'Wi-Fi', value: 'Wi-Fi' },
 		{
 			label: 'Television- Netflix, dstv, Hulu, Amazon etc',

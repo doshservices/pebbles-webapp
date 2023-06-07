@@ -449,8 +449,12 @@ a {
 	font-weight: 400;
 	line-height: 32px;
 	letter-spacing: 0.169361px;
-	margin: 1rem 0;
-	text-align: justify;
+	margin: 0.5rem 0 1rem 0;
+	/* text-align: justify; */
+}
+
+.apartment_details_page ul.intro_para {
+	padding-left: 1rem;
 }
 
 .apartment_details_page .sect_head {
@@ -528,6 +532,23 @@ a {
 	border-style: solid;
 	border-color: #2d2d2d;
 	border-radius: 4px;
+}
+
+.amenity_icon {
+	height: 20px;
+	width: 20px;
+	color: #155eef !important;
+	fill: #155eef !important;
+	object-fit: contain;
+	margin-right: 1rem;
+}
+
+.amenity_icon path {
+	fill: #155eef !important;
+}
+
+.amenity_para {
+	margin-bottom: 0;
 }
 
 @media (max-width: 1200px) {

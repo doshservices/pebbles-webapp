@@ -10,7 +10,6 @@ import ApartmentSlider from '../../components/General/ApartmentSlider'
 import bgImage from '../../assets/Become_a_Host.jpg'
 import coming_soon from '../../assets/coming_soon.jpg'
 import { Link } from 'react-router-dom'
-import FoodCarousel from '../../components/General/FoodCarousel'
 
 const Voucher = () => {
 	const dispatch = useAppDispatch()

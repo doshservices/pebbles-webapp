@@ -1,10 +1,15 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { useAppSelector } from '../../app/hooks'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentCard from '../../components/ApartmentCard'
 import GoogleMapReact from 'google-map-react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import Loader from '../../components/Loader'
+import {
+	get_all_apartments,
+	get_saved_apartments,
+} from '../../features/apartment/apartmentSlice'
+import EmptyPage from '../../components/EmptyPage'
 
 const AnyReactComponent = ({
 	text,
@@ -16,15 +21,26 @@ const AnyReactComponent = ({
 	lng: number
 }) => (
 	<>
-		<FaMapMarkerAlt size={28} color='red' />
-		{/* <div>{text}</div> */}
+		<FaMapMarkerAlt size={18} color='red' />
+		<div
+			style={{
+				padding: '0rem .2rem',
+				backgroundColor: '#fff',
+				display: 'inline-block',
+			}}
+		>
+			<p style={{ fontSize: '16px', marginBottom: '0' }}>{text}</p>
+		</div>
 	</>
 )
 
 const AllApartments = () => {
-	const { allApartments, isFetchingAllApartments } = useAppSelector(
-		(state) => state.apartment
-	)
+	const dispatch = useAppDispatch()
+
+	const { allApartments, isFetchingAllApartments, savedApartment } =
+		useAppSelector((state) => state.apartment)
+
+	const { user_detail } = useAppSelector((state) => state.auth)
 
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
@@ -38,15 +54,14 @@ const AllApartments = () => {
 
 	const defaultProps = {
 		center: {
-			lat: 6.465422,
-			lng: 3.406448,
+			lat: 6.565422,
+			lng: 3.506448,
 		},
 		zoom: 11,
 	}
 
 	const [currentPage, setCurrentPage] = useState(1)
 	const [postsPerPage, setPostsPerPage] = useState(12)
-	const [loading, setLoading] = useState(false)
 
 	const indexOfLastPost = currentPage * postsPerPage
 	const indexOfFirstPost = indexOfLastPost - postsPerPage
@@ -72,6 +87,13 @@ const AllApartments = () => {
 		setCurrentPage(pageNum)
 	}
 
+	useEffect(() => {
+		if (user_detail) {
+			dispatch(get_saved_apartments())
+		}
+		dispatch(get_all_apartments())
+	}, [dispatch, user_detail, savedApartment])
+
 	return (
 		<section className='search_page page_padding'>
 			<div className='navbar_search'>
@@ -90,10 +112,6 @@ const AllApartments = () => {
 				<div className='row'>
 					<div className='col-lg-8'>
 						<div className='sort_div'>
-							{/* <p style={{ marginBottom: '0' }}>
-								10 Apartment found in Surulere
-							</p> */}
-
 							<div
 								className='d-flex'
 								style={{ alignItems: 'center', justifyContent: 'center' }}
@@ -128,11 +146,10 @@ const AllApartments = () => {
 									</div>
 								))
 							) : (
-								<div className='col-md-4 col-sm-6'>
-									<div className='p_4 mb-5'>
-										<p>No results found</p>
-									</div>
-								</div>
+								<EmptyPage
+									header='No apartments found'
+									para='All apartments will be shown here'
+								/>
 							)}
 						</div>
 					</div>
@@ -145,11 +162,22 @@ const AllApartments = () => {
 								defaultCenter={defaultProps.center}
 								defaultZoom={defaultProps.zoom}
 							>
-								<AnyReactComponent
-									lat={6.465422}
-									lng={3.406448}
-									text='My Marker'
-								/>
+								{allApartments?.apartments?.map((item) => {
+									return (
+										item?.latitude &&
+										item?.latitude !== 'undefined' &&
+										item?.latitude !== 'latitude' &&
+										item?.longitude &&
+										item?.longitude !== 'undefined' &&
+										item?.longitude !== 'longitude' && (
+											<AnyReactComponent
+												lat={Number(item?.latitude)}
+												lng={Number(item?.longitude)}
+												text={item.apartmentName}
+											/>
+										)
+									)
+								})}
 							</GoogleMapReact>
 						</div>
 					</div>

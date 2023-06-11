@@ -5,6 +5,7 @@ import GoogleMapReact from 'google-map-react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import Loader from '../../components/Loader'
+import EmptyPage from '../../components/EmptyPage'
 
 const AnyReactComponent = ({
 	text,
@@ -101,11 +102,10 @@ const SearchApartments = () => {
 									</div>
 								))
 							) : (
-								<div className='col-md-4 col-sm-6'>
-									<div className='p_4 mb-5'>
-										<p>No results found</p>
-									</div>
-								</div>
+								<EmptyPage
+									header='No apartments found'
+									para='Search results will be shown here'
+								/>
 							)}
 						</div>
 					</div>
@@ -118,11 +118,22 @@ const SearchApartments = () => {
 								defaultCenter={defaultProps.center}
 								defaultZoom={defaultProps.zoom}
 							>
-								<AnyReactComponent
-									lat={6.465422}
-									lng={3.406448}
-									text='My Marker'
-								/>
+								{searchApartments?.apartments?.map((item) => {
+									return (
+										item?.latitude &&
+										item?.latitude !== 'undefined' &&
+										item?.latitude !== 'latitude' &&
+										item?.longitude &&
+										item?.longitude !== 'undefined' &&
+										item?.longitude !== 'longitude' && (
+											<AnyReactComponent
+												lat={Number(item?.latitude)}
+												lng={Number(item?.longitude)}
+												text={item.apartmentName}
+											/>
+										)
+									)
+								})}
 							</GoogleMapReact>
 						</div>
 					</div>

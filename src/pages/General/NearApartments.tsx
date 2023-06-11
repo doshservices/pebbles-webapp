@@ -1,11 +1,15 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { useAppSelector } from '../../app/hooks'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentCard from '../../components/ApartmentCard'
-import apartmentImg from '../../assets/picture.png'
 import GoogleMapReact from 'google-map-react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import Loader from '../../components/Loader'
+import {
+	get_nearby_apartments,
+	get_saved_apartments,
+} from '../../features/apartment/apartmentSlice'
+import EmptyPage from '../../components/EmptyPage'
 
 const AnyReactComponent = ({
 	text,
@@ -23,9 +27,12 @@ const AnyReactComponent = ({
 )
 
 const NearApartments = () => {
-	const { nearbyApartments, isFetchingNearbyApartments } = useAppSelector(
-		(state) => state.apartment
-	)
+	const dispatch = useAppDispatch()
+
+	const { nearbyApartments, isFetchingNearbyApartments, savedApartment } =
+		useAppSelector((state) => state.apartment)
+
+	const { user_detail } = useAppSelector((state) => state.auth)
 
 	const RouteToTop = () => {
 		window.scrollTo(0, 0)
@@ -45,6 +52,13 @@ const NearApartments = () => {
 		zoom: 11,
 	}
 
+	useEffect(() => {
+		if (user_detail) {
+			dispatch(get_nearby_apartments())
+			dispatch(get_saved_apartments())
+		}
+	}, [dispatch, user_detail, savedApartment])
+
 	return (
 		<section className='search_page page_padding'>
 			<div className='navbar_search'>
@@ -63,10 +77,6 @@ const NearApartments = () => {
 				<div className='row'>
 					<div className='col-lg-8'>
 						<div className='sort_div'>
-							{/* <p style={{ marginBottom: '0' }}>
-								10 Apartment found in Surulere
-							</p> */}
-
 							<div
 								className='d-flex'
 								style={{ alignItems: 'center', justifyContent: 'center' }}
@@ -102,11 +112,12 @@ const NearApartments = () => {
 									</div>
 								))
 							) : (
-								<div className='col-md-4 col-sm-6'>
-									<div className='p_4 mb-5'>
-										<p>No results found</p>
-									</div>
-								</div>
+								// <div className='col-md-4 col-sm-6'>
+								<EmptyPage
+									header='No apartments found'
+									para='Nearby apartments will be shown here'
+								/>
+								// </div>
 							)}
 						</div>
 					</div>
@@ -119,11 +130,22 @@ const NearApartments = () => {
 								defaultCenter={defaultProps.center}
 								defaultZoom={defaultProps.zoom}
 							>
-								<AnyReactComponent
-									lat={6.465422}
-									lng={3.406448}
-									text='My Marker'
-								/>
+								{nearbyApartments?.apartments?.map((item) => {
+									return (
+										item?.latitude &&
+										item?.latitude !== 'undefined' &&
+										item?.latitude !== 'latitude' &&
+										item?.longitude &&
+										item?.longitude !== 'undefined' &&
+										item?.longitude !== 'longitude' && (
+											<AnyReactComponent
+												lat={Number(item?.latitude)}
+												lng={Number(item?.longitude)}
+												text={item.apartmentName}
+											/>
+										)
+									)
+								})}
 							</GoogleMapReact>
 						</div>
 					</div>

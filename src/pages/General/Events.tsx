@@ -7,6 +7,7 @@ import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { comma } from '../../utils/helper'
 import moment from 'moment'
+import EmptyPage from '../../components/EmptyPage'
 
 const Events = () => {
 	const dispatch = useAppDispatch()
@@ -85,9 +86,10 @@ const Events = () => {
 								</div>
 							))
 						) : (
-							<div className=''>
-								<p> No events at the moment. </p>
-							</div>
+							<EmptyPage
+								header='No events found'
+								para='Events will be shown here'
+							/>
 						)}
 					</div>
 				</div>

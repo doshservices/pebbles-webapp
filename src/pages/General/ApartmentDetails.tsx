@@ -67,11 +67,6 @@ const ApartmentDetails = () => {
 		(state) => state.booking
 	)
 
-	const [value, onChange] = useState<any>([new Date(), new Date()])
-	console.log(
-		'🚀 ~ file: ApartmentDetails.tsx:74 ~ ApartmentDetails ~ value:',
-		value
-	)
 	const [createType, setCreateType] = useState<number | null>()
 	const [limitValue, setLimitValue] = useState<number | null>(3)
 	const [limit, setLimit] = useState<boolean>(false)

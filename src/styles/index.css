@@ -362,6 +362,9 @@ a {
 
 .apartment_formform_pad {
 	padding: 1rem 3.5rem;
+	/* position: relative; */
+	position: sticky;
+	top: 60px;
 }
 
 .apartment_formform {

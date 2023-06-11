@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ApartmentInterface } from '../features/apartment/apartmentState'
 import { comma } from '../utils/helper'
@@ -23,8 +23,11 @@ const ApartmentCard = ({
 		(state) => state.apartment
 	)
 
+	const [id, setId] = useState<String>('')
+
 	const saveHandler = (e: any, id: string) => {
 		e.preventDefault()
+		setId(id)
 		dispatch(save_apartment({ apartmentId: id }))
 	}
 
@@ -37,10 +40,15 @@ const ApartmentCard = ({
 				<div className='apartment_card_div'>
 					<div className='row'>
 						<div className='col-10'>
-							<h6>
+							{/* <h6>
 								{apartmentInfo?.address.length >= 50
 									? apartmentInfo?.address.substring(0, 50) + '...'
 									: apartmentInfo?.address}
+							</h6> */}
+							<h6>
+								{' '}
+								{apartmentInfo?.apartmentName?.charAt(0).toUpperCase() +
+									apartmentInfo?.apartmentName?.slice(1)}{' '}
 							</h6>
 							<p className='no_of_rooms' style={{ color: '#2d2d2d' }}>
 								{apartmentInfo?.numberOfBedrooms} bedroom apartment
@@ -57,7 +65,7 @@ const ApartmentCard = ({
 										(item) => item.apartmentId._id === apartmentInfo?._id
 									) ? (
 										<img
-											onClick={(e) => saveHandler(e, apartmentInfo?._id)}
+											// onClick={(e) => saveHandler(e, apartmentInfo?._id)}
 											src={blue_heart}
 											alt=''
 											style={{
@@ -71,7 +79,11 @@ const ApartmentCard = ({
 											onClick={(e) => saveHandler(e, apartmentInfo?._id)}
 											src={white_heart}
 											alt=''
-											className={isSavingApartment ? 'rotating_heart' : ''}
+											className={
+												isSavingApartment && id === apartmentInfo?._id
+													? 'rotating_heart'
+													: ''
+											}
 											style={{
 												height: '1.5rem',
 												width: '1.5rem',

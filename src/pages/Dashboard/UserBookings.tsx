@@ -108,7 +108,7 @@ const UserBookings = () => {
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.address}
 										</td>
-										<td className='td_pad_top'>
+										<td className='td_pad_top' style={{ width: '12rem' }}>
 											{booking?.apartmentId?.facilities.map((item, index) => {
 												return (
 													index <= 3 && (
@@ -161,11 +161,11 @@ const UserBookings = () => {
 														to={`/user/dashboard/my-bookings/${booking._id}`}
 														className='me-3 btn'
 														style={{
-															backgroundColor: 'blue',
+															backgroundColor: '#155EEF',
 															color: '#fff',
 															borderRadius: '8px',
-															fontSize: '12px',
-															borderColor: 'blue',
+															fontSize: '11px',
+															borderColor: '#155EEF',
 															marginBottom: '.5rem',
 														}}
 													>
@@ -177,11 +177,11 @@ const UserBookings = () => {
 												<button
 													className='me-3 btn'
 													style={{
-														backgroundColor: 'red',
+														backgroundColor: '#ad1818',
 														color: '#fff',
 														borderRadius: '8px',
-														fontSize: '12px',
-														borderColor: 'red',
+														fontSize: '11px',
+														borderColor: '#ad1818',
 														marginBottom: '.5rem',
 													}}
 													onClick={(e) => cancelHandler(e, booking._id)}

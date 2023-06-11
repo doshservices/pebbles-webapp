@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import { Link, useParams } from 'react-router-dom'
 import { comma } from '../../utils/helper'
@@ -67,6 +67,11 @@ const ApartmentDetails = () => {
 		(state) => state.booking
 	)
 
+	const [createType, setCreateType] = useState<number | null>()
+	console.log(
+		'🚀 ~ file: ApartmentDetails.tsx:71 ~ ApartmentDetails ~ createType:',
+		createType
+	)
 	const [limitValue, setLimitValue] = useState<number | null>(3)
 	const [limit, setLimit] = useState<boolean>(false)
 	const [photoIndex, setPhotoIndex] = useState<number>(0)
@@ -101,11 +106,6 @@ const ApartmentDetails = () => {
 
 	const toggleMore = () => {
 		setLimit(!limit)
-		if (limit) {
-			setLimitValue(apartment && apartment?.apartment?.facilities?.length - 1)
-		} else {
-			setLimitValue(3)
-		}
 	}
 
 	const pressHandler = async (e: any) => {
@@ -128,7 +128,8 @@ const ApartmentDetails = () => {
 		setIsLoading(false)
 	}
 
-	const createBookingHandler = (e: any) => {
+	const createBookingHandler = (e: any, num: number) => {
+		setCreateType(num)
 		e.preventDefault()
 		let data = {
 			apartmentOwnerId: apartment?.apartment?.userId,
@@ -161,6 +162,14 @@ const ApartmentDetails = () => {
 			dispatch(bookingReset())
 		}
 	}, [params?.id, dispatch])
+
+	useEffect(() => {
+		if (limit) {
+			setLimitValue(apartment && apartment?.apartment?.facilities?.length - 1)
+		} else {
+			setLimitValue(3)
+		}
+	}, [limit])
 
 	return (
 		<main className='apartment_details_page page_padding'>
@@ -433,7 +442,7 @@ const ApartmentDetails = () => {
 										onClick={() => toggleMore()}
 										className='btn btn-primary mt-3  btn_white_blue'
 									>
-										{limit ? (
+										{!limit ? (
 											<span>
 												Show all {apartment?.apartment?.facilities?.length}{' '}
 												Amenities
@@ -684,17 +693,38 @@ const ApartmentDetails = () => {
 																'Check Availability'
 															)}
 														</button>
-														<button
-															className='btn form-control btn_save'
-															onClick={createBookingHandler}
-															disabled={isCreatingBooking}
+														<div
+															className='d-flex'
+															style={{ marginTop: '-1.3rem' }}
 														>
-															{isCreatingBooking ? (
-																<i className='fas fa-spinner fa-spin'></i>
-															) : (
-																'Book Now'
-															)}
-														</button>
+															<button
+																className='btn form-control btn_save me-2'
+																style={{
+																	backgroundColor: '#fff',
+																	color: '#155EEF',
+																	border: '1px solid #155EEF',
+																}}
+																onClick={(e) => createBookingHandler(e, 2)}
+																disabled={isCreatingBooking}
+															>
+																{isCreatingBooking && createType === 2 ? (
+																	<i className='fas fa-spinner fa-spin'></i>
+																) : (
+																	'Reserve'
+																)}
+															</button>
+															<button
+																className='btn form-control btn_save ms-2'
+																onClick={(e) => createBookingHandler(e, 1)}
+																disabled={isCreatingBooking}
+															>
+																{isCreatingBooking && createType === 1 ? (
+																	<i className='fas fa-spinner fa-spin'></i>
+																) : (
+																	'Book Now'
+																)}
+															</button>
+														</div>
 													</div>
 												</form>
 											</div>
@@ -714,18 +744,36 @@ const ApartmentDetails = () => {
 											</div> */}
 
 											{booking ? (
-												<div className='col-12 pb-4'>
-													<p>
-														You have successfully booked an apartment. Please
-														proceed to view booking and make payment.
-													</p>
-													<Link
-														to={`/user/dashboard/my-bookings`}
-														className='btn btn-info text-white'
-													>
-														Proceed
-													</Link>
-												</div>
+												<>
+													{createType === 1 ? (
+														<div className='col-12 pb-4'>
+															<p>
+																You have successfully booked an apartment.
+																Please proceed to view booking and make payment.
+															</p>
+															<Link
+																to={`/user/dashboard/my-bookings/${booking?._id}`}
+																className='btn btn_save text-white'
+															>
+																Proceed
+															</Link>
+														</div>
+													) : (
+														<div className='col-12 pb-4'>
+															<p>
+																You have successfully reserved this apartment.
+																Please payment should be made not later than
+																24hrs after reservation.
+															</p>
+															<Link
+																to={`/user/dashboard/my-bookings`}
+																className='btn btn_save text-white'
+															>
+																View Bookings
+															</Link>
+														</div>
+													)}
+												</>
 											) : bookingState ? (
 												<div className='col-12 pb-4'>
 													<p>
@@ -735,7 +783,7 @@ const ApartmentDetails = () => {
 													</p>
 													<Link
 														to={`/auth/login`}
-														className='btn btn-info text-white'
+														className='btn btn_save text-white'
 													>
 														Proceed
 													</Link>

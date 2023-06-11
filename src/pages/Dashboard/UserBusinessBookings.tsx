@@ -100,13 +100,13 @@ const UserBusinessBookings = () => {
 												{booking?.apartmentId?.apartmentName}
 											</Link>
 										</td>
-										<td className='td_pad_top' style={{ width: '8rem' }}>
+										<td className='td_pad_top'>
 											{booking?.apartmentId?.typeOfApartment}
 										</td>
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.address}
 										</td>
-										<td className='td_pad_top'>
+										<td className='td_pad_top' style={{ width: '12rem' }}>
 											{booking?.apartmentId?.facilities.map((item, index) => {
 												return (
 													index <= 3 && (

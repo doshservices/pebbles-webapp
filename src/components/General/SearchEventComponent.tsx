@@ -18,14 +18,6 @@ const SearchEventComponent = () => {
 		)
 	}
 
-	// useEffect(() => {
-	// 	dispatch(
-	// 		get_search_events({
-	// 			loc: loc?.formatted_address,
-	// 		})
-	// 	)
-	// }, [loc, dispatch])
-
 	return (
 		<div className='search_component_main_div'>
 			<div className='container position-relative'>

@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { Calendar } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-// import { MultiSelect } from 'react-multi-select-component'
 import moment from 'moment'
 import { book_add_on } from '../../features/booking/bookingSlice'
 import { toast } from 'react-hot-toast'
@@ -27,6 +26,11 @@ const SearchFoodComponent = () => {
 
 	const showDeliveryDateHandler = () => {
 		setShowDeliveryDate(!showDeliveryDate)
+	}
+
+	const dateSelectHandler = (item: any) => {
+		setDeliveryDate(item)
+		setShowDeliveryDate(false)
 	}
 
 	const submitHandler = (e: any) => {
@@ -126,7 +130,7 @@ const SearchFoodComponent = () => {
 					<div className='search_component_div_date ride_date'>
 						<Calendar
 							date={new Date()}
-							onChange={(item) => setDeliveryDate(item)}
+							onChange={(item: any) => dateSelectHandler(item)}
 						/>
 					</div>
 				)}

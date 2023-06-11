@@ -34,6 +34,11 @@ const SearchApartmentComponent = ({
 		setShowDate(!showDate)
 	}
 
+	const dateSelectHandler = (item: any) => {
+		setState([item.selection])
+		if (item.selection.startDate !== item.selection.endDate) setShowDate(false)
+	}
+
 	const submitHandler = () => {
 		dispatch(
 			get_search_apartments({
@@ -46,12 +51,6 @@ const SearchApartmentComponent = ({
 
 		navigate('/search-apartments')
 	}
-
-	useEffect(() => {
-		if (!showDateValue) {
-			setShowDate(false)
-		}
-	}, [showDateValue])
 
 	return (
 		<div className='search_component_main_div'>
@@ -162,11 +161,10 @@ const SearchApartmentComponent = ({
 					<div className='search_component_div_date'>
 						<DateRange
 							editableDateInputs={true}
-							onChange={(item) => setState([item.selection])}
-							moveRangeOnFirstSelection={true}
+							onChange={(item: any) => dateSelectHandler(item)}
+							moveRangeOnFirstSelection={false}
 							ranges={state}
 							minDate={new Date()}
-							scroll={{ enabled: true }}
 						/>
 					</div>
 				)}

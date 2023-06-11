@@ -57,6 +57,16 @@ const SearchRideComponent = () => {
 		setShowDateFalse()
 	}
 
+	const pickupSelectHandler = (item: any) => {
+		setPickupDate(item)
+		setShowPickupDate(false)
+	}
+
+	const delSelectHandler = (item: any) => {
+		setDepartureDate(item)
+		setShowDepartureDate(false)
+	}
+
 	const submitHandler = (e: any) => {
 		e.preventDefault()
 		if (user_detail) {
@@ -251,7 +261,7 @@ const SearchRideComponent = () => {
 					<div className='search_component_div_date ride_date'>
 						<Calendar
 							date={new Date()}
-							onChange={(item) => setPickupDate(item)}
+							onChange={(item) => pickupSelectHandler(item)}
 						/>
 					</div>
 				)}
@@ -259,7 +269,7 @@ const SearchRideComponent = () => {
 					<div className='search_component_div_date ride_date'>
 						<Calendar
 							date={new Date()}
-							onChange={(item) => setDepartureDate(item)}
+							onChange={(item) => delSelectHandler(item)}
 						/>
 					</div>
 				)}

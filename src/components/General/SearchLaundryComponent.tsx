@@ -37,6 +37,16 @@ const SearchLaundryComponent = () => {
 		setShowPickupDate(!showPickupDate)
 	}
 
+	const pickupSelectHandler = (item: any) => {
+		setPickUpDate(item)
+		setShowPickupDate(false)
+	}
+
+	const delSelectHandler = (item: any) => {
+		setDeliveryDate(item)
+		setShowDeliveryDate(false)
+	}
+
 	const submitHandler = (e: any) => {
 		e.preventDefault()
 		if (user_detail) {
@@ -170,7 +180,7 @@ const SearchLaundryComponent = () => {
 					<div className='search_component_div_date ride_date'>
 						<Calendar
 							date={new Date()}
-							onChange={(item) => setPickUpDate(item)}
+							onChange={(item) => pickupSelectHandler(item)}
 						/>
 					</div>
 				)}
@@ -178,7 +188,7 @@ const SearchLaundryComponent = () => {
 					<div className='search_component_div_date ride_date'>
 						<Calendar
 							date={new Date()}
-							onChange={(item) => setDeliveryDate(item)}
+							onChange={(item) => delSelectHandler(item)}
 						/>
 					</div>
 				)}

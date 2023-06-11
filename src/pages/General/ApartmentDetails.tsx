@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import { Link, useParams } from 'react-router-dom'
 import { comma } from '../../utils/helper'
-import { MdOutlinePayments, MdOutlinePool } from 'react-icons/md'
+import { MdOutlinePayments } from 'react-icons/md'
 import { TbMessageReport, TbDisabled } from 'react-icons/tb'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import two_users from '../../assets/two_users.png'
@@ -29,7 +29,7 @@ import ac_unit from '../../assets/apartment_icons/ac_unit.svg'
 import assured_workload from '../../assets/apartment_icons/assured_workload.svg'
 import balcony from '../../assets/apartment_icons/balcony.svg'
 import business_center from '../../assets/apartment_icons/business_center.svg'
-import deck from '../../assets/apartment_icons/deck.svg'
+// import deck from '../../assets/apartment_icons/deck.svg'
 import elevator from '../../assets/apartment_icons/elevator.svg'
 import engineering from '../../assets/apartment_icons/engineering.svg'
 import fitness_center from '../../assets/apartment_icons/fitness_center.svg'
@@ -48,7 +48,7 @@ import tv from '../../assets/apartment_icons/tv.svg'
 import warehouse from '../../assets/apartment_icons/warehouse.svg'
 import wifi from '../../assets/apartment_icons/wifi.svg'
 import pin_drop from '../../assets/apartment_icons/pin_drop.svg'
-import long_term from '../../assets/apartment_icons/long_term.png'
+// import long_term from '../../assets/apartment_icons/long_term.png'
 import short_term from '../../assets/apartment_icons/short_term.svg'
 import furnished from '../../assets/apartment_icons/furnished.svg'
 import { HiOutlineLightBulb } from 'react-icons/hi'
@@ -67,11 +67,12 @@ const ApartmentDetails = () => {
 		(state) => state.booking
 	)
 
-	const [createType, setCreateType] = useState<number | null>()
+	const [value, onChange] = useState<any>([new Date(), new Date()])
 	console.log(
-		'🚀 ~ file: ApartmentDetails.tsx:71 ~ ApartmentDetails ~ createType:',
-		createType
+		'🚀 ~ file: ApartmentDetails.tsx:74 ~ ApartmentDetails ~ value:',
+		value
 	)
+	const [createType, setCreateType] = useState<number | null>()
 	const [limitValue, setLimitValue] = useState<number | null>(3)
 	const [limit, setLimit] = useState<boolean>(false)
 	const [photoIndex, setPhotoIndex] = useState<number>(0)
@@ -126,6 +127,11 @@ const ApartmentDetails = () => {
 				setIsLoading(false)
 			})
 		setIsLoading(false)
+	}
+
+	const dateSelectHandler = (item: any) => {
+		setState([item.selection])
+		if (item.selection.startDate !== item.selection.endDate) setShowDate(false)
 	}
 
 	const createBookingHandler = (e: any, num: number) => {
@@ -652,8 +658,8 @@ const ApartmentDetails = () => {
 																	<div className='search_component_div_date apart_det_date'>
 																		<DateRange
 																			editableDateInputs={true}
-																			onChange={(item) =>
-																				setState([item.selection])
+																			onChange={(item: any) =>
+																				dateSelectHandler(item)
 																			}
 																			moveRangeOnFirstSelection={false}
 																			ranges={state}

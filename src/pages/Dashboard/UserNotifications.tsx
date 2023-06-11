@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import SliderImages from '../../components/SliderImages'
-import { Link } from 'react-router-dom'
-import { FaEye, FaPen, FaPlus, FaTrash } from 'react-icons/fa'
+// import { Link } from 'react-router-dom'
+import { FaTrash } from 'react-icons/fa'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Loader from '../../components/Loader'
 import {
 	delete_notification,
-	get_all_notifications,
+	get_notification_by_id,
 } from '../../features/notification/notificationSlice'
 import EmptyPage from '../../components/EmptyPage'
 
 const UserNotifications = () => {
 	const dispatch = useAppDispatch()
+
+	const { user_detail } = useAppSelector((state) => state.auth)
 
 	const { notifications, isLoading, isDeleting, deleteSuccess } =
 		useAppSelector((state) => state.notification)
@@ -29,7 +31,7 @@ const UserNotifications = () => {
 	}
 
 	useEffect(() => {
-		dispatch(get_all_notifications())
+		dispatch(get_notification_by_id({ id: user_detail?._id }))
 	}, [dispatch, deleteSuccess])
 
 	return (

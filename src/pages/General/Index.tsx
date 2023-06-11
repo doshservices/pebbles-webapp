@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import '../../styles/index.css'
 import HomeCarousel from '../../components/General/HomeCarousel'
 import PageHeaderComponent from '../../components/General/PageHeaderComponent'
 import {
 	get_nearby_apartments,
 	get_all_apartments,
+	get_saved_apartments,
 } from '../../features/apartment/apartmentSlice'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
@@ -59,7 +60,7 @@ const reviewData = [
 const Index = () => {
 	const dispatch = useAppDispatch()
 
-	const { nearbyApartments, allApartments } = useAppSelector(
+	const { nearbyApartments, allApartments, savedApartment } = useAppSelector(
 		(state) => state.apartment
 	)
 	const { user_detail } = useAppSelector((state) => state.auth)
@@ -68,10 +69,11 @@ const Index = () => {
 		if (user_detail) {
 			dispatch(get_nearby_apartments())
 			dispatch(get_all_apartments())
+			dispatch(get_saved_apartments())
 		} else {
 			dispatch(get_all_apartments())
 		}
-	}, [dispatch, user_detail])
+	}, [dispatch, user_detail, savedApartment])
 
 	return (
 		<>

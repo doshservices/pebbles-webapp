@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { ApartmentInterface } from '../features/apartment/apartmentState'
 import { comma } from '../utils/helper'
 import SliderImages from './SliderImages'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import white_heart from '../assets/white_heart.png'
+import blue_heart from '../assets/blue_heart.png'
 import { save_apartment } from '../features/apartment/apartmentSlice'
 
 const ApartmentCard = ({
@@ -17,6 +18,10 @@ const ApartmentCard = ({
 	const dispatch = useAppDispatch()
 
 	const { user_detail } = useAppSelector((state) => state.auth)
+
+	const { savedApartments, isSavingApartment } = useAppSelector(
+		(state) => state.apartment
+	)
 
 	const saveHandler = (e: any, id: string) => {
 		e.preventDefault()
@@ -48,16 +53,32 @@ const ApartmentCard = ({
 						<div className='col-2'>
 							{user_detail && showfalse ? (
 								<>
-									<img
-										onClick={(e) => saveHandler(e, apartmentInfo?._id)}
-										src={white_heart}
-										alt=''
-										style={{
-											height: '1.5rem',
-											width: '1.5rem',
-											objectFit: 'contain',
-										}}
-									/>
+									{savedApartments?.apartment?.find(
+										(item) => item.apartmentId._id === apartmentInfo?._id
+									) ? (
+										<img
+											onClick={(e) => saveHandler(e, apartmentInfo?._id)}
+											src={blue_heart}
+											alt=''
+											style={{
+												height: '1.5rem',
+												width: '1.5rem',
+												objectFit: 'contain',
+											}}
+										/>
+									) : (
+										<img
+											onClick={(e) => saveHandler(e, apartmentInfo?._id)}
+											src={white_heart}
+											alt=''
+											className={isSavingApartment ? 'rotating_heart' : ''}
+											style={{
+												height: '1.5rem',
+												width: '1.5rem',
+												objectFit: 'contain',
+											}}
+										/>
+									)}
 								</>
 							) : null}
 						</div>

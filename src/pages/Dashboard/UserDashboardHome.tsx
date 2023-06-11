@@ -11,7 +11,7 @@ import {
 	get_apartments_by_user,
 	get_saved_apartments,
 } from '../../features/apartment/apartmentSlice'
-import { get_all_notifications } from '../../features/notification/notificationSlice'
+import { get_notification_by_id } from '../../features/notification/notificationSlice'
 
 const UserDashboardHome = () => {
 	const dispatch = useAppDispatch()
@@ -35,7 +35,7 @@ const UserDashboardHome = () => {
 		}
 
 		dispatch(get_apartments_by_user())
-		dispatch(get_all_notifications())
+		dispatch(get_notification_by_id({ id: user_detail?._id }))
 		dispatch(get_saved_apartments())
 		dispatch(get_user_bookings())
 		return () => {

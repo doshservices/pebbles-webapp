@@ -1110,3 +1110,17 @@ a {
 	color: #fff !important;
 	box-shadow: 2px 2px 2px #ccc;
 }
+
+.rotating_heart {
+	animation: 3s infinite alternate slidein;
+}
+
+@keyframes slidein {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}

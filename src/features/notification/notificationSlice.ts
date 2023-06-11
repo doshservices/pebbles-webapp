@@ -176,14 +176,14 @@ export const { reducer: NotificationReducer, actions } = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(get_all_notifications.fulfilled, (state, action) => {
+		builder.addCase(get_notification_by_id.fulfilled, (state, action) => {
 			state.notifications = action.payload.data
 			state.isLoading = false
 		})
-		builder.addCase(get_all_notifications.pending, (state, action) => {
+		builder.addCase(get_notification_by_id.pending, (state, action) => {
 			state.isLoading = true
 		})
-		builder.addCase(get_all_notifications.rejected, (state, action) => {
+		builder.addCase(get_notification_by_id.rejected, (state, action) => {
 			state.isLoading = false
 		})
 		builder.addCase(delete_notification.fulfilled, (state, action) => {

@@ -437,7 +437,7 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 			state.isCreatingApartment = false
 		})
 		builder.addCase(save_apartment.fulfilled, (state, action) => {
-			// state.savedApartments = action.payload.data
+			state.savedApartment = action.payload.data
 			state.isSavingApartment = false
 		})
 		builder.addCase(save_apartment.pending, (state, action) => {

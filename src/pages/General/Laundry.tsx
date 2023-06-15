@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentSlider from '../../components/General/ApartmentSlider'
 import bgImage from '../../assets/Become_a_Host.jpg'
 import { Link } from 'react-router-dom'
-import RideCarousel from '../../components/General/RideCarousel'
+// import RideCarousel from '../../components/General/RideCarousel'
 import LaundryCarousel from '../../components/General/LaundryCarousel'
 
 const Laundry = () => {

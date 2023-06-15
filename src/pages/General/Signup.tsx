@@ -15,9 +15,7 @@ const Signup = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_register, isLoading, verifyOtp } = useAppSelector(
-		(state) => state.auth
-	)
+	const { isLoading, verifyOtp } = useAppSelector((state) => state.auth)
 
 	const [verify, setVerify] = useState(false)
 	const [showIndividual, setShowIndividual] = useState(true)

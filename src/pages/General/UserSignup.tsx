@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
 	user_signup,
-	get_otp,
 	verify_otp,
 } from '../../features/authentication/authenticationSlice'
 import OTPInput, { ResendOTP } from 'otp-input-react'
@@ -15,9 +14,7 @@ const UserSignup = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_register, isLoading, verifyOtp } = useAppSelector(
-		(state) => state.auth
-	)
+	const { isLoading, verifyOtp } = useAppSelector((state) => state.auth)
 
 	const [verify, setVerify] = useState(false)
 	const [message, setMessage] = useState<string | null>(null)

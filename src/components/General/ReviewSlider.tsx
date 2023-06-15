@@ -1,6 +1,5 @@
 import React from 'react'
 import Slider from 'react-slick'
-import ApartmentCard from '../ApartmentCard'
 
 const ReviewSlider = ({ data }: { data: any[] }) => {
 	const settings = {

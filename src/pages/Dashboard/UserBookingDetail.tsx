@@ -5,7 +5,7 @@ import {
 	flutter_pay_booking,
 	get_booking_by_id,
 } from '../../features/booking/bookingSlice'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import flutter from '../../assets/flutterwave.svg'
 import white_house from '../../assets/white_house.png'
 import black_house from '../../assets/black_house.png'

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { Dropdown } from 'react-bootstrap'
 
 const NavLeft = ({ handle }) => {
 	const [openSearch, setOpenSearch] = useState(false)
 
-	const searchHandler = (e) => {
+	const searchHandler = (e: any) => {
 		e.preventDefault()
 		setOpenSearch(!openSearch)
 	}

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Dropdown from 'react-bootstrap/Dropdown'
-// import { TbFileX } from 'react-icons/tb'
 import { useAppSelector } from '../../../app/hooks'
 import Avatar1 from '../../../assets/profile-circle-black.png'
 import { reset } from '../../../features/authentication/authenticationSlice'

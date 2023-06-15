@@ -1,14 +1,10 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
-// import { Link, useNavigate } from 'react-router-dom'
 import Slider from 'react-slick'
 import carouselBackground1 from '../../assets/event.png'
 import carouselBackground2 from '../../assets/Registration1.jpg'
 import SearchEventComponent from './SearchEventComponent'
 
 const EventCarousel = () => {
-	// const navigate = useNavigate()
-
 	const settings = {
 		dots: true,
 		infinite: true,

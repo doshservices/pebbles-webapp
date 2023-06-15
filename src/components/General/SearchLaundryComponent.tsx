@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
-import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { Calendar } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-// import { MultiSelect } from 'react-multi-select-component'
 import moment from 'moment'
 import { book_add_on } from '../../features/booking/bookingSlice'
 import { toast } from 'react-hot-toast'
 
 const SearchLaundryComponent = () => {
 	const dispatch = useAppDispatch()
-	const navigate = useNavigate()
 
 	const { user_detail } = useAppSelector((state) => state.auth)
 

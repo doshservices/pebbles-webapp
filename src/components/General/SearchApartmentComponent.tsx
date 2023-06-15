@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
@@ -17,8 +17,6 @@ const SearchApartmentComponent = ({
 	const navigate = useNavigate()
 
 	const [loc, setLoc] = useState<any>({})
-	const [checkIn, setCheckIn] = useState('')
-	const [checkOut, setCheckOut] = useState('')
 	const [apartmentType, setApartmentType] = useState('')
 	const [showDate, setShowDate] = useState(false)
 

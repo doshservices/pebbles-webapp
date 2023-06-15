@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaBatteryEmpty } from 'react-icons/fa'
 import empty from '../assets/empty.png'
 
 const EmptyPage = ({ header, para }: { header: string; para?: string }) => {

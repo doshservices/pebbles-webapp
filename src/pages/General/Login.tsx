@@ -13,7 +13,7 @@ const Login = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { user_detail, token, isLoading, keepLoggedIn } = useAppSelector(
+	const { user_detail, isLoading, keepLoggedIn } = useAppSelector(
 		(state) => state.auth
 	)
 

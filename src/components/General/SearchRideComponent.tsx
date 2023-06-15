@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Autocomplete from 'react-google-autocomplete'
-import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { Calendar } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
@@ -13,7 +12,6 @@ import Multiselect from 'multiselect-react-dropdown'
 
 const SearchRideComponent = () => {
 	const dispatch = useAppDispatch()
-	const navigate = useNavigate()
 
 	const { user_detail } = useAppSelector((state) => state.auth)
 

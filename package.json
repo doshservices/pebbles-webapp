@@ -48,7 +48,6 @@
 		"react-tabs": "^6.0.0",
 		"reactstrap": "^9.1.5",
 		"redux-persist": "^6.0.0",
-		"serve": "^14.2.0",
 		"typescript": "^4.9.5",
 		"web-vitals": "^2.1.4"
 	},

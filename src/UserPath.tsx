@@ -91,7 +91,7 @@ const UserPath = () => {
 			</div>
 		</FullScreen>
 	) : (
-		<Navigate to='/user/dashboard/home' />
+		<Navigate to='/auth/login' />
 	)
 }
 

@@ -14,52 +14,24 @@ const UserProfile = () => {
 	const [firstName, setFirstName] = useState(
 		user_detail ? user_detail.firstName : ''
 	)
-	const [businessName, setBusinessName] = useState(
-		user_detail ? user_detail.businessName : ''
+	const [businessName, setBusinessName] = useState<string | undefined | null>(
+		user_detail ? user_detail?.businessName : null
 	)
 	const [email, setEmail] = useState(user_detail ? user_detail.email : '')
 	const [phoneNumber, setPhoneNumber] = useState(
 		user_detail ? user_detail.phoneNumber : ''
 	)
-	const [address, setAddress] = useState(user_detail ? user_detail.address : '')
+	const [address, setAddress] = useState(
+		user_detail ? user_detail.companyAddress : ''
+	)
 	const [businessAddress, setBusinessAddress] = useState(
-		user_detail ? user_detail.businessAddress : ''
+		user_detail ? user_detail.companyAddress : ''
 	)
 	const [state, setState] = useState(user_detail ? user_detail.state : '')
 	const [city, setCity] = useState(user_detail ? user_detail.city : '')
 	const [country, setCountry] = useState(
 		user_detail ? user_detail.country : 'NG'
 	)
-	const [password, setPassword] = useState('')
-	const [newPassword, setNewPassword] = useState('')
-	const [confirmPassword, setConfirmPassword] = useState('')
-
-	const viewHandler = () => {
-		let pass = document.getElementById('password')
-		let view = document.getElementById('view')
-		const type = pass?.getAttribute('type') === 'password' ? 'text' : 'password'
-		pass?.setAttribute('type', type)
-
-		view?.classList.toggle('fa-eye-slash')
-	}
-
-	const viewHandler1 = () => {
-		let pass = document.getElementById('new_password')
-		let view = document.getElementById('view1')
-		const type = pass?.getAttribute('type') === 'password' ? 'text' : 'password'
-		pass?.setAttribute('type', type)
-
-		view?.classList.toggle('fa-eye-slash')
-	}
-
-	const viewHandler2 = () => {
-		let pass = document.getElementById('confirm_password')
-		let view = document.getElementById('view2')
-		const type = pass?.getAttribute('type') === 'password' ? 'text' : 'password'
-		pass?.setAttribute('type', type)
-
-		view?.classList.toggle('fa-eye-slash')
-	}
 
 	const [imageFile, setImageFile] = useState('')
 	const [idFile, setIdFile] = useState('')
@@ -80,8 +52,6 @@ const UserProfile = () => {
 		user_detail ? user_detail.cacDocument : ''
 	)
 	const [uploading, setUploading] = useState(false)
-	const [uploadedValidID, setUploadedValidID] = useState('')
-	const [mainValidID, setMainValidID] = useState(null)
 
 	const getBase64 = (file: any) => {
 		return new Promise((resolve) => {
@@ -208,20 +178,35 @@ const UserProfile = () => {
 
 	const updateHandler = (e: any) => {
 		e.preventDefault()
-		let data = {
-			firstName,
-			lastName,
-			businessName,
-			businessAddress,
-			phoneNumber,
-			state,
-			country,
-			city,
-			profilePicture: uploadedImage,
-			validId: uploadedId,
-			cacDocument: uploadedCac,
+		if (user_detail?.role === 'BUSINESS') {
+			let data = {
+				firstName,
+				lastName,
+				businessName,
+				companyAddress: businessAddress,
+				phoneNumber,
+				state,
+				country,
+				city,
+				profilePicture: uploadedImage,
+				validId: uploadedId,
+				cacDocument: uploadedCac,
+			}
+			dispatch(user_update(data))
+		} else {
+			let data = {
+				firstName,
+				lastName,
+				companyAddress: address,
+				phoneNumber,
+				state,
+				country,
+				city,
+				profilePicture: uploadedImage,
+				validId: uploadedId,
+			}
+			dispatch(user_update(data))
 		}
-		dispatch(user_update(data))
 	}
 
 	return (
@@ -283,18 +268,19 @@ const UserProfile = () => {
 											// onChange={(e) => setLastName(e.target.value)}
 										/>
 									</div>
-									{user_detail?.role === 'BUSINESS' && (
-										<div className='col-md-12'>
-											<label htmlFor=''>Business Name</label>
-											<input
-												type='text'
-												value={businessName}
-												placeholder='Enter Company name here'
-												className='form-control'
-												onChange={(e) => setBusinessName(e.target.value)}
-											/>
-										</div>
-									)}
+									{user_detail?.role === 'BUSINESS' &&
+										user_detail?.businessName && (
+											<div className='col-md-12'>
+												<label htmlFor=''>Business Name</label>
+												<input
+													type='text'
+													value={businessName ? businessName : ''}
+													placeholder='Enter Company name here'
+													className='form-control'
+													onChange={(e) => setBusinessName(e.target.value)}
+												/>
+											</div>
+										)}
 
 									{user_detail?.role === 'BUSINESS' ? (
 										<div className='col-md-6'>

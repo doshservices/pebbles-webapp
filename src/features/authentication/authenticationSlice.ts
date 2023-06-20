@@ -139,8 +139,8 @@ export const user_update = createAsyncThunk(
 	async (
 		payload: {
 			firstName?: string | undefined
-			businessName?: string | undefined
-			businessAddress?: string | undefined
+			businessName?: string | undefined | null
+			companyAddress?: string | undefined
 			lastName?: string | undefined
 			phoneNumber: string | undefined
 			state: string | undefined

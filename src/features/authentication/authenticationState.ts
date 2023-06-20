@@ -33,7 +33,7 @@ export interface AuthInterface {
 	city?: string
 	state?: string
 	address?: string
-	businessAddress?: string
+	companyAddress?: string
 	cacDocument?: string
 	validId?: string
 }

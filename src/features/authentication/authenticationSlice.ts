@@ -10,7 +10,7 @@ import { newState } from '../../utils/newState'
 import { store } from '../../app/store'
 import toast from 'react-hot-toast'
 
-let url = config.testUrl
+let url = config.liveUrl
 
 function rehydrate(
 	state: AuthInitialInterface,

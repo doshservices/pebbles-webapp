@@ -36,6 +36,7 @@ import ApproveEventPayment from './pages/General/ApproveEventPayment'
 import Food from './pages/General/Food'
 import Laundry from './pages/General/Laundry'
 import Voucher from './pages/General/Voucher'
+import Policy from './pages/General/Policy'
 
 function App() {
 	return (
@@ -53,6 +54,7 @@ function App() {
 							<Route path='apartments/:id' element={<ApartmentDetails />} />
 							<Route path='about-us' element={<About />} />
 							<Route path='contact' element={<Contact />} />
+							<Route path='privacy-policy' element={<Policy />} />
 							<Route path='add-ons/ride' element={<Ride />} />
 							<Route path='add-ons/voucher' element={<Voucher />} />
 							<Route path='add-ons/food' element={<Food />} />

@@ -110,7 +110,7 @@ const AllApartments = () => {
 					ALL APARTMENTS
 				</h5>
 				<div className='row'>
-					<div className='col-lg-8'>
+					<div className='col-lg-12'>
 						<div className='sort_div'>
 							<div
 								className='d-flex'
@@ -153,7 +153,7 @@ const AllApartments = () => {
 							)}
 						</div>
 					</div>
-					<div className='col-lg-4 map_section'>
+					{/* <div className='col-lg-4 map_section'>
 						<div style={{ height: '30rem', width: '100%' }}>
 							<GoogleMapReact
 								bootstrapURLKeys={{
@@ -162,7 +162,7 @@ const AllApartments = () => {
 								defaultCenter={defaultProps.center}
 								defaultZoom={defaultProps.zoom}
 							>
-								{allApartments?.apartments?.map((item) => {
+								{allApartments?.apartments?.map((item, index) => {
 									return (
 										item?.latitude &&
 										item?.latitude !== 'undefined' &&
@@ -174,13 +174,14 @@ const AllApartments = () => {
 												lat={Number(item?.latitude)}
 												lng={Number(item?.longitude)}
 												text={item.apartmentName}
+												key={index}
 											/>
 										)
 									)
 								})}
 							</GoogleMapReact>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 

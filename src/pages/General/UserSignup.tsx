@@ -14,9 +14,13 @@ const UserSignup = () => {
 	const dispatch = useAppDispatch()
 	let navigate = useNavigate()
 
-	const { isLoading, verifyOtp } = useAppSelector((state) => state.auth)
+	const { isLoading, verifyOtp, user_register } = useAppSelector(
+		(state) => state.auth
+	)
 
 	const [verify, setVerify] = useState(false)
+	const [justPressed, setJustPressed] = useState(false)
+	const [justPressedOtp, setJustPressedOtp] = useState(false)
 	const [message, setMessage] = useState<string | null>(null)
 	const [OTP, setOTP] = useState('')
 	const [firstName, setFirstName] = useState('')
@@ -54,11 +58,11 @@ const UserSignup = () => {
 	}, [])
 
 	const submitHandler = (e: any) => {
+		setJustPressedOtp(true)
 		e.preventDefault()
 		setRole(role)
 		if (OTP) {
 			dispatch(verify_otp({ token: OTP }))
-			setVerify(true)
 		} else {
 			setMessage('Please type in your OTP.')
 		}
@@ -66,6 +70,7 @@ const UserSignup = () => {
 
 	const submitSignupHandler = (e: any, role: string) => {
 		e.preventDefault()
+		setJustPressed(true)
 		setRole(role)
 
 		if (
@@ -87,7 +92,6 @@ const UserSignup = () => {
 						role,
 					})
 				)
-				setVerify(true)
 			} else {
 				setMessage('Passwords do not match.')
 			}
@@ -111,10 +115,16 @@ const UserSignup = () => {
 	}
 
 	useEffect(() => {
-		if (verifyOtp) {
+		if (user_register && justPressed) {
+			setVerify(true)
+		}
+	}, [user_register, justPressed])
+
+	useEffect(() => {
+		if (verifyOtp && justPressedOtp) {
 			navigate('/auth/login')
 		}
-	}, [verifyOtp])
+	}, [verifyOtp, justPressedOtp])
 
 	return (
 		<main className='about_page auth_page'>
@@ -284,7 +294,11 @@ const UserSignup = () => {
 													onClick={(e) => submitSignupHandler(e, 'USER')}
 													disabled={isLoading}
 												>
-													Create Account
+													{isLoading ? (
+														<i className='fas fa-spinner fa-spin'></i>
+													) : (
+														<span>Create Account</span>
+													)}
 												</button>
 											</div>
 											<p

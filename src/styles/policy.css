@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'poppins', Arial, Helvetica, sans-serif;
+	scroll-padding-top: 3rem;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+.policy {
+	margin-top: 7rem;
+}
+
+.policy h1 {
+	color: hsla(0, 0%, 18%, 0.8);
+	font-size: 2rem;
+	font-family: 500;
+	margin-bottom: 1rem;
+}
+
+.policy h2 {
+	color: hsla(0, 0%, 18%, 0.9);
+	font-size: 1.5rem;
+	font-family: 500;
+	margin-bottom: 0.6rem;
+}
+
+.policy p {
+	color: hsla(0, 0%, 18%, 0.8);
+	font-size: 0.9rem;
+	line-height: 1.7;
+}
+
+.policy .bold-text {
+	font-weight: 600;
+}
+
+.policy em {
+	font-weight: 600;
+	font-style: normal;
+}
+
+.policy a {
+	color: hsla(220, 87%, 51%, 1);
+}
+
+.policy a:visited {
+	color: hsla(220, 87%, 56%, 1);
+}
+
+.policy section {
+	margin-bottom: 2rem;
+}
+
+#terms-for-non-european {
+	margin-top: 2rem;
+}
+
+#terms-for-non-european p {
+	margin-bottom: 1.3rem;
+}
+
+.policy li {
+	list-style: none;
+	font-size: 0.9rem;
+}
+
+#table-of-contents {
+}
+
+#table-of-contents h3 {
+	margin: 1rem 0;
+}
+
+#guest-terms ol {
+	margin: 1rem 0;
+}
+
+#guest-terms p {
+	margin: 1rem 0;
+}
+
+#guest-terms h3 {
+	margin: 1rem 0;
+}
+
+#guest-terms li {
+	list-style: lower-roman;
+	margin-left: 2rem;
+}
+
+#host-terms p {
+	margin: 1rem 0;
+}
+
+#host-terms li {
+	margin: 0.7rem 0;
+	list-style: unset;
+	margin-left: 3rem;
+}
+
+#general-terms p {
+	margin: 1rem 0;
+}
+
+.policy .round-list {
+	list-style: none;
+	margin-left: 3rem;
+	margin-bottom: 0.5rem;
+	position: relative;
+	margin-left: 3rem;
+}
+
+.policy .round-list::before {
+	content: '';
+	position: absolute;
+	height: 5px;
+	width: 5px;
+	display: block;
+	background-color: black;
+	margin: 7px 1rem 0 -10px;
+	border-radius: 50%;
+}
+
+.policy .round-list ul li {
+	list-style: circle !important;
+	margin: 0.5rem 0 0 2rem;
+}

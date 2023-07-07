@@ -61,7 +61,7 @@ const SearchApartments = () => {
 					APARTMENTS SEARCH
 				</h5>
 				<div className='row'>
-					<div className='col-lg-8'>
+					<div className='col-lg-12'>
 						<div className='sort_div'>
 							{/* <p style={{ marginBottom: '0' }}>
 								10 Apartment found in Surulere
@@ -109,7 +109,7 @@ const SearchApartments = () => {
 							)}
 						</div>
 					</div>
-					<div className='col-lg-4 map_section'>
+					{/* <div className='col-lg-4 map_section'>
 						<div style={{ height: '30rem', width: '100%' }}>
 							<GoogleMapReact
 								bootstrapURLKeys={{
@@ -136,7 +136,7 @@ const SearchApartments = () => {
 								})}
 							</GoogleMapReact>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</section>

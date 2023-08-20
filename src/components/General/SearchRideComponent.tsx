@@ -9,6 +9,8 @@ import moment from 'moment'
 import { book_add_on } from '../../features/booking/bookingSlice'
 import { toast } from 'react-hot-toast'
 import Multiselect from 'multiselect-react-dropdown'
+import { HiOutlineMapPin } from 'react-icons/hi2'
+import { BiCalendar } from 'react-icons/bi'
 
 const SearchRideComponent = () => {
 	const dispatch = useAppDispatch()
@@ -100,7 +102,7 @@ const SearchRideComponent = () => {
 										style={{ position: 'relative' }}
 									>
 										<span>
-											<i className='icofont-google-map' aria-hidden='true'></i>
+											<HiOutlineMapPin />
 										</span>
 
 										<Autocomplete
@@ -120,7 +122,7 @@ const SearchRideComponent = () => {
 										style={{ position: 'relative' }}
 									>
 										<span>
-											<i className='icofont-google-map' aria-hidden='true'></i>
+											<HiOutlineMapPin />
 										</span>
 
 										<Autocomplete
@@ -144,7 +146,7 @@ const SearchRideComponent = () => {
 										style={{ position: 'relative' }}
 									>
 										<span>
-											<i className='icofont-calendar' aria-hidden='true'></i>
+											<BiCalendar />
 										</span>
 										<div
 											className='form-control input'
@@ -206,7 +208,7 @@ const SearchRideComponent = () => {
 											style={{ position: 'relative' }}
 										>
 											<span>
-												<i className='icofont-calendar' aria-hidden='true'></i>
+												<BiCalendar />
 											</span>
 											<div
 												className='form-control input'

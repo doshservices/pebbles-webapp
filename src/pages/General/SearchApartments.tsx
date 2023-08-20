@@ -45,33 +45,49 @@ const SearchApartments = () => {
 		zoom: 11,
 	}
 
+	console.log('====================================')
+	console.log('searchApartments', searchApartments)
+	console.log('====================================')
+
 	return (
 		<section className='search_page page_padding'>
 			<div className='navbar_search'>
 				<SearchApartmentComponent />
 			</div>
 			<div className='container'>
-				<h5
-					style={{
-						fontWeight: '700',
-						marginTop: '-1rem',
-						marginBottom: '2rem',
-					}}
-				>
-					APARTMENTS SEARCH
-				</h5>
 				<div className='row'>
 					<div className='col-lg-12'>
 						<div className='sort_div'>
-							{/* <p style={{ marginBottom: '0' }}>
-								10 Apartment found in Surulere
-							</p> */}
+							<h5
+								style={{
+									fontWeight: '700',
+									marginTop: '-1rem',
+									marginBottom: '2rem',
+								}}
+							>
+								{searchApartments && searchApartments?.apartments?.length > 0
+									? searchApartments?.apartments?.length
+									: '0'}{' '}
+								Apartment
+								{searchApartments && searchApartments?.apartments?.length === 1
+									? ''
+									: 's'}{' '}
+								found
+							</h5>
 
 							<div
 								className='d-flex'
 								style={{ alignItems: 'center', justifyContent: 'center' }}
 							>
-								<p style={{ width: '5rem', marginBottom: '0' }}>Sort by</p>
+								<p
+									style={{
+										width: '5rem',
+										marginBottom: '0',
+										marginRight: '1rem',
+									}}
+								>
+									Sort by
+								</p>
 								<select
 									onChange={(e) => {
 										setSortParams(e.target.value)
@@ -95,7 +111,7 @@ const SearchApartments = () => {
 							) : searchApartments &&
 							  searchApartments.apartments?.length > 0 ? (
 								searchApartments.apartments.map((item, index) => (
-									<div className='col-md-4 col-sm-6' key={index}>
+									<div className='col-md-3 col-sm-6' key={index}>
 										<div key={index} className='p_4 mb-5'>
 											<ApartmentCard apartmentInfo={item} />
 										</div>
@@ -103,8 +119,8 @@ const SearchApartments = () => {
 								))
 							) : (
 								<EmptyPage
-									header='No apartments found'
-									para='Search results will be shown here'
+									header='No apartment found'
+									para='Try modifying your search by changing your dates or removing filters.'
 								/>
 							)}
 						</div>

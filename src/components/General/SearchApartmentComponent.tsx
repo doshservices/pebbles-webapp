@@ -7,6 +7,10 @@ import { DateRange } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import moment from 'moment'
+import { HiOutlineMapPin } from 'react-icons/hi2'
+import { TfiHome } from 'react-icons/tfi'
+import { BiCalendar } from 'react-icons/bi'
+import { toast } from 'react-hot-toast'
 
 const SearchApartmentComponent = ({
 	showDateValue,
@@ -38,16 +42,19 @@ const SearchApartmentComponent = ({
 	}
 
 	const submitHandler = () => {
-		dispatch(
-			get_search_apartments({
-				loc: loc?.formatted_address,
-				checkIn: moment(state[0].startDate).format(),
-				checkOut: moment(state[0].endDate).format(),
-				apartmentType,
-			})
-		)
-
-		navigate('/search-apartments')
+		if (loc && apartmentType) {
+			dispatch(
+				get_search_apartments({
+					loc: loc?.formatted_address,
+					checkIn: moment(state[0].startDate).format(),
+					checkOut: moment(state[0].endDate).format(),
+					apartmentType,
+				})
+			)
+			navigate('/search-apartments')
+		} else {
+			toast.error('Please fill all required fields')
+		}
 	}
 
 	return (
@@ -61,7 +68,7 @@ const SearchApartmentComponent = ({
 							onClick={() => setShowDate(false)}
 						>
 							<span>
-								<i className='icofont-google-map' aria-hidden='true'></i>
+								<HiOutlineMapPin />
 							</span>
 
 							<Autocomplete
@@ -80,7 +87,7 @@ const SearchApartmentComponent = ({
 									style={{ position: 'relative' }}
 								>
 									<span>
-										<i className='icofont-calendar' aria-hidden='true'></i>
+										<BiCalendar />
 									</span>
 									<div className='form-control input' onClick={showDateHandler}>
 										<p className='mb-0 pb-0' style={{ fontSize: '14px' }}>
@@ -103,7 +110,7 @@ const SearchApartmentComponent = ({
 									onClick={() => setShowDate(false)}
 								>
 									<span>
-										<i className='fa fa-home-alt' aria-hidden='true'></i>
+										<TfiHome />
 									</span>
 									<select
 										onChange={(e) => {

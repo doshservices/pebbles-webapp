@@ -1,5 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
+import review_img from '../../assets/review_img.png'
 
 const ReviewSlider = ({ data }: { data: any[] }) => {
 	const settings = {
@@ -47,18 +48,22 @@ const ReviewSlider = ({ data }: { data: any[] }) => {
 			<Slider {...settings}>
 				{data.map((item, index) => (
 					<div key={index} className='p-2 mt-3'>
-						<div
-							className={
-								index === 0
-									? 'review_box review_0'
-									: index % 2 !== 0
-									? 'review_box review_1'
-									: 'review_box review_2'
-							}
-						>
+						<div className={'review_box'}>
 							<p className='message'>"{item.message}"</p>
-							<p className='name'> {item.name} </p>
-							<p className='location'> {item.location} </p>
+							<div
+								className='d-flex align-items-center'
+								style={{ height: 'auto' }}
+							>
+								<img
+									src={review_img}
+									alt=''
+									style={{ objectFit: 'contain', marginTop: '-.5rem' }}
+								/>
+								<div>
+									<p className='name'> {item.name} </p>
+									<p className='location'> {item.location} </p>
+								</div>
+							</div>
 						</div>
 					</div>
 				))}

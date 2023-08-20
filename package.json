@@ -34,6 +34,7 @@
 		"react-date-picker": "^10.2.0",
 		"react-date-range": "^1.4.0",
 		"react-dom": "^18.2.0",
+		"react-dropzone": "^14.2.3",
 		"react-full-screen": "^1.1.1",
 		"react-google-autocomplete": "^2.7.2",
 		"react-hot-toast": "^2.4.0",

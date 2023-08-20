@@ -112,7 +112,7 @@ const Footer = () => {
 							<div className='row justify-content-center'>
 								<div className='col-lg-7 col-md-10 col-sm-11 col-12'>
 									<div className='d-flex flex-wrap justify-content-center sv'>
-										<Link to='/apartments' className=''>
+										<Link to='/all-apartments' className=''>
 											APARTMENT
 										</Link>
 										<Link to='/about-us' className=''>

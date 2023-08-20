@@ -58,6 +58,8 @@ const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
 
+	const refresh = () => window.location.reload()
+
 	let url = 'https://pubblessignature-production.up.railway.app/api'
 
 	const { user_detail } = useAppSelector((state) => state.auth)
@@ -670,7 +672,7 @@ const ApartmentDetails = () => {
 																<div className='p-2'>
 																	<input
 																		type='number'
-																		placeholder='Guest'
+																		placeholder='No. of Guests'
 																		className='form-control'
 																		max={apartment?.apartment?.numberOfGuests}
 																		onChange={(e) =>

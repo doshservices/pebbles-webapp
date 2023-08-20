@@ -40,7 +40,7 @@ a {
 	line-height: 40px;
 	letter-spacing: 0.5px;
 	text-transform: uppercase;
-	color: rgba(248, 248, 248, 0.8);
+	color: rgba(248, 248, 248, 1);
 }
 
 .homepage_div p {
@@ -50,14 +50,34 @@ a {
 
 .home_carousel .slick-dots {
 	position: absolute;
-	bottom: 0;
-	left: 0;
-	color: #fff;
+	top: 50%;
+	right: 4%;
+	text-align: right;
+	display: flex !important;
+	flex-direction: column;
+	align-items: end;
+	gap: 0.1rem;
 }
 
-.homepage_bg .slick-dots li.slick-active button:before {
-	opacity: 0.75;
+.home_carousel .slick-dots li.slick-active button::before {
 	color: #fff;
+	/* border: 0.1px solid transparent; */
+	/* outline: 1px solid #fff; */
+}
+
+.home_carousel .slick-dots li button::before {
+	opacity: 1;
+	color: transparent;
+	border: 1px solid #fff;
+	/* outline: 1px solid transparent; */
+	border-radius: 50%;
+	width: 14px;
+	height: 14px;
+	font-size: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1px 0px 0 0.5px;
 }
 
 .search_apartment_div {
@@ -128,12 +148,12 @@ a {
 }
 
 .new_apartments a img {
-	border-radius: 8px;
+	border-radius: 8px 8px 0 0;
 }
 
 .new_apartments h1 {
 	text-align: center;
-	font-weight: 700;
+	font-weight: 600;
 	font-size: 40px;
 	letter-spacing: 0.15px;
 	color: #f8f8f8;
@@ -152,7 +172,7 @@ a {
 
 .new_apartments p {
 	margin-bottom: 0;
-	font-weight: 500;
+	font-weight: 400;
 	letter-spacing: 0.15px;
 }
 
@@ -194,43 +214,36 @@ a {
 	color: #f8f8f8;
 }
 
-.review_0 {
-	background: #d0dffc;
-	border-radius: 100px 0px;
-}
-
-.review_1 {
-	background: #d0dffc;
-	border-radius: 0px 100px;
-}
-
-.review_2 {
-	background: #d0dffc;
-	border-radius: 100px 0px;
-}
-
 .review_box {
 	padding: 2rem;
 	padding-top: 3rem;
-	min-height: 350px;
+	min-height: 390px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	background: #d0dffc;
+	border-radius: 100px 0px;
+}
+
+.review_box p {
+	color: #124ec7;
+	margin-bottom: 0;
 }
 
 .review_box .message {
-	font-family: 'Halant', serif;
-	font-weight: 500;
-	line-height: 28px;
 	text-align: justify;
+	font-family: Halant;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 37.5px; /* 187.5% */
 	letter-spacing: 0.15px;
-	color: #2d2d2d;
-	min-height: 11rem;
-	padding-bottom: 0.1rem;
+	margin-bottom: 1rem;
 }
 
 .review_box .name {
 	font-weight: 500;
+	margin-bottom: 0.5rem;
 }
 
 @media (max-width: 1200px) {
@@ -267,6 +280,10 @@ a {
 	.homepage_div h1 {
 		font-size: 24px;
 		line-height: 26px;
+	}
+
+	.home_carousel .slick-dots {
+		display: none !important;
 	}
 
 	.new_apartments h1 {
@@ -309,6 +326,17 @@ a {
 
 .map_section {
 	margin: 2rem 0;
+}
+
+.search_component_main_div button {
+	background-color: #155eef;
+}
+
+.search_component_main_div button:focus {
+	background-color: #155eef;
+	color: #fff;
+	box-shadow: #155eef;
+	border-color: #155eef;
 }
 
 @media (max-width: 1200px) {
@@ -535,6 +563,7 @@ a {
 	border-style: solid;
 	border-color: #2d2d2d;
 	border-radius: 4px;
+	padding: 12px 22px;
 }
 
 .amenity_icon {
@@ -1043,7 +1072,7 @@ a {
 }
 
 .span_important::before {
-	content: '------------';
+	content: '-------';
 	position: absolute;
 	color: red;
 	left: -3rem;

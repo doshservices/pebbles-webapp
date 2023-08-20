@@ -105,7 +105,7 @@ const NearApartments = () => {
 							) : nearbyApartments &&
 							  nearbyApartments?.apartments?.length > 0 ? (
 								nearbyApartments?.apartments?.map((item, index) => (
-									<div className='col-md-4 col-sm-6' key={index}>
+									<div className='col-md-3 col-sm-6' key={index}>
 										<div key={index} className='p_4 mb-5'>
 											<ApartmentCard apartmentInfo={item} />
 										</div>

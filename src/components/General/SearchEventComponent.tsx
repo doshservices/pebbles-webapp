@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../app/hooks'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { get_search_events } from '../../features/event/eventSlice'
+import { HiOutlineMapPin } from 'react-icons/hi2'
 
 const SearchEventComponent = () => {
 	const dispatch = useAppDispatch()
@@ -25,7 +26,7 @@ const SearchEventComponent = () => {
 					<div className='row no-gutters'>
 						<div className='col-sm-9 p-1' style={{ position: 'relative' }}>
 							<span>
-								<i className='icofont-google-map' aria-hidden='true'></i>
+								<HiOutlineMapPin />
 							</span>
 
 							<Autocomplete

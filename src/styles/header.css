@@ -282,3 +282,11 @@ header .prof_circle {
 	transition-timing-function: ease-in-out;
 	display: none;
 }
+
+.header_dropdown_menu {
+	width: 40rem;
+}
+
+header .dropdown-toggle::after {
+	display: none;
+}

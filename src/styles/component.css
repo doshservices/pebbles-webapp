@@ -92,7 +92,7 @@
 /* ---------------- Page section header component styles -------------------- */
 .page_header_component h3 {
 	font-size: 26px;
-	font-weight: 700;
+	font-weight: 600;
 	letter-spacing: 0.5px;
 	text-transform: uppercase;
 	color: #2d2d2d;
@@ -110,6 +110,10 @@
 	font-weight: 600;
 	font-size: 16px;
 	text-transform: uppercase;
+}
+
+.page_header_component a {
+	text-transform: none;
 }
 
 @media (max-width: 767px) {

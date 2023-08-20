@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import '../../styles/policy.css'
 
 const Policy = () => {
+	const RouteToTop = () => {
+		window.scrollTo(0, 0)
+	}
+
+	useLayoutEffect(() => {
+		RouteToTop()
+	}, [])
+
 	return (
 		<main className='container policy'>
 			<h1>Terms of Service</h1>

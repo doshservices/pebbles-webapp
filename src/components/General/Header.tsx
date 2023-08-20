@@ -25,6 +25,7 @@ import { reset } from '../../features/authentication/authenticationSlice'
 import { bookingReset } from '../../features/booking/bookingSlice'
 import { apartmentReset } from '../../features/apartment/apartmentSlice'
 import { notificationReset } from '../../features/notification/notificationSlice'
+import { MdMenu } from 'react-icons/md'
 
 const Header = ({ type }: { type: number }) => {
 	const dispatch = useAppDispatch()
@@ -112,6 +113,7 @@ const Header = ({ type }: { type: number }) => {
 										>
 											{!user_detail ? (
 												<>
+													<MdMenu color='white' size='22' />
 													<img
 														src={profileCircle}
 														alt=''
@@ -167,6 +169,7 @@ const Header = ({ type }: { type: number }) => {
 										<Dropdown.Menu
 											align={'end'}
 											style={{ padding: '.5rem .4rem' }}
+											className='header_dropdown_menu'
 										>
 											{!user_detail ? (
 												<LinkContainer to={`/auth/login`}>
@@ -343,13 +346,17 @@ const Header = ({ type }: { type: number }) => {
 											id='dropdown-basic'
 										>
 											{!user_detail ? (
-												<img
-													src={profileCircleBlack}
-													alt=''
-													className='prof_circle profile_dark'
-												/>
+												<>
+													<MdMenu color='#999' size='22' />
+													<img
+														src={profileCircleBlack}
+														alt=''
+														className='prof_circle profile_dark'
+													/>
+												</>
 											) : (
 												<>
+													<MdMenu color='#999' size='22' />
 													{user_detail?.profilePicture ? (
 														<img
 															src={user_detail?.profilePicture}

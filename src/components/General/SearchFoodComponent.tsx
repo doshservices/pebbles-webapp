@@ -7,6 +7,8 @@ import 'react-date-range/dist/theme/default.css'
 import moment from 'moment'
 import { book_add_on } from '../../features/booking/bookingSlice'
 import { toast } from 'react-hot-toast'
+import { HiOutlineMapPin } from 'react-icons/hi2'
+import { BiCalendar } from 'react-icons/bi'
 
 const SearchFoodComponent = () => {
 	const dispatch = useAppDispatch()
@@ -58,7 +60,7 @@ const SearchFoodComponent = () => {
 							>
 								<div className='' style={{ position: 'relative' }}>
 									<span style={{ top: '.3rem' }}>
-										<i className='icofont-google-map' aria-hidden='true'></i>
+										<HiOutlineMapPin />
 									</span>
 
 									<Autocomplete
@@ -80,7 +82,7 @@ const SearchFoodComponent = () => {
 								style={{ position: 'relative' }}
 							>
 								<span>
-									<i className='icofont-calendar' aria-hidden='true'></i>
+									<BiCalendar />
 								</span>
 								<div
 									className='form-control input'

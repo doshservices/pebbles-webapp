@@ -14,6 +14,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import Loader from '../../components/Loader'
+import Dropper from '../../components/Dropper'
 
 const CreateListing = () => {
 	const dispatch = useAppDispatch()

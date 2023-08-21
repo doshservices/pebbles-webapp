@@ -105,7 +105,7 @@ const Header = ({ type }: { type: number }) => {
 										</LinkContainer>
 									)}
 
-									<Dropdown className=''>
+									<Dropdown className='mr-0'>
 										<Dropdown.Toggle
 											variant=''
 											className=''
@@ -129,6 +129,8 @@ const Header = ({ type }: { type: number }) => {
 												<>
 													{user_detail?.profilePicture ? (
 														<>
+															<MdMenu color='white' size='22' />
+
 															<img
 																src={user_detail?.profilePicture}
 																alt=''
@@ -150,6 +152,8 @@ const Header = ({ type }: { type: number }) => {
 														</>
 													) : (
 														<>
+															<MdMenu color='white' size='22' />
+
 															<img
 																src={profileCircle}
 																alt=''
@@ -168,31 +172,52 @@ const Header = ({ type }: { type: number }) => {
 
 										<Dropdown.Menu
 											align={'end'}
-											style={{ padding: '.5rem .4rem' }}
 											className='header_dropdown_menu'
 										>
 											{!user_detail ? (
-												<LinkContainer to={`/auth/login`}>
-													<Nav.Link className=''> Login </Nav.Link>
-												</LinkContainer>
+												<>
+													<div className='drop_btn_div'>
+														<LinkContainer to={`/auth/login`}>
+															<Nav.Link className='drop_btn btn'>
+																Login
+															</Nav.Link>
+														</LinkContainer>
+													</div>
+													<hr />
+													<div className='d-flex justify-content-center flex-column align-items-center drop_btn_div2'>
+														<span>Don’t have an account?</span>
+														<LinkContainer to={`/auth/user/signup`}>
+															<Nav.Link className=''>Create Account</Nav.Link>
+														</LinkContainer>
+													</div>
+												</>
 											) : (
 												<div className='text-center'>
-													<LinkContainer to={`/user/dashboard/home`}>
-														<Nav.Link className=''> My Dashboard </Nav.Link>
-													</LinkContainer>
+													<div className='drop_btn_div3'>
+														<LinkContainer to={`/user/dashboard/home`}>
+															<Nav.Link className=''> My Dashboard </Nav.Link>
+														</LinkContainer>
+													</div>
+													<div className='drop_btn_div3'>
+														<LinkContainer to={`/user/dashboard/my-bookings`}>
+															<Nav.Link className=''> Bookings </Nav.Link>
+														</LinkContainer>
+													</div>
+													<div className='drop_btn_div3'>
+														<LinkContainer to={`/user/dashboard/wishlist`}>
+															<Nav.Link className=''>Saved Apartments</Nav.Link>
+														</LinkContainer>
+													</div>
+													<hr />
+
 													<div className='text-center'>
-														<button
-															className='btn btn-primary'
-															style={{
-																backgroundColor: 'white',
-																border: '1px solid red',
-																color: 'red',
-																fontSize: '12px',
-															}}
+														<a
+															href='#'
 															onClick={logoutHandler}
+															className='logout'
 														>
-															Sign Out
-														</button>
+															Log Out
+														</a>
 													</div>
 												</div>
 											)}
@@ -380,30 +405,52 @@ const Header = ({ type }: { type: number }) => {
 
 										<Dropdown.Menu
 											align={'end'}
-											style={{ padding: '.5rem 1rem' }}
+											className='header_dropdown_menu'
 										>
 											{!user_detail ? (
-												<LinkContainer to={`/auth/login`}>
-													<Nav.Link className=''> Login </Nav.Link>
-												</LinkContainer>
+												<>
+													<div className='drop_btn_div'>
+														<LinkContainer to={`/auth/login`}>
+															<Nav.Link className='drop_btn btn'>
+																Login
+															</Nav.Link>
+														</LinkContainer>
+													</div>
+													<hr />
+													<div className='d-flex justify-content-center flex-column align-items-center drop_btn_div2'>
+														<span>Don’t have an account?</span>
+														<LinkContainer to={`/auth/user/signup`}>
+															<Nav.Link className=''>Create Account</Nav.Link>
+														</LinkContainer>
+													</div>
+												</>
 											) : (
 												<div className='text-center'>
-													<LinkContainer to={`/user/dashboard/home`}>
-														<Nav.Link className=''> My Dashboard </Nav.Link>
-													</LinkContainer>
+													<div className='drop_btn_div3'>
+														<LinkContainer to={`/user/dashboard/home`}>
+															<Nav.Link className=''> My Dashboard </Nav.Link>
+														</LinkContainer>
+													</div>
+													<div className='drop_btn_div3'>
+														<LinkContainer to={`/user/dashboard/my-bookings`}>
+															<Nav.Link className=''> Bookings </Nav.Link>
+														</LinkContainer>
+													</div>
+													<div className='drop_btn_div3'>
+														<LinkContainer to={`/user/dashboard/wishlist`}>
+															<Nav.Link className=''>Saved Apartments</Nav.Link>
+														</LinkContainer>
+													</div>
+													<hr />
+
 													<div className='text-center'>
-														<button
-															className='btn btn-primary'
-															style={{
-																backgroundColor: 'white',
-																border: '1px solid red',
-																color: 'red',
-																fontSize: '12px',
-															}}
+														<a
+															href='#'
 															onClick={logoutHandler}
+															className='logout'
 														>
-															Sign Out
-														</button>
+															Log Out
+														</a>
 													</div>
 												</div>
 											)}

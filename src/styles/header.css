@@ -1,9 +1,7 @@
 /* -------------------------------------- Navbar component styles ---------------------- */
 .nav_light {
 	background-color: rgba(255, 255, 255, 1);
-	/* border-bottom: 1px solid #ccc; */
 	box-shadow: 1px 1px 1px #ccc;
-	/* filter: blur(0.2rem); */
 }
 
 header a {
@@ -190,6 +188,10 @@ header .prof_circle {
 }
 
 @media (max-width: 992px) {
+	.nav_light {
+		box-shadow: 1px 1px 1px #fff;
+	}
+
 	.def_navbar2 {
 		background-color: #fff;
 	}
@@ -254,6 +256,12 @@ header .prof_circle {
 
 	.def_navbar4 {
 		display: block;
+		padding-bottom: 0.7rem;
+	}
+
+	.def_navbar2,
+	.def_navbar4 {
+		box-shadow: 1px 1px 1px #ccc;
 	}
 }
 

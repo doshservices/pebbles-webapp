@@ -278,7 +278,7 @@ const ApartmentDetails = () => {
 											apartment?.apartment?.facilities.map((item, index) => (
 												<div className='col-md-6 col-sm-6' key={index}>
 													{index <= limitValue ? (
-														<div className='d-flex amenities_div align-items-center mb-3'>
+														<div className='d-flex amenities_div mb-3'>
 															{item === '24hrs Power Supply' ? (
 																<HiOutlineLightBulb size={22} />
 															) : item === 'Wi-Fi' ? (
@@ -451,7 +451,7 @@ const ApartmentDetails = () => {
 												Amenities
 											</span>
 										) : (
-											<span> Close </span>
+											<span> Show less </span>
 										)}
 									</button>
 								</div>

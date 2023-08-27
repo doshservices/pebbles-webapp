@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../../app/hooks'
 import { bookingReset } from '../../../features/booking/bookingSlice'
 import { apartmentReset } from '../../../features/apartment/apartmentSlice'
 import { notificationReset } from '../../../features/notification/notificationSlice'
+import { FaChevronDown } from 'react-icons/fa'
 
 const NavRight = () => {
 	const dispatch = useAppDispatch()
@@ -78,7 +79,7 @@ const NavRight = () => {
 			<li>
 				<Dropdown className='drp-user'>
 					<Dropdown.Toggle variant={'link'} id='dropdown-basic'>
-						{/* <i className='icon feather icon-settings' /> */}
+						<FaChevronDown />
 					</Dropdown.Toggle>
 					<Dropdown.Menu className='profile-notification'>
 						<ul className='pro-body'>

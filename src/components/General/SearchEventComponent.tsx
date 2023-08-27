@@ -9,12 +9,12 @@ import { HiOutlineMapPin } from 'react-icons/hi2'
 const SearchEventComponent = () => {
 	const dispatch = useAppDispatch()
 
-	const [loc, setLoc] = useState<any>({})
+	const [loc, setLoc] = useState<any>('')
 
 	const submitHandler = () => {
 		dispatch(
 			get_search_events({
-				loc: loc?.formatted_address,
+				loc,
 			})
 		)
 	}
@@ -29,10 +29,9 @@ const SearchEventComponent = () => {
 								<HiOutlineMapPin />
 							</span>
 
-							<Autocomplete
-								apiKey={process.env.REACT_APP_GOOGLE_MAPS_API}
-								onPlaceSelected={(place) => {
-									setLoc(place)
+							<input
+								onChange={(e) => {
+									setLoc(e.target.value)
 								}}
 								className='form-control'
 								placeholder='Enter a location'

@@ -187,11 +187,11 @@ const UserBookingDetailBusiness = () => {
 								</div>
 							</div>
 
-							<div className='d-flex justify-content-between mt-3 mb-2'>
-								<div style={{ width: '20%', marginRight: '2rem' }}>
+							<div className='row mt-3 mb-2'>
+								<div className='col-md-4 col-3'>
 									<h6> Apartment Amenities </h6>
 								</div>
-								<div>
+								<div className='col-md-8 col-9'>
 									<p>
 										{bookingDetail?.booking?.apartmentId?.facilities.map(
 											(item, index) => {

@@ -3,6 +3,7 @@ import SliderImages from '../../components/SliderImages'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import {
+	bookingReset,
 	cancel_booking,
 	get_user_bookings,
 } from '../../features/booking/bookingSlice'
@@ -27,7 +28,7 @@ const UserBookings = () => {
 		'Booking Status',
 		'Payment Status',
 		'View',
-		'Action',
+		// 'Action',
 	]
 
 	const cancelHandler = async (e: any, id: string) => {
@@ -39,6 +40,9 @@ const UserBookings = () => {
 
 	useEffect(() => {
 		dispatch(get_user_bookings())
+		return () => {
+			dispatch(bookingReset())
+		}
 	}, [dispatch, cancelSuccess])
 
 	const [currentPage, setCurrentPage] = useState(1)
@@ -47,10 +51,11 @@ const UserBookings = () => {
 
 	const indexOfLastPost = currentPage * postsPerPage
 	const indexOfFirstPost = indexOfLastPost - postsPerPage
-	const currentPosts = bookings?.bookings?.slice(
-		indexOfFirstPost,
-		indexOfLastPost
-	)
+	const currentPosts =
+		bookings &&
+		bookings?.bookings
+			?.filter((item) => item.bookingStatus !== 'CANCELLED')
+			.slice(indexOfFirstPost, indexOfLastPost)
 
 	const pageNumbers: number[] = []
 
@@ -74,10 +79,10 @@ const UserBookings = () => {
 	return (
 		<main className='dashboard dashboard_bookings'>
 			<div>
-				<h6>Booking History</h6>
+				<h6 className='table_title'>Reservation History</h6>
 				{isFetchingBooking ? (
 					<Loader />
-				) : bookings && bookings?.bookings?.length > 0 ? (
+				) : bookings && currentPosts && currentPosts?.length > 0 ? (
 					<div className='table-responsive'>
 						<table className='table ' style={{ fontSize: '12px' }}>
 							<thead className=''>
@@ -108,13 +113,13 @@ const UserBookings = () => {
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.address}
 										</td>
-										<td className='td_pad_top' style={{ width: '12rem' }}>
+										<td className='td_pad_top' style={{ width: '18rem' }}>
 											{booking?.apartmentId?.facilities.map((item, index) => {
 												return (
-													index <= 3 && (
+													index <= 2 && (
 														<span key={index} style={{ paddingRight: 3 }}>
 															{item}
-															{index === 3 ? (
+															{index === 2 ? (
 																<span>
 																	<span>...</span>
 																	<Link
@@ -154,7 +159,7 @@ const UserBookings = () => {
 												</div>
 											</Link>
 										</td>
-										<td className='td_pad_top'>
+										{/* <td className='td_pad_top'>
 											{booking?.bookingStatus.toLowerCase() === 'pending' &&
 												booking?.paymentStatus.toLowerCase() === 'pending' && (
 													<Link
@@ -191,7 +196,7 @@ const UserBookings = () => {
 											) : (
 												''
 											)}
-										</td>
+										</td> */}
 									</tr>
 								))}
 							</tbody>

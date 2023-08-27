@@ -14,6 +14,7 @@ import moment from 'moment'
 import { comma } from '../../utils/helper'
 import Slider from 'react-slick'
 import Loader from '../../components/Loader'
+import { AiOutlineProfile } from 'react-icons/ai'
 
 const UserBookingDetail = () => {
 	const dispatch = useAppDispatch()
@@ -102,7 +103,7 @@ const UserBookingDetail = () => {
 							<div className='row'>
 								<div className='col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6 detail_box_div'>
 									<div className='white_house'>
-										<img src={white_house} alt='house icon' />
+										<AiOutlineProfile size={28} color='#fff' />
 									</div>
 								</div>
 								<div className='col-xl-2 col-lg-4 col-md-4 col-sm-4 col-6 detail_box_div'>
@@ -169,12 +170,13 @@ const UserBookingDetail = () => {
 									</p>
 								</div>
 							</div>
-							<div className='d-flex justify-content-between mt-5 mb-1'>
-								<div>
+							<hr />
+							<div className='row mt-4 mb-2 '>
+								<div className='col-md-4 col-3'>
 									<h6> Apartment Amenities </h6>
 								</div>
-								<div>
-									<p>
+								<div className='col-md-8 col-9'>
+									<p className='text-end'>
 										{bookingDetail?.booking?.apartmentId?.facilities.map(
 											(item, index) => {
 												return (

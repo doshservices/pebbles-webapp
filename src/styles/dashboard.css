@@ -77,6 +77,17 @@
 	box-shadow: none;
 }
 
+.dashboard_bookings .table_title {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 1rem;
+	margin-bottom: 0;
+}
+
+.dashboard_bookings table {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin-top: 0 !important;
+}
+
 .dashboard_bookings .images_slider {
 	width: 9rem;
 }
@@ -100,16 +111,19 @@
 
 .dashboard thead {
 	border-bottom: 0px solid transparent;
+	padding: 0 3rem;
 }
 
 .dashboard thead tr th {
 	color: #2d2d2d80;
 	font-weight: 600;
+	padding: 1rem 1rem;
 }
 
 .dashboard_bookings tbody tr td {
 	padding-top: 1.5rem;
-	vertical-align: text-bottomß;
+	background-color: #f4f4f4;
+	margin-bottom: 0.5rem;
 }
 
 .dashboard_bookings .td_pad_top {

@@ -25,7 +25,7 @@ items = [
 			},
 			{
 				id: 'my-bookings',
-				title: 'My Bookings',
+				title: 'Reservations',
 				type: 'item',
 				url: '/user/dashboard/my-bookings',
 				icon: 'fas fa-building',

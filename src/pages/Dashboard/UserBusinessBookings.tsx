@@ -71,7 +71,7 @@ const UserBusinessBookings = () => {
 	return (
 		<main className='dashboard dashboard_bookings'>
 			<div>
-				<h6>Booking History</h6>
+				<h6 className='table_title'>Booking History</h6>
 				{isFetchingBooking ? (
 					<Loader />
 				) : bookings && bookings?.bookings?.length > 0 ? (
@@ -106,13 +106,13 @@ const UserBusinessBookings = () => {
 										<td className='td_pad_top'>
 											{booking?.apartmentId?.address}
 										</td>
-										<td className='td_pad_top' style={{ width: '12rem' }}>
+										<td className='td_pad_top' style={{ width: '18rem' }}>
 											{booking?.apartmentId?.facilities.map((item, index) => {
 												return (
-													index <= 3 && (
+													index <= 2 && (
 														<span key={index} style={{ paddingRight: 3 }}>
 															{item}
-															{index === 3 ? (
+															{index === 2 ? (
 																<span>
 																	<span>...</span>
 																	<Link

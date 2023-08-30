@@ -2,6 +2,7 @@ import React from 'react'
 import Slider from 'react-slick'
 import carouselBackground1 from '../../assets/event.png'
 import carouselBackground2 from '../../assets/Registration1.jpg'
+import carouselBackground3 from '../../assets/bg_images/event1.jpg'
 import SearchEventComponent from './SearchEventComponent'
 
 const EventCarousel = () => {
@@ -37,11 +38,11 @@ const EventCarousel = () => {
 				</div>
 				<div>
 					<div
-						style={{ backgroundImage: `url(${carouselBackground2})` }}
+						style={{ backgroundImage: `url(${carouselBackground3})` }}
 						className='homepage_bg event_bg'
 					>
 						<div className='homepage_div container'>
-							<h1>FIND AFFORDABLE </h1>
+							<h1>BEST EVENTS AT </h1>
 							<h1>LOCATIONS AROUND YOU</h1>
 							<p>
 								Stay in comfort and style with our highly rated service

@@ -328,11 +328,11 @@ a {
 	margin: 2rem 0;
 }
 
-.search_component_main_div button {
+.search_component_main_div .btn_search {
 	background-color: #155eef;
 }
 
-.search_component_main_div button:focus {
+.search_component_main_div .btn_search:focus {
 	background-color: #155eef;
 	color: #fff;
 	box-shadow: #155eef;

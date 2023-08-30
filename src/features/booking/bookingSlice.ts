@@ -242,6 +242,7 @@ export const book_add_on = createAsyncThunk(
 			destination?: String | undefined
 			pickUpDate?: String | undefined
 			pickUpTime?: String | undefined
+			typeOfCar?: String | undefined
 			departureTime?: String | undefined
 			departureDate?: String | undefined
 			amenities?: String[]

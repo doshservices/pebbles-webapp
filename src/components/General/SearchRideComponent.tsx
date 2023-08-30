@@ -11,6 +11,7 @@ import { toast } from 'react-hot-toast'
 import Multiselect from 'multiselect-react-dropdown'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 import { BiCalendar } from 'react-icons/bi'
+import { ErrorPara } from './SearchEventComponent'
 
 const SearchRideComponent = () => {
 	const dispatch = useAppDispatch()
@@ -22,22 +23,24 @@ const SearchRideComponent = () => {
 	const [pickupDate, setPickupDate] = useState('')
 	const [pickupTime, setPickupTime] = useState('')
 	const [carAmenities, setCarAmenities] = useState([])
+	const [carType, setCarType] = useState('')
 	const [departureTime, setDepartureTime] = useState('')
 	const [departureDate, setDepartureDate] = useState('')
 	const [bookRound, setBookRound] = useState(false)
 	const [showDepartureDate, setShowDepartureDate] = useState(false)
 	const [showPickupDate, setShowPickupDate] = useState(false)
+	const [message, setMessage] = useState<string | null>(null)
 
-	const options = [
-		{ name: 'With Security', id: 'With Security' },
-		{ name: 'Luxury Rides', id: 'Luxury Rides' },
-	]
+	// const options = [
+	// 	{ name: 'With Security', id: 'With Security' },
+	// 	{ name: 'Luxury Rides', id: 'Luxury Rides' },
+	// ]
 
-	const onSelect = (selectedList, selectedItem) => {
-		setCarAmenities(selectedList)
-	}
+	// const onSelect = (selectedList, selectedItem) => {
+	// 	setCarAmenities(selectedList)
+	// }
 
-	const onRemove = (selectedList, removedItem) => {}
+	// const onRemove = (selectedList, removedItem) => {}
 
 	const setShowDateFalse = () => {
 		setShowDepartureDate(false)
@@ -48,14 +51,14 @@ const SearchRideComponent = () => {
 		setShowPickupDate(!showPickupDate)
 	}
 
-	const showDepartureDateHandler = () => {
-		setShowDepartureDate(!showDepartureDate)
-	}
+	// const showDepartureDateHandler = () => {
+	// 	setShowDepartureDate(!showDepartureDate)
+	// }
 
-	const setBookRoundHandler = () => {
-		setBookRound(!bookRound)
-		setShowDateFalse()
-	}
+	// const setBookRoundHandler = () => {
+	// 	setBookRound(!bookRound)
+	// 	setShowDateFalse()
+	// }
 
 	const pickupSelectHandler = (item: any) => {
 		setPickupDate(item)
@@ -76,11 +79,18 @@ const SearchRideComponent = () => {
 				pickUpDate: pickupDate,
 				pickUpTime: pickupTime,
 				deliveryDate: departureDate,
+				typeOfCar: carType,
 				deliveryTime: departureTime,
 				serviceType: 'RIDE',
 				amenities: carAmenities?.map((item: any) => item.name),
 			}
-			dispatch(book_add_on(data))
+			console.log(
+				'🚀 ~ file: SearchRideComponent.tsx:87 ~ submitHandler ~ data:',
+				data
+			)
+			if (pickupAddress && destination && pickupDate && carType) {
+				dispatch(book_add_on(data))
+			} else setMessage('Please fill all fields')
 		} else {
 			toast.error('Please login to use this service')
 		}
@@ -159,7 +169,7 @@ const SearchRideComponent = () => {
 											</p>
 										</div>
 									</div>
-									<div
+									{/* <div
 										className='col-lg-6 col-md-4 col-sm-12 p-1'
 										style={{ position: 'relative' }}
 										onClick={() => setShowDateFalse()}
@@ -173,11 +183,29 @@ const SearchRideComponent = () => {
 											placeholder='Pickup Time, e.g. 12pm'
 											onChange={(e) => setPickupTime(e.target.value)}
 										/>
+									</div> */}
+									<div
+										className='col-lg-6 col-md-4 col-sm-12 p-1'
+										style={{ position: 'relative' }}
+									>
+										<span>
+											<i className='icofont-car' aria-hidden='true'></i>
+										</span>
+										<select
+											className='form-select'
+											placeholder='Select car type'
+											onChange={(e) => setCarType(e.target.value)}
+										>
+											<option value=''>Select car type</option>
+											<option value='Sedan'>Sedan</option>
+											<option value='SUV'>SUV</option>
+											<option value='Pickup Truck'>Pickup Truck</option>
+										</select>
 									</div>
 								</div>
 							</div>
 
-							<div className='col-md-8 mb-3'>
+							{/* <div className='col-md-8 mb-3'>
 								<label htmlFor='' className='book_trip_text'>
 									Select Ride Amenities
 								</label>
@@ -241,19 +269,20 @@ const SearchRideComponent = () => {
 										</div>
 									</div>
 								</div>
-							)}
+							)} */}
 							<div
 								className='col-lg-12 col-sm-12 p-1'
 								onClick={() => setShowDateFalse()}
 							>
 								<button
 									type='submit'
-									className='btn btn-primary form-control'
+									className='btn btn-primary form-control btn_search'
 									onClick={(e) => submitHandler(e)}
 								>
 									Submit
 								</button>
 							</div>
+							{message && <ErrorPara message={message} />}
 						</div>
 					</form>
 				</div>

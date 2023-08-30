@@ -152,7 +152,7 @@ const SearchApartmentComponent = ({
 								>
 									<button
 										type='submit'
-										className='btn btn-primary form-control'
+										className='btn btn-primary form-control btn_search'
 										onClick={() => submitHandler()}
 									>
 										Search

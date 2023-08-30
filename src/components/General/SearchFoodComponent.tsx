@@ -9,6 +9,7 @@ import { book_add_on } from '../../features/booking/bookingSlice'
 import { toast } from 'react-hot-toast'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 import { BiCalendar } from 'react-icons/bi'
+import { ErrorPara } from './SearchEventComponent'
 
 const SearchFoodComponent = () => {
 	const dispatch = useAppDispatch()
@@ -19,6 +20,7 @@ const SearchFoodComponent = () => {
 	const [deliveryDate, setDeliveryDate] = useState('')
 	const [deliveryTime, setDeliveryTime] = useState('')
 	const [showDeliveryDate, setShowDeliveryDate] = useState(false)
+	const [message, setMessage] = useState<string | null>(null)
 
 	const setShowDateFalse = () => {
 		setShowDeliveryDate(false)
@@ -36,13 +38,15 @@ const SearchFoodComponent = () => {
 	const submitHandler = (e: any) => {
 		e.preventDefault()
 		if (user_detail) {
-			let data = {
-				address: deliveryAddress?.formatted_address,
-				deliveryDate: deliveryDate,
-				deliveryTime: deliveryTime,
-				serviceType: 'FOOD',
-			}
-			dispatch(book_add_on(data))
+			if (deliveryAddress && deliveryDate && deliveryTime) {
+				let data = {
+					address: deliveryAddress?.formatted_address,
+					deliveryDate: deliveryDate,
+					deliveryTime: deliveryTime,
+					serviceType: 'FOOD',
+				}
+				dispatch(book_add_on(data))
+			} else setMessage('Please fill in all fields')
 		} else {
 			toast.error('Please login to use this service')
 		}
@@ -117,12 +121,13 @@ const SearchFoodComponent = () => {
 							>
 								<button
 									type='submit'
-									className='btn btn-primary form-control'
+									className='btn btn-primary form-control btn_search'
 									onClick={(e) => submitHandler(e)}
 								>
 									Submit
 								</button>
 							</div>
+							{message && <ErrorPara message={message} />}
 						</div>
 					</form>
 				</div>

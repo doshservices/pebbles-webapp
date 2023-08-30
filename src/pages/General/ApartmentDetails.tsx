@@ -53,14 +53,15 @@ import short_term from '../../assets/apartment_icons/short_term.svg'
 import furnished from '../../assets/apartment_icons/furnished.svg'
 import { HiOutlineLightBulb } from 'react-icons/hi'
 import { AiOutlineClockCircle, AiOutlineStop } from 'react-icons/ai'
+import config from '../../utils/config'
 
 const ApartmentDetails = () => {
 	const dispatch = useAppDispatch()
 	const params = useParams()
 
-	const refresh = () => window.location.reload()
+	// const refresh = () => window.location.reload()
 
-	let url = 'https://pubblessignature-production.up.railway.app/api'
+	let url = `${config.liveUrl}`
 
 	const { user_detail } = useAppSelector((state) => state.auth)
 	const { allApartments, apartment, isFetchingApartment, nearbyApartments } =
@@ -116,7 +117,9 @@ const ApartmentDetails = () => {
 		})
 			.then((res) => {
 				setAvailability(res?.data?.data?.bookings)
-				toast.success(res?.data?.data?.message, { position: 'top-center' })
+				toast.success('Booked dates fetched successfully', {
+					position: 'top-center',
+				})
 				setOpenModal(true)
 				setIsLoading(false)
 			})

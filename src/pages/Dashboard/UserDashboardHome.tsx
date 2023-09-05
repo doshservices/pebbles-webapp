@@ -26,22 +26,24 @@ const UserDashboardHome = () => {
 	const { notifications } = useAppSelector((state) => state.notification)
 
 	useEffect(() => {
-		if (bookingState) {
-			dispatch(create_booking(bookingState))
+		if (user_detail) {
+			if (bookingState) {
+				dispatch(create_booking(bookingState))
 
-			setTimeout(() => {
-				dispatch(delete_booking_from_state())
-			}, 100)
+				setTimeout(() => {
+					dispatch(delete_booking_from_state())
+				}, 100)
+			}
+
+			dispatch(get_apartments_by_user())
+			dispatch(get_notification_by_id({ id: user_detail?._id }))
+			dispatch(get_saved_apartments())
+			dispatch(get_user_bookings())
 		}
-
-		dispatch(get_apartments_by_user())
-		dispatch(get_notification_by_id({ id: user_detail?._id }))
-		dispatch(get_saved_apartments())
-		dispatch(get_user_bookings())
 		return () => {
 			dispatch(apartmentReset())
 		}
-	}, [dispatch])
+	}, [dispatch, user_detail])
 
 	return (
 		<main className='dashboard'>

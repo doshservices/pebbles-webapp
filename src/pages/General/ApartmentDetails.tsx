@@ -137,27 +137,32 @@ const ApartmentDetails = () => {
 	const createBookingHandler = (e: any, num: number) => {
 		setCreateType(num)
 		e.preventDefault()
-		let data = {
-			apartmentOwnerId: apartment?.apartment?.userId,
-			apartmentId: apartment?.apartment?._id,
-			checkInDate: moment(state[0].startDate).format(),
-			checkOutDate: moment(state[0].endDate).format(),
-			bookingAmount: apartment?.apartment?.price,
-			numberOfGuests: Number(numberOfGuests),
-		}
-		if (user_detail) {
-			if (
-				Number(numberOfGuests) <= Number(apartment?.apartment?.numberOfGuests)
-			) {
-				dispatch(create_booking(data))
+
+		if (state && numberOfGuests) {
+			let data = {
+				apartmentOwnerId: apartment?.apartment?.userId,
+				apartmentId: apartment?.apartment?._id,
+				checkInDate: moment(state[0].startDate).format(),
+				checkOutDate: moment(state[0].endDate).format(),
+				bookingAmount: apartment?.apartment?.price,
+				numberOfGuests: Number(numberOfGuests),
+			}
+			if (user_detail) {
+				if (
+					Number(numberOfGuests) <= Number(apartment?.apartment?.numberOfGuests)
+				) {
+					dispatch(create_booking(data))
+				} else {
+					toast.error('Number of guests exceeds maximum apartment capacity')
+				}
 			} else {
-				toast.error('Number of guests exceeds maximum apartment capacity')
+				dispatch(save_booking_to_state(data))
+				toast(
+					'You have saved this apartment. Please create an account before you proceed to view booking and make payment.'
+				)
 			}
 		} else {
-			dispatch(save_booking_to_state(data))
-			toast(
-				'You have saved this apartment. Please create an account before you proceed to view booking and make payment.'
-			)
+			toast('Please fill out all fields')
 		}
 	}
 

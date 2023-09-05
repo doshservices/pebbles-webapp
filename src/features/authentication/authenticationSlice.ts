@@ -172,6 +172,10 @@ export const user_update = createAsyncThunk(
 				error.toString()
 			toast.error(message)
 
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -311,6 +315,11 @@ export const change_user_type = createAsyncThunk(
 				error.message ||
 				error.toString()
 			toast.error(message?._message)
+
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				toast.error(message)
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}

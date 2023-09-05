@@ -84,10 +84,6 @@ const SearchRideComponent = () => {
 				serviceType: 'RIDE',
 				amenities: carAmenities?.map((item: any) => item.name),
 			}
-			console.log(
-				'🚀 ~ file: SearchRideComponent.tsx:87 ~ submitHandler ~ data:',
-				data
-			)
 			if (pickupAddress && destination && pickupDate && carType) {
 				dispatch(book_add_on(data))
 			} else setMessage('Please fill all fields')

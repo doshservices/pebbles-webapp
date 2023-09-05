@@ -6,6 +6,7 @@ import { authHeader, header } from '../../utils/headers'
 import config from '../../utils/config'
 import { store } from '../../app/store'
 import { toast } from 'react-hot-toast'
+import { reset } from '../authentication/authenticationSlice'
 
 let url = config.liveUrl
 
@@ -28,6 +29,11 @@ export const get_all_notifications = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				toast.error(message)
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -58,6 +64,11 @@ export const get_notification_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				toast.error(message)
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -92,6 +103,11 @@ export const delete_notification = createAsyncThunk(
 				error.message ||
 				error.toString()
 
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				toast.error(message)
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -125,7 +141,11 @@ export const update_notification = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast.error(message[0])
+			toast.error(message)
+
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}

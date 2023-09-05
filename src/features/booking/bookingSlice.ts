@@ -5,6 +5,7 @@ import { authHeader, header } from '../../utils/headers'
 import config from '../../utils/config'
 import { store } from '../../app/store'
 import { toast } from 'react-hot-toast'
+import { reset } from '../authentication/authenticationSlice'
 
 let url = config.liveUrl
 
@@ -41,7 +42,14 @@ export const create_booking = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast.error(message[0])
+			toast.error(message)
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -67,6 +75,13 @@ export const get_user_bookings = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -97,6 +112,13 @@ export const get_booking_by_id = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -132,6 +154,13 @@ export const flutter_pay_booking = createAsyncThunk(
 				error.message ||
 				error.toString()
 
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -159,6 +188,13 @@ export const get_business_bookings = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -194,6 +230,13 @@ export const cancel_booking = createAsyncThunk(
 				error.toString()
 			toast.error(message)
 
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -227,6 +270,13 @@ export const flutter_verify_booking = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -268,6 +318,13 @@ export const book_add_on = createAsyncThunk(
 				error.message ||
 				error.toString()
 			toast.error(message)
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}

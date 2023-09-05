@@ -45,10 +45,6 @@ const SearchApartments = () => {
 		zoom: 11,
 	}
 
-	console.log('====================================')
-	console.log('searchApartments', searchApartments)
-	console.log('====================================')
-
 	return (
 		<section className='search_page page_padding'>
 			<div className='navbar_search'>

@@ -190,14 +190,27 @@ const UserListings = () => {
 														{apartment.address}
 													</td>
 													<td className='td_pad_top' style={{ width: '20rem' }}>
-														{apartment.facilities.map((item, index) => (
-															<span key={index} style={{ paddingRight: 3 }}>
-																{item}
-																{index === apartment.facilities.length - 1
-																	? '.'
-																	: ','}
-															</span>
-														))}
+														{apartment.facilities.map((item, index) => {
+															return (
+																index <= 2 && (
+																	<span key={index} style={{ paddingRight: 3 }}>
+																		{item}
+																		{index === 2 ? (
+																			<span>
+																				<span>...</span>
+																				<Link
+																					to={`/apartments/${apartment?._id}`}
+																				>
+																					see more
+																				</Link>
+																			</span>
+																		) : (
+																			','
+																		)}
+																	</span>
+																)
+															)
+														})}
 													</td>
 
 													<td className='td_pad_top'> {apartment.status} </td>

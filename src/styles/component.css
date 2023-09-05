@@ -340,6 +340,10 @@
 	background-color: white !important;
 }
 
+.footer2 .foot_logo {
+	width: 19rem;
+}
+
 @media (min-width: 767px) {
 	.foot_socials2 {
 		display: none;
@@ -371,6 +375,10 @@
 	.foot_para,
 	.foot_para .align_right {
 		text-align: center;
+	}
+
+	.footer2 .foot_logo {
+		width: 15rem;
 	}
 }
 

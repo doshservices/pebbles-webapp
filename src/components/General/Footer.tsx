@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/Logo.png'
+import Logo2 from '../../assets/footer_logo.png'
 import '../../styles/component.css'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { post_newsletter } from '../../features/notification/notificationSlice'
@@ -106,7 +107,7 @@ const Footer = () => {
 				<div className='container'>
 					<div className='text-center'>
 						<div className='mb-4'>
-							<img src={Logo} alt='' />
+							<img src={Logo2} alt='' className='foot_logo' />
 						</div>
 						<div className='foot_links'>
 							<div className='row justify-content-center'>

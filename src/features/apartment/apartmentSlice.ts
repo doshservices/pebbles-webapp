@@ -30,6 +30,14 @@ export const get_nearby_apartments = createAsyncThunk(
 				error.message ||
 				error.toString()
 
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				toast.error(message)
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -164,7 +172,7 @@ export const create_apartment = createAsyncThunk(
 				error.message ||
 				error.toString()
 			toast.error(message)
-			if (message == 'Unauthorized Access. Contact the admin.') {
+			if (message === 'Unauthorized Access. Contact the admin.') {
 				store.dispatch(reset())
 			}
 			return rejectWithValue(message)
@@ -191,6 +199,13 @@ export const get_apartments_by_user = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -221,7 +236,14 @@ export const delete_apartment = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast(message[0])
+			toast(message)
+
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'Not Authorized'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -270,9 +292,8 @@ export const update_apartment = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
-			toast.error(message[0])
-
-			if (message == 'Unauthorized Access. Contact the admin.') {
+			toast.error(message)
+			if (message === 'Unauthorized Access. Contact the admin.') {
 				store.dispatch(reset())
 			}
 
@@ -311,6 +332,10 @@ export const save_apartment = createAsyncThunk(
 				error.toString()
 			toast.error(message)
 
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -335,6 +360,10 @@ export const get_saved_apartments = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}

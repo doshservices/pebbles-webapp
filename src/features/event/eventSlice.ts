@@ -92,6 +92,11 @@ export const flutter_pay_event = createAsyncThunk(
 				error.message ||
 				error.toString()
 
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				toast.error(message)
+				store.dispatch(reset())
+			}
+
 			return rejectWithValue(message)
 		}
 	}
@@ -125,6 +130,11 @@ export const flutter_verify_event = createAsyncThunk(
 					error.response.data.message) ||
 				error.message ||
 				error.toString()
+
+			if (message === 'Unauthorized Access. Contact the admin.') {
+				toast.error(message)
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}

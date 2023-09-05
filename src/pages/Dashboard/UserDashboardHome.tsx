@@ -19,14 +19,19 @@ const UserDashboardHome = () => {
 	const dataData2 = [0, 0, 0, 0, 0, 0, 0]
 
 	const { bookingState, bookings } = useAppSelector((state) => state.booking)
-	const { user_detail } = useAppSelector((state) => state.auth)
+	const { user_detail, token } = useAppSelector((state) => state.auth)
+	console.log(
+		'🚀 ~ file: UserDashboardHome.tsx:23 ~ UserDashboardHome ~ token:',
+		token,
+		user_detail
+	)
 	const { userApartments, savedApartments } = useAppSelector(
 		(state) => state.apartment
 	)
 	const { notifications } = useAppSelector((state) => state.notification)
 
 	useEffect(() => {
-		if (user_detail) {
+		if (user_detail && token) {
 			if (bookingState) {
 				dispatch(create_booking(bookingState))
 
@@ -43,7 +48,7 @@ const UserDashboardHome = () => {
 		return () => {
 			dispatch(apartmentReset())
 		}
-	}, [dispatch, user_detail])
+	}, [dispatch, user_detail, token])
 
 	return (
 		<main className='dashboard'>

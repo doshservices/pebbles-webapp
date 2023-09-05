@@ -185,6 +185,7 @@ export const get_apartments_by_user = createAsyncThunk(
 	async (_, thunkAPI) => {
 		const { rejectWithValue } = thunkAPI
 		let token: string | null = store.getState()?.auth?.token
+		console.log('🚀 ~ file: apartmentSlice.ts:188 ~ tokenSlice:', token)
 
 		try {
 			const response = await axios.get(`${url}/apartments/user`, {
@@ -200,12 +201,12 @@ export const get_apartments_by_user = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			if (
-				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
-			) {
-				store.dispatch(reset())
-			}
+			// if (
+			// 	message === 'Unauthorized Access. Contact the admin.' ||
+			// 	message === 'Not Authorized'
+			// ) {
+			// 	store.dispatch(reset())
+			// }
 
 			return rejectWithValue(message)
 		}

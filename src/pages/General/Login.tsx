@@ -93,7 +93,7 @@ const Login = () => {
 						<div className='col-lg-6 col-md-8'>
 							<div className='pebbles_form_div'>
 								<div className='pebbles_form'>
-									<h4 className='text-center'> WELCOME BACK </h4>
+									<h4 className='text-center'> WELCOME BACKK </h4>
 									<form>
 										<label htmlFor='fullName'>Email Address</label>
 										<input

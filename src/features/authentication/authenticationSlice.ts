@@ -172,7 +172,10 @@ export const user_update = createAsyncThunk(
 				error.toString()
 			toast.error(message)
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				store.dispatch(reset())
 			}
 
@@ -316,7 +319,10 @@ export const change_user_type = createAsyncThunk(
 				error.toString()
 			toast.error(message?._message)
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				toast.error(message)
 				store.dispatch(reset())
 			}

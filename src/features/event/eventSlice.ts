@@ -92,7 +92,10 @@ export const flutter_pay_event = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				toast.error(message)
 				store.dispatch(reset())
 			}
@@ -131,7 +134,10 @@ export const flutter_verify_event = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				toast.error(message)
 				store.dispatch(reset())
 			}

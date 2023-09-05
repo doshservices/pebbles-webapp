@@ -46,7 +46,7 @@ export const create_booking = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -78,7 +78,7 @@ export const get_user_bookings = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -115,7 +115,7 @@ export const get_booking_by_id = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -156,7 +156,7 @@ export const flutter_pay_booking = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -191,7 +191,7 @@ export const get_business_bookings = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -232,7 +232,7 @@ export const cancel_booking = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -273,7 +273,7 @@ export const flutter_verify_booking = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -321,7 +321,7 @@ export const book_add_on = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}

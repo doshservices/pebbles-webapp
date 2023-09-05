@@ -30,7 +30,10 @@ export const get_all_notifications = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				toast.error(message)
 				store.dispatch(reset())
 			}
@@ -65,7 +68,10 @@ export const get_notification_by_id = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				toast.error(message)
 				store.dispatch(reset())
 			}
@@ -103,7 +109,10 @@ export const delete_notification = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				toast.error(message)
 				store.dispatch(reset())
 			}
@@ -143,7 +152,10 @@ export const update_notification = createAsyncThunk(
 				error.toString()
 			toast.error(message)
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				store.dispatch(reset())
 			}
 

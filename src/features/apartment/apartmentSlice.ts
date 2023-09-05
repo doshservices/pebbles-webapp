@@ -32,7 +32,7 @@ export const get_nearby_apartments = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				toast.error(message)
 				store.dispatch(reset())
@@ -201,12 +201,12 @@ export const get_apartments_by_user = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			// if (
-			// 	message === 'Unauthorized Access. Contact the admin.' ||
-			// 	message === 'Not Authorized'
-			// ) {
-			// 	store.dispatch(reset())
-			// }
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
+				store.dispatch(reset())
+			}
 
 			return rejectWithValue(message)
 		}
@@ -241,7 +241,7 @@ export const delete_apartment = createAsyncThunk(
 
 			if (
 				message === 'Unauthorized Access. Contact the admin.' ||
-				message === 'Not Authorized'
+				message === 'jwt expired'
 			) {
 				store.dispatch(reset())
 			}
@@ -294,7 +294,10 @@ export const update_apartment = createAsyncThunk(
 				error.message ||
 				error.toString()
 			toast.error(message)
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				store.dispatch(reset())
 			}
 
@@ -333,7 +336,10 @@ export const save_apartment = createAsyncThunk(
 				error.toString()
 			toast.error(message)
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				store.dispatch(reset())
 			}
 
@@ -362,7 +368,10 @@ export const get_saved_apartments = createAsyncThunk(
 				error.message ||
 				error.toString()
 
-			if (message === 'Unauthorized Access. Contact the admin.') {
+			if (
+				message === 'Unauthorized Access. Contact the admin.' ||
+				message === 'jwt expired'
+			) {
 				store.dispatch(reset())
 			}
 

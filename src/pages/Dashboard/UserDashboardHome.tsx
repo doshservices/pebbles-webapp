@@ -40,7 +40,8 @@ const UserDashboardHome = () => {
 				}, 100)
 			}
 
-			dispatch(get_apartments_by_user())
+			if (user_detail.role === 'INDIVIDUAL' || user_detail.role === 'BUSINESS')
+				dispatch(get_apartments_by_user())
 			dispatch(get_notification_by_id({ id: user_detail?._id }))
 			dispatch(get_saved_apartments())
 			dispatch(get_user_bookings())

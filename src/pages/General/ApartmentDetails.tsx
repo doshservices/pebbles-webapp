@@ -254,7 +254,7 @@ const ApartmentDetails = () => {
 											apartment?.apartment?.apartmentImages.length
 									)
 								}
-								imagePadding={100}
+								imagePadding={20}
 							/>
 						)}
 					</div>

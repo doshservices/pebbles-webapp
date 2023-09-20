@@ -42,12 +42,12 @@ const SearchApartmentComponent = ({
 	}
 
 	const submitHandler = () => {
-		if (loc && apartmentType) {
+		if (loc) {
 			dispatch(
 				get_search_apartments({
 					loc: loc?.formatted_address,
-					checkIn: moment(state[0].startDate).format(),
-					checkOut: moment(state[0].endDate).format(),
+					checkIn: new Date(state[0].startDate).toISOString(),
+					checkOut: new Date(state[0].endDate).toISOString(),
 					apartmentType,
 				})
 			)

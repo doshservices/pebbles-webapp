@@ -62,7 +62,7 @@ const ApartmentCard = ({
 							{user_detail && showfalse ? (
 								<>
 									{savedApartments?.apartment?.find(
-										(item) => item.apartmentId._id === apartmentInfo?._id
+										(item) => item?.apartmentId?._id === apartmentInfo?._id
 									) ? (
 										<img
 											// onClick={(e) => saveHandler(e, apartmentInfo?._id)}

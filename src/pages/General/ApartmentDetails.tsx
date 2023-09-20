@@ -475,8 +475,8 @@ const ApartmentDetails = () => {
 															<AiOutlineClockCircle />
 														</div>
 														<div className='detail_div'>
-															<h6> Check-in is at 3:00pm </h6>
-															<h6> Check-out is at 11:00pm </h6>
+															<h6> Check-in is at 12:00pm </h6>
+															<h6> Check-out is at 12:00pm </h6>
 														</div>
 													</div>
 													<div>

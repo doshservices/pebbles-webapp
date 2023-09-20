@@ -48,8 +48,8 @@ export const get_search_apartments = createAsyncThunk(
 	async (
 		payload: {
 			loc: string
-			checkIn: string
-			checkOut: string
+			checkIn: string | Date
+			checkOut: string | Date
 			apartmentType: string
 		},
 		thunkAPI
@@ -185,7 +185,6 @@ export const get_apartments_by_user = createAsyncThunk(
 	async (_, thunkAPI) => {
 		const { rejectWithValue } = thunkAPI
 		let token: string | null = store.getState()?.auth?.token
-		console.log('🚀 ~ file: apartmentSlice.ts:188 ~ tokenSlice:', token)
 
 		try {
 			const response = await axios.get(`${url}/apartments/user`, {

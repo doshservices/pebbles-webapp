@@ -196,6 +196,7 @@ const SearchRideComponent = () => {
 											<option value='Sedan'>Sedan</option>
 											<option value='SUV'>SUV</option>
 											<option value='Pickup Truck'>Pickup Truck</option>
+											<option value='Private Jet'>Private Jet</option>
 										</select>
 									</div>
 								</div>

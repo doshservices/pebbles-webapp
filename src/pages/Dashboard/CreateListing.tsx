@@ -90,6 +90,27 @@ const CreateListing = () => {
 		}
 	}
 
+	const handleFormUpdate = async (event: any, index: number, type: string) => {
+		let data = [...inputFields]
+		if (type === 'string') {
+			const modifiedData = data.map((obj) => {
+				return (obj[index][event.target.name] = event.target.value)
+			})
+			// data[index].{event.target.name} = event.target.value
+			setInputFields(modifiedData)
+		} else {
+			await handleLandmarkFileInputChange(event, index)
+			if (
+				landmark_image_values?.findIndex((item) => index === item.index) !== -1
+			) {
+				data[index][event.target.name] = landmark_image_values?.find(
+					(item) => index === item.index
+				).text
+				setInputFields(data)
+			}
+		}
+	}
+
 	const addNewFields = (e) => {
 		e.preventDefault()
 		let newfield = { landmark: '', address: '', details: '', image: '' }
@@ -406,6 +427,7 @@ const CreateListing = () => {
 
 	useEffect(() => {
 		let data = [...inputFields]
+		console.log('🚀 ~ file: CreateListing.tsx:409 ~ useEffect ~ data:', data)
 		if (landmark_image_values?.length > 0) {
 			for (let i = 0; i < landmark_image_values?.length; i++) {
 				data[i]['image'] =
@@ -990,9 +1012,11 @@ const CreateListing = () => {
 																type='text'
 																className='form-control'
 																name='landmark'
-																value={input.landmark}
+																defaultValue={input.landmark || ''}
 																onChange={(event) =>
-																	handleFormChange(event, index, 'string')
+																	params?.id
+																		? handleFormUpdate(event, index, 'string')
+																		: handleFormChange(event, index, 'string')
 																}
 															/>
 														</div>
@@ -1005,7 +1029,7 @@ const CreateListing = () => {
 																type='text'
 																name='address'
 																className='form-control'
-																value={input.address}
+																defaultValue={input.address}
 																onChange={(event) =>
 																	handleFormChange(event, index, 'string')
 																}

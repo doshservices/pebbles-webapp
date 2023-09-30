@@ -21,6 +21,8 @@ const SearchApartmentComponent = ({
 	const navigate = useNavigate()
 
 	const [loc, setLoc] = useState<any>({})
+	console.log('🚀 ~ file: SearchApartmentComponent.tsx:24 ~ loc:', loc)
+
 	const [apartmentType, setApartmentType] = useState('')
 	const [showDate, setShowDate] = useState(false)
 
@@ -45,10 +47,11 @@ const SearchApartmentComponent = ({
 		if (loc) {
 			dispatch(
 				get_search_apartments({
-					loc: loc?.formatted_address,
+					loc: loc?.address_components[0]?.long_name,
 					checkIn: new Date(state[0].startDate).toISOString(),
 					checkOut: new Date(state[0].endDate).toISOString(),
 					apartmentType,
+					state: loc?.address_components[1]?.long_name,
 				})
 			)
 			navigate('/search-apartments')

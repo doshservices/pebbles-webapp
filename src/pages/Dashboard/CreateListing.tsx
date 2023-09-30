@@ -92,12 +92,32 @@ const CreateListing = () => {
 
 	const handleFormUpdate = async (event: any, index: number, type: string) => {
 		let data = [...inputFields]
-		if (type === 'string') {
-			const modifiedData = data.map((obj) => {
-				return (obj[index][event.target.name] = event.target.value)
+		//checking for string type
+		if (type === 'landmark') {
+			//looking for index of the object to be edited in the array
+			let arr = data.findIndex((item) => {
+				return data.indexOf(item) === index
 			})
-			// data[index].{event.target.name} = event.target.value
-			setInputFields(modifiedData)
+
+			data[arr] = { ...data[arr], landmark: event.target.value }
+
+			setInputFields([...data])
+		} else if (type === 'address') {
+			let arr = data.findIndex((item) => {
+				return data.indexOf(item) === index
+			})
+
+			data[arr] = { ...data[arr], address: event.target.value }
+
+			setInputFields([...data])
+		} else if (type === 'details') {
+			let arr = data.findIndex((item) => {
+				return data.indexOf(item) === index
+			})
+
+			data[arr] = { ...data[arr], details: event.target.value }
+
+			setInputFields([...data])
 		} else {
 			await handleLandmarkFileInputChange(event, index)
 			if (
@@ -337,7 +357,7 @@ const CreateListing = () => {
 			.catch((err) => {})
 	}
 
-	const uploadLandmarkFileHandler = (e: any) => {
+	const uploadLandmarkFileHandler = async (e: any) => {
 		e.preventDefault()
 		const data = new FormData()
 
@@ -348,10 +368,13 @@ const CreateListing = () => {
 
 		setUploading(true)
 
-		fetch('https://api.cloudinary.com/v1_1/pebbles-signature/image/upload', {
-			method: 'post',
-			body: data,
-		})
+		await fetch(
+			'https://api.cloudinary.com/v1_1/pebbles-signature/image/upload',
+			{
+				method: 'post',
+				body: data,
+			}
+		)
 			.then((resp) => resp.json())
 			.then((data) => {
 				setUploading(false)
@@ -427,7 +450,6 @@ const CreateListing = () => {
 
 	useEffect(() => {
 		let data = [...inputFields]
-		console.log('🚀 ~ file: CreateListing.tsx:409 ~ useEffect ~ data:', data)
 		if (landmark_image_values?.length > 0) {
 			for (let i = 0; i < landmark_image_values?.length; i++) {
 				data[i]['image'] =
@@ -441,6 +463,8 @@ const CreateListing = () => {
 		inputFields,
 		inputFields?.length,
 	])
+
+	console.log('inputFields', inputFields)
 
 	useEffect(() => {
 		if (!user_detail?.isVerified || !user_detail?.validId) {
@@ -1015,7 +1039,7 @@ const CreateListing = () => {
 																defaultValue={input.landmark || ''}
 																onChange={(event) =>
 																	params?.id
-																		? handleFormUpdate(event, index, 'string')
+																		? handleFormUpdate(event, index, 'landmark')
 																		: handleFormChange(event, index, 'string')
 																}
 															/>
@@ -1031,7 +1055,9 @@ const CreateListing = () => {
 																className='form-control'
 																defaultValue={input.address}
 																onChange={(event) =>
-																	handleFormChange(event, index, 'string')
+																	params?.id
+																		? handleFormUpdate(event, index, 'address')
+																		: handleFormChange(event, index, 'string')
 																}
 															/>
 														</div>
@@ -1044,7 +1070,9 @@ const CreateListing = () => {
 															className='form-control'
 															value={input.details}
 															onChange={(event) =>
-																handleFormChange(event, index, 'string')
+																params?.id
+																	? handleFormUpdate(event, index, 'details')
+																	: handleFormChange(event, index, 'string')
 															}
 														></textarea>
 													</div>

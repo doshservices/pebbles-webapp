@@ -673,7 +673,8 @@ a {
 	justify-content: center;
 }
 
-.about_text p {
+.about_text p,
+.about_text ul li {
 	font-size: 14px;
 	line-height: 28px;
 	text-align: justify;

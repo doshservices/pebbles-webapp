@@ -51,17 +51,19 @@ export const get_search_apartments = createAsyncThunk(
 			checkIn: string | Date
 			checkOut: string | Date
 			apartmentType: string
+			state: string
 		},
 		thunkAPI
 	) => {
 		const { rejectWithValue } = thunkAPI
 		try {
 			const response = await axios.get(
-				`${url}/apartments-one/search?check_in=${payload.checkIn}&location=${payload.loc}&type=${payload.apartmentType}&check_out=${payload.checkOut}`,
+				`${url}/apartments-one/search?check_in=${payload.checkIn}&location=${payload.loc}&type=${payload.apartmentType}&check_out=${payload.checkOut}&state=${payload.state}`,
 				{
 					headers: header,
 				}
 			)
+			console.log('payload', payload)
 
 			return response.data
 		} catch (error: any) {
@@ -284,6 +286,7 @@ export const update_apartment = createAsyncThunk(
 				headers: authHeader(token ? token : '123'),
 			})
 			toast.success(`${payload.apartmentName} updated successfully.`)
+			console.log('payload', payload)
 			return response.data
 		} catch (error: any) {
 			const message =

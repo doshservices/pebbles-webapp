@@ -64,20 +64,19 @@ const About = () => {
 								<div className='about_text'>
 									<h3>WHO WE ARE</h3>
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Proin nec auctor ligula, sed luctus magna. Sed placerat
-										lacus auctor congue molestie. Sed facilisis felis ac commodo
-										convallis. Nunc ullamcorper vehicula magna sit amet
-										tincidunt. Fusce in iaculis arcu, sed posuere nisi. Etiam
-										porttitor elit eget arcu malesuada dictum. Fusce sit amet
-										elit viverra, laoreet risus ac, varius enim. Quisque ut
-										pellentesque mi. Nullam lacus quam, imperdiet ac metus non,
-										eleifend ornare massa.Morbi vestibulum erat eget massa
-										sollicitudin, vel pellentesque diam posuere. Suspendisse
-										scelerisque consectetur nisi, sed vulputate lacus aliquet
-										sed. Orci varius natoque penatibus et magnis dis parturient
-										montes, nascetur ridiculus mus. In aliquam vel nisl sit amet
-										lobortis.
+										At Pebbles Signatures, hospitality is not just a service;
+										it's our passion, our commitment, and our way of life. We
+										are more than just a hospitality brand; we are your trusted
+										partner in creating memorable experiences. Established with
+										a vision to redefine the way you experience hospitality,
+										Pebbles Signatures has emerged as a name synonymous with
+										luxury, comfort, and convenience. Our journey began with a
+										simple yet profound idea: to offer a place where every guest
+										feels not just welcome but truly at home. Over time, we've
+										transformed this vision into reality, evolving into a
+										renowned name in the world of hospitality. We are Pebbles
+										Signatures, where every moment is crafted to perfection, and
+										every stay is an unforgettable journey.
 									</p>
 								</div>
 							</div>
@@ -89,20 +88,49 @@ const About = () => {
 									<div className='about_text'>
 										<h3>WHAT WE DO</h3>
 										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Proin nec auctor ligula, sed luctus magna. Sed placerat
-											lacus auctor congue molestie. Sed facilisis felis ac
-											commodo convallis. Nunc ullamcorper vehicula magna sit
-											amet tincidunt. Fusce in iaculis arcu, sed posuere nisi.
-											Etiam porttitor elit eget arcu malesuada dictum. Fusce sit
-											amet elit viverra, laoreet risus ac, varius enim. Quisque
-											ut pellentesque mi. Nullam lacus quam, imperdiet ac metus
-											non, eleifend ornare massa.Morbi vestibulum erat eget
-											massa sollicitudin, vel pellentesque diam posuere.
-											Suspendisse scelerisque consectetur nisi, sed vulputate
-											lacus aliquet sed. Orci varius natoque penatibus et magnis
-											dis parturient montes, nascetur ridiculus mus. In aliquam
-											vel nisl sit amet lobortis.
+											At Pebbles Signatures, we pride ourselves on being your
+											all-in-one solution for hospitality. We go beyond offering
+											mere accommodations; we curate experiences that leave a
+											lasting imprint on your memory. Our comprehensive range of
+											services includes:
+										</p>
+										<ul>
+											<li>
+												<strong>Short-Let Apartments:</strong> Immerse yourself
+												in the perfect blend of comfort, style, and convenience
+												in our short-let apartments.
+											</li>
+											<li>
+												<strong>Chauffeur Services:</strong> Travel with ease
+												and comfort, as our professional drivers take you to
+												your destination safely.
+											</li>
+											<li>
+												<strong>Party Apartments:</strong> Celebrate life's
+												milestones in our unique party apartments, designed for
+												gatherings, birthdays, and special occasions.
+											</li>
+											<li>
+												<strong>Events:</strong> Transform your events into
+												extraordinary experiences with our event planning
+												services.
+											</li>
+											<li>
+												<strong>Tourist Attractions:</strong> Explore the
+												culture and beauty of your destination with our curated
+												tourist attraction services.
+											</li>
+											<li>
+												<strong>Jet Services:</strong> Elevate your travel
+												experience with our luxurious jet services, making your
+												journey as extraordinary as your destination.
+											</li>
+										</ul>
+										<p>
+											At Pebbles Signatures, we are more than just a place to
+											stay; we are a destination where moments are created,
+											experiences are treasured, and hospitality is elevated to
+											an art form.
 										</p>
 									</div>
 								</div>
@@ -115,20 +143,24 @@ const About = () => {
 									<div className='about_text'>
 										<h3>WHERE WE WANT TO BE </h3>
 										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Proin nec auctor ligula, sed luctus magna. Sed placerat
-											lacus auctor congue molestie. Sed facilisis felis ac
-											commodo convallis. Nunc ullamcorper vehicula magna sit
-											amet tincidunt. Fusce in iaculis arcu, sed posuere nisi.
-											Etiam porttitor elit eget arcu malesuada dictum. Fusce sit
-											amet elit viverra, laoreet risus ac, varius enim. Quisque
-											ut pellentesque mi. Nullam lacus quam, imperdiet ac metus
-											non, eleifend ornare massa.Morbi vestibulum erat eget
-											massa sollicitudin, vel pellentesque diam posuere.
-											Suspendisse scelerisque consectetur nisi, sed vulputate
-											lacus aliquet sed. Orci varius natoque penatibus et magnis
-											dis parturient montes, nascetur ridiculus mus. In aliquam
-											vel nisl sit amet lobortis.
+											Our vision is to be the global epitome of exceptional
+											hospitality, where the Pebbles Signatures experience
+											becomes synonymous with unparalleled luxury, seamless
+											convenience, and unwavering quality. We aspire to expand
+											our footprint, reaching travellers and event hosts
+											worldwide, offering them a unique and memorable
+											hospitality experience that exceeds their expectations. We
+											strive to continuously innovate, setting new standards in
+											the industry and pioneering new ways to enhance the guest
+											experience. Our journey is a quest for excellence, and our
+											destination is to be the preferred choice for discerning
+											travellers and event organizers seeking the finest in
+											hospitality.
+										</p>
+
+										<p>
+											Welcome to Pebbles Signatures – Where Hospitality is
+											Elevated to a Signature Experience.
 										</p>
 									</div>
 								</div>
@@ -138,7 +170,7 @@ const About = () => {
 				</div>
 			</section>
 
-			<section className='about_team'>
+			{/* <section className='about_team'>
 				<div className='container'>
 					<h2 className='text-center mb-4 pb-2' style={{ fontWeight: '600' }}>
 						MEET THE TEAM
@@ -153,7 +185,7 @@ const About = () => {
 						))}
 					</div>
 				</div>
-			</section>
+			</section> */}
 		</main>
 	)
 }

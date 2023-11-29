@@ -28,7 +28,8 @@ const Login = () => {
 	const viewHandler = () => {
 		let pass = document.getElementById('password')
 		let view = document.getElementById('view')
-		const type = pass?.getAttribute('type') === 'password' ? 'text' : 'password'
+		const type =
+			pass?.getAttribute('type') === 'password' ? 'text' : 'password'
 		pass?.setAttribute('type', type)
 
 		view?.classList.toggle('fa-eye-slash')
@@ -68,7 +69,9 @@ const Login = () => {
 
 	useEffect(() => {
 		if (user_detail) {
-			navigate('/user/dashboard/home')
+			setTimeout(() => {
+				navigate('/user/dashboard/home')
+			}, 200)
 		}
 	}, [user_detail])
 
@@ -83,35 +86,53 @@ const Login = () => {
 						<div className='col-lg-6 col-md-4'>
 							<div
 								className='logo_div'
-								style={{ position: 'relative', marginTop: '1.5rem' }}
+								style={{
+									position: 'relative',
+									marginTop: '1.5rem',
+								}}
 							>
 								<Link to='/'>
-									<img src={logo} alt='' className='img-fluid' />
+									<img
+										src={logo}
+										alt=''
+										className='img-fluid'
+									/>
 								</Link>
 							</div>
 						</div>
 						<div className='col-lg-6 col-md-8'>
 							<div className='pebbles_form_div'>
 								<div className='pebbles_form'>
-									<h4 className='text-center'> WELCOME BACK </h4>
+									<h4 className='text-center'>
+										{' '}
+										WELCOME BACK{' '}
+									</h4>
 									<form>
-										<label htmlFor='fullName'>Email Address</label>
+										<label htmlFor='fullName'>
+											Email Address
+										</label>
 										<input
 											type='text'
 											placeholder='Email address here'
 											value={email}
 											className='form-control'
-											onChange={(e) => setEmail(e.target.value)}
+											onChange={(e) =>
+												setEmail(e.target.value)
+											}
 										/>
 										<div className='password_div'>
-											<label htmlFor='fullName'>Password</label>
+											<label htmlFor='fullName'>
+												Password
+											</label>
 											<input
 												placeholder='Password here'
 												className='form-control'
 												id='password'
 												value={password}
 												type='password'
-												onChange={(e) => setPassword(e.target.value)}
+												onChange={(e) =>
+													setPassword(e.target.value)
+												}
 											/>
 											<i
 												className='fa fa-eye view'
@@ -121,11 +142,16 @@ const Login = () => {
 										</div>
 
 										<div className='text-end mt-3'>
-											<Link to='/auth/forgot-password'>Forgot password?</Link>
+											<Link to='/auth/forgot-password'>
+												Forgot password?
+											</Link>
 										</div>
 										<div
 											className='form-input-group checkbox'
-											style={{ alignItems: 'center', display: 'flex' }}
+											style={{
+												alignItems: 'center',
+												display: 'flex',
+											}}
 										>
 											<input
 												className='form-input'
@@ -149,7 +175,9 @@ const Login = () => {
 										<div className='mt-1'>
 											<button
 												className='btn btn-primary form-control'
-												onClick={(e) => submitHandler(e)}
+												onClick={(e) =>
+													submitHandler(e)
+												}
 												disabled={isLoading}
 											>
 												{isLoading ? (
@@ -172,7 +200,10 @@ const Login = () => {
 										</p>
 										<p>
 											Want to signup as a host?{' '}
-											<Link to='/auth/signup' style={{ fontWeight: '500' }}>
+											<Link
+												to='/auth/signup'
+												style={{ fontWeight: '500' }}
+											>
 												Become a host
 											</Link>
 										</p>

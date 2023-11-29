@@ -6,6 +6,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import Loader from '../../components/Loader'
 import {
+	apartmentReset,
 	get_all_apartments,
 	get_saved_apartments,
 } from '../../features/apartment/apartmentSlice'
@@ -92,6 +93,9 @@ const AllApartments = () => {
 			dispatch(get_saved_apartments())
 		}
 		dispatch(get_all_apartments())
+		return () => {
+			dispatch(apartmentReset())
+		}
 	}, [dispatch, user_detail, savedApartment])
 
 	return (

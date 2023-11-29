@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ApartmentInterface } from '../features/apartment/apartmentState'
 import { comma } from '../utils/helper'
 import SliderImages from './SliderImages'
@@ -16,6 +16,7 @@ const ApartmentCard = ({
 	showfalse?: boolean
 }) => {
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
 	const { user_detail } = useAppSelector((state) => state.auth)
 
@@ -31,9 +32,18 @@ const ApartmentCard = ({
 		dispatch(save_apartment({ apartmentId: id }))
 	}
 
+	const navHandler = (e: any) => {
+		// e.preventDefault()
+		navigate(`/apartments/${apartmentInfo?._id}`)
+		window.location.reload()
+	}
+
 	return (
 		<div className='apartment_card'>
-			<Link to={`/apartments/${apartmentInfo?._id}`}>
+			<Link
+				onClick={(e) => navHandler(e)}
+				to={`/apartments/${apartmentInfo?._id}`}
+			>
 				<div className='apartment_card_img_div'>
 					<SliderImages images={apartmentInfo?.featuredImages} />
 				</div>

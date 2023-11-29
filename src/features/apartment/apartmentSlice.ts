@@ -63,7 +63,6 @@ export const get_search_apartments = createAsyncThunk(
 					headers: header,
 				}
 			)
-			console.log('payload', payload)
 
 			return response.data
 		} catch (error: any) {
@@ -286,7 +285,6 @@ export const update_apartment = createAsyncThunk(
 				headers: authHeader(token ? token : '123'),
 			})
 			toast.success(`${payload.apartmentName} updated successfully.`)
-			console.log('payload', payload)
 			return response.data
 		} catch (error: any) {
 			const message =
@@ -392,6 +390,9 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 			state.savedApartments = null
 			state.apartment = null
 			state.createSuccess = null
+		},
+		apartment_search_save: (state, action) => {
+			state.localApartmentSearch = action.payload
 		},
 	},
 	extraReducers: (builder) => {
@@ -500,4 +501,4 @@ export const { reducer: ApartmentReducer, actions } = createSlice({
 	},
 })
 
-export const { apartmentReset } = actions
+export const { apartmentReset, apartment_search_save } = actions

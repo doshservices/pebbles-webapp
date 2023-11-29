@@ -15,6 +15,7 @@ export interface ApartmentInitialInterface {
 	isCreatingApartment: boolean
 	savedApartments: SavedApartmentsInterface | null
 	isSavingApartment: boolean
+	localApartmentSearch: LocalApartmentSearchInterface | null
 }
 
 export const ApartmentInitialState: ApartmentInitialInterface = {
@@ -34,6 +35,7 @@ export const ApartmentInitialState: ApartmentInitialInterface = {
 	savedApartments: null,
 	isSavingApartment: false,
 	savedApartment: null,
+	localApartmentSearch: null,
 }
 
 export interface NearbyApartmentsInterface {
@@ -74,4 +76,11 @@ export interface ApartmentInterface {
 	typeOfApartment: string
 	userId: string
 	_id: string
+}
+export interface LocalApartmentSearchInterface {
+	loc: any
+	checkIn: string
+	checkOut: string
+	apartmentType: string
+	state: string
 }

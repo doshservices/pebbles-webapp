@@ -20,11 +20,6 @@ const UserDashboardHome = () => {
 
 	const { bookingState, bookings } = useAppSelector((state) => state.booking)
 	const { user_detail, token } = useAppSelector((state) => state.auth)
-	console.log(
-		'🚀 ~ file: UserDashboardHome.tsx:23 ~ UserDashboardHome ~ token:',
-		token,
-		user_detail
-	)
 	const { userApartments, savedApartments } = useAppSelector(
 		(state) => state.apartment
 	)

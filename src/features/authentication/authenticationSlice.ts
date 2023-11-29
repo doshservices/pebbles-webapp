@@ -118,6 +118,9 @@ export const user_login = createAsyncThunk(
 			const response = await axios.post(`${url}/users/login`, payload, {
 				headers: header,
 			})
+			window.location.href = '/'
+
+			toast.success('You are logged in successfully.')
 
 			return response.data
 		} catch (error: any) {

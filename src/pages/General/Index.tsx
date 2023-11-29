@@ -17,6 +17,7 @@ import abuja from '../../assets/abuja.png'
 import enugu from '../../assets/enugu.png'
 import { Link } from 'react-router-dom'
 import ReviewSlider from '../../components/General/ReviewSlider'
+import toast from 'react-hot-toast'
 
 const reviewData = [
 	{
@@ -67,6 +68,8 @@ const Index = () => {
 
 	useEffect(() => {
 		if (user_detail) {
+			toast.success('You are logged in.')
+
 			dispatch(get_nearby_apartments())
 			dispatch(get_all_apartments())
 			dispatch(get_saved_apartments())
@@ -90,13 +93,22 @@ const Index = () => {
 								link='/apartments-near-you'
 								linkText='View all'
 							/>
-							{nearbyApartments && nearbyApartments?.apartments.length > 0 ? (
+							{nearbyApartments &&
+							nearbyApartments?.apartments.length > 0 ? (
 								<ApartmentSlider
-									data={nearbyApartments ? nearbyApartments?.apartments : []}
+									data={
+										nearbyApartments
+											? nearbyApartments?.apartments
+											: []
+									}
 								/>
 							) : (
 								<ApartmentSlider
-									data={allApartments ? allApartments?.apartments : []}
+									data={
+										allApartments
+											? allApartments?.apartments
+											: []
+									}
 								/>
 							)}
 						</>
@@ -111,7 +123,8 @@ const Index = () => {
 							/>
 							<ApartmentSlider
 								data={
-									allApartments && allApartments?.apartments.length > 0
+									allApartments &&
+									allApartments?.apartments.length > 0
 										? allApartments?.apartments
 										: []
 								}
@@ -133,65 +146,95 @@ const Index = () => {
 						>
 							<div
 								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
+								style={{
+									marginRight: '15px',
+									marginLeft: '15px',
+								}}
 							>
 								<Link to='/'>
 									<div>
 										<img src={lagos} alt='' />
 										<div className='bg-white'>
-											<p className='text_black'> Lagos </p>
+											<p className='text_black'>
+												{' '}
+												Lagos{' '}
+											</p>
 										</div>
 									</div>
 								</Link>
 							</div>
 							<div
 								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
+								style={{
+									marginRight: '15px',
+									marginLeft: '15px',
+								}}
 							>
 								<Link to='/'>
 									<div>
 										<img src={ph} alt='' />
 										<div className='bg-white'>
-											<p className='text_black'> Port Harcourt </p>
+											<p className='text_black'>
+												{' '}
+												Port Harcourt{' '}
+											</p>
 										</div>
 									</div>
 								</Link>
 							</div>
 							<div
 								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
+								style={{
+									marginRight: '15px',
+									marginLeft: '15px',
+								}}
 							>
 								<Link to='/'>
 									<div>
 										<img src={ibadan} alt='' />
 										<div className='bg-white'>
-											<p className='text_black'> Ibadan </p>
+											<p className='text_black'>
+												{' '}
+												Ibadan{' '}
+											</p>
 										</div>
 									</div>
 								</Link>
 							</div>
 							<div
 								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
+								style={{
+									marginRight: '15px',
+									marginLeft: '15px',
+								}}
 							>
 								<Link to='/'>
 									<div>
 										<img src={abuja} alt='' />
 										<div className='bg-white'>
-											<p className='text_black'> Abuja </p>
+											<p className='text_black'>
+												{' '}
+												Abuja{' '}
+											</p>
 										</div>
 									</div>
 								</Link>
 							</div>
 							<div
 								className='col'
-								style={{ marginRight: '15px', marginLeft: '15px' }}
+								style={{
+									marginRight: '15px',
+									marginLeft: '15px',
+								}}
 							>
 								<Link to='/'>
 									<div>
 										<img src={enugu} alt='' />
 										<div className='bg-white'>
-											<p className='text_black'> Enugu </p>
+											<p className='text_black'>
+												{' '}
+												Enugu{' '}
+											</p>
 										</div>
 									</div>
 								</Link>
@@ -229,10 +272,12 @@ const Index = () => {
 								<h1> Unlock Your Earning Potential Today </h1>
 
 								<p>
-									Open the door to endless possibilities and become a host
-									today. Whether you have a spare room or a whole property,
-									renting it out on our platform can bring in extra income and
-									help you connect with people from all over the world.
+									Open the door to endless possibilities and
+									become a host today. Whether you have a
+									spare room or a whole property, renting it
+									out on our platform can bring in extra
+									income and help you connect with people from
+									all over the world.
 								</p>
 
 								<div className='mt-4 pt-2'>

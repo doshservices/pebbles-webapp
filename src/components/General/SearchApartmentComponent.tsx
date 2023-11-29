@@ -21,7 +21,6 @@ const SearchApartmentComponent = ({
 	const navigate = useNavigate()
 
 	const [loc, setLoc] = useState<any>({})
-	console.log('🚀 ~ file: SearchApartmentComponent.tsx:24 ~ loc:', loc)
 
 	const [apartmentType, setApartmentType] = useState('')
 	const [showDate, setShowDate] = useState(false)
@@ -79,6 +78,7 @@ const SearchApartmentComponent = ({
 								onPlaceSelected={(place) => {
 									setLoc(place)
 								}}
+								// defaultValue={JSON.parse(loc)?.address_components[0]?.long_name}
 								className='form-control'
 								placeholder='Enter a location'
 							/>

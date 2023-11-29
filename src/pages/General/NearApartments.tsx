@@ -1,30 +1,14 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentCard from '../../components/ApartmentCard'
-import GoogleMapReact from 'google-map-react'
-import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import Loader from '../../components/Loader'
 import {
+	apartmentReset,
 	get_nearby_apartments,
 	get_saved_apartments,
 } from '../../features/apartment/apartmentSlice'
 import EmptyPage from '../../components/EmptyPage'
-
-const AnyReactComponent = ({
-	text,
-	lat,
-	lng,
-}: {
-	text: any
-	lat: number
-	lng: number
-}) => (
-	<>
-		<FaMapMarkerAlt size={28} color='red' />
-		{/* <div>{text}</div> */}
-	</>
-)
 
 const NearApartments = () => {
 	const dispatch = useAppDispatch()
@@ -44,18 +28,13 @@ const NearApartments = () => {
 
 	const [sortParams, setSortParams] = useState('')
 
-	const defaultProps = {
-		center: {
-			lat: 6.465422,
-			lng: 3.406448,
-		},
-		zoom: 11,
-	}
-
 	useEffect(() => {
 		if (user_detail) {
 			dispatch(get_nearby_apartments())
 			dispatch(get_saved_apartments())
+		}
+		return () => {
+			dispatch(apartmentReset())
 		}
 	}, [dispatch, user_detail, savedApartment])
 
@@ -75,7 +54,7 @@ const NearApartments = () => {
 					APARTMENTS NEAR YOU
 				</h5>
 				<div className='row'>
-					<div className='col-lg-8'>
+					<div className='col-lg-12'>
 						<div className='sort_div'>
 							<div
 								className='d-flex'
@@ -112,41 +91,11 @@ const NearApartments = () => {
 									</div>
 								))
 							) : (
-								// <div className='col-md-4 col-sm-6'>
 								<EmptyPage
 									header='No apartments found'
 									para='Nearby apartments will be shown here'
 								/>
-								// </div>
 							)}
-						</div>
-					</div>
-					<div className='col-lg-4 map_section'>
-						<div style={{ height: '30rem', width: '100%' }}>
-							<GoogleMapReact
-								bootstrapURLKeys={{
-									key: `${process.env.REACT_APP_GOOGLE_MAPS_API}`,
-								}}
-								defaultCenter={defaultProps.center}
-								defaultZoom={defaultProps.zoom}
-							>
-								{nearbyApartments?.apartments?.map((item) => {
-									return (
-										item?.latitude &&
-										item?.latitude !== 'undefined' &&
-										item?.latitude !== 'latitude' &&
-										item?.longitude &&
-										item?.longitude !== 'undefined' &&
-										item?.longitude !== 'longitude' && (
-											<AnyReactComponent
-												lat={Number(item?.latitude)}
-												lng={Number(item?.longitude)}
-												text={item.apartmentName}
-											/>
-										)
-									)
-								})}
-							</GoogleMapReact>
 						</div>
 					</div>
 				</div>

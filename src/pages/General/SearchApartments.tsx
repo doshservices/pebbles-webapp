@@ -1,11 +1,12 @@
-import React, { useLayoutEffect, useState } from 'react'
-import { useAppSelector } from '../../app/hooks'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import ApartmentCard from '../../components/ApartmentCard'
 import GoogleMapReact from 'google-map-react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import SearchApartmentComponent from '../../components/General/SearchApartmentComponent'
 import Loader from '../../components/Loader'
 import EmptyPage from '../../components/EmptyPage'
+import { apartmentReset } from '../../features/apartment/apartmentSlice'
 
 const AnyReactComponent = ({
 	text,
@@ -23,6 +24,8 @@ const AnyReactComponent = ({
 )
 
 const SearchApartments = () => {
+	const dispatch = useAppDispatch()
+
 	const { searchApartments, isFetchingSearchApartments } = useAppSelector(
 		(state) => state.apartment
 	)
@@ -37,13 +40,19 @@ const SearchApartments = () => {
 
 	const [sortParams, setSortParams] = useState('')
 
-	const defaultProps = {
-		center: {
-			lat: 6.465422,
-			lng: 3.406448,
-		},
-		zoom: 11,
-	}
+	// const defaultProps = {
+	// 	center: {
+	// 		lat: 6.465422,
+	// 		lng: 3.406448,
+	// 	},
+	// 	zoom: 11,
+	// }
+
+	useEffect(() => {
+		return () => {
+			dispatch(apartmentReset())
+		}
+	}, [dispatch])
 
 	return (
 		<section className='search_page page_padding'>

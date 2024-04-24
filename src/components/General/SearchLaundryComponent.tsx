@@ -94,7 +94,7 @@ const SearchLaundryComponent = () => {
 											setDeliveryAddress(place)
 										}}
 										className='form-control'
-										placeholder='Pickup  Address'
+										// placeholder='Pickup  Address'
 										options={{
 											types: ['address'],
 										}}

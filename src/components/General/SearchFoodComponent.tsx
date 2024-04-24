@@ -73,7 +73,7 @@ const SearchFoodComponent = () => {
 											setDeliveryAddress(place)
 										}}
 										className='form-control'
-										placeholder='Delivery  Address'
+										// placeholder='Delivery  Address'
 										options={{
 											types: ['address'],
 										}}

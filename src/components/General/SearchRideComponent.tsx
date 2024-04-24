@@ -117,7 +117,7 @@ const SearchRideComponent = () => {
 												setPickupAddress(place)
 											}}
 											className='form-control'
-											placeholder='Pickup  Address'
+											// placeholder='Pickup  Address'
 											options={{
 												types: ['address'],
 											}}
@@ -137,7 +137,7 @@ const SearchRideComponent = () => {
 												setDestination(place)
 											}}
 											className='form-control'
-											placeholder='Destination'
+											// placeholder='Destination'
 											options={{
 												types: ['address'],
 											}}
@@ -189,10 +189,9 @@ const SearchRideComponent = () => {
 										</span>
 										<select
 											className='form-select'
-											placeholder='Select car type'
 											onChange={(e) => setCarType(e.target.value)}
 										>
-											<option value=''>Select car type</option>
+											<option disabled defaultValue={'Select car type'} value=''>Select car type</option>
 											<option value='Sedan'>Sedan</option>
 											<option value='SUV'>SUV</option>
 											<option value='Pickup Truck'>Pickup Truck</option>

@@ -80,7 +80,7 @@ const SearchApartmentComponent = ({
 								}}
 								// defaultValue={JSON.parse(loc)?.address_components[0]?.long_name}
 								className='form-control'
-								placeholder='Enter a location'
+								// placeholder='Enter a location'
 							/>
 						</div>
 						<div className='col-lg-8 col-md-12'>

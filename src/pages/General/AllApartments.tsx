@@ -62,7 +62,7 @@ const AllApartments = () => {
 	}
 
 	const [currentPage, setCurrentPage] = useState(1)
-	const [postsPerPage, setPostsPerPage] = useState(12)
+	const [postsPerPage, setPostsPerPage] = useState(10)
 
 	const indexOfLastPost = currentPage * postsPerPage
 	const indexOfFirstPost = indexOfLastPost - postsPerPage

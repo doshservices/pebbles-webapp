@@ -957,7 +957,7 @@ const CreateListing = () => {
 														<img src={blue_building} alt='' />
 														<input
 															type='text'
-															required
+															// required
 															placeholder='Longitude'
 															value={lng}
 															className='form-control'
@@ -976,7 +976,7 @@ const CreateListing = () => {
 															type='text'
 															placeholder='Latitude'
 															value={lat}
-															required
+															// required
 															className='form-control'
 															disabled
 														/>

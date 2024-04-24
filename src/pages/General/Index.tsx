@@ -82,7 +82,6 @@ const Index = () => {
 		<>
 			<main>
 				<HomeCarousel />
-
 				<section className='explore_apartments'>
 					{user_detail ? (
 						<>

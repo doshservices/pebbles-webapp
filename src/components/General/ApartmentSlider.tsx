@@ -4,6 +4,20 @@ import { ApartmentInterface } from '../../features/apartment/apartmentState'
 import ApartmentCard from '../ApartmentCard'
 
 const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
+
+	const shuffleArray = (arr: any[]): any[] => {
+		const newArray = [...arr];
+		let currentIndex = newArray.length;
+		while (currentIndex !== 0) {
+			const randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex--;
+			[newArray[currentIndex], newArray[randomIndex]] = [newArray[randomIndex], newArray[currentIndex]];
+		}
+		return newArray;
+	}
+
+	const randomApartments = shuffleArray(data);
+
 	const settings = {
 		dots: false,
 		infinite: data?.length > 3,
@@ -46,10 +60,10 @@ const ApartmentSlider = ({ data }: { data: ApartmentInterface[] }) => {
 
 	return (
 		<div className='container '>
-			{data?.length !== 0 ? (
+			{randomApartments?.length !== 0 ? (
 				<div className='px_5'>
 					<Slider {...settings}>
-						{data.map((item, index) => {
+						{randomApartments?.map((item, index) => {
 							return index <= 5 ? (
 								<div key={index} className='p_4'>
 									<ApartmentCard apartmentInfo={item} />
